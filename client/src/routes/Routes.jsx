@@ -6,6 +6,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
+import Home from '../pages/home';
 
 const Routes = () => {
   console.log('yo');
@@ -15,7 +16,7 @@ const Routes = () => {
       <MainLayout>
         <Switch>
           <Route path="/hjem">
-            <p>Hjem</p>
+            <Home />
           </Route>
           <Route path="/kontorer">
             <p>Kontorer</p>
