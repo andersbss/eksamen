@@ -4,6 +4,8 @@ import morgan from 'morgan';
 
 import 'dotenv/config.js';
 
+import auth from './routes/auth.js';
+
 const app = express();
 
 if (process.env.NODE_ENV === 'development') {
@@ -24,5 +26,7 @@ app.use(
 app.get(`${process.env.BASEURL}/test`, (req, res) => {
   res.status(200).json({ data: 'Test working' });
 });
+
+app.use(`${process.env.BASEURL}/`, auth);
 
 export { app };
