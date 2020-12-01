@@ -3,6 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 
 import 'dotenv/config.js';
+import errorMiddleware from './middleware/errors.js';
 
 import auth from './routes/auth.js';
 
@@ -28,5 +29,7 @@ app.get(`${process.env.BASEURL}/test`, (req, res) => {
 });
 
 app.use(`${process.env.BASEURL}/`, auth);
+
+app.use(errorMiddleware);
 
 export { app };
