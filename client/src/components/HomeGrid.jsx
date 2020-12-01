@@ -16,7 +16,7 @@ const StyledSectionKontorer = styled.section`
   grid-column-end: span 1;
   grid-row-start: 1;
   grid-row-end: 1;
-  background-color: #d1d1d1;
+  background-color: ${(props) => props.theme.colors.grey};
   height: 160px;
   padding: 35px 0px 35px 0px;
 `;
@@ -25,7 +25,7 @@ const StyledSectionKontakt = styled.section`
   grid-column-end: span 2;
   grid-row-start: 1;
   grid-row-end: 1;
-  background-color: #d1d1d1;
+  background-color: ${(props) => props.theme.colors.grey};
   height: 160px;
   padding: 35px 0px 35px 0px;
 `;
@@ -35,7 +35,7 @@ const StyledSectionFagartikler = styled.section`
   grid-column-end: span 3;
   grid-row-start: 2;
   grid-row-end: 2;
-  background-color: #d1d1d1;
+  background-color: ${(props) => props.theme.colors.grey};
   height: 160px;
   padding: 35px 0px 35px 0px;
 `;

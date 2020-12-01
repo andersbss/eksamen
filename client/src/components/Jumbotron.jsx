@@ -6,7 +6,7 @@ const StyledHeader = styled.header`
   margin: 0;
   width: 100%;
   padding: 80px;
-  background-color: #d1d1d1;
+  background-color: ${(props) => props.theme.colors.grey};
 `;
 
 const Jumbotron = ({ headerText }) => (
