@@ -1,0 +1,56 @@
+import React from 'react';
+import styled from 'styled-components';
+import MediumTitle from './titles/MediumTitle';
+
+const StyledGrid = styled.main`
+  display: grid;
+  grid-template-columns: 1fr, 2fr;
+  grid-template-rows: 1fr, 1fr;
+  grid-gap: 25px;
+  margin: 25px;
+  text-align: center;
+`;
+
+const StyledSectionKontorer = styled.section`
+  grid-column-start: 1;
+  grid-column-end: span 1;
+  grid-row-start: 1;
+  grid-row-end: 1;
+  background-color: #d1d1d1;
+  height: 160px;
+  padding: 35px 0px 35px 0px;
+`;
+const StyledSectionKontakt = styled.section`
+  grid-column-start: 2;
+  grid-column-end: span 2;
+  grid-row-start: 1;
+  grid-row-end: 1;
+  background-color: #d1d1d1;
+  height: 160px;
+  padding: 35px 0px 35px 0px;
+`;
+
+const StyledSectionFagartikler = styled.section`
+  grid-column-start: 1;
+  grid-column-end: span 3;
+  grid-row-start: 2;
+  grid-row-end: 2;
+  background-color: #d1d1d1;
+  height: 160px;
+  padding: 35px 0px 35px 0px;
+`;
+
+const HomeGrid = () => (
+  <StyledGrid>
+    <StyledSectionKontorer>
+      <MediumTitle content="Kontorer" />
+    </StyledSectionKontorer>
+    <StyledSectionKontakt>
+      <MediumTitle content="Kontakt" />
+    </StyledSectionKontakt>
+    <StyledSectionFagartikler>
+      <MediumTitle content="Se våre fagartikler om oppussing av bad" />
+    </StyledSectionFagartikler>
+  </StyledGrid>
+);
+export default HomeGrid;
