@@ -1,21 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
+import LargeTitle from './titles/LargeTitle';
 
 const StyledHeader = styled.header`
   margin: 0;
   width: 100%;
   padding: 80px;
-`;
-
-const StyledHeaderText = styled.h1`
-  font-size: 30px;
-  text-align: center;
-  font-weight: bolder;
+  background-color: #d1d1d1;
 `;
 
 const Jumbotron = ({ headerText }) => (
   <StyledHeader>
-    <StyledHeaderText>{headerText}</StyledHeaderText>
+    <LargeTitle content={headerText} />
   </StyledHeader>
 );
 export default Jumbotron;
