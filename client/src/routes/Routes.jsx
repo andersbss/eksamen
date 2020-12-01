@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import Home from '../pages/home';
+import Offices from '../pages/offices';
 
 const Routes = () => {
   console.log('yo');
@@ -19,7 +20,7 @@ const Routes = () => {
             <Home />
           </Route>
           <Route path="/kontorer">
-            <p>Kontorer</p>
+            <Offices />
           </Route>
           <Route path="/kontorer/:id">
             <p>Spesifikt kontor</p>
