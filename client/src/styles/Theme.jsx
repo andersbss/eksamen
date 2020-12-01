@@ -9,6 +9,7 @@ const theme = {
   },
   colors: {
     grey: '#d1d1d1',
+    blue: '#479eb9',
   },
 };
 
