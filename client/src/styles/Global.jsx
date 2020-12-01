@@ -12,7 +12,7 @@ export const GlobalStyles = createGlobalStyle`
   body {
     width: 100%;
     h1 {
-      font-size: 4rem;
+      font-size: 3.6rem;
     }
     h2 {
       font-size: 2.8rem;

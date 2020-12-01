@@ -1,12 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import Nav from '../components/nav/Nav';
+import Footer from '../components/footer/Footer';
 
 const StyledMainLayout = styled.div``;
+
 const StyledHeader = styled.header`
   display: inline-block;
   width: 100%;
 `;
+
 const StyledContainer = styled.div``;
 
 const MainLayout = ({ children }) => (
@@ -15,6 +18,7 @@ const MainLayout = ({ children }) => (
       <Nav />
     </StyledHeader>
     <StyledContainer>{children}</StyledContainer>
+    <Footer />
   </StyledMainLayout>
 );
 
