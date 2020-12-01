@@ -11,7 +11,7 @@ const StyledGrid = styled.main`
   text-align: center;
 `;
 
-const StyledSectionKontorer = styled.section`
+const StyledSectionOffices = styled.section`
   grid-column-start: 1;
   grid-column-end: span 1;
   grid-row-start: 1;
@@ -20,7 +20,7 @@ const StyledSectionKontorer = styled.section`
   height: 160px;
   padding: 35px 0px 35px 0px;
 `;
-const StyledSectionKontakt = styled.section`
+const StyledSectionContact = styled.section`
   grid-column-start: 2;
   grid-column-end: span 2;
   grid-row-start: 1;
@@ -30,7 +30,7 @@ const StyledSectionKontakt = styled.section`
   padding: 35px 0px 35px 0px;
 `;
 
-const StyledSectionFagartikler = styled.section`
+const StyledSectionArticles = styled.section`
   grid-column-start: 1;
   grid-column-end: span 3;
   grid-row-start: 2;
@@ -42,15 +42,15 @@ const StyledSectionFagartikler = styled.section`
 
 const HomeGrid = () => (
   <StyledGrid>
-    <StyledSectionKontorer>
+    <StyledSectionOffices>
       <MediumTitle content="Kontorer" />
-    </StyledSectionKontorer>
-    <StyledSectionKontakt>
+    </StyledSectionOffices>
+    <StyledSectionContact>
       <MediumTitle content="Kontakt" />
-    </StyledSectionKontakt>
-    <StyledSectionFagartikler>
+    </StyledSectionContact>
+    <StyledSectionArticles>
       <MediumTitle content="Se våre fagartikler om oppussing av bad" />
-    </StyledSectionFagartikler>
+    </StyledSectionArticles>
   </StyledGrid>
 );
 export default HomeGrid;
