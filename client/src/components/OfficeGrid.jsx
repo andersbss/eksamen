@@ -1,7 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
-import MediumTitle from './titles/MediumTitle';
-import OfficeGridItem from './OfficeGridItem';
 import OfficeGridContainer from './OfficeGridContainer';
 
 const OfficesGrid = ({ officeList }) => (
