@@ -4,7 +4,6 @@ import styled from 'styled-components';
 const StyledFooter = styled.footer`
   width: 100%;
   height: 50px;
-  position: absolute;
   bottom: 0;
   background-color: ${(props) => props.theme.colors.grey};
   text-align: center;
