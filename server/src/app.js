@@ -30,10 +30,6 @@ app.use(
 
 app.use(cookieParser());
 
-app.get(`${process.env.BASEURL}/test`, (req, res) => {
-  res.status(200).json({ data: 'Test working' });
-});
-
 app.use(`${process.env.BASEURL}/`, auth);
 app.use(`${process.env.BASEURL}/articles`, article);
 app.use(`${process.env.BASEURL}/categories`, category);
