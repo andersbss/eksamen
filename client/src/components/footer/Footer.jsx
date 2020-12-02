@@ -8,17 +8,16 @@ const StyledFooter = styled.footer`
   background-color: ${(props) => props.theme.colors.grey};
   text-align: center;
   font-size: 14px;
-`;
 
-const StyledFooterText = styled.p`
-  font-size: 1.2rem;
+  & > p {
+    font-size: 1.2rem;
+    line-height: 50px;
+  }
 `;
 
 const Footer = () => (
   <StyledFooter>
-    <StyledFooterText>
-      Orgnr: 007 007 007&emsp;lg@lgror.no&emsp;99 00 00 00
-    </StyledFooterText>
+    <p>Orgnr: 007 007 007&emsp;lg@lgror.no&emsp;99 00 00 00</p>
   </StyledFooter>
 );
 
