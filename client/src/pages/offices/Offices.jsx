@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import Jumbotron from '../../components/common/Jumbotron';
 import OfficeGrid from '../../components/grids/OfficeGrid';
-import OfficeList from '../../components/OfficeList';
+import OfficeList from '../../components/lists/OfficeList';
 import OfficeViewToggle from '../../components/OfficeViewToggle';
 import { officeList } from '../../mockUpData';
 

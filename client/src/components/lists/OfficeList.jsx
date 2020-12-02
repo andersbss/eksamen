@@ -1,5 +1,5 @@
 import React from 'react';
-import OfficeListContainer from './containers/OfficeListContainer';
+import OfficeListContainer from '../containers/OfficeListContainer';
 
 const OfficeList = ({ officeList }) => (
   <>
