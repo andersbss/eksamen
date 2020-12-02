@@ -1,5 +1,5 @@
 import React from 'react';
-import OfficeGridContainer from './containers/OfficeGridContainer';
+import OfficeGridContainer from '../containers/OfficeGridContainer';
 
 const OfficeGrid = ({ officeList }) => (
   <>
