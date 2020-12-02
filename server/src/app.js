@@ -33,7 +33,7 @@ app.get(`${process.env.BASEURL}/test`, (req, res) => {
 });
 
 app.use(`${process.env.BASEURL}/`, auth);
-app.use(`${process.env.BASEURL}/`, article);
+app.use(`${process.env.BASEURL}/articles`, article);
 
 app.use(errorMiddleware);
 

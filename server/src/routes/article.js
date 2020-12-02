@@ -5,8 +5,8 @@ import { authenticate, authorize } from '../middleware/auth.js';
 
 const router = express.Router();
 
-router.get('/articles', articleController.getAll);
-router.post('/articles', [authenticate, authorize(ROLE.ADMIN)], articleController.create);
-router.delete('/articles', [authenticate, authorize(ROLE.ADMIN)], articleController.remove);
+router.get('/', articleController.getAll);
+router.post('/', [authenticate, authorize(ROLE.ADMIN)], articleController.create);
+router.delete('/', [authenticate, authorize(ROLE.ADMIN)], articleController.remove);
 
 export default router;
