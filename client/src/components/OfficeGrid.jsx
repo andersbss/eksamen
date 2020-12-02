@@ -1,14 +1,14 @@
 import React from 'react';
 import OfficeGridContainer from './OfficeGridContainer';
 
-const OfficesGrid = ({ officeList }) => (
+const OfficeGrid = ({ officeList }) => (
   <>
     {officeList.length <= 0 ? (
-      <p>404</p>
+      <p>Ingen kontorer funnet. Vennligst prøv igjen senere.</p>
     ) : (
       officeList.map((offices) => <OfficeGridContainer offices={offices} />)
     )}
   </>
 );
 
-export default OfficesGrid;
+export default OfficeGrid;
