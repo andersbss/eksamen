@@ -6,3 +6,7 @@ const ArticleSchema = new Schema({
   ingress: ARTICLE_INGRESS,
   content: ARTICLE_CONTENT,
 });
+
+const Author = mongoose.model('Article', ArticleSchema);
+
+export default Author;
