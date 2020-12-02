@@ -4,10 +4,11 @@ import { articleService, authorService, categoryService } from '../services/inde
 import response from '../utils/response.js';
 
 export const createArticle = catchAsyncErrors(async (req, res, next) => {
-  const { author, category, publisher } = req.body;
+  const { author, category } = req.body;
+  req.body.publisher = req.body.user.id;
 
-  if (!(await authorService.getAuthorById(author))) return next(ErrorHandler('Author not found', 404));
-  if (!(await categoryService.getCategoryById(category))) return next(ErrorHandler('Category not found', 404));
+  if (!(await authorService.getAuthorById(author))) return next(new ErrorHandler('Author not found', 404));
+  if (!(await categoryService.getCategoryById(category))) return next(new ErrorHandler('Category not found', 404));
 
   const article = await articleService.createArticle(req.body);
 

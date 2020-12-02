@@ -1,4 +1,5 @@
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import morgan from 'morgan';
 
@@ -25,11 +26,14 @@ app.use(
   })
 );
 
+app.use(cookieParser());
+
 app.get(`${process.env.BASEURL}/test`, (req, res) => {
   res.status(200).json({ data: 'Test working' });
 });
 
 app.use(`${process.env.BASEURL}/`, auth);
+app.use(`${process.env.BASEURL}/`, article);
 
 app.use(errorMiddleware);
 
