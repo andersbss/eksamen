@@ -1,7 +1,7 @@
-import { userService } from '../services/index.js';
-import { sendToken } from '../utils/jwt.js';
 import ErrorHandler from '../utils/errorHandler.js';
 import catchAsyncErrors from '../middleware/catchAsync.js';
+import { userService } from '../services/index.js';
+import { sendToken } from '../utils/jwt.js';
 
 export const register = catchAsyncErrors(async (req, res, next) => {
   const user = await userService.createUser(req.body);
