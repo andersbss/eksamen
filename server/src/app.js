@@ -1,4 +1,5 @@
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import morgan from 'morgan';
 
@@ -6,6 +7,9 @@ import 'dotenv/config.js';
 import errorMiddleware from './middleware/errors.js';
 
 import auth from './routes/auth.js';
+import article from './routes/article.js';
+import category from './routes/category.js';
+import author from './routes/author.js';
 
 const app = express();
 
@@ -24,11 +28,12 @@ app.use(
   })
 );
 
-app.get(`${process.env.BASEURL}/test`, (req, res) => {
-  res.status(200).json({ data: 'Test working' });
-});
+app.use(cookieParser());
 
 app.use(`${process.env.BASEURL}/`, auth);
+app.use(`${process.env.BASEURL}/articles`, article);
+app.use(`${process.env.BASEURL}/categories`, category);
+app.use(`${process.env.BASEURL}/authors`, author);
 
 app.use(errorMiddleware);
 
