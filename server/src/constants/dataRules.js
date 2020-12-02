@@ -55,3 +55,25 @@ export const ARTICLE_CONTENT = {
   min: [10, 'An article has to be at least 10 digit long'],
   max: [3000, 'Ingress cannot be longer han 50 digits'],
 };
+
+// Author
+export const AUTHOR_FIRSTNAME = {
+  type: String,
+  required: true,
+  min: [1, 'First name has to be at least 1 digit long'],
+  max: [100, 'First name cannot be longer than 100 digits'],
+};
+
+export const AUTHOR_LASTNAME = {
+  type: String,
+  required: true,
+  min: [1, 'Last name has to be at least 1 digit long'],
+  max: [100, 'Last name cannot be longer than 100 digits'],
+};
+
+// Category
+export const CATEGORY_TITLE = {
+  type: String,
+  required: true,
+  max: [50, 'Category cannot be longer than 50 digits'],
+};
