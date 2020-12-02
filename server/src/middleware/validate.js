@@ -1,7 +1,7 @@
-import validate from '../utils/validationFormatter.js';
+import validationExecutor from '../utils/validationFormatter.js';
 
-const isValidated = (schema) => async (req, res, next) => {
-  if (!(await validate(schema, req.body, res))) next();
+const validate = (schema) => async (req, res, next) => {
+  if (!(await validationExecutor(schema, req.body, res))) next();
 };
 
-export default isValidated;
+export default validate;

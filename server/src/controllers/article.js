@@ -6,8 +6,6 @@ import response from '../utils/response.js';
 export const create = catchAsyncErrors(async (req, res, next) => {
   const { author, category } = req.body;
 
-  req.body.publisher = req.user.id;
-
   if (!(await authorService.getAuthorById(author))) return next(new ErrorHandler('Author not found', 404));
   if (!(await categoryService.getCategoryById(category))) return next(new ErrorHandler('Category not found', 404));
 
