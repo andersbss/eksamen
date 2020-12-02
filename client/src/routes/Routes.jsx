@@ -7,7 +7,8 @@ import {
 } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import Home from '../pages/home';
-import Offices from '../pages/offices';
+import Offices from '../pages/offices/Offices';
+import OfficeDetail from '../pages/offices/OfficeDetail';
 
 const Routes = () => {
   console.log('yo');
@@ -22,8 +23,8 @@ const Routes = () => {
           <Route path="/kontorer">
             <Offices />
           </Route>
-          <Route path="/kontorer/:id">
-            <p>Spesifikt kontor</p>
+          <Route path="/kontor/:id">
+            <OfficeDetail />
           </Route>
           <Route path="/fagartikler">
             <p>Fagartikler</p>
