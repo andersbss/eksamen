@@ -21,6 +21,16 @@ export const getAll = catchAsyncErrors(async (req, res, next) => {
   response(res, 200, true, articles);
 });
 
+export const update = catchAsyncErrors(async (req, res, next) => {
+  const { id } = req.params;
+
+  const prevArticle = await articleService.getArticleById(id);
+  if (!prevArticle) return next(new ErrorHandler('Article not found', 404));
+
+  const updatedArticle = await articleService.updateArticle(id, req.body);
+  response(res, 200, true, updatedArticle);
+});
+
 export const remove = catchAsyncErrors(async (req, res, next) => {
   const { id } = req.params;
 
