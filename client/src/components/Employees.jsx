@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import EmployeeItem from './EmployeeItem';
+import EmployeeItem from './items/EmployeeItem';
 import { employeesList } from '../mockUpData';
 
 const StyledEmployeeContainer = styled.section`

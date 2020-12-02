@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import LargeTitle from './titles/LargeTitle';
+import LargeTitle from '../titles/LargeTitle';
 
 const StyledHeader = styled.header`
   margin: 0;
