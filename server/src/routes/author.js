@@ -3,6 +3,7 @@ import { authorController } from '../controllers/index.js';
 
 const router = express.Router();
 
-router.post('/', authorController.create);
+// Not needed to fulfill the requirements. Only used to add the given authors
+// router.post('/', authorController.create);
 
 export default router;
