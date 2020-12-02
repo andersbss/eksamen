@@ -1,7 +1,7 @@
 import React from 'react';
 import OfficeGridContainer from './OfficeGridContainer';
 
-const OfficesGrid = ({ officeList }) => (
+const OfficeGrid = ({ officeList }) => (
   <>
     {officeList.length <= 0 ? (
       <p>404</p>
@@ -11,4 +11,4 @@ const OfficesGrid = ({ officeList }) => (
   </>
 );
 
-export default OfficesGrid;
+export default OfficeGrid;
