@@ -7,6 +7,6 @@ const router = express.Router();
 
 router.get('/', articleController.getAll);
 router.post('/', [authenticate, authorize(ROLE.ADMIN)], articleController.create);
-router.delete('/', [authenticate, authorize(ROLE.ADMIN)], articleController.remove);
+router.delete('/:id', [authenticate, authorize(ROLE.ADMIN)], articleController.remove);
 
 export default router;

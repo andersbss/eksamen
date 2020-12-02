@@ -2,7 +2,6 @@ import ErrorHandler from '../utils/errorHandler.js';
 import response from '../utils/response.js';
 
 export default (err, req, res, next) => {
-  console.log('mårn');
   err.status = err.status || 500;
 
   // if (process.env.NODE_ENV === 'development') {
