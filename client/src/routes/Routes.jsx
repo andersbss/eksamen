@@ -7,8 +7,8 @@ import {
 } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import Home from '../pages/home';
-import Offices from '../pages/offices/Offices';
-import OfficeDetail from '../pages/offices/OfficeDetail';
+import Offices from '../pages/offices';
+import OfficeDetail from '../pages/officeDetail/index';
 
 const Routes = () => {
   console.log('yo');
