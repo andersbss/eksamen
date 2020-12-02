@@ -7,6 +7,6 @@ const router = express.Router();
 
 router.get('/articles', articleController.getAll);
 router.post('/articles', [authenticate, authorize(ROLE.ADMIN)], articleController.create);
-router.delete('/articles', [authenticate, authorize(ROLE.ADMIN)]);
+router.delete('/articles', [authenticate, authorize(ROLE.ADMIN)], articleController.remove);
 
 export default router;

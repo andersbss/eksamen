@@ -20,3 +20,14 @@ export const getAll = catchAsyncErrors(async (req, res, next) => {
   const articles = await articleService.getAllArticles();
   response(res, 200, true, articles);
 });
+
+export const remove = catchAsyncErrors(async (req, res, next) => {
+  if (!req.id) return next(new ErrorHandler('No article id', 400));
+
+  const article = await articleService.getArticleById(req.id);
+  if (!article) return next(new ErrorHandler('Article not found', 404));
+
+  await article.remove();
+
+  response(res, 200, true, article);
+});
