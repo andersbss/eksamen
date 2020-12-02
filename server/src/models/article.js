@@ -16,9 +16,11 @@ const ArticleSchema = new Schema(
       ref: 'Category',
       required: true,
     },
-    publisher: mongoose.Schema.ObjectId,
-    ref: 'User',
-    required: true,
+    publisher: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+      required: true,
+    },
   },
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
