@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import Jumbotron from '../../components/Jumbotron';
+import Jumbotron from '../../components/common/Jumbotron';
 import OfficeGrid from '../../components/OfficeGrid';
 import OfficeList from '../../components/OfficeList';
 import OfficeViewToggle from '../../components/OfficeViewToggle';

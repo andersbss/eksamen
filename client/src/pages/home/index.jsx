@@ -1,5 +1,5 @@
 import React from 'react';
-import Jumbotron from '../../components/Jumbotron';
+import Jumbotron from '../../components/common/Jumbotron';
 import HomeGrid from '../../components/HomeGrid';
 
 const Home = () => (
