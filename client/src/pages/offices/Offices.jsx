@@ -3,7 +3,7 @@ import Jumbotron from '../../components/Jumbotron';
 import OfficeGrid from '../../components/OfficeGrid';
 import OfficeList from '../../components/OfficeList';
 import OfficeViewToggle from '../../components/OfficeViewToggle';
-import { officeList } from '../../offices';
+import { officeList } from '../../mockUpData';
 
 const Offices = () => {
   const [toggleView, setToggleView] = useState(false);
