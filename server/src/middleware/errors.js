@@ -15,7 +15,6 @@ export default (err, req, res, next) => {
   //  });
   // }
 
-  console.log(process.env.NODE_ENV);
   if (
     process.env.NODE_ENV === 'production' ||
     process.env.NODE_ENV === 'test' ||

@@ -8,7 +8,6 @@ export const authenticate = catchAsyncErrors(async (req, res, next) => {
   let token;
   if (req.cookies?.token) token = req.cookies.token;
 
-  console.log(token);
   if (!token) return next(new ErrorHandler('No token', 401));
 
   jwt.verify(token, process.env.JWT_ACCESS_TOKEN_SECRET, async (err, decoded) => {
@@ -17,15 +16,15 @@ export const authenticate = catchAsyncErrors(async (req, res, next) => {
     const { id } = decoded;
     if (!mongoose.Types.ObjectId.isValid(id)) return next(new ErrorHandler('Invalid token', 403));
 
-    console.log(id);
     const user = await userService.getUserById(id);
-
-    console.log(user);
-
     if (!user) return next(new ErrorHandler('User not found', 404));
 
     req.user = user;
-
     next();
   });
 });
+
+export const authorize = (...roles) => (req, res, next) => {
+  if (!roles.includes(req.user.role)) return next(new ErrorHandler('Unauthorized', 403));
+  next();
+};
