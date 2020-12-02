@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import logErrors from './errorLogger.js';
+import logErrors from '../utils/schemaErrorLogger.js';
 
 const OBJECT_ID_REGEX = /^[0-9a-fA-F]{24}$/;
 
