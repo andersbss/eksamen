@@ -37,7 +37,7 @@ const OfficeDetail = () => {
       />
       <MediumTitle content="Våre ansatte" />
       <Employees officeId={id} />
-      <ContactUs content={`Kontakt oss på ${specificOffice.phone}`} />
+      <Jumbotron content={`Kontakt oss på ${specificOffice.phone}`} />
     </>
   );
 };
