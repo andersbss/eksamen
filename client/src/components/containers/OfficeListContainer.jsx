@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import MediumTitle from './titles/MediumTitle';
-import OfficeListItem from './items/OfficeListItem';
+import MediumTitle from '../titles/MediumTitle';
+import OfficeListItem from '../items/OfficeListItem';
 
 const StyledUl = styled.ol`
   list-style: none;
