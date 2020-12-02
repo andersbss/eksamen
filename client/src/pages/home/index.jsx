@@ -1,6 +1,6 @@
 import React from 'react';
 import Jumbotron from '../../components/common/Jumbotron';
-import HomeGrid from '../../components/HomeGrid';
+import HomeGrid from '../../components/grids/HomeGrid';
 
 const Home = () => (
   <>
