@@ -6,6 +6,7 @@ import 'dotenv/config.js';
 import errorMiddleware from './middleware/errors.js';
 
 import auth from './routes/auth.js';
+import article from './routes/article.js';
 
 const app = express();
 
