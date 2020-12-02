@@ -37,3 +37,21 @@ export const USER_ROLES = {
   },
   default: 'user',
 };
+
+// Article
+export const ARTICLE_TITLE = {
+  type: String,
+  required: true,
+  max: [50, 'Title cannot be longer han 50 digits'],
+};
+
+export const ARTICLE_INGRESS = {
+  type: String,
+  max: [1000, 'Ingress cannot be longer han 50 digits'],
+};
+
+export const ARTICLE_CONTENT = {
+  type: String,
+  min: [10, 'An article has to be at least 10 digit long'],
+  max: [3000, 'Ingress cannot be longer han 50 digits'],
+};
