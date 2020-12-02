@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import Jumbotron from '../../components/Jumbotron';
 import OfficeGrid from '../../components/OfficeGrid';
 import OfficeList from '../../components/OfficeList';
@@ -8,7 +8,7 @@ import { officeList } from '../../offices';
 const Offices = () => {
   const [toggleView, setToggleView] = useState(false);
 
-  const handleToggle = React.useCallback(() => setToggleView(!toggleView), [
+  const handleToggle = useCallback(() => setToggleView(!toggleView), [
     toggleView,
     setToggleView,
   ]);
