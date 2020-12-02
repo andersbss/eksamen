@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import MediumTitle from './titles/MediumTitle';
-import OfficeGridItem from './items/OfficeGridItem';
+import MediumTitle from '../titles/MediumTitle';
+import OfficeGridItem from '../items/OfficeGridItem';
 
 const StyledGridContainer = styled.section`
   display: flex;
