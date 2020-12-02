@@ -32,7 +32,7 @@ const OfficeListContainer = ({ offices }) => (
     />
     <StyledUl>
       {offices.offices.length <= 0 ? (
-        <p>404</p>
+        <p>Ingen kontorer funnet i {offices.location}</p>
       ) : (
         offices.offices.map((office) => (
           <OfficeListItem

@@ -16,7 +16,7 @@ const OfficeGridContainer = ({ offices }) => (
     />
     <StyledGridContainer>
       {offices.offices.length <= 0 ? (
-        <p>404</p>
+        <p>Ingen kontorer funnet i {offices.location}</p>
       ) : (
         offices.offices.map((office) => (
           <OfficeGridItem

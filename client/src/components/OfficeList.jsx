@@ -4,7 +4,7 @@ import OfficeListContainer from './OfficeListContainer';
 const OfficeList = ({ officeList }) => (
   <>
     {officeList.length <= 0 ? (
-      <p>404</p>
+      <p>Ingen kontorer funnet. Vennligst prøv igjen senere.</p>
     ) : (
       officeList.map((offices) => <OfficeListContainer offices={offices} />)
     )}
