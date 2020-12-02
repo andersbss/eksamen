@@ -39,7 +39,7 @@ export const remove = catchAsyncErrors(async (req, res, next) => {
   const article = await articleService.getArticleById(id);
   if (!article) return next(new ErrorHandler('Article not found', 404));
 
-  await article.remove();
+  article.remove();
 
   response(res, 200, true, article);
 });
