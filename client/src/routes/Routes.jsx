@@ -9,6 +9,7 @@ import MainLayout from '../layouts/MainLayout';
 import Home from '../pages/home';
 import Offices from '../pages/offices';
 import OfficeDetail from '../pages/officeDetail/index';
+import Articles from '../pages/articles';
 
 const Routes = () => (
   <Router>
@@ -24,7 +25,7 @@ const Routes = () => (
           <OfficeDetail />
         </Route>
         <Route path="/fagartikler">
-          <p>Fagartikler</p>
+          <Articles />
         </Route>
         <Route path="/kontakt">
           <p>Kontakt</p>
