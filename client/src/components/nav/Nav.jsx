@@ -10,7 +10,8 @@ const StyledNav = styled.nav`
   padding: 15px;
 `;
 
-const StyledName = styled.text`
+// Changed from text to p becuase of anoying error in console
+const StyledName = styled.p`
   float: left;
   font-size: 2em;
 `;
