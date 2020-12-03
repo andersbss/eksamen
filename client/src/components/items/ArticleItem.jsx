@@ -43,7 +43,7 @@ const StyledLi = styled.li`
 `;
 
 const FallbackImage = styled.div`
-  background-color: grey;
+  background-color: ${(props) => props.theme.colors.lightGrey};
 `;
 
 const ArticleItem = ({ title, ingress, categoryTitle, image }) => {
@@ -56,7 +56,6 @@ const ArticleItem = ({ title, ingress, categoryTitle, image }) => {
         <h1>{title}</h1>
         <h4>{categoryTitle}</h4>
       </span>
-
       <p>{ingress}</p>
     </StyledLi>
   );

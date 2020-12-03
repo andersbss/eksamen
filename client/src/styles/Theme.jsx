@@ -8,7 +8,8 @@ const theme = {
     md: '(max-width: 800px)',
   },
   colors: {
-    grey: '#d1d1d1',
+    grey: '#dbdbdb',
+    lightGrey: '#e8e8e8',
     blue: '#479eb9',
     black: 'black',
     white: 'white',
