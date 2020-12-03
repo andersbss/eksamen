@@ -3,11 +3,15 @@ import { OBJECT_ID_REGEX } from '../constants/regexes.js';
 
 export const articleSchema = Joi.object()
   .keys({
-    title: Joi.string().required().max(50).messages({
-      'any.required': 'Title is required',
-      'string.empty': 'Title is required',
-      'string.max': 'Title cannot be longer than 50 characters',
-    }),
+    title: Joi.string()
+      .required()
+      .max(50)
+      .meta({ _mongoose: { trim: true } })
+      .messages({
+        'any.required': 'Title is required',
+        'string.empty': 'Title is required',
+        'string.max': 'Title cannot be longer than 50 characters',
+      }),
     ingress: Joi.string().max(1000).messages({
       'string.max': 'Ingress cannot be longer than 1000 characters',
     }),
@@ -17,7 +21,7 @@ export const articleSchema = Joi.object()
     author: Joi.string()
       .required()
       .regex(OBJECT_ID_REGEX)
-      .meta({ _mongoose: { type: 'ObjectId', ref: 'Author' } })
+      .meta({ _mongoose: { type: 'ObjectId', ref: 'Author', trim: true } })
       .messages({
         'any.required': 'Author is required',
         'string.pattern.base': 'Author id is not valid',

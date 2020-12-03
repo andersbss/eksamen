@@ -3,16 +3,24 @@ import { ONE_DIGIT_REGEX, ONE_LOWERCASE_REGEX, ONE_SPECIAL_CHARACTER, ONE_UPPERC
 
 export const userSchema = Joi.object()
   .keys({
-    firstName: Joi.string().required().max(100).messages({
-      'any.required': 'First name is required',
-      'string.empty': 'First name is required',
-      'string.max': 'First name cannot be longer than 100 characters',
-    }),
-    lastName: Joi.string().required().max(100).messages({
-      'any.required': 'Last name is required',
-      'string.empty': 'Last name is required',
-      'string.max': 'Last name cannot be longer than 100 characters',
-    }),
+    firstName: Joi.string()
+      .required()
+      .max(100)
+      .meta({ _mongoose: { trim: true } })
+      .messages({
+        'any.required': 'First name is required',
+        'string.empty': 'First name is required',
+        'string.max': 'First name cannot be longer than 100 characters',
+      }),
+    lastName: Joi.string()
+      .required()
+      .max(100)
+      .meta({ _mongoose: { trim: true } })
+      .messages({
+        'any.required': 'Last name is required',
+        'string.empty': 'Last name is required',
+        'string.max': 'Last name cannot be longer than 100 characters',
+      }),
     email: Joi.string().required().email().messages({
       'any.required': 'Email is required',
       'string.email': 'Invalid email',
