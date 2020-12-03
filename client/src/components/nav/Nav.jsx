@@ -6,11 +6,11 @@ import TabletNav from './TabletNav';
 const StyledNav = styled.nav`
   margin: 0;
   font-weight: bolder;
-  height: 60px;
+  height: 80px;
   padding: 15px;
 `;
 
-const StyledName = styled.text`
+const StyledName = styled.div`
   float: left;
   font-size: 2em;
 `;
