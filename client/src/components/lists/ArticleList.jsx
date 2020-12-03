@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import ArticleItem from '../items/ArticleItem';
 
 const StyledUl = styled.ul`
   list-style: none;
@@ -15,9 +16,17 @@ const ArticleList = ({ articles }) => {
   return (
     <StyledUl>
       {!articles && articles.length <= 0 ? (
-        <p>Finner inne artikler for øyeblikket. Vennligst prøv igjen senere</p>
+        <p>Finner ingen artikler for øyeblikket. Vennligst prøv igjen senere</p>
       ) : (
-        articles.map((article) => <li>{article.title}</li>)
+        articles.map((article) => (
+          <ArticleItem
+            key={article._id}
+            title={article.title}
+            ingress={article.ingress}
+            content={article.content}
+            category={article.category.title}
+          />
+        ))
       )}
     </StyledUl>
   );
