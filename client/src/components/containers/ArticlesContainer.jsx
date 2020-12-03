@@ -7,7 +7,7 @@ const StyledMain = styled.main`
   width: 1200px;
 
   display: grid;
-  grid-row-gap: 30px;
+  grid-row-gap: 80px;
 `;
 
 const ArticlesContainer = ({ children }) => <StyledMain>{children}</StyledMain>;
