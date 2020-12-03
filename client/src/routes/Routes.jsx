@@ -17,8 +17,8 @@ const Routes = () => (
   <Router>
     <MainLayout>
       <Switch>
-        <Route>
-          <Login path="/logginn" />
+        <Route path="/logginn">
+          <Login />
         </Route>
         <Route path="/hjem">
           <Home />
