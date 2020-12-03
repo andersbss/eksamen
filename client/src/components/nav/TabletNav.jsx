@@ -37,7 +37,6 @@ const StyledHamburgerUl = styled.ul`
   }
 
   @media screen and (max-width: 500px) {
-    height: 10%;
     width: 96%;
     display: flex;
     flex-wrap: wrap;
