@@ -11,6 +11,9 @@ const theme = {
     grey: '#d1d1d1',
     blue: '#479eb9',
   },
+  fontSizes: {
+    button: '1.2em',
+  },
   visible: {
     visibility: 'visible',
     opacity: 1,
