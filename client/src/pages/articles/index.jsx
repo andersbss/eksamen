@@ -15,11 +15,8 @@ const Articles = () => {
       <Jumbotron headerText="Fagartikler" />
       <ArticlesContainer>
         <ArticlesToggles />
-        {loading && !isSuccess ? (
-          <Loader />
-        ) : (
-          <ArticleList articles={response} />
-        )}
+        {loading && <Loader />}
+        {isSuccess && !loading && <ArticleList articles={response} />}
         {!isSuccess && !loading && <Error error={error} />}
       </ArticlesContainer>
     </>
