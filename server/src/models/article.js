@@ -21,6 +21,10 @@ const ArticleSchema = new Schema(
       ref: 'User',
       required: true,
     },
+    image: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Image',
+    },
   },
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
