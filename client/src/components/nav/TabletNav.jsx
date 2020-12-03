@@ -123,21 +123,6 @@ const TabletNav = () => {
             Kontakt
           </NavLink>
         </StyledHamburgerLi>
-        <StyledHamburgerLi>
-          <NavLink exact to="/kontakt" activeClassName="active">
-            Kontakt
-          </NavLink>
-        </StyledHamburgerLi>
-        <StyledHamburgerLi>
-          <NavLink exact to="/kontakt" activeClassName="active">
-            Kontakt
-          </NavLink>
-        </StyledHamburgerLi>
-        <StyledHamburgerLi>
-          <NavLink exact to="/kontakt" activeClassName="active">
-            Kontakt
-          </NavLink>
-        </StyledHamburgerLi>
       </StyledHamburgerUl>
     </>
   );
