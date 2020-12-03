@@ -17,6 +17,8 @@ const StyledButton = styled.button`
 
   height: 85px;
   width: 200px;
+
+  cursor: pointer;
 `;
 
 const Button = ({ content, onClick, disabled, backgroundColor, color }) => {

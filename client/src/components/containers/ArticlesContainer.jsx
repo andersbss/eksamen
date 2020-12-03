@@ -6,8 +6,6 @@ const StyledMain = styled.main`
   margin-top: 80px;
   width: 1200px;
 
-  border: solid;
-
   display: grid;
   grid-row-gap: 30px;
 `;
