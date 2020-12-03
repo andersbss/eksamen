@@ -1,10 +1,10 @@
 import Article from '../models/article.js';
 
-export const getArticleById = (id) => Article.findById(id);
+export const getArticleById = (id) => Article.findById(id).populate('category');
 
 export const createArticle = (article) => Article.create(article);
 
-export const getAllArticles = () => Article.find();
+export const getAllArticles = () => Article.find().populate('category');
 
 export const updateArticle = (id, article) => {
   const updateOptions = {

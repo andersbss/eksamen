@@ -1,18 +1,14 @@
 import argon2 from 'argon2';
 import jwt from 'jsonwebtoken';
 import mongoose, { Schema } from 'mongoose';
-import { USER_FIRSTNAME, USER_LASTNAME, USER_EMAIL, USER_PASSWORD, USER_ROLES } from '../constants/dataRules';
 
-const UserSchema = new Schema(
-  {
-    firstName: USER_FIRSTNAME,
-    lastName: USER_LASTNAME,
-    email: USER_EMAIL,
-    role: USER_ROLES,
-    password: { ...USER_PASSWORD, select: false },
-  },
-  { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
-);
+import { userSchema } from '../schemas/user';
+
+const Joigoose = require('joigoose')(mongoose);
+
+const options = { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } };
+
+const UserSchema = new Schema(Joigoose.convert(userSchema, options));
 
 UserSchema.pre('save', async function (next) {
   this.password = await argon2.hash(this.password);

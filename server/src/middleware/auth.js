@@ -14,6 +14,7 @@ export const authenticate = catchAsyncErrors(async (req, res, next) => {
     if (err) return next(new ErrorHandler('Invalid token', 403));
 
     const { id } = decoded;
+
     if (!mongoose.Types.ObjectId.isValid(id)) return next(new ErrorHandler('Invalid token', 403));
 
     const user = await userService.getUserById(id);
