@@ -8,37 +8,34 @@ import {
 import MainLayout from '../layouts/MainLayout';
 import Home from '../pages/home';
 import Offices from '../pages/offices';
+import OfficeDetail from '../pages/officeDetail/index';
 
-const Routes = () => {
-  console.log('yo');
-
-  return (
-    <Router>
-      <MainLayout>
-        <Switch>
-          <Route path="/hjem">
-            <Home />
-          </Route>
-          <Route path="/kontorer">
-            <Offices />
-          </Route>
-          <Route path="/kontorer/:id">
-            <p>Spesifikt kontor</p>
-          </Route>
-          <Route path="/fagartikler">
-            <p>Fagartikler</p>
-          </Route>
-          <Route path="/kontakt">
-            <p>Kontakt</p>
-          </Route>
-          <Redirect exact from="/" to="/hjem" />
-          <Route path="*">
-            <p>404</p>
-          </Route>
-        </Switch>
-      </MainLayout>
-    </Router>
-  );
-};
+const Routes = () => (
+  <Router>
+    <MainLayout>
+      <Switch>
+        <Route path="/hjem">
+          <Home />
+        </Route>
+        <Route path="/kontorer">
+          <Offices />
+        </Route>
+        <Route path="/kontor/:id">
+          <OfficeDetail />
+        </Route>
+        <Route path="/fagartikler">
+          <p>Fagartikler</p>
+        </Route>
+        <Route path="/kontakt">
+          <p>Kontakt</p>
+        </Route>
+        <Redirect exact from="/" to="/hjem" />
+        <Route path="*">
+          <p>404</p>
+        </Route>
+      </Switch>
+    </MainLayout>
+  </Router>
+);
 
 export default Routes;

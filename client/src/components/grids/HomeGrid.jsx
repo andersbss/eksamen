@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import MediumTitle from './titles/MediumTitle';
+import MediumTitle from '../titles/MediumTitle';
 
 const StyledGrid = styled.main`
   display: grid;

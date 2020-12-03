@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import MediumTitle from './titles/MediumTitle';
-import OfficeGridItem from './OfficeGridItem';
+import MediumTitle from '../titles/MediumTitle';
+import OfficeGridItem from '../items/OfficeGridItem';
 
 const StyledGridContainer = styled.section`
   display: flex;
@@ -16,10 +16,11 @@ const OfficeGridContainer = ({ offices }) => (
     />
     <StyledGridContainer>
       {offices.offices.length <= 0 ? (
-        <p>404</p>
+        <p>Ingen kontorer funnet i {offices.location}</p>
       ) : (
         offices.offices.map((office) => (
           <OfficeGridItem
+            id={office.id}
             office={office.office}
             address={office.address}
             phone={office.phone}
