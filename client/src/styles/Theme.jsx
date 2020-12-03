@@ -10,6 +10,16 @@ const theme = {
   colors: {
     grey: '#d1d1d1',
     blue: '#479eb9',
+    black: 'black',
+    white: 'white',
+  },
+  fonts: {
+    sizes: {
+      button: '1.5em',
+    },
+    weights: {
+      button: 700,
+    },
   },
   visible: {
     visibility: 'visible',

@@ -7,7 +7,7 @@ export const GlobalStyles = createGlobalStyle`
   }
   html {
     font-size: 11px;
-    font-family: "Nunito", sans-serif;
+    font-family:'Roboto', sans-serif;;
   }
   body {
     width: 100%;

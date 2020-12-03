@@ -7,6 +7,11 @@ const StyledHeader = styled.header`
   width: 100%;
   padding: 80px;
   background-color: ${(props) => props.theme.colors.grey};
+
+  & > h1 {
+    margin-top: 180px;
+    margin-bottom: 140px;
+  }
 `;
 
 const Jumbotron = ({ headerText }) => (
