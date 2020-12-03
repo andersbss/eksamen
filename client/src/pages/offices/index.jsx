@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import Jumbotron from '../../components/common/Jumbotron';
 import OfficeGrid from '../../components/grids/OfficeGrid';
 import OfficeList from '../../components/lists/OfficeList';
@@ -8,10 +8,9 @@ import { officeList } from '../../mockUpData';
 const Offices = () => {
   const [toggleView, setToggleView] = useState(false);
 
-  const handleToggle = useCallback(() => setToggleView(!toggleView), [
-    toggleView,
-    setToggleView,
-  ]);
+  const handleToggle = () => {
+    setToggleView((prev) => !prev);
+  };
 
   return (
     <>

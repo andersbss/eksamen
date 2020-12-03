@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import styled, { ThemeContext } from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
@@ -79,10 +79,9 @@ const TabletNav = () => {
   const themeContext = useContext(ThemeContext);
   const { visible, hidden } = themeContext;
 
-  const handleMenuToggle = useCallback(() => setShowMenu(!showMenu), [
-    showMenu,
-    setShowMenu,
-  ]);
+  const handleMenuToggle = () => {
+    setShowMenu((prev) => !prev);
+  };
 
   // Updates windowWidth when window is resized.
   useEffect(() => {
