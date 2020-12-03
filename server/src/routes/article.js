@@ -14,7 +14,11 @@ router.post(
   articleController.create
 );
 router.get('/', articleController.getAll);
-router.put('/:id', [authenticate, authorize(ROLE.ADMIN)], articleController.update);
+router.put(
+  '/:id',
+  [authenticate, authorize(ROLE.ADMIN), appendUser('publisher'), validate(articleSchema)],
+  articleController.update
+);
 router.delete('/:id', [authenticate, authorize(ROLE.ADMIN)], articleController.remove);
 
 export default router;

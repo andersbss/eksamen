@@ -12,6 +12,7 @@ const validateInput = async (schema, input) => {
 
 const formatRegexErrors = (error) => {
   if (!error.context.regex) return error;
+  if (error.type === 'string.pattern.base') return error;
 
   switch (error.context.regex) {
     case ONE_DIGIT_REGEX:
@@ -32,6 +33,7 @@ const formatRegexErrors = (error) => {
   return error;
 };
 
+// This needs some work
 const validationFormatter = async (schema, input, res) => {
   let validation = await validateInput(schema, input);
   if (validation.isJoi && Array.isArray(validation.details) && validation.details.length > 0) {
