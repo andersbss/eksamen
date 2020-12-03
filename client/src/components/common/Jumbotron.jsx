@@ -9,8 +9,8 @@ const StyledHeader = styled.header`
   background-color: ${(props) => props.theme.colors.grey};
 
   & > h1 {
-    margin-top: 85px;
-    margin-bottom: 85px;
+    margin-top: 110px;
+    margin-bottom: 110px;
   }
 `;
 

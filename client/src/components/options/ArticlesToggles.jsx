@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import Button from '../buttons/Button';
 
 const StyledSection = styled.section`
-  & > button:not(:first-child) {
-    float: right;
-  }
+  display: flex;
+  justify-content: space-between;
 
   & > button:nth-child(2) {
-    margin-left: 20px;
+    margin-left: auto;
+    margin-right: 20px;
   }
 `;
 
