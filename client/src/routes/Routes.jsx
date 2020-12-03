@@ -9,6 +9,7 @@ import MainLayout from '../layouts/MainLayout';
 import Home from '../pages/home';
 import Offices from '../pages/offices';
 import OfficeDetail from '../pages/officeDetail/index';
+import CreateArticle from '../pages/createArticle';
 import Articles from '../pages/articles';
 
 const Routes = () => (
@@ -28,7 +29,7 @@ const Routes = () => (
           <Articles />
         </Route>
         <Route path="/kontakt">
-          <p>Kontakt</p>
+          <CreateArticle />
         </Route>
         <Redirect exact from="/" to="/hjem" />
         <Route path="*">
