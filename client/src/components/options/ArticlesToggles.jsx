@@ -7,8 +7,9 @@ const ArticlesToggles = ({ isLoggedIn }) => {
 
   return (
     <>
-      <Button content="Søk" />
-      <Button content="Filter" />
+      <Button content="NY ARTIKKEL" backgroundColor="blue" color="white" />
+      <Button content="SØK" />
+      <Button content="FILTER" />
     </>
   );
 };
