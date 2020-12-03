@@ -89,11 +89,11 @@ const TabletNav = () => {
     const handleSizeChange = () => {
       setWindowWidth(window.innerWidth);
     };
-    window.addEventListener('sizeChange', handleSizeChange);
-    return () => window.removeEventListener('sizeChange', handleSizeChange);
-  }, [windowWidth]);
+    window.addEventListener('resize', handleSizeChange);
+    handleSizeChange();
+    return () => window.removeEventListener('resize', handleSizeChange);
+  }, []);
 
-  // Removes opened tablet navigation when window width > 800px
   useEffect(() => {
     windowWidth > 800 && setShowMenu(false);
   }, [windowWidth]);
