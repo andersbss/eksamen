@@ -1,9 +1,11 @@
 import mongoose, { Schema } from 'mongoose';
-import { CATEGORY_TITLE } from '../constants/dataRules';
+import { categorySchema } from '../schemas/category';
 
-const CategorySchema = new Schema({
-  title: CATEGORY_TITLE,
-});
+const Joigoose = require('joigoose')(mongoose);
+
+const options = { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } };
+
+const CategorySchema = new Schema(Joigoose.convert(categorySchema, options));
 
 const Category = mongoose.model('Category', CategorySchema);
 

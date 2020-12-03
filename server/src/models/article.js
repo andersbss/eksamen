@@ -1,5 +1,4 @@
 import mongoose, { Schema } from 'mongoose';
-
 import { articleSchema } from '../schemas/article';
 
 const Joigoose = require('joigoose')(mongoose);
