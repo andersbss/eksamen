@@ -1,23 +1,34 @@
 import Joi from 'joi';
-import { ONE_DIGIT_REGEX, ONE_LOWERCASE_REGEX } from '../constants/regexes';
+import { ONE_DIGIT_REGEX, ONE_LOWERCASE_REGEX, ONE_SPECIAL_CHARACTER, ONE_UPPERCASE_REGEX } from '../constants/regexes';
 
-export const userSchema = Joi.object().keys({
-  firstName: Joi.string().required().max(100).messages({
-    'any.required': 'First name is required',
-    'string.empty': 'First name is required',
-    'string.max': 'First name cannot be longer than 100 characters',
-  }),
-  lastName: Joi.string().required().max(100).messages({
-    'any.required': 'Last name is required',
-    'string.empty': 'Last name is required',
-    'string.max': 'Last name cannot be longer than 100 characters',
-  }),
-  email: Joi.string().required().email().messages({
-    'any.required': 'Email is required',
-    'string.email': 'Invalid email',
-  }),
-  password: Joi.string().required().regex(ONE_DIGIT_REGEX).regex(ONE_LOWERCASE_REGEX),
-});
+export const userSchema = Joi.object()
+  .keys({
+    firstName: Joi.string().required().max(100).messages({
+      'any.required': 'First name is required',
+      'string.empty': 'First name is required',
+      'string.max': 'First name cannot be longer than 100 characters',
+    }),
+    lastName: Joi.string().required().max(100).messages({
+      'any.required': 'Last name is required',
+      'string.empty': 'Last name is required',
+      'string.max': 'Last name cannot be longer than 100 characters',
+    }),
+    email: Joi.string().required().email().messages({
+      'any.required': 'Email is required',
+      'string.email': 'Invalid email',
+    }),
+    password: Joi.string()
+      .required()
+      .min(8)
+      .regex(ONE_DIGIT_REGEX, { name: 'digit' })
+      .regex(ONE_LOWERCASE_REGEX, { name: 'lowercase' })
+      .regex(ONE_UPPERCASE_REGEX, { name: 'uppercase' })
+      .regex(ONE_SPECIAL_CHARACTER, { name: 'special' })
+      .messages({
+        'string.min': 'Password has to be at least 8 characters',
+      }),
+  })
+  .options({ abortEarly: false });
 
 // export const OBJECT_ID_REGEX = /^[0-9a-fA-F]{24}$/;
 // export const ONE_DIGIT_REGEX = /(?=.*[0-9])/;
