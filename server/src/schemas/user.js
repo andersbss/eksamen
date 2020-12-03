@@ -24,6 +24,7 @@ export const userSchema = Joi.object()
       .regex(ONE_LOWERCASE_REGEX, { name: 'lowercase' })
       .regex(ONE_UPPERCASE_REGEX, { name: 'uppercase' })
       .regex(ONE_SPECIAL_CHARACTER, { name: 'special' })
+      .meta({ _mongoose: { select: false } })
       .messages({
         'string.min': 'Password has to be at least 8 characters',
       }),
