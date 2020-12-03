@@ -10,7 +10,7 @@ const StyledNav = styled.nav`
   padding: 15px;
 `;
 
-const StyledName = styled.div`
+const StyledName = styled.text`
   float: left;
   font-size: 2em;
 `;
