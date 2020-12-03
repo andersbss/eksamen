@@ -12,7 +12,7 @@ const theme = {
     lightGrey: '#e8e8e8',
     blue: '#479eb9',
     black: 'black',
-    white: 'white',
+    white: '#ffffff',
   },
   fonts: {
     sizes: {

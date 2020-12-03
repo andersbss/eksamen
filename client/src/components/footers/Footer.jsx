@@ -3,15 +3,16 @@ import styled from 'styled-components';
 
 const StyledFooter = styled.footer`
   width: 100%;
-  height: 50px;
+  height: 80px;
   bottom: 0;
-  background-color: ${(props) => props.theme.colors.grey};
+  display: inline-block;
+  background-color: ${(props) => props.theme.colors.white};
   text-align: center;
-  font-size: 14px;
 
   & > p {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     line-height: 50px;
+    height: 100%;
   }
 `;
 
