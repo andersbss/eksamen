@@ -14,6 +14,7 @@ export const authenticate = catchAsyncErrors(async (req, res, next) => {
     if (err) return next(new ErrorHandler('Invalid token', 403));
 
     const { id } = decoded;
+
     if (!mongoose.Types.ObjectId.isValid(id)) return next(new ErrorHandler('Invalid token', 403));
 
     const user = await userService.getUserById(id);
@@ -25,8 +26,6 @@ export const authenticate = catchAsyncErrors(async (req, res, next) => {
 });
 
 export const authorize = (...roles) => (req, res, next) => {
-  console.log(req.user);
-  console.log(req.user.role);
   if (!roles.includes(req.user.role)) return next(new ErrorHandler('Unauthorized', 403));
   next();
 };
