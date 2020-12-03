@@ -15,11 +15,9 @@ const theme = {
   },
   fonts: {
     sizes: {
-      h1: '2em',
       button: '1.5em',
     },
     weights: {
-      h1: 900,
       button: 700,
     },
   },
