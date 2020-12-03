@@ -77,3 +77,15 @@ export const CATEGORY_TITLE = {
   required: true,
   max: [50, 'Category cannot be longer than 50 digits'],
 };
+
+// Image
+export const IMAGE_FILE_PATH = {
+  type: String,
+  required: true,
+};
+
+export const IMAGE_FILE_MIMETYPE = {
+  type: String,
+  required: true,
+  // min: [1, 'Mime type has to be at least 1 digit long'],
+};
