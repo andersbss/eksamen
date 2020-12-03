@@ -1,6 +1,5 @@
 import Joi from 'joi';
 import { OBJECT_ID_REGEX } from '../constants/regexes.js';
-import logErrors from '../utils/schemaErrorLogger.js';
 
 export const articleSchema = Joi.object().keys({
   title: Joi.string().required().max(50).messages({
@@ -39,5 +38,3 @@ export const articleSchema = Joi.object().keys({
       'string.pattern.base': 'Publisher id is not valid',
     }),
 });
-
-// logErrors(articleSchema);

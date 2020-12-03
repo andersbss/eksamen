@@ -4,6 +4,8 @@ const validateInput = async (schema, input) => {
   try {
     return await schema.validateAsync({ ...input });
   } catch (error) {
+    console.log(error.details.map((detail) => detail.type));
+    console.log(error.details.map((detail) => detail.message));
     return error;
   }
 };
