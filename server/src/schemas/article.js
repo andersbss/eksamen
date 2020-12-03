@@ -42,5 +42,11 @@ export const articleSchema = Joi.object()
         'any.required': 'Publisher is required',
         'string.pattern.base': 'Publisher id is not valid',
       }),
+    image: Joi.string()
+      .regex(OBJECT_ID_REGEX)
+      .meta({ _mongoose: { type: 'ObjectId', ref: 'Image' } })
+      .messages({
+        'string.pattern.base': 'Image id is not valid',
+      }),
   })
   .options({ abortEarly: false });
