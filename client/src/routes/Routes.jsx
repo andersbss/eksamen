@@ -11,11 +11,15 @@ import Offices from '../pages/offices';
 import OfficeDetail from '../pages/officeDetail/index';
 import CreateArticle from '../pages/createArticle';
 import Articles from '../pages/articles';
+import Login from '../pages/login';
 
 const Routes = () => (
   <Router>
     <MainLayout>
       <Switch>
+        <Route>
+          <Login path="/logginn" />
+        </Route>
         <Route path="/hjem">
           <Home />
         </Route>

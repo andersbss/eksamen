@@ -20,6 +20,7 @@ const Nav = () => (
     <StyledName>FG</StyledName>
     <DesktopNav />
     <TabletNav />
+    <button>Logg inn</button>
   </StyledNav>
 );
 export default Nav;
