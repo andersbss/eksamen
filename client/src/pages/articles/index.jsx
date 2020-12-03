@@ -1,5 +1,6 @@
 import React from 'react';
 import Jumbotron from '../../components/common/Jumbotron';
+import ArticlesContainer from '../../components/containers/ArticlesContainer';
 import ArticlesToggles from '../../components/options/ArticlesToggles';
 
 const Articles = () => {
@@ -7,7 +8,9 @@ const Articles = () => {
   return (
     <>
       <Jumbotron headerText="Fagartikler" />
-      <ArticlesToggles />
+      <ArticlesContainer>
+        <ArticlesToggles />
+      </ArticlesContainer>
     </>
   );
 };
