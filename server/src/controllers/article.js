@@ -9,7 +9,7 @@ export const getAll = catchAsyncErrors(async (req, res, next) => {
 });
 
 export const getById = catchAsyncErrors(async (req, res, next) => {
-  const article = await articleService.getArticleById(req.params.id);
+  const article = await articleService.getArticleById(req.params.id, true);
   if (!article) return next(new ErrorHandler('Article not found', 404));
 
   response(res, 200, true, article);

@@ -1,6 +1,9 @@
 import Article from '../models/article.js';
 
-export const getArticleById = (id) => Article.findById(id).populate('category');
+export const getArticleById = (id, withPopulation) => {
+  if (withPopulation) return Article.findById(id).populate(['category', 'author']);
+  return Article.findById(id);
+};
 
 export const createArticle = (article) => Article.create(article);
 
