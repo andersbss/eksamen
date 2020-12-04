@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 
 const StyledLi = styled.li`
   margin: 0;
@@ -48,19 +49,18 @@ const FallbackImage = styled.div`
   background-color: ${(props) => props.theme.colors.lightGrey};
 `;
 
-const ArticleItem = ({
-  title,
-  ingress,
-  categoryTitle,
-  id,
-  handleArticleClick,
-  image,
-}) => {
-  console.log();
+const ArticleItem = ({ title, ingress, categoryTitle, id, image }) => {
+  const history = useHistory();
+
+  const handleArticleClick = () => {
+    history.push({
+      pathname: `/fagartikkel/${id}`,
+    });
+  };
 
   // Replace the truthy result with actual image later
   return (
-    <StyledLi onClick={() => handleArticleClick(id)}>
+    <StyledLi onClick={handleArticleClick}>
       {image ? <FallbackImage /> : <FallbackImage />}
       <span>
         <h1>{title}</h1>

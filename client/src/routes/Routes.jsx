@@ -34,6 +34,9 @@ const Routes = () => (
         <Route path="/fagartikler">
           <Articles />
         </Route>
+        <Route path="/fagartikkel/:id">
+          <h1>higjdsaf</h1>
+        </Route>
         <Route path="/kontakt">
           <h1>Make this</h1>
         </Route>
