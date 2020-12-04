@@ -1,7 +1,7 @@
 import React from 'react';
 import Loader from '../../components/animations/Loader';
 import Jumbotron from '../../components/common/Jumbotron';
-import ArticlesContainer from '../../layouts/ArticlesLayout';
+import ArticlesLayout from '../../layouts/ArticlesLayout';
 import Error from '../../components/errors/Error';
 import ArticleList from '../../components/lists/ArticleList';
 import ArticlesToggles from '../../components/options/ArticlesToggles';
@@ -15,12 +15,12 @@ const Articles = () => {
   return (
     <>
       <Jumbotron headerText="Fagartikler" />
-      <ArticlesContainer>
+      <ArticlesLayout>
         <ArticlesToggles loggedIn={loggedIn} isAdmin={isAdmin} />
         {loading && <Loader />}
         {isSuccess && !loading && <ArticleList articles={response} />}
         {!isSuccess && !loading && <Error error={error} />}
-      </ArticlesContainer>
+      </ArticlesLayout>
     </>
   );
 };

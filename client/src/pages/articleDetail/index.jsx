@@ -11,8 +11,6 @@ const ArticleDetail = () => {
     `articles/${id}`
   );
 
-  console.log(response);
-
   return (
     <>
       <Jumbotron headerText="Tittel" />
