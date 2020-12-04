@@ -11,6 +11,8 @@ const StyledLi = styled.li`
   grid-template-rows: 70px 1fr;
   grid-column-gap: 30px;
 
+  cursor: pointer;
+
   & > div {
     grid-row: span 2;
   }
@@ -46,11 +48,19 @@ const FallbackImage = styled.div`
   background-color: ${(props) => props.theme.colors.lightGrey};
 `;
 
-const ArticleItem = ({ title, ingress, categoryTitle, image }) => {
+const ArticleItem = ({
+  title,
+  ingress,
+  categoryTitle,
+  id,
+  handleArticleClick,
+  image,
+}) => {
   console.log();
-  // Replaced the truthy result with actual image later
+
+  // Replace the truthy result with actual image later
   return (
-    <StyledLi>
+    <StyledLi onClick={() => handleArticleClick(id)}>
       {image ? <FallbackImage /> : <FallbackImage />}
       <span>
         <h1>{title}</h1>

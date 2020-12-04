@@ -13,6 +13,7 @@ import CreateArticle from '../pages/createArticle';
 import Articles from '../pages/articles';
 import Login from '../pages/login';
 import NotFound from '../pages/notFound';
+import AuthRoute from './AuthRoute';
 
 const Routes = () => (
   <Router>
@@ -36,9 +37,9 @@ const Routes = () => (
         <Route path="/kontakt">
           <h1>Make this</h1>
         </Route>
-        <Route path="/nyartikkel">
+        <AuthRoute path="/nyartikkel">
           <CreateArticle />
-        </Route>
+        </AuthRoute>
         <Redirect exact from="/" to="/hjem" />
         <Route path="*">
           <NotFound />
