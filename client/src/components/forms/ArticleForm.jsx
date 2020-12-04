@@ -7,6 +7,7 @@ import useFetch from '../../hooks/useFetch';
 import inputValidation from '../../utils/formValidation';
 import Input from '../common/Input';
 import Loader from '../animations/Loader';
+import Textarea from '../common/Textarea';
 
 const StyledFormContainer = styled.main`
   padding: 20px;
@@ -129,18 +130,17 @@ const ArticleForm = () => {
           name="ingress"
           onChange={handleChange}
         />
-        <StyledLabel>
-          Innhold {contentError && `${contentError}`}
-          <textarea
-            name="content"
-            placeholder="Innhold"
-            maxLength="3000"
-            required
-            rows="4"
-            cols="50"
-            onChange={handleChange}
-          />
-        </StyledLabel>
+        <Textarea
+          label="Innhold"
+          errorLabel={contentError}
+          maxLength="3000"
+          placeholder="Innhold"
+          required="true"
+          name="content"
+          rows="4"
+          cols="50"
+          onChange={handleChange}
+        />
         <StyledLabel>
           Publiseringsdato
           <input
