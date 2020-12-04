@@ -161,7 +161,6 @@ const Nav = () => {
       if (success) {
         setLoading(false);
         setUser(null);
-        history.push('/hjem');
       } else {
         setLoading(false);
         setError(data);
