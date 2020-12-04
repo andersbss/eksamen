@@ -70,8 +70,6 @@ const ArticleForm = () => {
     isSuccess: authorIsSuccess,
   } = useFetch('GET', '/authors');
 
-  console.log(formData);
-
   const handleChange = (e) => {
     updateFormData({
       ...formData,
@@ -106,7 +104,6 @@ const ArticleForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
     request('POST', '/articles', formData);
   };
 
@@ -119,7 +116,7 @@ const ArticleForm = () => {
           type="text"
           maxLength="50"
           placeholder="Tittel"
-          required="true"
+          required
           name="title"
           onChange={handleChange}
         />
@@ -129,7 +126,7 @@ const ArticleForm = () => {
           type="text"
           maxLength="1000"
           placeholder="Ingress"
-          required="true"
+          required
           name="ingress"
           onChange={handleChange}
         />
@@ -138,7 +135,7 @@ const ArticleForm = () => {
           errorLabel={contentError}
           maxLength="3000"
           placeholder="Innhold"
-          required="true"
+          required
           name="content"
           rows="4"
           cols="50"
@@ -153,7 +150,9 @@ const ArticleForm = () => {
                 <p>Ingen kategorier</p>
               ) : (
                 categories.map((category) => (
-                  <option value={category._id}>{category.title}</option>
+                  <option key={category._id} value={category._id}>
+                    {category.title}
+                  </option>
                 ))
               )}
             </Select>
@@ -172,7 +171,11 @@ const ArticleForm = () => {
               ) : (
                 authors.map((author) => {
                   const name = `${author.firstName} ${author.lastName}`;
-                  return <option value={author._id}>{name}</option>;
+                  return (
+                    <option key={author._id} value={author._id}>
+                      {name}
+                    </option>
+                  );
                 })
               )}
             </Select>
