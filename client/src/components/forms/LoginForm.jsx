@@ -12,7 +12,7 @@ const StyledForm = styled.form`
   }
 `;
 
-const LoginForm = ({ handleLogin }) => {
+const LoginForm = ({ handleLogin, loading }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -29,7 +29,13 @@ const LoginForm = ({ handleLogin }) => {
         placeholder="Passord"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <Button content="Logg inn" backgroundColor="blue" color="white" />
+      <Button
+        type="submit"
+        content="Logg inn"
+        backgroundColor="blue"
+        color="white"
+        disabled={loading}
+      />
     </StyledForm>
   );
 };
