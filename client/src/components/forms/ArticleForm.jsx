@@ -53,10 +53,19 @@ const ArticleForm = () => {
   const [ingressError, setIngressError] = useState(' ');
   const [contentError, setContentError] = useState(' ');
 
-  const { error, loading, response, isSuccess } = useFetch(
-    'GET',
-    '/categories'
-  );
+  const {
+    error: categoryError,
+    loading: categoryLoading,
+    response: categories,
+    isSuccess: categoryIsSuccess,
+  } = useFetch('GET', '/categories');
+
+  const {
+    error: authorError,
+    loading: authorLoading,
+    response: authors,
+    isSuccess: authorIsSuccess,
+  } = useFetch('GET', '/authors');
 
   const handleChange = (e) => {
     updateFormData({
@@ -143,28 +152,38 @@ const ArticleForm = () => {
         </StyledLabel>
         <StyledLabel>
           Kategori
-          {loading && <p>Loading...</p>}
-          {isSuccess && (
+          {categoryLoading && <p>Loading...</p>}
+          {categoryIsSuccess && (
             <Select name="category" onChange={handleChange}>
-              {response.length <= 0 ? (
+              {categories.length <= 0 ? (
                 <p>Ingen kategorier</p>
               ) : (
-                response.map((category) => (
+                categories.map((category) => (
                   <option value={category.title}>{category.title}</option>
                 ))
               )}
             </Select>
           )}
-          {!isSuccess && !loading && <Error error={error} />}
+          {!categoryIsSuccess && !categoryLoading && (
+            <Error error={categoryError} />
+          )}
         </StyledLabel>
         <StyledLabel>
           Forfatter
-          <select name="author" required onChange={handleChange}>
-            <option value={null}>Velg en forfatter</option>
-            <option value="Lars Larsen">Lars Larsen</option>
-            <option value="Gunn Gundersen">Gunn Gundersen</option>
-            <option value="Simen Simensen">Simen Simensen</option>
-          </select>
+          {authorLoading && <p>Loading...</p>}
+          {authorIsSuccess && (
+            <Select name="author" onChange={handleChange}>
+              {authors.length <= 0 ? (
+                <p>Ingen forfattere</p>
+              ) : (
+                authors.map((author) => {
+                  const name = `${author.firstName} ${author.lastName}`;
+                  return <option value={name}>{name}</option>;
+                })
+              )}
+            </Select>
+          )}
+          {!authorIsSuccess && !authorLoading && <Error error={authorError} />}
         </StyledLabel>
         <Button
           content="Create"
