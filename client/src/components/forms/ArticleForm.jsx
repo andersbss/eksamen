@@ -44,7 +44,6 @@ const initialFormData = Object.freeze({
   title: '',
   ingress: '',
   content: '',
-  published: '',
   category: '',
   author: '',
 });
@@ -104,10 +103,6 @@ const ArticleForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateFormData({
-      ...formData,
-      published: Date.now(),
-    });
     console.log(formData);
   };
 
@@ -154,7 +149,7 @@ const ArticleForm = () => {
                 <p>Ingen kategorier</p>
               ) : (
                 categories.map((category) => (
-                  <option value={category.title}>{category.title}</option>
+                  <option value={category._id}>{category.title}</option>
                 ))
               )}
             </Select>
@@ -173,7 +168,7 @@ const ArticleForm = () => {
               ) : (
                 authors.map((author) => {
                   const name = `${author.firstName} ${author.lastName}`;
-                  return <option value={name}>{name}</option>;
+                  return <option value={author._id}>{name}</option>;
                 })
               )}
             </Select>
