@@ -15,6 +15,11 @@ const StyledButton = styled.button`
       ? props.theme.colors.white
       : props.theme.colors.black};
 
+  &:disabled {
+    background-color: ${(props) => props.theme.colors.lightGrey};
+    color: black;
+  }
+
   border: 0;
 
   height: 85px;
