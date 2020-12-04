@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 import { useUserContext } from '../../context/UserContext';
 import { request } from '../../services/httpService';
@@ -146,10 +146,7 @@ const StyledLi = styled.li`
 
 const Nav = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const { setUser, loggedIn } = useUserContext();
-  const history = useHistory();
 
   const handleLogout = async () => {
     try {
