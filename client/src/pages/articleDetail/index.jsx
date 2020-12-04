@@ -2,10 +2,16 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import Jumbotron from '../../components/common/Jumbotron';
 import ArticleDetailLayout from '../../layouts/ArticleDetailLayout';
+import useFetch from '../../hooks/useFetch';
 
 const ArticleDetail = () => {
   const { id } = useParams();
-  console.log(id);
+  const { error, loading, response, isSuccess } = useFetch(
+    'GET',
+    `articles/${id}`
+  );
+
+  console.log(response);
 
   return (
     <>

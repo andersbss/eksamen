@@ -3,6 +3,16 @@ import catchAsyncErrors from '../middleware/catchAsync.js';
 import { articleService, authorService, categoryService } from '../services/index.js';
 import response from '../utils/response.js';
 
+export const getAll = catchAsyncErrors(async (req, res, next) => {
+  const articles = await articleService.getAllArticles();
+  response(res, 200, true, articles);
+});
+
+export const getById = catchAsyncErrors(async (req, res, next) => {
+  const article = await articleService.getArticleById(req.params.id);
+  response(res, 200, true, article);
+});
+
 export const create = catchAsyncErrors(async (req, res, next) => {
   const { author, category } = req.body;
 
@@ -12,11 +22,6 @@ export const create = catchAsyncErrors(async (req, res, next) => {
   const article = await articleService.createArticle(req.body);
 
   response(res, 201, true, article);
-});
-
-export const getAll = catchAsyncErrors(async (req, res, next) => {
-  const articles = await articleService.getAllArticles();
-  response(res, 200, true, articles);
 });
 
 export const update = catchAsyncErrors(async (req, res, next) => {
