@@ -8,6 +8,7 @@ const UserContext = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    console.log(user);
     const loadUserData = async () => {
       if (!user) {
         setLoading(true);
