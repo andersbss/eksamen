@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Nav from '../components/nav/Nav';
+import Nav from '../components/navv2/Nav';
 import Footer from '../components/footers/Footer';
 
 const StyledMainLayout = styled.div`
@@ -14,6 +14,8 @@ const StyledHeader = styled.header`
   position: fixed;
   z-index: 1;
   box-shadow: 0px -2px 15px -1px rgba(0, 0, 0, 0.54);
+
+  border: solid;
 `;
 
 const StyledContainer = styled.div`

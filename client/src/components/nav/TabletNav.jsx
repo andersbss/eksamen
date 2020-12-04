@@ -83,9 +83,6 @@ const TabletNav = () => {
     setShowMenu((prev) => !prev);
   };
 
-  // This component as causing too many renders :(
-  console.log('render');
-
   // Updates windowWidth when window is resized.
   useEffect(() => {
     const handleSizeChange = () => {
