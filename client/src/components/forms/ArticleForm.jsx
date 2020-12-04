@@ -8,6 +8,7 @@ import inputValidation from '../../utils/formValidation';
 import Input from '../common/Input';
 import Loader from '../animations/Loader';
 import Textarea from '../common/Textarea';
+import { request } from '../../services/httpService';
 
 const StyledFormContainer = styled.main`
   padding: 20px;
@@ -104,6 +105,7 @@ const ArticleForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+    request('POST', '/articles', formData);
   };
 
   return (
