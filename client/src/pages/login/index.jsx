@@ -10,9 +10,7 @@ import { request } from '../../services/httpService';
 const Login = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [response, setResponse] = useState(null);
   const history = useHistory();
-
   const { setUser } = useUserContext();
 
   const handleLogin = async (e, email, password) => {
@@ -29,7 +27,7 @@ const Login = () => {
         const expire = JSON.parse(window.atob(token.split('.')[1])).exp;
         setUser({ ...user, expire });
         setLoading(false);
-        history.push('/fagartikler');
+        history.push('/hjem');
       } else {
         setLoading(false);
         setError(data);

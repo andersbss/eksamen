@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
+import { useUserContext } from '../../context/UserContext';
+import { request } from '../../services/httpService';
 
 const StyledHamburger = styled(FaBars)`
   display: none;
@@ -93,6 +95,7 @@ const StyledLi = styled.li`
     color: ${(props) => props.theme.colors.black};
     font-size: 2rem;
     font-weight: 600;
+    cursor: pointer;
 
     &.active {
       color: ${(props) => props.theme.colors.blue};
@@ -143,6 +146,27 @@ const StyledLi = styled.li`
 
 const Nav = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const { setUser, loggedIn } = useUserContext();
+
+  const handleLogout = async () => {
+    try {
+      setLoading(true);
+      const {
+        data: { success, data },
+      } = await request('POST', '/logout');
+
+      if (success) {
+        setLoading(false);
+        setUser(null);
+      } else {
+        setLoading(false);
+        setError(data);
+      }
+    } catch (error) {
+      setLoading(false);
+      setError({ success: false, data: 'Unexpected error occurred' });
+    }
+  };
 
   return (
     <StyledNav visible={isVisible}>
@@ -170,9 +194,13 @@ const Nav = () => {
           </NavLink>
         </StyledLi>
         <StyledLi>
-          <NavLink exact to="/logginn" activeClassName="active">
-            LOGG INN
-          </NavLink>
+          {loggedIn ? (
+            <a onClick={handleLogout}>LOGG UT</a>
+          ) : (
+            <NavLink exact to="/logginn" activeClassName="active">
+              LOGG INN
+            </NavLink>
+          )}
         </StyledLi>
       </StyledUl>
     </StyledNav>
