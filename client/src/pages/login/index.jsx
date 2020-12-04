@@ -28,7 +28,7 @@ const Login = () => {
         const expire = JSON.parse(window.atob(token.split('.')[1])).exp;
         setUser({ ...user, expire });
         setLoading(false);
-        history.push('/fagartikler');
+        history.push('/hjem');
       } else {
         setLoading(false);
         setError(data);
