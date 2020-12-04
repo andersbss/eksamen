@@ -13,11 +13,16 @@ const StyledContainer = styled.span`
   }
 
   & > input {
+    height: 50px;
     font-size: 2em;
     border-radius: 5px;
     border: solid grey 2px;
     color: ${(props) => props.theme.colors.black};
     padding: 5px;
+
+    ::placeholder {
+      font-size: 1em;
+    }
   }
 `;
 

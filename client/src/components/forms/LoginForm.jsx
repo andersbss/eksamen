@@ -26,7 +26,7 @@ const LoginForm = ({ handleLogin }) => {
       <Input
         label="Passord"
         type="Password"
-        placeholder="Password"
+        placeholder="Passord"
         onChange={(e) => setPassword(e.target.value)}
       />
       <Button content="Logg inn" backgroundColor="blue" color="white" />
