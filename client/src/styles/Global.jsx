@@ -7,18 +7,24 @@ export const GlobalStyles = createGlobalStyle`
   }
   html {
     font-size: 11px;
-    font-family:'Roboto', sans-serif;;
+    font-family:'Roboto', sans-serif;
+    background-color: #fafafa;
   }
   body {
     width: 100%;
     h1 {
-      font-size: 3.6rem;
+      font-size: 4rem;
+      font-weight: 900;
     }
     h2 {
       font-size: 2.8rem;
     }
     h3 {
       font-size: 2rem;
+    }
+    h4 {
+      font-size: 1.5em;
+      font-weight: 800;
     }
     p {
       font-size: 1.6rem;

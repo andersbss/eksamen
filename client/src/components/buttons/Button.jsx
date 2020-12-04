@@ -6,7 +6,9 @@ const StyledButton = styled.button`
   font-weight: ${(props) => props.theme.fonts.weights.button};
 
   background-color: ${(props) =>
-    props.backgroundColor === 'blue' && props.theme.colors.blue};
+    props.backgroundColor === 'blue'
+      ? props.theme.colors.blue
+      : props.theme.colors.lightGrey};
 
   color: ${(props) =>
     props.color === 'white'
