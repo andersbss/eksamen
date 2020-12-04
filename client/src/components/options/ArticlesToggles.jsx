@@ -6,22 +6,20 @@ const StyledSection = styled.section`
   display: flex;
   justify-content: space-between;
 
-  & > button:nth-child(2) {
+  & > button:nth-child(${(props) => (props.isAdmin ? 2 : 1)}) {
     margin-left: auto;
     margin-right: 20px;
   }
 `;
 
-const ArticlesToggles = ({ isLoggedIn }) => {
-  console.log();
-
-  return (
-    <StyledSection>
+const ArticlesToggles = ({ loggedIn, isAdmin }) => (
+  <StyledSection isAdmin={isAdmin}>
+    {loggedIn && isAdmin && (
       <Button content="NY ARTIKKEL" backgroundColor="blue" color="white" />
-      <Button content="SØK" />
-      <Button content="FILTER" />
-    </StyledSection>
-  );
-};
+    )}
+    <Button content="SØK" />
+    <Button content="FILTER" />
+  </StyledSection>
+);
 
 export default ArticlesToggles;
