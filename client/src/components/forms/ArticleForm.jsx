@@ -104,6 +104,10 @@ const ArticleForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    updateFormData({
+      ...formData,
+      published: Date.now(),
+    });
     console.log(formData);
   };
 
@@ -141,15 +145,6 @@ const ArticleForm = () => {
           cols="50"
           onChange={handleChange}
         />
-        <StyledLabel>
-          Publiseringsdato
-          <input
-            type="date"
-            name="published"
-            required
-            onChange={handleChange}
-          />
-        </StyledLabel>
         <StyledLabel>
           Kategori
           {categoryLoading && <Loader />}
