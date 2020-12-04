@@ -14,6 +14,7 @@ import Articles from '../pages/articles';
 import Login from '../pages/login';
 import NotFound from '../pages/notFound';
 import AuthRoute from './AuthRoute';
+import ArticleDetail from '../pages/articleDetail';
 
 const Routes = () => (
   <Router>
@@ -35,7 +36,7 @@ const Routes = () => (
           <Articles />
         </Route>
         <Route path="/fagartikkel/:id">
-          <h1>higjdsaf</h1>
+          <ArticleDetail />
         </Route>
         <Route path="/kontakt">
           <h1>Make this</h1>
