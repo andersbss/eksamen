@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Button from '../common/Button';
+import Button from '../buttons/Button';
 import Select from '../common/Select';
 import Error from '../errors/Error';
 import useFetch from '../../hooks/useFetch';
+import inputValidation from '../../utils/formValidation';
+import Input from '../common/Input';
+import Loader from '../animations/Loader';
+import Textarea from '../common/Textarea';
+import { request } from '../../services/httpService';
 
 const StyledFormContainer = styled.main`
   padding: 20px;
@@ -13,7 +18,7 @@ const StyledFormContainer = styled.main`
 
 const StyledForm = styled.form`
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 2fr 1fr 1fr 1fr 1fr;
   & > * {
   }
 `;
@@ -32,6 +37,7 @@ const StyledLabel = styled.label`
 
   & > textarea {
     resize: none;
+    height: 130px;
   }
 `;
 
@@ -39,19 +45,30 @@ const initialFormData = Object.freeze({
   title: '',
   ingress: '',
   content: '',
-  published: '',
   category: '',
   author: '',
 });
 
-// tittel, ingress, innhold(textarea), dato, forfatter(nedtrekksliste), kategori(nedtrekksliste)
 const ArticleForm = () => {
   const [formData, updateFormData] = useState(initialFormData);
+  const [disabled, setDisabled] = useState(true);
+  const [titleError, setTitleError] = useState(' ');
+  const [ingressError, setIngressError] = useState(' ');
+  const [contentError, setContentError] = useState(' ');
 
-  const { error, loading, response, isSuccess } = useFetch(
-    'GET',
-    '/categories'
-  );
+  const {
+    error: categoryError,
+    loading: categoryLoading,
+    response: categories,
+    isSuccess: categoryIsSuccess,
+  } = useFetch('GET', '/categories');
+
+  const {
+    error: authorError,
+    loading: authorLoading,
+    response: authors,
+    isSuccess: authorIsSuccess,
+  } = useFetch('GET', '/authors');
 
   console.log(formData);
 
@@ -60,83 +77,114 @@ const ArticleForm = () => {
       ...formData,
       [e.target.name]: e.target.value.trim(),
     });
+
+    switch (e.target.name) {
+      case 'title':
+        setTitleError(
+          inputValidation(e.target.name, e.target.value, e.target.maxLength)
+        );
+        break;
+      case 'ingress':
+        setIngressError(
+          inputValidation(e.target.name, e.target.value, e.target.maxLength)
+        );
+        break;
+      case 'content':
+        setContentError(
+          inputValidation(e.target.name, e.target.value, e.target.maxLength)
+        );
+        break;
+      default:
+    }
+
+    if (!(titleError && ingressError && contentError)) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+    request('POST', '/articles', formData);
   };
 
   return (
     <StyledFormContainer>
-      <StyledForm>
-        <StyledLabel>
-          Tittel
-          <input
-            type="text"
-            name="title"
-            placeholder="Tittel"
-            maxLength="50"
-            required
-            onChange={handleChange}
-          />
-        </StyledLabel>
-        <StyledLabel>
-          Ingress
-          <input
-            type="text"
-            name="ingress"
-            placeholder="Ingress"
-            maxLength="1000"
-            required
-            onChange={handleChange}
-          />
-        </StyledLabel>
-        <StyledLabel>
-          Innhold
-          <textarea
-            name="content"
-            placeholder="Innhold"
-            maxLength="3000"
-            required
-            onChange={handleChange}
-          />
-        </StyledLabel>
-        <StyledLabel>
-          Publiseringsdato
-          <input
-            type="date"
-            name="published"
-            required
-            onChange={handleChange}
-          />
-        </StyledLabel>
+      <StyledForm onSubmit={(e) => handleSubmit(e)}>
+        <Input
+          label="Tittel"
+          errorLabel={titleError}
+          type="text"
+          maxLength="50"
+          placeholder="Tittel"
+          required="true"
+          name="title"
+          onChange={handleChange}
+        />
+        <Input
+          label="Ingress"
+          errorLabel={ingressError}
+          type="text"
+          maxLength="1000"
+          placeholder="Ingress"
+          required="true"
+          name="ingress"
+          onChange={handleChange}
+        />
+        <Textarea
+          label="Innhold"
+          errorLabel={contentError}
+          maxLength="3000"
+          placeholder="Innhold"
+          required="true"
+          name="content"
+          rows="4"
+          cols="50"
+          onChange={handleChange}
+        />
         <StyledLabel>
           Kategori
-          {loading && <p>Loading...</p>}
-          {isSuccess && (
+          {categoryLoading && <Loader />}
+          {categoryIsSuccess && (
             <Select name="category" onChange={handleChange}>
-              {response.length <= 0 ? (
+              {categories.length <= 0 ? (
                 <p>Ingen kategorier</p>
               ) : (
-                response.map((category) => (
-                  <option value={category.title}>{category.title}</option>
+                categories.map((category) => (
+                  <option value={category._id}>{category.title}</option>
                 ))
               )}
             </Select>
           )}
-          {!isSuccess && !loading && <Error error={error} />}
+          {!categoryIsSuccess && !categoryLoading && (
+            <Error error={categoryError} />
+          )}
         </StyledLabel>
         <StyledLabel>
           Forfatter
-          <select name="author" required onChange={handleChange}>
-            <option value={null}>Velg en forfatter</option>
-            <option value="Lars Larsen">Lars Larsen</option>
-            <option value="Gunn Gundersen">Gunn Gundersen</option>
-            <option value="Simen Simensen">Simen Simensen</option>
-          </select>
+          {authorLoading && <Loader />}
+          {authorIsSuccess && (
+            <Select name="author" onChange={handleChange}>
+              {authors.length <= 0 ? (
+                <p>Ingen forfattere</p>
+              ) : (
+                authors.map((author) => {
+                  const name = `${author.firstName} ${author.lastName}`;
+                  return <option value={author._id}>{name}</option>;
+                })
+              )}
+            </Select>
+          )}
+          {!authorIsSuccess && !authorLoading && <Error error={authorError} />}
         </StyledLabel>
-        <Button click={handleSubmit} content="Create" type="submit" />
+        <Button
+          content="Create"
+          disabled={disabled}
+          backgroundColor="blue"
+          color="white"
+        />
       </StyledForm>
     </StyledFormContainer>
   );
