@@ -5,6 +5,8 @@ import Select from '../common/Select';
 import Error from '../errors/Error';
 import useFetch from '../../hooks/useFetch';
 import inputValidation from '../../utils/formValidation';
+import Input from '../common/Input';
+import Loader from '../animations/Loader';
 
 const StyledFormContainer = styled.main`
   padding: 20px;
@@ -107,28 +109,26 @@ const ArticleForm = () => {
   return (
     <StyledFormContainer>
       <StyledForm onSubmit={(e) => handleSubmit(e)}>
-        <StyledLabel>
-          Tittel {titleError && `${titleError}`}
-          <input
-            type="text"
-            name="title"
-            placeholder="Tittel"
-            maxLength="50"
-            required
-            onChange={handleChange}
-          />
-        </StyledLabel>
-        <StyledLabel>
-          Ingress {ingressError && `${ingressError}`}
-          <input
-            type="text"
-            name="ingress"
-            placeholder="Ingress"
-            maxLength="1000"
-            required
-            onChange={handleChange}
-          />
-        </StyledLabel>
+        <Input
+          label="Tittel"
+          errorLabel={titleError}
+          type="text"
+          maxLength="50"
+          placeholder="Tittel"
+          required="true"
+          name="title"
+          onChange={handleChange}
+        />
+        <Input
+          label="Ingress"
+          errorLabel={ingressError}
+          type="text"
+          maxLength="1000"
+          placeholder="Ingress"
+          required="true"
+          name="ingress"
+          onChange={handleChange}
+        />
         <StyledLabel>
           Innhold {contentError && `${contentError}`}
           <textarea
@@ -152,7 +152,7 @@ const ArticleForm = () => {
         </StyledLabel>
         <StyledLabel>
           Kategori
-          {categoryLoading && <p>Loading...</p>}
+          {categoryLoading && <Loader />}
           {categoryIsSuccess && (
             <Select name="category" onChange={handleChange}>
               {categories.length <= 0 ? (
@@ -170,7 +170,7 @@ const ArticleForm = () => {
         </StyledLabel>
         <StyledLabel>
           Forfatter
-          {authorLoading && <p>Loading...</p>}
+          {authorLoading && <Loader />}
           {authorIsSuccess && (
             <Select name="author" onChange={handleChange}>
               {authors.length <= 0 ? (
