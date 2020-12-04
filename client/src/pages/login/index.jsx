@@ -12,7 +12,6 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState(null);
   const history = useHistory();
-
   const { setUser } = useUserContext();
 
   const handleLogin = async (e, email, password) => {
