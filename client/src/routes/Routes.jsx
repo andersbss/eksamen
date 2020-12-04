@@ -34,6 +34,9 @@ const Routes = () => (
           <Articles />
         </Route>
         <Route path="/kontakt">
+          <h1>Make this</h1>
+        </Route>
+        <Route path="/nyartikkel">
           <CreateArticle />
         </Route>
         <Redirect exact from="/" to="/hjem" />
