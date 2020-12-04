@@ -14,6 +14,7 @@ router.post(
   articleController.create
 );
 router.get('/', articleController.getAll);
+router.get('/:id', articleController.getById);
 router.put(
   '/:id',
   [authenticate, authorize(ROLE.ADMIN), appendUser('publisher'), validate(articleSchema)],
