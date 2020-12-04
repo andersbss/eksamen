@@ -11,11 +11,16 @@ import Offices from '../pages/offices';
 import OfficeDetail from '../pages/officeDetail/index';
 import CreateArticle from '../pages/createArticle';
 import Articles from '../pages/articles';
+import Login from '../pages/login';
+import NotFound from '../pages/notFound';
 
 const Routes = () => (
   <Router>
     <MainLayout>
       <Switch>
+        <Route path="/logginn">
+          <Login />
+        </Route>
         <Route path="/hjem">
           <Home />
         </Route>
@@ -33,7 +38,7 @@ const Routes = () => (
         </Route>
         <Redirect exact from="/" to="/hjem" />
         <Route path="*">
-          <p>404</p>
+          <NotFound />
         </Route>
       </Switch>
     </MainLayout>

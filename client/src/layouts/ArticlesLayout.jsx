@@ -10,6 +10,6 @@ const StyledMain = styled.main`
   grid-row-gap: 80px;
 `;
 
-const ArticlesContainer = ({ children }) => <StyledMain>{children}</StyledMain>;
+const ArticlesLayout = ({ children }) => <StyledMain>{children}</StyledMain>;
 
-export default ArticlesContainer;
+export default ArticlesLayout;
