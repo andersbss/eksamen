@@ -53,6 +53,8 @@ const ArticleForm = () => {
     '/categories'
   );
 
+  console.log(formData);
+
   const handleChange = (e) => {
     updateFormData({
       ...formData,

@@ -28,7 +28,6 @@ const StyledLi = styled.li`
     }
     &.active {
       color: ${(props) => props.theme.colors.blue};
-      border-bottom: 4px solid ${(props) => props.theme.colors.blue};
     }
 
     &:hover {
@@ -58,6 +57,11 @@ const DesktopNav = () => (
     <StyledLi>
       <NavLink exact to="/kontakt" activeClassName="active">
         Kontakt
+      </NavLink>
+    </StyledLi>
+    <StyledLi>
+      <NavLink exact to="/logginn" activeClassName="active">
+        Logg inn
       </NavLink>
     </StyledLi>
   </StyledUl>
