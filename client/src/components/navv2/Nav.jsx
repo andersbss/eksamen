@@ -1,10 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+import { FaBars } from 'react-icons/fa';
+
+const StyledHamburger = styled(FaBars)`
+  display: none;
+  color: black;
+
+  @media screen and (max-width: 800px) {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    transform: translate(-100%, 75%);
+    font-size: 2rem;
+    cursor: pointer;
+  }
+`;
 
 const StyledNav = styled.nav`
   display: flex;
   justify-content: space-between;
+
+  @media screen and (max-width: 800px) {
+    margin: auto;
+    height: ${(props) => (props.visible ? '500px' : '55px')};
+    flex-direction: ${(props) => props.visible && 'column'};
+  }
 `;
 
 const StyledName = styled.p`
@@ -16,6 +39,12 @@ const StyledName = styled.p`
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  @media screen and (max-width: 800px) {
+    margin: ${(props) => props.visible && '40px'};
+    display: ${(props) => props.visible && 'inline-block'};
+    text-align: center;
+  }
 `;
 
 const StyledUl = styled.ul`
@@ -26,6 +55,16 @@ const StyledUl = styled.ul`
   display: grid;
   grid-template-columns: repeat(5, auto);
   column-gap: 30px;
+
+  @media screen and (max-width: 800px) {
+    display: ${(props) => (props.visible ? 'grid' : 'none')};
+
+    margin: auto;
+    margin-top: -30px;
+
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, auto);
+  }
 `;
 
 const StyledLi = styled.li`
@@ -49,6 +88,11 @@ const StyledLi = styled.li`
       transition: all 0.06s ease-in-out;
       color: #88d1e7;
     }
+
+    @media screen and (max-width: 800px) {
+      width: 100%;
+      text-align: center;
+    }
   }
 
   &:nth-child(5) {
@@ -71,12 +115,13 @@ const StyledLi = styled.li`
 `;
 
 const Nav = () => {
-  console.log();
+  const [isVisible, setIsVisible] = useState(false);
 
   return (
-    <StyledNav>
-      <StyledName>FG</StyledName>
-      <StyledUl>
+    <StyledNav visible={isVisible}>
+      <StyledHamburger onClick={() => setIsVisible(!isVisible)} />
+      <StyledName visible={isVisible}>FG</StyledName>
+      <StyledUl visible={isVisible}>
         <StyledLi>
           <NavLink exact to="/hjem" activeClassName="active">
             Hjem
