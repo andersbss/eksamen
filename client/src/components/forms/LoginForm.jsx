@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const StyledForm = styled.form``;
+const StyledForm = styled.form`
+  display: grid;
+`;
 
 const LoginForm = ({ handleLogin }) => {
   const [email, setEmail] = useState('');
@@ -9,7 +11,6 @@ const LoginForm = ({ handleLogin }) => {
 
   return (
     <StyledForm onSubmit={(e) => handleLogin(e, email, password)}>
-      <h1>TEST</h1>
       <input placeholder="Epost" onChange={(e) => setEmail(e.target.value)} />
       <input
         placeholder="Passord"
