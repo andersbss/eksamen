@@ -4,7 +4,7 @@ import Jumbotron from '../../components/common/Jumbotron';
 import ArticlesLayout from '../../layouts/ArticlesLayout';
 import Error from '../../components/errors/Error';
 import ArticleList from '../../components/lists/ArticleList';
-import ArticlesToggles from '../../components/options/ArticlesToggles';
+import ArticlesToggles from '../../components/toggles/ArticlesToggles';
 import useFetch from '../../hooks/useFetch';
 import { useUserContext } from '../../context/UserContext';
 

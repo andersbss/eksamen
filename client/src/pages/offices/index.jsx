@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Jumbotron from '../../components/common/Jumbotron';
 import OfficeGrid from '../../components/grids/OfficeGrid';
 import OfficeList from '../../components/lists/OfficeList';
-import OfficeViewToggle from '../../components/options/OfficeViewToggle';
+import OfficeViewToggle from '../../components/toggles/OfficeViewToggle';
 import { officeList } from '../../mockUpData';
 
 const Offices = () => {
