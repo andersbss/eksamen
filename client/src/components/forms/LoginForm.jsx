@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import Button from '../buttons/Button';
+import Input from '../common/Input';
 
 const StyledForm = styled.form`
   display: grid;
+  grid-row-gap: 20px;
+
+  & > button {
+    margin: auto;
+  }
 `;
 
 const LoginForm = ({ handleLogin }) => {
@@ -11,13 +18,18 @@ const LoginForm = ({ handleLogin }) => {
 
   return (
     <StyledForm onSubmit={(e) => handleLogin(e, email, password)}>
-      <input placeholder="Epost" onChange={(e) => setEmail(e.target.value)} />
-      <input
-        placeholder="Passord"
+      <Input
+        label="Epost"
+        placeholder="Epost"
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <Input
+        label="Passord"
         type="Password"
+        placeholder="Password"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button type="submit">Logg inn</button>
+      <Button content="Logg inn" backgroundColor="blue" color="white" />
     </StyledForm>
   );
 };
