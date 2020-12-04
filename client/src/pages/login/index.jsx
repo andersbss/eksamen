@@ -4,7 +4,7 @@ import LoginForm from '../../components/forms/LoginForm';
 
 const Login = () => (
   <>
-    <Jumbotron headerText="Logg inn" />
+    <Jumbotron headerText="Logg inn" top="70" bottom="0" />
 
     <LoginForm />
   </>

@@ -6,6 +6,6 @@ const StyledTitle = styled.h1`
   text-align: center;
 `;
 
-const MediumTitle = ({ content }) => <StyledTitle>{content}</StyledTitle>;
+const LargeTitle = ({ content }) => <StyledTitle>{content}</StyledTitle>;
 
-export default MediumTitle;
+export default LargeTitle;
