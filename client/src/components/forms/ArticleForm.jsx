@@ -70,8 +70,6 @@ const ArticleForm = () => {
     isSuccess: authorIsSuccess,
   } = useFetch('GET', '/authors');
 
-  console.log(formData);
-
   const handleChange = (e) => {
     updateFormData({
       ...formData,

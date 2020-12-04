@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 const StyledFooter = styled.footer`
   width: 100%;
+  height: 80px;
+  bottom: 0;
   display: inline-block;
   background-color: ${(props) => props.theme.colors.white};
   text-align: center;

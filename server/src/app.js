@@ -10,7 +10,6 @@ import auth from './routes/auth.js';
 import article from './routes/article.js';
 import category from './routes/category.js';
 import author from './routes/author.js';
-import user from './routes/user.js';
 import image from './routes/image.js';
 
 const app = express();
@@ -36,7 +35,6 @@ app.use(`${process.env.BASEURL}/`, auth);
 app.use(`${process.env.BASEURL}/articles`, article);
 app.use(`${process.env.BASEURL}/categories`, category);
 app.use(`${process.env.BASEURL}/authors`, author);
-app.use(`${process.env.BASEURL}/`, user);
 app.use(`${process.env.BASEURL}/images`, image);
 
 app.use(errorMiddleware);
