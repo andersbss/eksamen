@@ -7,7 +7,7 @@ const StyledHamburger = styled(FaBars)`
   display: none;
   color: black;
 
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 500px) {
     display: block;
     position: absolute;
     top: 0;
@@ -24,6 +24,10 @@ const StyledNav = styled.nav`
   justify-content: space-between;
 
   @media screen and (max-width: 800px) {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 500px) {
     margin: auto;
     height: ${(props) => (props.visible ? '500px' : '55px')};
     flex-direction: ${(props) => props.visible && 'column'};
@@ -41,6 +45,11 @@ const StyledName = styled.p`
   align-items: center;
 
   @media screen and (max-width: 800px) {
+    margin-left: 20px;
+    font-size: 2rem;
+  }
+
+  @media screen and (max-width: 500px) {
     margin: ${(props) => props.visible && '40px'};
     display: ${(props) => props.visible && 'inline-block'};
     text-align: center;
@@ -57,6 +66,11 @@ const StyledUl = styled.ul`
   column-gap: 30px;
 
   @media screen and (max-width: 800px) {
+    column-gap: 20px;
+    margin: auto;
+  }
+
+  @media screen and (max-width: 500px) {
     display: ${(props) => (props.visible ? 'grid' : 'none')};
 
     margin: auto;
@@ -77,7 +91,7 @@ const StyledLi = styled.li`
   & > a {
     text-decoration: none;
     color: ${(props) => props.theme.colors.black};
-    font-size: 2em;
+    font-size: 2rem;
     font-weight: 600;
 
     &.active {
@@ -88,8 +102,12 @@ const StyledLi = styled.li`
       transition: all 0.06s ease-in-out;
       color: #88d1e7;
     }
-
     @media screen and (max-width: 800px) {
+      font-size: 1.5rem;
+    }
+
+    @media screen and (max-width: 500px) {
+      font-size: 2rem;
       width: 100%;
       text-align: center;
     }
@@ -110,6 +128,15 @@ const StyledLi = styled.li`
       text-align: center;
       vertical-align: middle;
       line-height: 80px;
+
+      @media screen and (max-width: 800px) {
+        font-size: 1.2em;
+      }
+    }
+
+    @media screen and (max-width: 800px) {
+      float: right;
+      width: 100px;
     }
   }
 `;
