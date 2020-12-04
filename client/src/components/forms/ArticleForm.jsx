@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Button from '../common/Button';
+import Button from '../buttons/Button';
 import Select from '../common/Select';
 import Error from '../errors/Error';
 import useFetch from '../../hooks/useFetch';
+import inputValidation from '../../utils/formValidation';
 
 const StyledFormContainer = styled.main`
   padding: 20px;
@@ -13,7 +14,7 @@ const StyledFormContainer = styled.main`
 
 const StyledForm = styled.form`
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 2fr 1fr 1fr 1fr 1fr;
   & > * {
   }
 `;
@@ -32,6 +33,7 @@ const StyledLabel = styled.label`
 
   & > textarea {
     resize: none;
+    height: 130px;
   }
 `;
 
@@ -44,9 +46,12 @@ const initialFormData = Object.freeze({
   author: '',
 });
 
-// tittel, ingress, innhold(textarea), dato, forfatter(nedtrekksliste), kategori(nedtrekksliste)
 const ArticleForm = () => {
   const [formData, updateFormData] = useState(initialFormData);
+  const [disabled, setDisabled] = useState(true);
+  const [titleError, setTitleError] = useState(' ');
+  const [ingressError, setIngressError] = useState(' ');
+  const [contentError, setContentError] = useState(' ');
 
   const { error, loading, response, isSuccess } = useFetch(
     'GET',
@@ -58,6 +63,31 @@ const ArticleForm = () => {
       ...formData,
       [e.target.name]: e.target.value.trim(),
     });
+
+    switch (e.target.name) {
+      case 'title':
+        setTitleError(
+          inputValidation(e.target.name, e.target.value, e.target.maxLength)
+        );
+        break;
+      case 'ingress':
+        setIngressError(
+          inputValidation(e.target.name, e.target.value, e.target.maxLength)
+        );
+        break;
+      case 'content':
+        setContentError(
+          inputValidation(e.target.name, e.target.value, e.target.maxLength)
+        );
+        break;
+      default:
+    }
+
+    if (!(titleError && ingressError && contentError)) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -67,9 +97,9 @@ const ArticleForm = () => {
 
   return (
     <StyledFormContainer>
-      <StyledForm>
+      <StyledForm onSubmit={(e) => handleSubmit(e)}>
         <StyledLabel>
-          Tittel
+          Tittel {titleError && `${titleError}`}
           <input
             type="text"
             name="title"
@@ -80,7 +110,7 @@ const ArticleForm = () => {
           />
         </StyledLabel>
         <StyledLabel>
-          Ingress
+          Ingress {ingressError && `${ingressError}`}
           <input
             type="text"
             name="ingress"
@@ -91,12 +121,14 @@ const ArticleForm = () => {
           />
         </StyledLabel>
         <StyledLabel>
-          Innhold
+          Innhold {contentError && `${contentError}`}
           <textarea
             name="content"
             placeholder="Innhold"
             maxLength="3000"
             required
+            rows="4"
+            cols="50"
             onChange={handleChange}
           />
         </StyledLabel>
@@ -134,7 +166,12 @@ const ArticleForm = () => {
             <option value="Simen Simensen">Simen Simensen</option>
           </select>
         </StyledLabel>
-        <Button click={handleSubmit} content="Create" type="submit" />
+        <Button
+          content="Create"
+          disabled={disabled}
+          backgroundColor="blue"
+          color="white"
+        />
       </StyledForm>
     </StyledFormContainer>
   );
