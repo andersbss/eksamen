@@ -7,7 +7,7 @@ const StyledHamburger = styled(FaBars)`
   display: none;
   color: black;
 
-  @media screen and (max-width: 500px) {
+  @media ${(props) => props.theme.breakpoints.sm} {
     display: block;
     position: absolute;
     top: 0;
@@ -23,11 +23,11 @@ const StyledNav = styled.nav`
   display: flex;
   justify-content: space-between;
 
-  @media screen and (max-width: 800px) {
+  @media ${(props) => props.theme.breakpoints.md} {
     width: 100%;
   }
 
-  @media screen and (max-width: 500px) {
+  @media ${(props) => props.theme.breakpoints.sm} {
     margin: auto;
     height: ${(props) => (props.visible ? '500px' : '55px')};
     flex-direction: ${(props) => props.visible && 'column'};
@@ -44,12 +44,12 @@ const StyledName = styled.p`
   flex-direction: row;
   align-items: center;
 
-  @media screen and (max-width: 800px) {
+  @media ${(props) => props.theme.breakpoints.md} {
     margin-left: 20px;
     font-size: 2rem;
   }
 
-  @media screen and (max-width: 500px) {
+  @media ${(props) => props.theme.breakpoints.sm} {
     margin: ${(props) => props.visible && '40px'};
     display: ${(props) => props.visible && 'inline-block'};
     text-align: center;
@@ -65,12 +65,12 @@ const StyledUl = styled.ul`
   grid-template-columns: repeat(5, auto);
   column-gap: 30px;
 
-  @media screen and (max-width: 800px) {
+  @media ${(props) => props.theme.breakpoints.md} {
     column-gap: 20px;
     margin: auto;
   }
 
-  @media screen and (max-width: 500px) {
+  @media ${(props) => props.theme.breakpoints.sm} {
     display: ${(props) => (props.visible ? 'grid' : 'none')};
 
     margin: auto;
@@ -102,11 +102,11 @@ const StyledLi = styled.li`
       transition: all 0.06s ease-in-out;
       color: #88d1e7;
     }
-    @media screen and (max-width: 800px) {
+    @media ${(props) => props.theme.breakpoints.md} {
       font-size: 1.5rem;
     }
 
-    @media screen and (max-width: 500px) {
+    @media ${(props) => props.theme.breakpoints.sm} {
       font-size: 2rem;
       width: 100%;
       text-align: center;
@@ -129,12 +129,12 @@ const StyledLi = styled.li`
       vertical-align: middle;
       line-height: 80px;
 
-      @media screen and (max-width: 800px) {
+      @media ${(props) => props.theme.breakpoints.md} {
         font-size: 1.2em;
       }
     }
 
-    @media screen and (max-width: 800px) {
+    @media ${(props) => props.theme.breakpoints.md} {
       float: right;
       width: 100px;
     }
