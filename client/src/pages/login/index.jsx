@@ -10,7 +10,6 @@ import { request } from '../../services/httpService';
 const Login = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [response, setResponse] = useState(null);
   const history = useHistory();
   const { setUser } = useUserContext();
 
