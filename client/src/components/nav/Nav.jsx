@@ -145,6 +145,8 @@ const StyledLi = styled.li`
 `;
 
 const Nav = () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
   const { setUser, loggedIn } = useUserContext();
 
