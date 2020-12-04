@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Nav from '../components/navv2/Nav';
+import Nav from '../components/nav/Nav';
 import Footer from '../components/footers/Footer';
 
 const StyledMainLayout = styled.div`
