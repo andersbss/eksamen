@@ -31,7 +31,7 @@ const LoginForm = ({ handleLogin, loading }) => {
       />
       <Button
         type="submit"
-        content="Logg inn"
+        content={loading ? 'LOGGER INN...' : 'LOGG INN'}
         backgroundColor="blue"
         color="white"
         disabled={loading}
