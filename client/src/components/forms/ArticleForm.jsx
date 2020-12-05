@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../buttons/Button';
 import Select from '../common/Select';
@@ -34,12 +35,18 @@ const initialFormData = Object.freeze({
 const ArticleForm = () => {
   const [formData, updateFormData] = useState(initialFormData);
   const [disabled, setDisabled] = useState(true);
+  const [isCreated, setIsCreated] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [createError, setCreateError] = useState();
 
+  // Input errors
   const [titleError, setTitleError] = useState('Fyll ut tittel');
   const [ingressError, setIngressError] = useState('Fyll ut ingress');
   const [contentError, setContentError] = useState('Fyll ut innhold');
   const [categoryError, setCategoryError] = useState('');
   const [authorError, setAuthorError] = useState('');
+
+  const history = useHistory();
 
   const {
     error: categoryFetchError,
@@ -93,7 +100,7 @@ const ArticleForm = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
 
@@ -104,12 +111,36 @@ const ArticleForm = () => {
       setCategoryError('Velg en kategori');
     }
     if (formData.author !== '' && formData.category !== '') {
-      request('POST', '/articles', formData);
+      try {
+        setLoading(true);
+        const {
+          data: { success, data },
+        } = await request('POST', '/articles', formData);
+        console.log(success);
+
+        if (success) {
+          setIsCreated(true);
+          setLoading(false);
+          setDisabled(true);
+          setTimeout(() => history.push('/fagartikler'), 2000);
+        } else {
+          console.log(success);
+          setCreateError(data);
+          setLoading(false);
+        }
+      } catch (error) {
+        setLoading(false);
+        setCreateError({ success: false, data: 'Unexpected error occurred' });
+      }
     }
   };
 
   return (
     <StyledFormContainer>
+      {isCreated && (
+        <p>Artikkel publisert - Omdirigerer til fagartikkel-siden...</p>
+      )}
+      {createError && <p>Publisering av artikkel feilet</p>}
       <StyledForm onSubmit={(e) => handleSubmit(e)}>
         <Input
           label="Tittel"
@@ -186,7 +217,7 @@ const ArticleForm = () => {
           <Error error={authorFetchError} />
         )}
         <Button
-          content="Create"
+          content={loading ? 'Creating...' : 'Create'}
           disabled={disabled}
           backgroundColor="blue"
           color="white"
