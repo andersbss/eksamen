@@ -1,4 +1,4 @@
-export class ApiFilters {
+export class ApiFilter {
   constructor(query, queryStr) {
     this.query = query;
     this.queryStr = queryStr;

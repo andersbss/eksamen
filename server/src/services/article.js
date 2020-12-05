@@ -1,4 +1,5 @@
 import Article from '../models/article.js';
+import { ApiFilter } from '../utils/apiFilter.js';
 
 export const getArticleById = (id, withPopulation) => {
   if (withPopulation) return Article.findById(id).populate(['category', 'author']);
@@ -11,6 +12,22 @@ export const getPublicArticleById = (id, withPopulation) => {
 };
 
 export const getAllArticles = () => Article.find().populate('category');
+
+export const getAllArticlesFilter = async (queryStr) => {
+  console.log(queryStr);
+  const { limit, page } = queryStr;
+  const filter = new ApiFilter(Article.find(), queryStr);
+
+  const articles = await filter.query;
+  const paginated = await filter.pagination().query.populate('category');
+
+  return {
+    totalArticles: articles.length,
+    totalPages: Math.ceil(articles.length / limit) || 1,
+    currentPage: page && page > 0 ? parseInt(page) : 1,
+    data: paginated,
+  };
+};
 
 export const getAllPublicArticles = () => Article.find({ public: true }).populate('category');
 

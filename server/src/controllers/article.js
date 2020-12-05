@@ -5,7 +5,7 @@ import response from '../utils/response.js';
 import { articleController } from './index.js';
 
 export const getAll = catchAsyncErrors(async (req, res, next) => {
-  const articles = await articleService.getAllArticles();
+  const articles = await articleService.getAllArticlesFilter(req.query);
   response(res, 200, true, articles);
 });
 
