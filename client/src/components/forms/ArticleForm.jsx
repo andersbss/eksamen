@@ -10,16 +10,21 @@ import Input from '../common/Input';
 import Loader from '../animations/Loader';
 import Textarea from '../common/Textarea';
 import { request } from '../../services/httpService';
+import ImageForm from './ImageForm';
 
 const StyledFormContainer = styled.main`
   padding: 20px;
   width: 80%;
   margin: auto;
+  & > form > img {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
 `;
 
 const StyledForm = styled.form`
   display: grid;
-  grid-template-rows: 1fr 1fr 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 2fr 1fr 1fr 1fr auto auto;
   & > * {
   }
 `;
@@ -30,6 +35,7 @@ const initialFormData = Object.freeze({
   content: '',
   category: '',
   author: '',
+  image: '5fcb8b8bd895b528289723be',
 });
 
 const ArticleForm = () => {
@@ -216,6 +222,7 @@ const ArticleForm = () => {
         {!authorIsSuccess && !authorLoading && (
           <Error error={authorFetchError} />
         )}
+        <ImageForm />
         <Button
           content={loading ? 'Creating...' : 'Create'}
           disabled={disabled}
