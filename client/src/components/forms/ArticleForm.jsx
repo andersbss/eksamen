@@ -11,6 +11,7 @@ import Loader from '../animations/Loader';
 import Textarea from '../common/Textarea';
 import { request } from '../../services/httpService';
 import ImageForm from './ImageForm';
+import { upload } from '../../services/imageService';
 
 const StyledFormContainer = styled.main`
   padding: 20px;
@@ -44,6 +45,12 @@ const ArticleForm = () => {
   const [isCreated, setIsCreated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [createError, setCreateError] = useState();
+
+  // Image
+  const [file, setFile] = useState();
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
+  const [imageId, setImageId] = useState(null);
 
   // Input errors
   const [titleError, setTitleError] = useState('Fyll ut tittel');
@@ -103,6 +110,27 @@ const ArticleForm = () => {
       setDisabled(true);
     } else {
       setDisabled(false);
+    }
+  };
+
+  const imageFormOnChange = (e) => {
+    console.log(e);
+    const imageFile = e.target.files[0];
+    setFile(imageFile);
+  };
+
+  const handleImageUpload = async (event) => {
+    event.preventDefault();
+    const { data } = await upload(file);
+    console.log(data);
+
+    if (data.success) {
+      setSuccess(true);
+      setError(null);
+      setImageId(data?.data?._id);
+    } else {
+      setError(data.data);
+      setSuccess(false);
     }
   };
 
@@ -222,7 +250,6 @@ const ArticleForm = () => {
         {!authorIsSuccess && !authorLoading && (
           <Error error={authorFetchError} />
         )}
-        <ImageForm />
         <Button
           content={loading ? 'Creating...' : 'Create'}
           disabled={disabled}
@@ -230,6 +257,14 @@ const ArticleForm = () => {
           color="white"
         />
       </StyledForm>
+      <h4>Last opp bilde til artikkelen (valgfritt): </h4>
+      <ImageForm
+        handleSubmit={handleImageUpload}
+        onChange={imageFormOnChange}
+        error={error}
+        success={success}
+        imageId={imageId}
+      />
     </StyledFormContainer>
   );
 };
