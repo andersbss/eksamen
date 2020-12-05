@@ -6,14 +6,16 @@ const useFetch = (method, endpoint, wait = false, payload = null) => {
   const [loading, setLoading] = useState(true);
   const [response, setResponse] = useState(null);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [reqStatus, setReqStatus] = useState(null);
 
   useEffect(() => {
     const loadData = async () => {
       try {
         setLoading(true);
         const {
-          data: { success, data },
+          data: { success, data, status },
         } = await request(method, endpoint, payload);
+        setReqStatus(status);
         if (success) setResponse(data);
         else setError(data);
         setIsSuccess(success);
@@ -26,7 +28,7 @@ const useFetch = (method, endpoint, wait = false, payload = null) => {
 
     if (!wait) loadData();
   }, [method, endpoint, payload, wait]);
-  return { error, loading, response, isSuccess };
+  return { error, loading, response, isSuccess, reqStatus };
 };
 
 export default useFetch;
