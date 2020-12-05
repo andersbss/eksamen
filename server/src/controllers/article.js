@@ -2,15 +2,14 @@ import ErrorHandler from '../utils/errorHandler.js';
 import catchAsyncErrors from '../middleware/catchAsync.js';
 import { articleService, authorService, categoryService } from '../services/index.js';
 import response from '../utils/response.js';
-import { articleController } from './index.js';
 
 export const getAll = catchAsyncErrors(async (req, res, next) => {
-  const articles = await articleService.getAllArticles();
+  const articles = await articleService.getAllArticles(req.query, false);
   response(res, 200, true, articles);
 });
 
 export const getAllPublic = catchAsyncErrors(async (req, res, next) => {
-  const articles = await articleService.getAllPublicArticles();
+  const articles = await articleService.getAllArticles(req.query, true);
   response(res, 200, true, articles);
 });
 

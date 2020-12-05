@@ -59,7 +59,6 @@ const ArticleItem = ({ title, ingress, categoryTitle, id, image }) => {
     history.push(`/fagartikkel/${id}`);
   };
 
-  // Replace the truthy result with actual image later
   return (
     <StyledLi onClick={handleArticleClick}>
       {image ? <Image imageId={image} height="200px" /> : <FallbackImage />}
