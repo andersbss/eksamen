@@ -18,26 +18,8 @@ const StyledFormContainer = styled.main`
 
 const StyledForm = styled.form`
   display: grid;
-  grid-template-rows: 1fr 1fr 2fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
   & > * {
-  }
-`;
-
-const StyledLabel = styled.label`
-  font-size: 1.8rem;
-  font-weight: bold;
-  & > * {
-    display: block;
-    margin-bottom: 5px;
-    border: solid 2px ${(props) => props.theme.colors.grey};
-    border-radius: 5px;
-    height: 50px;
-    width: 100%;
-  }
-
-  & > textarea {
-    resize: none;
-    height: 130px;
   }
 `;
 
@@ -52,19 +34,22 @@ const initialFormData = Object.freeze({
 const ArticleForm = () => {
   const [formData, updateFormData] = useState(initialFormData);
   const [disabled, setDisabled] = useState(true);
-  const [titleError, setTitleError] = useState(' ');
-  const [ingressError, setIngressError] = useState(' ');
-  const [contentError, setContentError] = useState(' ');
+
+  const [titleError, setTitleError] = useState('Fyll ut tittel');
+  const [ingressError, setIngressError] = useState('Fyll ut ingress');
+  const [contentError, setContentError] = useState('Fyll ut innhold');
+  const [categoryError, setCategoryError] = useState('');
+  const [authorError, setAuthorError] = useState('');
 
   const {
-    error: categoryError,
+    error: categoryFetchError,
     loading: categoryLoading,
     response: categories,
     isSuccess: categoryIsSuccess,
   } = useFetch('GET', '/categories');
 
   const {
-    error: authorError,
+    error: authorFetchError,
     loading: authorLoading,
     response: authors,
     isSuccess: authorIsSuccess,
@@ -94,18 +79,33 @@ const ArticleForm = () => {
         break;
       default:
     }
+    if (e.target.name === 'category' && e.target.value !== '') {
+      setCategoryError('');
+    }
+    if (e.target.name === 'author' && e.target.value !== '') {
+      setAuthorError('');
+    }
 
-    if (!(titleError && ingressError && contentError)) {
-      setDisabled(false);
-    } else {
+    if (titleError || ingressError || contentError) {
       setDisabled(true);
+    } else {
+      setDisabled(false);
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
-    request('POST', '/articles', formData);
+
+    if (formData.author === '') {
+      setAuthorError('Velg en forfatter');
+    }
+    if (formData.category === '') {
+      setCategoryError('Velg en kategori');
+    }
+    if (formData.author !== '' && formData.category !== '') {
+      request('POST', '/articles', formData);
+    }
   };
 
   return (
@@ -142,41 +142,49 @@ const ArticleForm = () => {
           cols="50"
           onChange={handleChange}
         />
-        <StyledLabel>
-          Kategori
-          {categoryLoading && <Loader />}
-          {categoryIsSuccess && (
-            <Select name="category" onChange={handleChange}>
-              {categories.length <= 0 ? (
-                <p>Ingen kategorier</p>
-              ) : (
-                categories.map((category) => (
-                  <option value={category._id}>{category.title}</option>
-                ))
-              )}
-            </Select>
-          )}
-          {!categoryIsSuccess && !categoryLoading && (
-            <Error error={categoryError} />
-          )}
-        </StyledLabel>
-        <StyledLabel>
-          Forfatter
-          {authorLoading && <Loader />}
-          {authorIsSuccess && (
-            <Select name="author" onChange={handleChange}>
-              {authors.length <= 0 ? (
-                <p>Ingen forfattere</p>
-              ) : (
-                authors.map((author) => {
-                  const name = `${author.firstName} ${author.lastName}`;
-                  return <option value={author._id}>{name}</option>;
-                })
-              )}
-            </Select>
-          )}
-          {!authorIsSuccess && !authorLoading && <Error error={authorError} />}
-        </StyledLabel>
+        {categoryLoading && <Loader />}
+        {categoryIsSuccess && (
+          <Select
+            name="category"
+            label="Kategori"
+            errorLabel={categoryError}
+            onChange={handleChange}
+          >
+            <option value={null}>Velg kategori</option>
+            {categories.length <= 0 ? (
+              <p>Ingen kategorier</p>
+            ) : (
+              categories.map((category) => (
+                <option value={category._id}>{category.title}</option>
+              ))
+            )}
+          </Select>
+        )}
+        {!categoryIsSuccess && !categoryLoading && (
+          <Error error={categoryFetchError} />
+        )}
+        {authorLoading && <Loader />}
+        {authorIsSuccess && (
+          <Select
+            name="author"
+            label="Forfatter"
+            errorLabel={authorError}
+            onChange={handleChange}
+          >
+            <option value={null}>Velg forfatter</option>
+            {authors.length <= 0 ? (
+              <p>Ingen forfattere</p>
+            ) : (
+              authors.map((author) => {
+                const name = `${author.firstName} ${author.lastName}`;
+                return <option value={author._id}>{name}</option>;
+              })
+            )}
+          </Select>
+        )}
+        {!authorIsSuccess && !authorLoading && (
+          <Error error={authorFetchError} />
+        )}
         <Button
           content="Create"
           disabled={disabled}
