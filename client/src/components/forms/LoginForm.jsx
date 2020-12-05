@@ -12,7 +12,19 @@ const StyledForm = styled.form`
   }
 `;
 
-const LoginForm = ({ handleLogin, loading }) => {
+const StyledMessage = styled.span`
+  text-align: center;
+
+  & > p {
+    font-weight: 800;
+
+    &:nth-child(2) {
+      font-size: 1rem;
+    }
+  }
+`;
+
+const LoginForm = ({ handleLogin, loading, loggedIn }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -29,13 +41,20 @@ const LoginForm = ({ handleLogin, loading }) => {
         placeholder="Passord"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <Button
-        type="submit"
-        content={loading ? 'LOGGER INN...' : 'LOGG INN'}
-        backgroundColor="blue"
-        color="white"
-        disabled={loading}
-      />
+      {!loggedIn ? (
+        <Button
+          type="submit"
+          content={loading ? 'LOGGER INN...' : 'LOGG INN'}
+          backgroundColor="blue"
+          color="white"
+          disabled={loading}
+        />
+      ) : (
+        <StyledMessage>
+          <p>Du er logget inn!</p>
+          <p>Omdirigerer...</p>
+        </StyledMessage>
+      )}
     </StyledForm>
   );
 };

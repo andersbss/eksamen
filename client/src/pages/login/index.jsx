@@ -45,10 +45,12 @@ const Login = () => {
     <>
       <Jumbotron headerText="Logg inn" top="70" bottom="0" />
       <LoginLayout>
-        {!loading && loginSuccess && (
-          <Toast header="Logget inn!" content="Omdirigerer..." />
-        )}
-        <LoginForm handleLogin={handleLogin} loading={loading} />
+        <LoginForm
+          handleLogin={handleLogin}
+          loading={loading}
+          loggedIn={loginSuccess}
+        />
+
         {error && <Error error={error} />}
       </LoginLayout>
     </>

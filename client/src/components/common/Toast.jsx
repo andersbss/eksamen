@@ -3,8 +3,12 @@ import styled from 'styled-components';
 
 const StyledToastContainer = styled.div`
   position: fixed;
-  width: 200px;
-  height: 100px;
+  left: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 480px;
+  height: 115px;
+  border-radius: 20px;
 `;
 
 const Toast = ({ header, content, duration }) => (
