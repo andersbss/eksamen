@@ -5,8 +5,8 @@ const StyledGrid = styled.main`
   display: grid;
   grid-template-columns: 1fr, 2fr;
   grid-template-rows: 1fr, 1fr;
-  grid-gap: 25px;
-  margin: 25px;
+  grid-gap: 50px;
+  margin: 50px;
   text-align: center;
 `;
 
