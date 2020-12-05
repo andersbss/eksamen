@@ -1,7 +1,7 @@
 import http from '../utils/http';
 
 const API_UPLOAD_URL = '/images/upload';
-const API_DOWNLOAD_URL = '/image/download';
+const API_DOWNLOAD_URL = '/images/download';
 
 export const upload = async (image) => {
   try {
