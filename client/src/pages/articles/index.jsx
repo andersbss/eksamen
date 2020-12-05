@@ -11,16 +11,12 @@ import PaginationToggle from '../../components/toggles/PaginationToggle';
 
 const Articles = () => {
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(5);
-  const [length, setLength] = useState(0);
   const { loggedIn, isAdmin, userLoading } = useUserContext();
   const { error, loading, response, isSuccess } = useFetch(
     'GET',
     `${loggedIn ? `/articles?limit=5&page=${page}` : '/articles/public'}`,
     userLoading
   );
-
-  console.log(page);
 
   return (
     <>

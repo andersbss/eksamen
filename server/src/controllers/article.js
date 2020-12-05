@@ -4,12 +4,12 @@ import { articleService, authorService, categoryService } from '../services/inde
 import response from '../utils/response.js';
 
 export const getAll = catchAsyncErrors(async (req, res, next) => {
-  const articles = await articleService.getAllArticlesFilter(req.query);
+  const articles = await articleService.getAllArticles(req.query, false);
   response(res, 200, true, articles);
 });
 
 export const getAllPublic = catchAsyncErrors(async (req, res, next) => {
-  const articles = await articleService.getAllPublicArticles();
+  const articles = await articleService.getAllArticles(req.query, true);
   response(res, 200, true, articles);
 });
 
