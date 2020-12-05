@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { download } from '../../services/imageService';
 
-const ImageUpload = ({ imageId }) => {
+const Image = ({ imageId }) => {
   const [error, setError] = useState(null);
   const [src, setSrc] = useState(null);
 
@@ -36,4 +36,4 @@ const ImageUpload = ({ imageId }) => {
   );
 };
 
-export default ImageUpload;
+export default Image;
