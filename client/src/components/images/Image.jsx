@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { download } from '../../services/imageService';
 
-const Image = ({ imageId }) => {
+const Image = ({ imageId, width, height }) => {
   const [error, setError] = useState(null);
   const [src, setSrc] = useState(null);
 
@@ -12,26 +12,32 @@ const Image = ({ imageId }) => {
     return window.btoa(binary);
   }
 
-  const downloadImage = async () => {
-    const { data } = await download(imageId);
-    console.log(data);
-    setError(data);
-    const img = await data.arrayBuffer().then((buffer) => {
-      const base64Flag = 'data:image/jpeg;base64,';
-      const imageStr = arrayBufferToBase64(buffer);
-      return base64Flag + imageStr;
-    });
-    console.log(img);
-    setSrc(img);
-  };
+  useEffect(() => {
+    const downloadImage = async () => {
+      const { data } = await download(imageId);
+      console.log(data);
+      // application/json
+      // image/jpeg
+      if (data.type === 'image/jpeg') {
+        const img = await data.arrayBuffer().then((buffer) => {
+          const base64Flag = 'data:image/jpeg;base64,';
+          const imageStr = arrayBufferToBase64(buffer);
+          return base64Flag + imageStr;
+        });
+        setSrc(img);
+      } else {
+        setError(data);
+      }
+    };
+    downloadImage();
+  }, [imageId]);
 
   return (
     <>
-      {src && <img alt="my" src={src} />}
+      {src && (
+        <img alt="bilde" id={imageId} src={src} width={width} height={height} />
+      )}
       {error && <p>Feil ved henting av bilde</p>}
-      <button type="button" onClick={downloadImage}>
-        Vis bilde
-      </button>
     </>
   );
 };
