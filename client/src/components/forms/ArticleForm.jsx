@@ -36,7 +36,6 @@ const initialFormData = Object.freeze({
   content: '',
   category: '',
   author: '',
-  image: '5fcb8b8bd895b528289723be',
 });
 
 const ArticleForm = () => {
@@ -49,8 +48,8 @@ const ArticleForm = () => {
   // Image
   const [file, setFile] = useState();
   const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(false);
-  const [imageId, setImageId] = useState(null);
+  const [imageSuccess, setImageSuccess] = useState(false);
+  const [imageId, setImageId] = useState('');
 
   // Input errors
   const [titleError, setTitleError] = useState('Fyll ut tittel');
@@ -125,12 +124,12 @@ const ArticleForm = () => {
     console.log(data);
 
     if (data.success) {
-      setSuccess(true);
+      setImageSuccess(true);
       setError(null);
       setImageId(data?.data?._id);
     } else {
       setError(data.data);
-      setSuccess(false);
+      setImageSuccess(false);
     }
   };
 
@@ -146,6 +145,9 @@ const ArticleForm = () => {
     }
     if (formData.author !== '' && formData.category !== '') {
       try {
+        if (imageId !== '') {
+          formData.image = imageId;
+        }
         setLoading(true);
         const {
           data: { success, data },
@@ -158,7 +160,6 @@ const ArticleForm = () => {
           setDisabled(true);
           setTimeout(() => history.push('/fagartikler'), 2000);
         } else {
-          console.log(success);
           setCreateError(data);
           setLoading(false);
         }
@@ -262,7 +263,7 @@ const ArticleForm = () => {
         handleSubmit={handleImageUpload}
         onChange={imageFormOnChange}
         error={error}
-        success={success}
+        success={imageSuccess}
         imageId={imageId}
       />
     </StyledFormContainer>
