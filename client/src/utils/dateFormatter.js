@@ -1,6 +1,6 @@
 const formatDate = (dateStr) => {
   const date = new Date(dateStr);
-  return `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`;
+  return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
 };
 
 export default formatDate;
