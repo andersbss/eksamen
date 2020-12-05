@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Jumbotron from '../../components/common/Jumbotron';
+import Toast from '../../components/common/Toast';
 import Error from '../../components/errors/Error';
 import LoginForm from '../../components/forms/LoginForm';
 import { useUserContext } from '../../context/UserContext';
@@ -8,6 +9,7 @@ import LoginLayout from '../../layouts/LoginLayout';
 import { request } from '../../services/httpService';
 
 const Login = () => {
+  const [loginSuccess, setLoginSuccess] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -26,8 +28,9 @@ const Login = () => {
         const { user, token } = data;
         const expire = JSON.parse(window.atob(token.split('.')[1])).exp;
         setUser({ ...user, expire });
+        setLoginSuccess(success);
         setLoading(false);
-        history.push('/hjem');
+        setTimeout(() => history.push('/hjem'), 2000);
       } else {
         setLoading(false);
         setError(data);
@@ -42,6 +45,9 @@ const Login = () => {
     <>
       <Jumbotron headerText="Logg inn" top="70" bottom="0" />
       <LoginLayout>
+        {!loading && loginSuccess && (
+          <Toast header="Logget inn!" content="Omdirigerer..." />
+        )}
         <LoginForm handleLogin={handleLogin} loading={loading} />
         {error && <Error error={error} />}
       </LoginLayout>
