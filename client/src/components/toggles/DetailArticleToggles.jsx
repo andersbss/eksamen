@@ -10,10 +10,10 @@ const StyledSection = styled.section`
   }
 `;
 
-const DetailArticleToggles = () => (
+const DetailArticleToggles = ({ handleDelete, handleEdit }) => (
   <StyledSection>
-    <Button content="SLETT" />
-    <Button content="REDIGER" />
+    <Button content="SLETT" onClick={() => handleDelete()} />
+    <Button content="REDIGER" onClick={() => handleEdit()} />
   </StyledSection>
 );
 

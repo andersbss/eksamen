@@ -18,6 +18,14 @@ const ArticleDetail = () => {
     `articles/${id}`
   );
 
+  const handleDelete = () => {
+    console.log('delete');
+  };
+
+  const handleEdit = () => {
+    console.log('edit');
+  };
+
   return (
     <>
       {error === 'Resource not found. Invalid _id' ? (
@@ -30,7 +38,12 @@ const ArticleDetail = () => {
             {isSuccess && !loading && (
               <ArticleDetailArticle article={response} />
             )}
-            {loggedIn && isAdmin && <DetailArticleToggles />}
+            {loggedIn && isAdmin && (
+              <DetailArticleToggles
+                handleDelete={handleDelete}
+                handleEdit={handleEdit}
+              />
+            )}
             {!isSuccess && !loading && <Error error={error} />}
           </ArticleDetailLayout>
         </>
