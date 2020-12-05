@@ -9,8 +9,16 @@ import useFetch from '../../hooks/useFetch';
 import { useUserContext } from '../../context/UserContext';
 
 const Articles = () => {
-  const { error, loading, response, isSuccess } = useFetch('GET', '/articles');
-  const { loggedIn, isAdmin } = useUserContext();
+  const { loggedIn, isAdmin, userLoading } = useUserContext();
+  const { error, loading, response, isSuccess } = useFetch(
+    'GET',
+    `${
+      loggedIn
+        ? `${!userLoading && '/articles'}`
+        : `${!userLoading && '/articles/public'}`
+    }`,
+    userLoading
+  );
 
   return (
     <>

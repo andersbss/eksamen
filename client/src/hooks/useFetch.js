@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { request } from '../services/httpService';
 
-const useFetch = (method, endpoint, loadOnMount = true, payload = null) => {
+const useFetch = (method, endpoint, wait = false, payload = null) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [response, setResponse] = useState(null);
@@ -24,8 +24,8 @@ const useFetch = (method, endpoint, loadOnMount = true, payload = null) => {
       }
     };
 
-    loadData();
-  }, [method, endpoint, payload, loadOnMount]);
+    if (!wait) loadData();
+  }, [method, endpoint, payload, wait]);
   return { error, loading, response, isSuccess };
 };
 
