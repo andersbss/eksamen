@@ -35,7 +35,7 @@ const Routes = () => (
           <Articles />
         </Route>
         <Route path="/kontakt">
-          <h1>Make this</h1>
+          <CreateArticle />
         </Route>
         <AuthRoute path="/nyartikkel">
           <CreateArticle />
