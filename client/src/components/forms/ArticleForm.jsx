@@ -10,16 +10,22 @@ import Input from '../common/Input';
 import Loader from '../animations/Loader';
 import Textarea from '../common/Textarea';
 import { request } from '../../services/httpService';
+import ImageForm from './ImageForm';
+import { upload } from '../../services/imageService';
 
 const StyledFormContainer = styled.main`
   padding: 20px;
   width: 80%;
   margin: auto;
+  & > form > img {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
 `;
 
 const StyledForm = styled.form`
   display: grid;
-  grid-template-rows: 1fr 1fr 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 2fr 1fr 1fr 1fr auto auto;
   & > * {
   }
 `;
@@ -38,6 +44,12 @@ const ArticleForm = () => {
   const [isCreated, setIsCreated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [createError, setCreateError] = useState();
+
+  // Image
+  const [file, setFile] = useState();
+  const [error, setError] = useState(null);
+  const [imageSuccess, setImageSuccess] = useState(false);
+  const [imageId, setImageId] = useState('');
 
   // Input errors
   const [titleError, setTitleError] = useState('Fyll ut tittel');
@@ -100,6 +112,27 @@ const ArticleForm = () => {
     }
   };
 
+  const imageFormOnChange = (e) => {
+    console.log(e);
+    const imageFile = e.target.files[0];
+    setFile(imageFile);
+  };
+
+  const handleImageUpload = async (event) => {
+    event.preventDefault();
+    const { data } = await upload(file);
+    console.log(data);
+
+    if (data.success) {
+      setImageSuccess(true);
+      setError(null);
+      setImageId(data?.data?._id);
+    } else {
+      setError(data.data);
+      setImageSuccess(false);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
@@ -112,6 +145,9 @@ const ArticleForm = () => {
     }
     if (formData.author !== '' && formData.category !== '') {
       try {
+        if (imageId !== '') {
+          formData.image = imageId;
+        }
         setLoading(true);
         const {
           data: { success, data },
@@ -124,7 +160,6 @@ const ArticleForm = () => {
           setDisabled(true);
           setTimeout(() => history.push('/fagartikler'), 2000);
         } else {
-          console.log(success);
           setCreateError(data);
           setLoading(false);
         }
@@ -223,6 +258,14 @@ const ArticleForm = () => {
           color="white"
         />
       </StyledForm>
+      <h4>Last opp bilde til artikkelen (valgfritt): </h4>
+      <ImageForm
+        handleSubmit={handleImageUpload}
+        onChange={imageFormOnChange}
+        error={error}
+        success={imageSuccess}
+        imageId={imageId}
+      />
     </StyledFormContainer>
   );
 };
