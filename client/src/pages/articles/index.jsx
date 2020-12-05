@@ -14,7 +14,11 @@ const Articles = () => {
   const { loggedIn, isAdmin, userLoading } = useUserContext();
   const { error, loading, response, isSuccess } = useFetch(
     'GET',
-    `${loggedIn ? `/articles?limit=5&page=${page}` : '/articles/public'}`,
+    `${
+      loggedIn
+        ? `/articles?limit=5&page=${page}`
+        : `/articles/public?limit=5&page=${page}`
+    }`,
     userLoading
   );
 
