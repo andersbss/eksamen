@@ -25,7 +25,7 @@ const StyledFormContainer = styled.main`
 
 const StyledForm = styled.form`
   display: grid;
-  grid-template-rows: 1fr 1fr 2fr 1fr 1fr 1fr auto auto;
+  grid-template-rows: 1fr 1fr 2fr 1fr 1fr 1fr 1fr auto auto;
   & > * {
   }
 `;
@@ -36,6 +36,7 @@ const initialFormData = Object.freeze({
   content: '',
   category: '',
   author: '',
+  public: 'false',
 });
 
 const ArticleForm = () => {
@@ -251,6 +252,10 @@ const ArticleForm = () => {
         {!authorIsSuccess && !authorLoading && (
           <Error error={authorFetchError} />
         )}
+        <Select name="public" label="Tilgang" onChange={handleChange}>
+          <option value="false">Private</option>
+          <option value="true">Public</option>
+        </Select>
         <Button
           content={loading ? 'Creating...' : 'Create'}
           disabled={disabled}
