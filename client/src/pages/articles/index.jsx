@@ -7,7 +7,7 @@ import ArticleList from '../../components/lists/ArticleList';
 import ArticlesToggles from '../../components/toggles/ArticlesToggles';
 import useFetch from '../../hooks/useFetch';
 import { useUserContext } from '../../context/UserContext';
-import Pagination from '../../components/toggles/Pagination';
+import PaginationToggle from '../../components/toggles/PaginationToggle';
 
 const Articles = () => {
   const [page, setPage] = useState(1);
@@ -29,7 +29,7 @@ const Articles = () => {
         {isSuccess && !loading && <ArticleList articles={response.data} />}
 
         {isSuccess && !loading && (
-          <Pagination length={response.totalPages} setPage={setPage} />
+          <PaginationToggle length={response.totalPages} setPage={setPage} />
         )}
         {!isSuccess && !loading && <Error error={error} />}
       </ArticlesLayout>
