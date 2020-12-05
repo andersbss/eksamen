@@ -36,7 +36,7 @@ export const userSchema = Joi.object()
       .messages({
         'string.min': 'Password has to be at least 8 characters',
       }),
-    role: Joi.string().valid('user').default('user').messages({
+    role: Joi.string().valid('user', 'admin').default('user').messages({
       'any.only': 'Invalid role',
     }),
   })

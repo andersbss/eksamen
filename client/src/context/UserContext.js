@@ -5,7 +5,7 @@ const Context = createContext();
 
 const UserContext = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [userLoading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadUserData = async () => {
@@ -23,7 +23,7 @@ const UserContext = ({ children }) => {
   }, [user]);
 
   const contextValues = {
-    loading,
+    userLoading,
     isAdmin: user?.role === 'admin',
     loggedIn: !!user,
     user,

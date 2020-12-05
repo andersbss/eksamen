@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import Jumbotron from '../../components/common/Jumbotron';
 import ArticleDetailLayout from '../../layouts/ArticleDetailLayout';
@@ -18,7 +18,7 @@ const ArticleDetail = () => {
   const { id } = useParams();
   const history = useHistory();
   const { loggedIn, isAdmin } = useUserContext();
-  const { error, loading, response, isSuccess } = useFetch(
+  const { error, loading, response, isSuccess, reqStatus } = useFetch(
     'GET',
     `articles/${id}`
   );
@@ -46,13 +46,21 @@ const ArticleDetail = () => {
     console.log('edit');
   };
 
+  useEffect(() => {
+    if (response) {
+      if (!loggedIn && !response.public) {
+        history.push('/fagartikler');
+      }
+    }
+  }, [history, loggedIn, response]);
+
   return (
     <>
-      {error === 'Resource not found. Invalid _id' ? (
+      {reqStatus === 404 ? (
         <NotFound />
       ) : (
         <>
-          <Jumbotron headerText={loading ? '...' : response.title} />
+          <Jumbotron headerText={loading ? '...' : response?.title} />
           <ArticleDetailLayout>
             {loading && <Loader />}
             {isSuccess && !loading && (

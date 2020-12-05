@@ -28,7 +28,7 @@ const StyledArticle = styled.article`
   }
 `;
 
-const ArticleDetailArticle = ({ article }) => (
+const ArticleDetailArticle = ({ article, loggedIn }) => (
   <StyledArticle>
     <StyledInfoContainer>
       <h3>{`Av ${article.author.firstName} ${article.author.lastName}`}</h3>
