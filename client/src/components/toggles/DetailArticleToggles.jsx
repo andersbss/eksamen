@@ -7,6 +7,11 @@ const StyledSection = styled.section`
 
   & > button {
     margin-right: 20px;
+    background-color: ${(props) => props.theme.colors.red};
+
+    &:nth-child(2) {
+      background-color: ${(props) => props.theme.colors.green};
+    }
   }
 `;
 
