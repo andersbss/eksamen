@@ -9,7 +9,7 @@ export const getAll = catchAsyncErrors(async (req, res, next) => {
 });
 
 export const getAllPublic = catchAsyncErrors(async (req, res, next) => {
-  const articles = await articleService.getAllNotSecretArticles();
+  const articles = await articleService.getAllPublicArticles();
   response(res, 200, true, articles);
 });
 
