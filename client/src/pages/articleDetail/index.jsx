@@ -7,6 +7,7 @@ import useFetch from '../../hooks/useFetch';
 import Loader from '../../components/animations/Loader';
 import NotFound from '../notFound';
 import ArticleDetailArticle from '../../components/articles/ArticleDetailArticle';
+import DetailArticleToggles from '../../components/toggles/DetailArticleToggles';
 
 const ArticleDetail = () => {
   const { id } = useParams();
@@ -27,6 +28,7 @@ const ArticleDetail = () => {
             {isSuccess && !loading && (
               <ArticleDetailArticle article={response} />
             )}
+            <DetailArticleToggles />
             {!isSuccess && !loading && <Error error={error} />}
           </ArticleDetailLayout>
         </>

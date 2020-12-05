@@ -20,6 +20,11 @@ const StyledArticle = styled.article`
     &:nth-child(1) {
       margin-bottom: 100px;
     }
+
+    &:last-child {
+      font-size: 1.2rem;
+      font-weight: 900;
+    }
   }
 `;
 
@@ -31,6 +36,7 @@ const ArticleDetailArticle = ({ article }) => (
     </StyledInfoContainer>
     <p>{article.ingress}</p>
     <p>{article.content}</p>
+    <p>{article.category.title}</p>
   </StyledArticle>
 );
 
