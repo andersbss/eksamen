@@ -2,6 +2,7 @@ import ErrorHandler from '../utils/errorHandler.js';
 import catchAsyncErrors from '../middleware/catchAsync.js';
 import { articleService, authorService, categoryService } from '../services/index.js';
 import response from '../utils/response.js';
+import { articleController } from './index.js';
 
 export const getAll = catchAsyncErrors(async (req, res, next) => {
   const articles = await articleService.getAllArticles();
@@ -14,10 +15,15 @@ export const getAllPublic = catchAsyncErrors(async (req, res, next) => {
 });
 
 export const getById = catchAsyncErrors(async (req, res, next) => {
-  const article = await articleService.getArticleById(req.params.id, true);
-  if (!article) return next(new ErrorHandler('Article not found', 404));
-
-  response(res, 200, true, article);
+  if (!req.loggedIn) {
+    const publicArticle = await articleService.getPublicArticleById(req.params.id, true);
+    if (!publicArticle) return next(new ErrorHandler('Article not found', 404));
+    response(res, 200, true, publicArticle);
+  } else {
+    const article = await articleService.getArticleById(req.params.id, true);
+    if (!article) return next(new ErrorHandler('Article not found', 404));
+    response(res, 200, true, article);
+  }
 });
 
 export const create = catchAsyncErrors(async (req, res, next) => {

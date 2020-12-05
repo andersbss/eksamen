@@ -46,6 +46,7 @@ const ArticleDetail = () => {
     console.log('edit');
   };
 
+  // Needs better error handling
   return (
     <>
       {error === 'Resource not found. Invalid _id' ? (
