@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Button from '../common/Button';
+import Button from '../buttons/Button';
 import Input from '../common/Input';
 
 const StyledForm = styled.form`

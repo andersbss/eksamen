@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-import Button from '../common/Button';
+import Button from '../buttons/Button';
 
 const StyledSection = styled.section`
   display: flex;

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from '../common/Button';
+import Button from '../buttons/Button';
 
 const StyledSection = styled.section`
   display: flex;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Button from '../common/Button';
+import Button from '../buttons/Button';
 import Select from '../common/Select';
 import Error from '../errors/Error';
 import useFetch from '../../hooks/useFetch';
