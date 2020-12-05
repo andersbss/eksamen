@@ -8,7 +8,7 @@ export const getAll = catchAsyncErrors(async (req, res, next) => {
   response(res, 200, true, articles);
 });
 
-export const getAllNotSecret = catchAsyncErrors(async (req, res, next) => {
+export const getAllPublic = catchAsyncErrors(async (req, res, next) => {
   const articles = await articleService.getAllNotSecretArticles();
   response(res, 200, true, articles);
 });
