@@ -23,6 +23,7 @@ const ArticleList = ({ articles }) => (
           ingress={article.ingress}
           id={article._id}
           categoryTitle={article.category.title}
+          image={article.image}
         />
       ))
     )}
