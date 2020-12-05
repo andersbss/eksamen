@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { upload } from '../../services/imageService';
+import Image from '../images/Image';
 
 const ImageForm = () => {
   const [file, setFile] = useState();
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
-  const [src, setSrc] = useState(null);
+  const [imageId, setImageId] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -17,6 +18,7 @@ const ImageForm = () => {
     if (data.success) {
       setSuccess(true);
       setError(null);
+      setImageId(data?.data?._id);
     } else {
       setError(data.data);
       setSuccess(false);
@@ -25,16 +27,13 @@ const ImageForm = () => {
 
   return (
     <>
-      {src && <img alt="my" src={src} />}
       {success && <p>Bilde ble lastet opp!</p>}
       {error && <p>{error}</p>}
       <form encType="multipart/form-data" method="post" onSubmit={handleSubmit}>
-        <label htmlFor="image">Last opp bilde</label>
         <input
           type="file"
           id="image"
           name="image"
-          // image/*
           accept="image/*"
           onChange={(event) => {
             console.log(event);
@@ -42,8 +41,9 @@ const ImageForm = () => {
             setFile(imageFile);
           }}
         />
-        <button type="submit">Lagre</button>
+        <button type="submit">Last opp bilde</button>
       </form>
+      {imageId && <Image imageId={imageId} height="200px" />}
     </>
   );
 };
