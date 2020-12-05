@@ -8,9 +8,11 @@ import Loader from '../../components/animations/Loader';
 import NotFound from '../notFound';
 import ArticleDetailArticle from '../../components/articles/ArticleDetailArticle';
 import DetailArticleToggles from '../../components/toggles/DetailArticleToggles';
+import { useUserContext } from '../../context/UserContext';
 
 const ArticleDetail = () => {
   const { id } = useParams();
+  const { loggedIn, isAdmin } = useUserContext();
   const { error, loading, response, isSuccess } = useFetch(
     'GET',
     `articles/${id}`
@@ -28,7 +30,7 @@ const ArticleDetail = () => {
             {isSuccess && !loading && (
               <ArticleDetailArticle article={response} />
             )}
-            <DetailArticleToggles />
+            {loggedIn && isAdmin && <DetailArticleToggles />}
             {!isSuccess && !loading && <Error error={error} />}
           </ArticleDetailLayout>
         </>
