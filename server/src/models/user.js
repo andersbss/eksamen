@@ -4,11 +4,11 @@ import mongoose, { Schema } from 'mongoose';
 
 import { userSchema } from '../schemas/user';
 
-const Joigoose = require('joigoose')(mongoose);
+const Joigoose = require('joigoose')(mongoose, null);
 
 const options = { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } };
 
-const UserSchema = new Schema(Joigoose.convert(userSchema, options));
+const UserSchema = new Schema(Joigoose.convert(userSchema), options);
 
 UserSchema.pre('save', async function (next) {
   this.password = await argon2.hash(this.password);

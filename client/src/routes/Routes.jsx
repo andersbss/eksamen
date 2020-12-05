@@ -14,6 +14,7 @@ import Articles from '../pages/articles';
 import Login from '../pages/login';
 import NotFound from '../pages/notFound';
 import AuthRoute from './AuthRoute';
+import ArticleDetail from '../pages/articleDetail';
 
 const Routes = () => (
   <Router>
@@ -33,6 +34,9 @@ const Routes = () => (
         </Route>
         <Route path="/fagartikler">
           <Articles />
+        </Route>
+        <Route path="/fagartikkel/:id">
+          <ArticleDetail />
         </Route>
         <Route path="/kontakt">
           <CreateArticle />

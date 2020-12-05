@@ -12,7 +12,21 @@ const StyledForm = styled.form`
   }
 `;
 
-const LoginForm = ({ handleLogin, loading }) => {
+const StyledSuccessMessage = styled.span`
+  text-align: center;
+
+  & > p {
+    font-weight: 800;
+
+    &:nth-child(2) {
+      font-size: 1rem;
+    }
+  }
+`;
+
+const StyledErrorMessage = styled.p``;
+
+const LoginForm = ({ handleLogin, loading, loggedIn, error }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -29,13 +43,23 @@ const LoginForm = ({ handleLogin, loading }) => {
         placeholder="Passord"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <Button
-        type="submit"
-        content={loading ? 'LOGGER INN...' : 'LOGG INN'}
-        backgroundColor="blue"
-        color="white"
-        disabled={loading}
-      />
+      {error && (
+        <StyledErrorMessage>Innlogging feilet, prøv igjen</StyledErrorMessage>
+      )}
+      {!loggedIn ? (
+        <Button
+          type="submit"
+          content={loading ? 'LOGGER INN...' : 'LOGG INN'}
+          backgroundColor="blue"
+          color="white"
+          disabled={loading}
+        />
+      ) : (
+        <StyledSuccessMessage>
+          <p>Du er logget inn!</p>
+          <p>Omdirigerer...</p>
+        </StyledSuccessMessage>
+      )}
     </StyledForm>
   );
 };

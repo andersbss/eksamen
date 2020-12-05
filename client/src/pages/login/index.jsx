@@ -8,6 +8,7 @@ import LoginLayout from '../../layouts/LoginLayout';
 import { request } from '../../services/httpService';
 
 const Login = () => {
+  const [loginSuccess, setLoginSuccess] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -26,9 +27,11 @@ const Login = () => {
         const { user, token } = data;
         const expire = JSON.parse(window.atob(token.split('.')[1])).exp;
         setUser({ ...user, expire });
+        setLoginSuccess(success);
         setLoading(false);
-        history.push('/hjem');
+        setTimeout(() => history.push('/hjem'), 2000);
       } else {
+        console.log(data);
         setLoading(false);
         setError(data);
       }
@@ -42,7 +45,13 @@ const Login = () => {
     <>
       <Jumbotron headerText="Logg inn" top="70" bottom="0" />
       <LoginLayout>
-        <LoginForm handleLogin={handleLogin} loading={loading} />
+        <LoginForm
+          handleLogin={handleLogin}
+          loading={loading}
+          error={!!error}
+          loggedIn={loginSuccess}
+        />
+
         {error && <Error error={error} />}
       </LoginLayout>
     </>
