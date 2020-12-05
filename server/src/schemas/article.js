@@ -42,6 +42,9 @@ export const articleSchema = Joi.object()
         'any.required': 'Publisher is required',
         'string.pattern.base': 'Publisher id is not valid',
       }),
+    secret: Joi.boolean().default(false).messages({
+      'boolean.base': 'Secret have to be true or false',
+    }),
     image: Joi.string()
       .regex(OBJECT_ID_REGEX)
       .meta({ _mongoose: { type: 'ObjectId', ref: 'Image' } })
