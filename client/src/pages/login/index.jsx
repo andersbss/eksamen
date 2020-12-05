@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Jumbotron from '../../components/common/Jumbotron';
-import Toast from '../../components/common/Toast';
 import Error from '../../components/errors/Error';
 import LoginForm from '../../components/forms/LoginForm';
 import { useUserContext } from '../../context/UserContext';
