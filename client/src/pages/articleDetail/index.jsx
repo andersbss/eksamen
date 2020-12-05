@@ -13,7 +13,7 @@ import { request } from '../../services/httpService';
 
 const ArticleDetail = () => {
   const [deleteLoading, setDeleteLoading] = useState(false);
-  const [deleteSuccess, setDeleteSuccess] = useState(false);
+  const [deleteSuccess, setDeleteSuccess] = useState(true);
   const [deleteError, setDeleteError] = useState(false);
   const { id } = useParams();
   const history = useHistory();
@@ -31,10 +31,9 @@ const ArticleDetail = () => {
       } = await request('DELETE', `articles/${id}`);
 
       if (success) {
-        setDeleteSuccess(true);
-        setTimeout(() => history.push('/fagartikler'));
+        history.push('/fagartikler');
       } else {
-        setDeleteError(data);
+        setDeleteSuccess(false);
       }
     } catch (error) {
       deleteError({ success: false, data: 'Unexpected error occurred' });
@@ -61,10 +60,12 @@ const ArticleDetail = () => {
             )}
             {loggedIn && isAdmin && (
               <DetailArticleToggles
+                deleteLoading={deleteLoading}
                 handleDelete={handleDelete}
                 handleEdit={handleEdit}
               />
             )}
+            {!deleteSuccess && <p>Det oppstod en feil, prøv igjen</p>}
             {!isSuccess && !loading && <Error error={error} />}
           </ArticleDetailLayout>
         </>
