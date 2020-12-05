@@ -20,6 +20,8 @@ const Articles = () => {
     userLoading
   );
 
+  console.log(page);
+
   return (
     <>
       <Jumbotron headerText="Fagartikler" />
@@ -29,7 +31,11 @@ const Articles = () => {
         {isSuccess && !loading && <ArticleList articles={response.data} />}
 
         {isSuccess && !loading && (
-          <PaginationToggle length={response.totalPages} setPage={setPage} />
+          <PaginationToggle
+            length={response.totalPages}
+            setPage={setPage}
+            currentPage={page}
+          />
         )}
         {!isSuccess && !loading && <Error error={error} />}
       </ArticlesLayout>

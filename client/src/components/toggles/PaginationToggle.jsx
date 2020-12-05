@@ -10,7 +10,12 @@ const StyledButtonContainer = styled.section`
 const PaginationToggle = ({ currentPage, setPage, length }) => (
   <StyledButtonContainer>
     {Array.from({ length }, (num, index) => (
-      <PaginationButton key={index} setPage={setPage} number={index + 1} />
+      <PaginationButton
+        key={index}
+        setPage={setPage}
+        currentPage={currentPage}
+        number={index + 1}
+      />
     ))}
   </StyledButtonContainer>
 );
