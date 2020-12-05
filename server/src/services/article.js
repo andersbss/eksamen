@@ -9,6 +9,8 @@ export const createArticle = (article) => Article.create(article);
 
 export const getAllArticles = () => Article.find().populate('category');
 
+export const getAllNotSecretArticles = () => Article.find({ secret: false });
+
 export const updateArticle = (id, article) => {
   const updateOptions = {
     new: true,
