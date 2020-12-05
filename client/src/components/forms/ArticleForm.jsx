@@ -24,17 +24,6 @@ const StyledForm = styled.form`
   }
 `;
 
-// Midlertidlig meldingsboks
-const StyledMessage = styled.div`
-  background-color: green;
-  position: fixed;
-  margin-left: auto;
-  margin-right: auto;
-  height: 120px;
-  font-size: 3rem;
-  border-radius: 20px;
-`;
-
 const initialFormData = Object.freeze({
   title: '',
   ingress: '',
