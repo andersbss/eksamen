@@ -42,6 +42,8 @@ const StyledLi = styled.li`
     margin: 0;
     grid-column: 2 / 4;
     grid-row: 2;
+
+    max-width: 200ch;
   }
 `;
 
@@ -53,10 +55,10 @@ const ArticleItem = ({ title, ingress, categoryTitle, id, image }) => {
   const history = useHistory();
 
   const handleArticleClick = () => {
-    history.push({
-      pathname: `/fagartikkel/${id}`,
-    });
+    history.push(`/fagartikkel/${id}`);
   };
+
+  console.log(ingress.length);
 
   // Replace the truthy result with actual image later
   return (
@@ -66,7 +68,9 @@ const ArticleItem = ({ title, ingress, categoryTitle, id, image }) => {
         <h1>{title}</h1>
         <h4>{categoryTitle}</h4>
       </span>
-      <p>{ingress}</p>
+      <p>
+        {ingress.length > 200 ? `${ingress.substring(0, 200)}...` : ingress}
+      </p>
     </StyledLi>
   );
 };

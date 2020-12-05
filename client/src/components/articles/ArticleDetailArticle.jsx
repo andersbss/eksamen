@@ -23,19 +23,15 @@ const StyledArticle = styled.article`
   }
 `;
 
-const ArticleDetailArticle = ({ article }) => {
-  console.log(article);
-
-  return (
-    <StyledArticle>
-      <StyledInfoContainer>
-        <h3>{`Av ${article.author.firstName} ${article.author.lastName}`}</h3>
-        <h3>{formatDate(article.createdAt)}</h3>
-      </StyledInfoContainer>
-      <p>{article.ingress}</p>
-      <p>{article.content}</p>
-    </StyledArticle>
-  );
-};
+const ArticleDetailArticle = ({ article }) => (
+  <StyledArticle>
+    <StyledInfoContainer>
+      <h3>{`Av ${article.author.firstName} ${article.author.lastName}`}</h3>
+      <h3>{formatDate(article.createdAt)}</h3>
+    </StyledInfoContainer>
+    <p>{article.ingress}</p>
+    <p>{article.content}</p>
+  </StyledArticle>
+);
 
 export default ArticleDetailArticle;

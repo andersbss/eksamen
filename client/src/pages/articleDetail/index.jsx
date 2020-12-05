@@ -5,6 +5,7 @@ import ArticleDetailLayout from '../../layouts/ArticleDetailLayout';
 import Error from '../../components/errors/Error';
 import useFetch from '../../hooks/useFetch';
 import Loader from '../../components/animations/Loader';
+import NotFound from '../notFound';
 import ArticleDetailArticle from '../../components/articles/ArticleDetailArticle';
 
 const ArticleDetail = () => {
@@ -16,12 +17,20 @@ const ArticleDetail = () => {
 
   return (
     <>
-      <Jumbotron headerText={loading ? '...' : response.title} />
-      <ArticleDetailLayout>
-        {loading && <Loader />}
-        {isSuccess && !loading && <ArticleDetailArticle article={response} />}
-        {!isSuccess && !loading && <Error error={error} />}
-      </ArticleDetailLayout>
+      {error === 'Resource not found. Invalid _id' ? (
+        <NotFound />
+      ) : (
+        <>
+          <Jumbotron headerText={loading ? '...' : response.title} />
+          <ArticleDetailLayout>
+            {loading && <Loader />}
+            {isSuccess && !loading && (
+              <ArticleDetailArticle article={response} />
+            )}
+            {!isSuccess && !loading && <Error error={error} />}
+          </ArticleDetailLayout>
+        </>
+      )}
     </>
   );
 };
