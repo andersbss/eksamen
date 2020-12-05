@@ -14,6 +14,7 @@ router.post(
   articleController.create
 );
 router.get('/', authenticate, articleController.getAll);
+router.get('/public', articleController.getAllPublic);
 router.get('/:id', articleController.getById);
 router.put(
   '/:id',
