@@ -6,7 +6,7 @@ const StyledInfoContainer = styled.span`
   justify-content: space-between;
 `;
 
-const ArticleDetailItem = ({ article }) => {
+const ArticleDetailArticle = ({ article }) => {
   console.log(article);
 
   return (
@@ -20,4 +20,4 @@ const ArticleDetailItem = ({ article }) => {
   );
 };
 
-export default ArticleDetailItem;
+export default ArticleDetailArticle;

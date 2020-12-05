@@ -5,7 +5,7 @@ import ArticleDetailLayout from '../../layouts/ArticleDetailLayout';
 import Error from '../../components/errors/Error';
 import useFetch from '../../hooks/useFetch';
 import Loader from '../../components/animations/Loader';
-import ArticleDetailItem from '../../components/items/ArticleDetailItem';
+import ArticleDetailArticle from '../../components/articles/ArticleDetailArticle';
 
 const ArticleDetail = () => {
   const { id } = useParams();
@@ -19,7 +19,7 @@ const ArticleDetail = () => {
       <Jumbotron headerText={loading ? '...' : response.title} />
       <ArticleDetailLayout>
         {loading && <Loader />}
-        {isSuccess && !loading && <ArticleDetailItem article={response} />}
+        {isSuccess && !loading && <ArticleDetailArticle article={response} />}
         {!isSuccess && !loading && <Error error={error} />}
       </ArticleDetailLayout>
     </>
