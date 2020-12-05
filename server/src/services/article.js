@@ -9,7 +9,7 @@ export const createArticle = (article) => Article.create(article);
 
 export const getAllArticles = () => Article.find().populate('category');
 
-export const getAllPublicArticles = () => Article.find({ public: true });
+export const getAllPublicArticles = () => Article.find({ public: true }).populate('category');
 
 export const updateArticle = (id, article) => {
   const updateOptions = {
