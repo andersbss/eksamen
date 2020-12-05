@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
+import Image from '../images/Image';
 
 const StyledLi = styled.li`
   margin: 0;
@@ -61,7 +62,7 @@ const ArticleItem = ({ title, ingress, categoryTitle, id, image }) => {
   // Replace the truthy result with actual image later
   return (
     <StyledLi onClick={handleArticleClick}>
-      {image ? <FallbackImage /> : <FallbackImage />}
+      {image ? <Image imageId={image} height="200px" /> : <FallbackImage />}
       <span>
         <h1>{title}</h1>
         <h4>{categoryTitle}</h4>
