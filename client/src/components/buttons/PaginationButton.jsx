@@ -6,10 +6,8 @@ const StyledButton = styled.button`
   height: 25px;
 `;
 
-const PaginationButton = ({ number, setPage }) => {
-  console.log();
-
-  return <StyledButton onClick={() => setPage(number)}>{number}</StyledButton>;
-};
+const PaginationButton = ({ number, setPage }) => (
+  <StyledButton onClick={() => setPage(number)}>{number}</StyledButton>
+);
 
 export default PaginationButton;
