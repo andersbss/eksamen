@@ -13,6 +13,8 @@ const theme = {
     blue: '#479eb9',
     black: 'black',
     white: '#ffffff',
+    red: '#d54341',
+    green: '#adaa4f',
   },
   fonts: {
     sizes: {

@@ -32,6 +32,7 @@ const Login = () => {
         setLoading(false);
         setTimeout(() => history.push('/hjem'), 2000);
       } else {
+        console.log(data);
         setLoading(false);
         setError(data);
       }
@@ -48,6 +49,7 @@ const Login = () => {
         <LoginForm
           handleLogin={handleLogin}
           loading={loading}
+          error={!!error}
           loggedIn={loginSuccess}
         />
 

@@ -12,7 +12,7 @@ const StyledForm = styled.form`
   }
 `;
 
-const StyledMessage = styled.span`
+const StyledSuccessMessage = styled.span`
   text-align: center;
 
   & > p {
@@ -24,7 +24,9 @@ const StyledMessage = styled.span`
   }
 `;
 
-const LoginForm = ({ handleLogin, loading, loggedIn }) => {
+const StyledErrorMessage = styled.p``;
+
+const LoginForm = ({ handleLogin, loading, loggedIn, error }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -41,6 +43,9 @@ const LoginForm = ({ handleLogin, loading, loggedIn }) => {
         placeholder="Passord"
         onChange={(e) => setPassword(e.target.value)}
       />
+      {error && (
+        <StyledErrorMessage>Innlogging feilet, prøv igjen</StyledErrorMessage>
+      )}
       {!loggedIn ? (
         <Button
           type="submit"
@@ -50,10 +55,10 @@ const LoginForm = ({ handleLogin, loading, loggedIn }) => {
           disabled={loading}
         />
       ) : (
-        <StyledMessage>
+        <StyledSuccessMessage>
           <p>Du er logget inn!</p>
           <p>Omdirigerer...</p>
-        </StyledMessage>
+        </StyledSuccessMessage>
       )}
     </StyledForm>
   );
