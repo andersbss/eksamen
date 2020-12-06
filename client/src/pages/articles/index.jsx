@@ -58,6 +58,7 @@ const Articles = () => {
           />
         )}
         {!isSuccess && !loading && <Error error={error} />}
+        {!categoryIsSuccess && !categoryLoading && <Error error={error} />}
       </ArticlesLayout>
     </>
   );
