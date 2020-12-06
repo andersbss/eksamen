@@ -22,15 +22,11 @@ const Articles = () => {
   ] = useFetchArr('GET', '/categories');
   const { error, loading, response, isSuccess } = useFetch(
     'GET',
-    `${
-      loggedIn
-        ? `/articles?limit=5&page=${page}${
-            chosenCategory &&
-            chosenCategory !== 'INGEN' &&
-            `&category=${chosenCategory}`
-          }`
-        : `/articles/public?limit=5&page=${page}`
-    }`,
+    `${`/articles?limit=5&page=${page}${
+      chosenCategory && chosenCategory !== 'INGEN'
+        ? `&category=${chosenCategory}`
+        : ''
+    }`}`,
     userLoading
   );
 

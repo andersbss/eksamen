@@ -13,7 +13,8 @@ export const getPublicArticleById = (id, withPopulation) => {
 
 export const getAllArticles = async (queryStr, isPublic) => {
   const { limit, page } = queryStr;
-  const filter = new ApiFilter(isPublic ? Article.find({ public: true }) : Article.find(), queryStr).filter();
+  console.log(queryStr);
+  const filter = new ApiFilter(Article.find(), isPublic ? { ...queryStr, public: true } : queryStr).filter();
 
   const articles = await filter.query;
   const paginated = await filter.pagination().query.populate('category');
