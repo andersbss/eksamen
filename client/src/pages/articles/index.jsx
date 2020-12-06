@@ -13,6 +13,7 @@ import PaginationToggle from '../../components/toggles/PaginationToggle';
 const Articles = () => {
   const [page, setPage] = useState(1);
   const [chosenCategory, setChosenCategory] = useState(null);
+  const [searchInput, setSearchInput] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const { loggedIn, isAdmin, userLoading } = useUserContext();
   const [
@@ -32,14 +33,12 @@ const Articles = () => {
   );
 
   const handleSearch = () => {
-    console.log('handle');
+    setSearchTerm(searchInput);
   };
 
   useEffect(() => {
     setPage(1);
   }, [chosenCategory, setPage]);
-
-  console.log(searchTerm);
 
   return (
     <>
@@ -54,8 +53,8 @@ const Articles = () => {
             categories={categoryResponse}
             setChosenCategory={setChosenCategory}
             chosenCategory={chosenCategory}
-            setSearchTerm={setSearchTerm}
-            searchTerm={searchTerm}
+            setSearchTerm={setSearchInput}
+            searchTerm={searchInput}
             handleSearch={handleSearch}
           />
         )}
