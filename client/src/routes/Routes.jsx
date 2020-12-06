@@ -15,6 +15,7 @@ import Login from '../pages/login';
 import NotFound from '../pages/notFound';
 import AuthRoute from './AuthRoute';
 import ArticleDetail from '../pages/articleDetail';
+import Contact from '../pages/contact';
 
 const Routes = () => (
   <Router>
@@ -39,7 +40,7 @@ const Routes = () => (
           <ArticleDetail />
         </Route>
         <Route path="/kontakt">
-          <CreateArticle />
+          <Contact />
         </Route>
         <AuthRoute path="/nyartikkel">
           <CreateArticle />
