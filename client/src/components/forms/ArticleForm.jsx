@@ -70,9 +70,11 @@ const ArticleForm = ({ id, article }) => {
         author: article.author._id,
       };
       updateFormData(autoFillData);
-      console.log(autoFillData);
+      setDisabled(false);
+      setTitleError(false);
+      setIngressError(false);
+      setContentError(false);
       console.log(article);
-      console.log(formData);
     }
   }, [article]);
 
