@@ -1,19 +1,31 @@
 import catchAsyncErrors from '../middleware/catchAsync.js';
 import response from '../utils/response.js';
-import { contactService } from '../services/index.js';
+import ErrorHandler from '../utils/errorHandler.js';
+import { contactService, userService } from '../services/index.js';
 import { sendMail } from '../utils/sendEmail.js';
 
 export const create = catchAsyncErrors(async (req, res, next) => {
-  const { name, message } = req.body;
+  const { email, message } = req.body;
+
+  const user = await userService.getUserByEmail(email);
+  if (!user) {
+    return next(new ErrorHandler('User (by email) not found', 404));
+  }
+  if (!email) {
+    return next(new ErrorHandler('Fill out email', 400));
+  }
+  if (!message) {
+    return next(new ErrorHandler('Fill out message', 400));
+  }
 
   try {
     await sendMail({
-      email: 'placeholder@email.no',
-      subject: `Denne meldingen ble sendt av ${name} til Rørleggerfirma FG via deres kontaktside.`,
+      email: user.email,
+      subject: `Denne meldingen ble sendt av ${user.firstName} ${user.lastName} til Rørleggerfirma FG via deres kontaktside.`,
       message: `${message}`,
     });
   } catch (error) {
-    console.log(error);
+    return next(new ErrorHandler(error, 500));
   }
 
   const contact = await contactService.createContact(req.body);
