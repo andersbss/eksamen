@@ -13,7 +13,6 @@ export const getPublicArticleById = (id, withPopulation) => {
 
 export const getAllArticles = async (queryStr, isPublic) => {
   const { limit, page } = queryStr;
-  console.log(queryStr);
   const filter = new ApiFilter(Article.find(), isPublic ? { ...queryStr, public: true } : queryStr)
     .filter()
     .searchByQuery();
