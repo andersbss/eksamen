@@ -33,7 +33,7 @@ const Articles = () => {
     <>
       <Jumbotron headerText="Fagartikler" />
       <ArticlesLayout>
-        {!categoryError && !categoryLoading && (
+        {categoryIsSuccess && !categoryLoading && (
           <ArticlesToggles
             loggedIn={loggedIn}
             isAdmin={isAdmin}
