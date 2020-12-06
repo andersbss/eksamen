@@ -8,6 +8,6 @@ export const categorySchema = Joi.object().keys({
     .messages({
       'any.required': 'Title is required',
       'string.empty': 'Title is required',
-      'string.max': 'Title cannot be longer than 100 characters',
+      'string.max': 'Title cannot be longer than 50 characters',
     }),
 });
