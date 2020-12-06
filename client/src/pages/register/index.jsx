@@ -5,9 +5,9 @@ import RegisterForm from '../../components/forms/RegsiterForm';
 import RegisterLayout from '../../layouts/RegisterLayout';
 
 const Register = () => {
-  const handleRegister = (e, formData) => {
-    e.preventDefault();
-    console.log(formData);
+  const handleRegister = () => {
+    // Post logic
+    console.log('No errors');
   };
 
   return (

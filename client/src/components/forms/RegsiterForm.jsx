@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import validate from '../../utils/registerFormValidation';
+import useForm from '../../hooks/useForm';
 import Button from '../buttons/Button';
 import Input from '../common/Input';
 
@@ -13,36 +15,22 @@ const StyledForm = styled.form`
 `;
 
 const RegisterForm = ({ handleRegister }) => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [inputs, errors, handleChange, handleSubmit] = useForm(
+    handleRegister,
+    validate
+  );
 
-  const [firstNameError, setFirstNameError] = useState('Fyll ut fornavn');
-  const [lastNameError, setLastNameError] = useState('Fyll ut etternavn');
-  const [emailError, setEmailError] = useState({
-    empty: 'Fyll ut epost',
-    invalid: 'Eikk gyldig e-postadresse',
-  });
-  const [passwordError, setPasswordError] = useState({
-    short: 'Passord må minst ha 3 tegn',
-    number: 'Passord må inneholde minst 1 tegn',
-  });
-
-  const handleOnFocus = () => {
-    if (hasFocused) return;
-  };
+  useEffect(() => {
+    console.log(inputs);
+    console.log(errors);
+  }, [inputs, errors]);
 
   return (
-    <StyledForm
-      onSubmit={(e) =>
-        handleRegister(e, { firstName, lastName, email, password })
-      }
-    >
-      <Input label="Fornavn" onChange={(e) => setFirstName(e.target.value)} />
-      <Input label="Etternavn" onChange={(e) => setLastName(e.target.value)} />
-      <Input label="E-post" onChange={(e) => setEmail(e.target.value)} />
-      <Input label="Passord" onChange={(e) => setPassword(e.target.value)} />
+    <StyledForm onSubmit={handleSubmit}>
+      <Input name="firstName" label="Fornavn" onChange={handleChange} />
+      <Input name="lastName" label="Etternavn" onChange={handleChange} />
+      <Input name="email" label="E-post" onChange={handleChange} />
+      <Input name="password" label="Passord" onChange={handleChange} />
       <Button
         content="Registrer"
         type="submit"
