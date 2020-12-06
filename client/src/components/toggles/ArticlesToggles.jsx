@@ -13,7 +13,7 @@ const StyledSection = styled.section`
   }
 `;
 
-const ArticlesToggles = ({ loggedIn, isAdmin }) => {
+const ArticlesToggles = ({ loggedIn, isAdmin, categories }) => {
   const history = useHistory();
 
   return (

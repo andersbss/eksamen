@@ -3,9 +3,8 @@ import styled from 'styled-components';
 
 const StyledSelect = styled.select``;
 
-const SelectFilter = () => {
+const SelectFilter = ({ categories }) => {
   console.log();
-  // useFetch
 
   return (
     <StyledSelect>
