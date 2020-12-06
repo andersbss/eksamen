@@ -19,7 +19,7 @@ const StyledContainer = styled.span`
     border: solid grey 2px;
     color: ${(props) => props.theme.colors.black};
     padding: 5px;
-  
+
     ::placeholder {
       font-size: 1em;
     }
@@ -37,6 +37,7 @@ const Input = ({
   maxLength = '',
   placeholder = '',
   required = false,
+  value,
   onChange = () => {},
 }) => (
   <StyledContainer>
@@ -49,6 +50,7 @@ const Input = ({
       required={required}
       onChange={onChange}
       name={name}
+      value={value}
     />
   </StyledContainer>
 );
