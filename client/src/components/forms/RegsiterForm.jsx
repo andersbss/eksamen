@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import validate from '../../utils/registerFormValidation';
 import useForm from '../../hooks/useForm';
@@ -19,10 +19,6 @@ const RegisterForm = ({ handleRegister }) => {
     handleRegister,
     validate
   );
-
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
 
   return (
     <StyledForm onSubmit={handleSubmit}>

@@ -7,7 +7,6 @@ import RegisterLayout from '../../layouts/RegisterLayout';
 const Register = () => {
   const handleRegister = () => {
     // Post logic
-    console.log('No errors');
   };
 
   return (
