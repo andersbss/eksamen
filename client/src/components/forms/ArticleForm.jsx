@@ -62,7 +62,16 @@ const ArticleForm = ({ id, article }) => {
 
   useEffect(() => {
     if (article !== null) {
-      updateFormData(article);
+      const autoFillData = {
+        title: article.title,
+        ingress: article.ingress,
+        content: article.content,
+        category: article.category._id,
+        author: article.author._id,
+      };
+      updateFormData(autoFillData);
+      console.log(autoFillData);
+      console.log(article);
       console.log(formData);
     }
   }, [article]);
@@ -156,19 +165,35 @@ const ArticleForm = ({ id, article }) => {
           formData.image = imageId;
         }
         setLoading(true);
-        const {
-          data: { success, data },
-        } = await request('POST', '/articles', formData);
-        console.log(success);
+        if (!article) {
+          const {
+            data: { success, data },
+          } = await request('POST', '/articles', formData);
 
-        if (success) {
-          setIsCreated(true);
-          setLoading(false);
-          setDisabled(true);
-          setTimeout(() => history.push('/fagartikler'), 2000);
+          if (success) {
+            setIsCreated(true);
+            setLoading(false);
+            setDisabled(true);
+            setTimeout(() => history.push('/fagartikler'), 2000);
+          } else {
+            setCreateError(data);
+            setLoading(false);
+          }
         } else {
-          setCreateError(data);
-          setLoading(false);
+          console.log(formData);
+          const {
+            data: { success, data },
+          } = await request('PUT', `/articles/${article.id}`, formData);
+
+          if (success) {
+            setIsCreated(true);
+            setLoading(false);
+            setDisabled(true);
+            setTimeout(() => history.push('/fagartikler'), 2000);
+          } else {
+            setCreateError(data);
+            setLoading(false);
+          }
         }
       } catch (error) {
         setLoading(false);
@@ -228,19 +253,16 @@ const ArticleForm = ({ id, article }) => {
           >
             {!article && <option value={null}>Velg kategori</option>}
             {article && (
-              <option value={formData.category.id} selected="selected">
-                {formData.category.title}
+              <option value={article.category._id} selected="selected">
+                {article.category.title}
               </option>
             )}
             {categories.length <= 0 ? (
               <p>Ingen kategorier</p>
             ) : (
-              categories.map((category) => {
-                if (category._id === formData.category.id) {
-                  return null;
-                }
-                return <option value={category._id}>{category.title}</option>;
-              })
+              categories.map((category) => (
+                <option value={category._id}>{category.title}</option>
+              ))
             )}
           </Select>
         )}
@@ -255,7 +277,12 @@ const ArticleForm = ({ id, article }) => {
             errorLabel={authorError}
             onChange={handleChange}
           >
-            <option value={null}>Velg forfatter</option>
+            {!article && <option value={null}>Velg forfatter</option>}
+            {article && (
+              <option value={article.author._id} selected="selected">
+                {article.author.firstName}
+              </option>
+            )}
             {authors.length <= 0 ? (
               <p>Ingen forfattere</p>
             ) : (
