@@ -16,9 +16,7 @@ const Image = ({ imageId, width, height }) => {
     const downloadImage = async () => {
       const { data } = await download(imageId);
       console.log(data);
-      // application/json
-      // image/jpeg
-      if (data.type === 'image/jpeg') {
+      if (data.type === 'image/jpeg' || data.type === 'image/png') {
         const img = await data.arrayBuffer().then((buffer) => {
           const base64Flag = 'data:image/jpeg;base64,';
           const imageStr = arrayBufferToBase64(buffer);
