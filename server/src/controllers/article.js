@@ -3,14 +3,19 @@ import catchAsyncErrors from '../middleware/catchAsync.js';
 import { articleService, authorService, categoryService } from '../services/index.js';
 import response from '../utils/response.js';
 
-export const getAll = catchAsyncErrors(async (req, res, next) => {
-  const articles = await articleService.getAllArticles(req.query, false);
-  response(res, 200, true, articles);
-});
-
 export const getAllPublic = catchAsyncErrors(async (req, res, next) => {
   const articles = await articleService.getAllArticles(req.query, true);
   response(res, 200, true, articles);
+});
+
+export const getAll = catchAsyncErrors(async (req, res, next) => {
+  if (!req.loggedIn) {
+    const publicArticles = await articleService.getAllArticles(req.query, true);
+    response(res, 200, true, publicArticles);
+  } else {
+    const articles = await articleService.getAllArticles(req.query, false);
+    response(res, 200, true, articles);
+  }
 });
 
 export const getById = catchAsyncErrors(async (req, res, next) => {

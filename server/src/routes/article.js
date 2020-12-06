@@ -13,8 +13,7 @@ router.post(
   [authenticate, authorize(ROLE.ADMIN), appendUser('publisher'), validate(articleSchema)],
   articleController.create
 );
-router.get('/', authenticate, articleController.getAll);
-router.get('/public', articleController.getAllPublic);
+router.get('/', authorizeAccess, articleController.getAll);
 router.get('/:id', authorizeAccess, articleController.getById);
 router.put(
   '/:id',
