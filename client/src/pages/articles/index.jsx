@@ -34,8 +34,6 @@ const Articles = () => {
     userLoading
   );
 
-  //
-
   return (
     <>
       <Jumbotron headerText="Fagartikler" />
