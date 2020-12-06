@@ -46,7 +46,7 @@ const ArticlesToggles = ({
         onChange={(e) => setSearchTerm(e.target.value)}
       />
 
-      <Button content="SØK" onClick={handleSearch} disabled={!searchTerm} />
+      <Button content="SØK" onClick={handleSearch} />
 
       <SelectFilter
         categories={categories}

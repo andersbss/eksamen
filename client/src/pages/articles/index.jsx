@@ -24,11 +24,11 @@ const Articles = () => {
   ] = useFetchArr('GET', '/categories');
   const { error, loading, response, isSuccess } = useFetch(
     'GET',
-    `${`/articles?limit=5&page=${page}${
+    `/articles?limit=5&page=${page}${
       chosenCategory && chosenCategory !== 'INGEN'
         ? `&category=${chosenCategory}`
         : ''
-    }`}`,
+    }${searchTerm ? `&search=${searchTerm}` : ''}`,
     userLoading
   );
 
@@ -44,8 +44,6 @@ const Articles = () => {
     <>
       <Jumbotron headerText="Fagartikler" />
       <ArticlesLayout>
-        {loading && <Loader />}
-
         {categoryIsSuccess && !categoryLoading && (
           <ArticlesToggles
             loggedIn={loggedIn}
@@ -58,6 +56,8 @@ const Articles = () => {
             handleSearch={handleSearch}
           />
         )}
+
+        {loading && <Loader />}
 
         {isSuccess && !loading && <ArticleList articles={response?.data} />}
 
