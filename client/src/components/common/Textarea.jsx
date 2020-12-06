@@ -37,6 +37,7 @@ const Textarea = ({
   rows,
   cols,
   required = false,
+  value,
   onChange = () => {},
 }) => (
   <StyledContainer>
@@ -50,6 +51,7 @@ const Textarea = ({
       name={name}
       rows={rows}
       cols={cols}
+      value={value}
     />
   </StyledContainer>
 );

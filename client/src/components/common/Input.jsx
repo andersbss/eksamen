@@ -37,6 +37,7 @@ const Input = ({
   maxLength = '',
   placeholder = '',
   required = false,
+  value,
   onChange = () => {},
 }) => (
   <StyledContainer>
@@ -49,6 +50,7 @@ const Input = ({
       required={required}
       onChange={onChange}
       name={name}
+      value={value}
     />
   </StyledContainer>
 );

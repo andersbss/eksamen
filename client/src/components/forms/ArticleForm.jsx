@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../buttons/Button';
 import Select from '../common/Select';
@@ -39,7 +39,7 @@ const initialFormData = Object.freeze({
   public: 'false',
 });
 
-const ArticleForm = () => {
+const ArticleForm = ({ id, article }) => {
   const [formData, updateFormData] = useState(initialFormData);
   const [disabled, setDisabled] = useState(true);
   const [isCreated, setIsCreated] = useState(false);
@@ -61,6 +61,24 @@ const ArticleForm = () => {
 
   const history = useHistory();
 
+  useEffect(() => {
+    if (article !== null) {
+      const autoFillData = {
+        title: article.title,
+        ingress: article.ingress,
+        content: article.content,
+        category: article.category._id,
+        author: article.author._id,
+      };
+      updateFormData(autoFillData);
+      setDisabled(false);
+      setTitleError(false);
+      setIngressError(false);
+      setContentError(false);
+      console.log(article);
+    }
+  }, [article]);
+
   const {
     error: categoryFetchError,
     loading: categoryLoading,
@@ -78,7 +96,7 @@ const ArticleForm = () => {
   const handleChange = (e) => {
     updateFormData({
       ...formData,
-      [e.target.name]: e.target.value.trim(),
+      [e.target.name]: e.target.value,
     });
 
     switch (e.target.name) {
@@ -150,19 +168,35 @@ const ArticleForm = () => {
           formData.image = imageId;
         }
         setLoading(true);
-        const {
-          data: { success, data },
-        } = await request('POST', '/articles', formData);
-        console.log(success);
+        if (!article) {
+          const {
+            data: { success, data },
+          } = await request('POST', '/articles', formData);
 
-        if (success) {
-          setIsCreated(true);
-          setLoading(false);
-          setDisabled(true);
-          setTimeout(() => history.push('/fagartikler'), 2000);
+          if (success) {
+            setIsCreated(true);
+            setLoading(false);
+            setDisabled(true);
+            setTimeout(() => history.push('/fagartikler'), 2000);
+          } else {
+            setCreateError(data);
+            setLoading(false);
+          }
         } else {
-          setCreateError(data);
-          setLoading(false);
+          console.log(formData);
+          const {
+            data: { success, data },
+          } = await request('PUT', `/articles/${article.id}`, formData);
+
+          if (success) {
+            setIsCreated(true);
+            setLoading(false);
+            setDisabled(true);
+            setTimeout(() => history.push('/fagartikler'), 2000);
+          } else {
+            setCreateError(data);
+            setLoading(false);
+          }
         }
       } catch (error) {
         setLoading(false);
@@ -186,6 +220,7 @@ const ArticleForm = () => {
           placeholder="Tittel"
           required="true"
           name="title"
+          value={formData.title}
           onChange={handleChange}
         />
         <Input
@@ -196,6 +231,7 @@ const ArticleForm = () => {
           placeholder="Ingress"
           required="true"
           name="ingress"
+          value={formData.ingress}
           onChange={handleChange}
         />
         <Textarea
@@ -207,6 +243,7 @@ const ArticleForm = () => {
           name="content"
           rows="4"
           cols="50"
+          value={formData.content}
           onChange={handleChange}
         />
         {categoryLoading && <Loader />}
@@ -217,7 +254,12 @@ const ArticleForm = () => {
             errorLabel={categoryError}
             onChange={handleChange}
           >
-            <option value={null}>Velg kategori</option>
+            {!article && <option value={null}>Velg kategori</option>}
+            {article && (
+              <option value={article.category._id} selected="selected">
+                {article.category.title}
+              </option>
+            )}
             {categories.length <= 0 ? (
               <p>Ingen kategorier</p>
             ) : (
@@ -238,7 +280,12 @@ const ArticleForm = () => {
             errorLabel={authorError}
             onChange={handleChange}
           >
-            <option value={null}>Velg forfatter</option>
+            {!article && <option value={null}>Velg forfatter</option>}
+            {article && (
+              <option value={article.author._id} selected="selected">
+                {article.author.firstName}
+              </option>
+            )}
             {authors.length <= 0 ? (
               <p>Ingen forfattere</p>
             ) : (
@@ -257,7 +304,7 @@ const ArticleForm = () => {
           <option value="true">Public</option>
         </Select>
         <Button
-          content={loading ? 'Creating...' : 'Create'}
+          content={id ? 'Edit' : 'Create'}
           disabled={disabled}
           backgroundColor="blue"
           color="white"

@@ -43,7 +43,7 @@ const ArticleDetail = () => {
   };
 
   const handleEdit = () => {
-    console.log('edit');
+    history.push(`/redigerartikkel/${id}`);
   };
 
   useEffect(() => {
