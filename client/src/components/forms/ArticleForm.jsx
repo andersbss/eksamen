@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../buttons/Button';
 import Select from '../common/Select';
@@ -38,7 +38,7 @@ const initialFormData = Object.freeze({
   author: '',
 });
 
-const ArticleForm = () => {
+const ArticleForm = ({ id, article }) => {
   const [formData, updateFormData] = useState(initialFormData);
   const [disabled, setDisabled] = useState(true);
   const [isCreated, setIsCreated] = useState(false);
@@ -59,6 +59,13 @@ const ArticleForm = () => {
   const [authorError, setAuthorError] = useState('');
 
   const history = useHistory();
+
+  useEffect(() => {
+    if (article !== null) {
+      updateFormData(article);
+      console.log(formData);
+    }
+  }, [article, formData]);
 
   const {
     error: categoryFetchError,
@@ -185,6 +192,7 @@ const ArticleForm = () => {
           placeholder="Tittel"
           required="true"
           name="title"
+          value={formData.title}
           onChange={handleChange}
         />
         <Input
@@ -195,6 +203,7 @@ const ArticleForm = () => {
           placeholder="Ingress"
           required="true"
           name="ingress"
+          value={formData.ingress}
           onChange={handleChange}
         />
         <Textarea
@@ -206,6 +215,7 @@ const ArticleForm = () => {
           name="content"
           rows="4"
           cols="50"
+          value={formData.content}
           onChange={handleChange}
         />
         {categoryLoading && <Loader />}
@@ -252,7 +262,7 @@ const ArticleForm = () => {
           <Error error={authorFetchError} />
         )}
         <Button
-          content={loading ? 'Creating...' : 'Create'}
+          content={id ? 'Edit' : 'Create'}
           disabled={disabled}
           backgroundColor="blue"
           color="white"
