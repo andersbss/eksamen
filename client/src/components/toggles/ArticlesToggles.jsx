@@ -3,12 +3,16 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import Button from '../buttons/Button';
 import SelectFilter from '../common/SelectFilter';
+import Input from '../common/Input';
 
 const StyledSection = styled.section`
   display: flex;
   justify-content: space-between;
 
-  & > button:nth-child(${(props) => (props.isAdmin ? 2 : 1)}) {
+  & > select {
+    margin-left: 20px;
+  }
+  & > :nth-child(${(props) => (props.isAdmin ? 2 : 1)}) {
     margin-left: auto;
     margin-right: 20px;
   }
@@ -20,6 +24,9 @@ const ArticlesToggles = ({
   categories,
   setChosenCategory,
   chosenCategory,
+  setSearchTerm,
+  searchTerm,
+  handleSearch,
 }) => {
   const history = useHistory();
 
@@ -33,7 +40,14 @@ const ArticlesToggles = ({
           color="white"
         />
       )}
-      <Button content="SØK" />
+
+      <Input
+        label="Søk på artikkeltittel"
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+
+      <Button content="SØK" onClick={handleSearch} />
+
       <SelectFilter
         categories={categories}
         setChosenCategory={setChosenCategory}

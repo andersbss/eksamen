@@ -7,6 +7,8 @@ const options = { timestamps: true, toJSON: { virtuals: true }, toObject: { virt
 
 const ArticleSchema = new Schema(Joigoose.convert(articleSchema), options);
 
+ArticleSchema.index({ title: 'text' });
+
 const Article = mongoose.model('Article', ArticleSchema);
 
 export default Article;

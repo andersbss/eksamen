@@ -12,8 +12,10 @@ import PaginationToggle from '../../components/toggles/PaginationToggle';
 
 const Articles = () => {
   const [page, setPage] = useState(1);
-  const { loggedIn, isAdmin, userLoading } = useUserContext();
   const [chosenCategory, setChosenCategory] = useState(null);
+  const [searchInput, setSearchInput] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const { loggedIn, isAdmin, userLoading } = useUserContext();
   const [
     categoryError,
     categoryLoading,
@@ -22,13 +24,17 @@ const Articles = () => {
   ] = useFetchArr('GET', '/categories');
   const { error, loading, response, isSuccess } = useFetch(
     'GET',
-    `${`/articles?limit=5&page=${page}${
+    `/articles?limit=5&page=${page}${
       chosenCategory && chosenCategory !== 'INGEN'
         ? `&category=${chosenCategory}`
         : ''
-    }`}`,
+    }${searchTerm ? `&search=${searchTerm}` : ''}`,
     userLoading
   );
+
+  const handleSearch = () => {
+    setSearchTerm(searchInput);
+  };
 
   useEffect(() => {
     setPage(1);
@@ -45,9 +51,14 @@ const Articles = () => {
             categories={categoryResponse}
             setChosenCategory={setChosenCategory}
             chosenCategory={chosenCategory}
+            setSearchTerm={setSearchInput}
+            searchTerm={searchInput}
+            handleSearch={handleSearch}
           />
         )}
+
         {loading && <Loader />}
+
         {isSuccess && !loading && <ArticleList articles={response?.data} />}
 
         {isSuccess && !loading && (
@@ -57,6 +68,7 @@ const Articles = () => {
             currentPage={page}
           />
         )}
+
         {!isSuccess && !loading && <Error error={error} />}
         {!categoryIsSuccess && !categoryLoading && <Error error={error} />}
       </ArticlesLayout>
