@@ -30,8 +30,6 @@ const Articles = () => {
     userLoading
   );
 
-  console.log(chosenCategory);
-
   return (
     <>
       <Jumbotron headerText="Fagartikler" />

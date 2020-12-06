@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 const StyledSelect = styled.select`
@@ -22,6 +22,7 @@ const StyledSelect = styled.select`
 
 const SelectFilter = ({ categories, setChosenCategory, chosenCategory }) => {
   const [headerOption, setHeaderOption] = useState('FILTER');
+  const selectedCat = useRef(null);
 
   useEffect(() => {
     if (chosenCategory) {
@@ -34,10 +35,13 @@ const SelectFilter = ({ categories, setChosenCategory, chosenCategory }) => {
     <StyledSelect
       onChange={(e) => setChosenCategory(e.target.value)}
       optionSelected={headerOption === 'FILTER'}
+      ref={selectedCat}
     >
       <option>{headerOption}</option>
       {categories?.map((category) => (
-        <option key={category._id}>{category.title}</option>
+        <option value={category._id} key={category._id}>
+          {category.title}
+        </option>
       ))}
     </StyledSelect>
   );
