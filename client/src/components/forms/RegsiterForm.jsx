@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import validate from '../../utils/registerFormValidation';
-import useForm from '../../hooks/useForm';
 import Button from '../buttons/Button';
 import Input from '../common/Input';
+import validate from '../../utils/registerFormValidation';
 
 const StyledForm = styled.form`
   display: grid;
@@ -14,26 +13,19 @@ const StyledForm = styled.form`
   }
 `;
 
-const RegisterForm = ({ handleRegister }) => {
-  const { inputs, handleChange, handleSubmit } = useForm(
-    handleRegister,
-    validate
-  );
-
-  return (
-    <StyledForm onSubmit={handleSubmit}>
-      <Input name="firstName" label="Fornavn" onChange={handleChange} />
-      <Input name="lastName" label="Etternavn" onChange={handleChange} />
-      <Input name="email" label="E-post" onChange={handleChange} />
-      <Input name="password" label="Passord" onChange={handleChange} />
-      <Button
-        content="Registrer"
-        type="submit"
-        backgroundColor="blue"
-        color="white"
-      />
-    </StyledForm>
-  );
-};
+const RegisterForm = ({ handleSubmit, handleChange }) => (
+  <StyledForm onSubmit={handleSubmit}>
+    <Input name="firstName" label="Fornavn" onChange={handleChange} />
+    <Input name="lastName" label="Etternavn" onChange={handleChange} />
+    <Input name="email" label="E-post" onChange={handleChange} />
+    <Input name="password" label="Passord" onChange={handleChange} />
+    <Button
+      content="Registrer"
+      type="submit"
+      backgroundColor="blue"
+      color="white"
+    />
+  </StyledForm>
+);
 
 export default RegisterForm;

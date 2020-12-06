@@ -1,16 +1,19 @@
 import { useState, useEffect } from 'react';
 
-const useForm = (callBack, validate) => {
+const useForm = (callBack, validate, params) => {
   const [errors, setErrors] = useState([]);
   const [inputs, setInputs] = useState({});
   const [readySubmit, setReadySubmit] = useState(false);
+  const [response, setResponse] = useState(null);
 
   useEffect(() => {
     const execute = async () => {
-      await callBack();
+      const res = await callBack(...params, inputs);
+      setResponse(res);
+      setReadySubmit(false);
     };
     if (Object.keys(errors).length === 0 && readySubmit) execute();
-  }, [errors, callBack, readySubmit]);
+  }, [callBack, errors, inputs, params, readySubmit]);
 
   useEffect(() => {
     setErrors(validate(inputs));
@@ -27,7 +30,7 @@ const useForm = (callBack, validate) => {
     setReadySubmit(true);
   };
 
-  return { inputs, errors, handleChange, handleSubmit };
+  return { inputs, errors, handleChange, handleSubmit, response };
 };
 
 export default useForm;
