@@ -18,6 +18,21 @@ const RegisterForm = ({ handleRegister }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const [firstNameError, setFirstNameError] = useState('Fyll ut fornavn');
+  const [lastNameError, setLastNameError] = useState('Fyll ut etternavn');
+  const [emailError, setEmailError] = useState({
+    empty: 'Fyll ut epost',
+    invalid: 'Eikk gyldig e-postadresse',
+  });
+  const [passwordError, setPasswordError] = useState({
+    short: 'Passord må minst ha 3 tegn',
+    number: 'Passord må inneholde minst 1 tegn',
+  });
+
+  const handleOnFocus = () => {
+    if (hasFocused) return;
+  };
+
   return (
     <StyledForm
       onSubmit={(e) =>
