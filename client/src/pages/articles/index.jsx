@@ -12,8 +12,9 @@ import PaginationToggle from '../../components/toggles/PaginationToggle';
 
 const Articles = () => {
   const [page, setPage] = useState(1);
-  const { loggedIn, isAdmin, userLoading } = useUserContext();
   const [chosenCategory, setChosenCategory] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const { loggedIn, isAdmin, userLoading } = useUserContext();
   const [
     categoryError,
     categoryLoading,
@@ -30,14 +31,22 @@ const Articles = () => {
     userLoading
   );
 
+  const handleSearch = () => {
+    console.log('handle');
+  };
+
   useEffect(() => {
     setPage(1);
   }, [chosenCategory, setPage]);
+
+  console.log(searchTerm);
 
   return (
     <>
       <Jumbotron headerText="Fagartikler" />
       <ArticlesLayout>
+        {loading && <Loader />}
+
         {categoryIsSuccess && !categoryLoading && (
           <ArticlesToggles
             loggedIn={loggedIn}
@@ -45,9 +54,12 @@ const Articles = () => {
             categories={categoryResponse}
             setChosenCategory={setChosenCategory}
             chosenCategory={chosenCategory}
+            setSearchTerm={setSearchTerm}
+            searchTerm={searchTerm}
+            handleSearch={handleSearch}
           />
         )}
-        {loading && <Loader />}
+
         {isSuccess && !loading && <ArticleList articles={response?.data} />}
 
         {isSuccess && !loading && (
@@ -57,6 +69,7 @@ const Articles = () => {
             currentPage={page}
           />
         )}
+
         {!isSuccess && !loading && <Error error={error} />}
         {!categoryIsSuccess && !categoryLoading && <Error error={error} />}
       </ArticlesLayout>

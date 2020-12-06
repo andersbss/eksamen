@@ -24,6 +24,9 @@ const ArticlesToggles = ({
   categories,
   setChosenCategory,
   chosenCategory,
+  setSearchTerm,
+  searchTerm,
+  handleSearch,
 }) => {
   const history = useHistory();
 
@@ -37,9 +40,13 @@ const ArticlesToggles = ({
           color="white"
         />
       )}
-      <Input label="Søk på artikkeltittel" />
 
-      <Button content="SØK" />
+      <Input
+        label="Søk på artikkeltittel"
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+
+      <Button content="SØK" onClick={handleSearch} disabled={!searchTerm} />
 
       <SelectFilter
         categories={categories}

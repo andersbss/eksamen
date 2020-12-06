@@ -17,7 +17,8 @@ const StyledButton = styled.button`
 
   &:disabled {
     background-color: ${(props) => props.theme.colors.lightGrey};
-    color: black;
+    color: ${(props) => props.theme.colors.black};
+    opacity: 0.5;
     cursor: default;
   }
 
