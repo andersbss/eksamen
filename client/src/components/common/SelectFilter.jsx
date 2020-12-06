@@ -8,8 +8,9 @@ const StyledSelect = styled.select`
   width: 200px;
   border: 0;
   background-color: ${(props) => props.theme.colors.lightGrey};
-
   text-align-last: center;
+
+  cursor: pointer;
 
   option {
     font-size: 1.5rem;

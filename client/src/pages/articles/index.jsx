@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Loader from '../../components/animations/Loader';
 import Jumbotron from '../../components/common/Jumbotron';
 import ArticlesLayout from '../../layouts/ArticlesLayout';
@@ -22,17 +22,17 @@ const Articles = () => {
   ] = useFetchArr('GET', '/categories');
   const { error, loading, response, isSuccess } = useFetch(
     'GET',
-    `${
-      loggedIn
-        ? `/articles?limit=5&page=${page}${
-            chosenCategory &&
-            chosenCategory !== 'INGEN' &&
-            `&category=${chosenCategory}`
-          }`
-        : `/articles/public?limit=5&page=${page}`
-    }`,
+    `${`/articles?limit=5&page=${page}${
+      chosenCategory && chosenCategory !== 'INGEN'
+        ? `&category=${chosenCategory}`
+        : ''
+    }`}`,
     userLoading
   );
+
+  useEffect(() => {
+    setPage(1);
+  }, [chosenCategory, setPage]);
 
   return (
     <>
