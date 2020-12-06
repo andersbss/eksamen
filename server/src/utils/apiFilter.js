@@ -6,7 +6,7 @@ export class ApiFilter {
 
   filter() {
     const query = { ...this.queryStr };
-    const removeFields = ['sort', 'q', 'fields', 'page', 'limit'];
+    const removeFields = ['search', 'fields', 'page', 'limit'];
     removeFields.forEach((el) => delete query[el]);
     let queryStr = JSON.stringify(query);
     queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g, (match) => `$${match}`);
@@ -16,8 +16,8 @@ export class ApiFilter {
   }
 
   searchByQuery() {
-    if (this.queryStr.q) {
-      const term = this.queryStr.q.split('-').join(' ');
+    if (this.queryStr.search) {
+      const term = this.queryStr.search.split('-').join(' ');
       this.query = this.query.find({ $text: { $search: `"${term}"` } });
     }
     return this;
