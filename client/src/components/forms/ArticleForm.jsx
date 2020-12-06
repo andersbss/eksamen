@@ -226,13 +226,21 @@ const ArticleForm = ({ id, article }) => {
             errorLabel={categoryError}
             onChange={handleChange}
           >
-            <option value={null}>Velg kategori</option>
+            {!article && <option value={null}>Velg kategori</option>}
+            {article && (
+              <option value={formData.category.id} selected="selected">
+                {formData.category.title}
+              </option>
+            )}
             {categories.length <= 0 ? (
               <p>Ingen kategorier</p>
             ) : (
-              categories.map((category) => (
-                <option value={category._id}>{category.title}</option>
-              ))
+              categories.map((category) => {
+                if (category._id === formData.category.id) {
+                  return null;
+                }
+                return <option value={category._id}>{category.title}</option>;
+              })
             )}
           </Select>
         )}
