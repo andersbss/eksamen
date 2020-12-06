@@ -32,6 +32,14 @@ export const create = catchAsyncErrors(async (req, res, next) => {
   response(res, 201, true, contact);
 });
 
+export const getById = catchAsyncErrors(async (req, res, next) => {
+  const contact = await contactService.getContactById(req.params.id);
+  if (!contact) {
+    return next(new ErrorHandler('Contact not found', 404));
+  }
+  response(res, 200, true, contact);
+});
+
 export const getAll = catchAsyncErrors(async (req, res, next) => {
   const contacts = await contactService.getAllContacts();
   response(res, 201, true, contacts);
