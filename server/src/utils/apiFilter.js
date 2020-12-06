@@ -15,6 +15,14 @@ export class ApiFilter {
     return this;
   }
 
+  searchByQuery() {
+    if (this.queryStr.q) {
+      const term = this.queryStr.q.split('-').join(' ');
+      this.query = this.query.find({ $text: { $search: `"${term}"` } });
+    }
+    return this;
+  }
+
   pagination() {
     const page = parseInt(this.queryStr.page, 10) || 1;
     const limit = parseInt(this.queryStr.limit, 10) || 10;
