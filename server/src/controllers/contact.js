@@ -18,11 +18,23 @@ export const create = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler('Fill out message', 400));
   }
 
+  // Copy of mail to administrator
+  try {
+    await sendMail({
+      email: 'admin@admin.com',
+      subject: `Denne meldingen ble sendt av ${user.firstName} ${user.lastName} via deres kontaktside.`,
+      message: `${message}`,
+    });
+  } catch (error) {
+    return next(new ErrorHandler(error, 500));
+  }
+
+  // Verification email to user
   try {
     await sendMail({
       email: user.email,
-      subject: `Denne meldingen ble sendt av ${user.firstName} ${user.lastName} til Rørleggerfirma FG via deres kontaktside.`,
-      message: `${message}`,
+      subject: `Hei ${user.firstName} ${user.lastName} - dette er en bekreftelse på at din melding ble sendt til FG Rørleggerfirma`,
+      message: `Melding: ${message}`,
     });
   } catch (error) {
     return next(new ErrorHandler(error, 500));
