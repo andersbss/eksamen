@@ -25,7 +25,6 @@ const useFetch = (method, endpoint, wait = false, payload = null) => {
         setLoading(false);
       }
     };
-
     if (!wait) loadData();
   }, [method, endpoint, payload, wait]);
   return { error, loading, response, isSuccess, reqStatus };
