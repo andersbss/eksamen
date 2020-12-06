@@ -15,7 +15,7 @@ const StyledForm = styled.form`
 `;
 
 const RegisterForm = ({ handleRegister }) => {
-  const [inputs, errors, handleChange, handleSubmit] = useForm(
+  const { inputs, handleChange, handleSubmit } = useForm(
     handleRegister,
     validate
   );

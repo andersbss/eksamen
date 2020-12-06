@@ -2,12 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import Jumbotron from '../../components/common/Jumbotron';
 import RegisterForm from '../../components/forms/RegsiterForm';
+import useEventFetch from '../../hooks/useEventFetch';
 import RegisterLayout from '../../layouts/RegisterLayout';
+import { request } from '../../services/httpService';
 
 const Register = () => {
-  const handleRegister = () => {
-    // Post logic
-  };
+  const { fetch, loading, error, isSuccess, reqStatus } = useEventFetch(
+    request,
+    'POST',
+    '/'
+  );
+
+  const handleRegister = () => {};
 
   return (
     <>
