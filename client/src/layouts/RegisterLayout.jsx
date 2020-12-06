@@ -3,10 +3,12 @@ import styled from 'styled-components';
 
 const StyledMain = styled.main`
   display: grid;
+  margin: auto;
+  margin-top: 80px;
+  width: 500px;
+  row-gap: 30px;
 `;
 
-const RegisterLayout = ({ children }) => {
-  <StyledMain>{children}</StyledMain>;
-};
+const RegisterLayout = ({ children }) => <StyledMain>{children}</StyledMain>;
 
 export default RegisterLayout;
