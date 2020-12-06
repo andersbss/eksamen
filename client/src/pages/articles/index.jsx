@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Loader from '../../components/animations/Loader';
 import Jumbotron from '../../components/common/Jumbotron';
 import ArticlesLayout from '../../layouts/ArticlesLayout';
@@ -29,6 +29,10 @@ const Articles = () => {
     }`}`,
     userLoading
   );
+
+  useEffect(() => {
+    setPage(1);
+  }, [chosenCategory, setPage]);
 
   return (
     <>
