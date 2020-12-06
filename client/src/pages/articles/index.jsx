@@ -6,12 +6,19 @@ import Error from '../../components/errors/Error';
 import ArticleList from '../../components/lists/ArticleList';
 import ArticlesToggles from '../../components/toggles/ArticlesToggles';
 import useFetch from '../../hooks/useFetch';
+import useFetchArr from '../../hooks/useFetchArr';
 import { useUserContext } from '../../context/UserContext';
 import PaginationToggle from '../../components/toggles/PaginationToggle';
 
 const Articles = () => {
   const [page, setPage] = useState(1);
   const { loggedIn, isAdmin, userLoading } = useUserContext();
+  const [
+    categoryError,
+    categoryLoading,
+    categoryResponse,
+    categoryIsSuccess,
+  ] = useFetchArr('GET', '/categories');
   const { error, loading, response, isSuccess } = useFetch(
     'GET',
     `${
@@ -21,6 +28,8 @@ const Articles = () => {
     }`,
     userLoading
   );
+
+  console.log(categoryResponse);
 
   return (
     <>
