@@ -44,6 +44,9 @@ const Routes = () => (
         <AuthRoute path="/nyartikkel">
           <CreateArticle />
         </AuthRoute>
+        <AuthRoute path="/redigerartikkel/:id">
+          <CreateArticle />
+        </AuthRoute>
         <Redirect exact from="/" to="/hjem" />
         <Route path="*">
           <NotFound />
