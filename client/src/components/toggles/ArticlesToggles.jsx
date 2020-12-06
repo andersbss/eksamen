@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import Button from '../buttons/Button';
+import SelectFilter from '../common/SelectFilter';
 
 const StyledSection = styled.section`
   display: flex;
@@ -27,7 +28,7 @@ const ArticlesToggles = ({ loggedIn, isAdmin, categories }) => {
         />
       )}
       <Button content="SØK" />
-      <Button content="FILTER" />
+      <SelectFilter categories={categories} />
     </StyledSection>
   );
 };

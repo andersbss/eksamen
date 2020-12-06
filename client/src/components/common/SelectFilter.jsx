@@ -8,8 +8,9 @@ const SelectFilter = ({ categories }) => {
 
   return (
     <StyledSelect>
-      <option>Kategori</option>
-      <option>Kategori</option>
+      {categories?.map((category) => (
+        <option key={category._id}>{category.title}</option>
+      ))}
     </StyledSelect>
   );
 };

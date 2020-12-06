@@ -29,15 +29,19 @@ const Articles = () => {
     userLoading
   );
 
-  console.log(categoryResponse);
-
   return (
     <>
       <Jumbotron headerText="Fagartikler" />
       <ArticlesLayout>
-        <ArticlesToggles loggedIn={loggedIn} isAdmin={isAdmin} />
+        {!categoryError && !categoryLoading && (
+          <ArticlesToggles
+            loggedIn={loggedIn}
+            isAdmin={isAdmin}
+            categories={categoryResponse}
+          />
+        )}
         {loading && <Loader />}
-        {isSuccess && !loading && <ArticleList articles={response.data} />}
+        {isSuccess && !loading && <ArticleList articles={response?.data} />}
 
         {isSuccess && !loading && (
           <PaginationToggle
