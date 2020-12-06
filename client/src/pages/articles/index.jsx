@@ -24,11 +24,17 @@ const Articles = () => {
     'GET',
     `${
       loggedIn
-        ? `/articles?limit=5&page=${page}`
+        ? `/articles?limit=5&page=${page}${
+            chosenCategory &&
+            chosenCategory !== 'INGEN' &&
+            `&category=${chosenCategory}`
+          }`
         : `/articles/public?limit=5&page=${page}`
     }`,
     userLoading
   );
+
+  //
 
   return (
     <>
