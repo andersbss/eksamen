@@ -65,7 +65,7 @@ const ArticleForm = ({ id, article }) => {
       updateFormData(article);
       console.log(formData);
     }
-  }, [article, formData]);
+  }, [article]);
 
   const {
     error: categoryFetchError,
