@@ -13,6 +13,7 @@ import PaginationToggle from '../../components/toggles/PaginationToggle';
 const Articles = () => {
   const [page, setPage] = useState(1);
   const { loggedIn, isAdmin, userLoading } = useUserContext();
+  const [chosenCategory, setChosenCategory] = useState(null);
   const [
     categoryError,
     categoryLoading,
@@ -29,6 +30,8 @@ const Articles = () => {
     userLoading
   );
 
+  console.log(chosenCategory);
+
   return (
     <>
       <Jumbotron headerText="Fagartikler" />
@@ -38,6 +41,8 @@ const Articles = () => {
             loggedIn={loggedIn}
             isAdmin={isAdmin}
             categories={categoryResponse}
+            setChosenCategory={setChosenCategory}
+            chosenCategory={chosenCategory}
           />
         )}
         {loading && <Loader />}

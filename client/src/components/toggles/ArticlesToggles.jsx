@@ -14,7 +14,13 @@ const StyledSection = styled.section`
   }
 `;
 
-const ArticlesToggles = ({ loggedIn, isAdmin, categories }) => {
+const ArticlesToggles = ({
+  loggedIn,
+  isAdmin,
+  categories,
+  setChosenCategory,
+  chosenCategory,
+}) => {
   const history = useHistory();
 
   return (
@@ -28,7 +34,11 @@ const ArticlesToggles = ({ loggedIn, isAdmin, categories }) => {
         />
       )}
       <Button content="SØK" />
-      <SelectFilter categories={categories} />
+      <SelectFilter
+        categories={categories}
+        setChosenCategory={setChosenCategory}
+        chosenCategory={chosenCategory}
+      />
     </StyledSection>
   );
 };

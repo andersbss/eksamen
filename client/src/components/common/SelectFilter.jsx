@@ -20,20 +20,19 @@ const StyledSelect = styled.select`
   }
 `;
 
-const SelectFilter = ({ categories }) => {
-  const [selected, setSelected] = useState(null);
+const SelectFilter = ({ categories, setChosenCategory, chosenCategory }) => {
   const [headerOption, setHeaderOption] = useState('FILTER');
 
   useEffect(() => {
-    if (selected) {
+    if (chosenCategory) {
       setHeaderOption('INGEN');
-      if (selected === 'INGEN') setHeaderOption('FILTER');
+      if (chosenCategory === 'INGEN') setHeaderOption('FILTER');
     }
-  }, [selected]);
+  }, [chosenCategory]);
 
   return (
     <StyledSelect
-      onChange={(e) => setSelected(e.target.value)}
+      onChange={(e) => setChosenCategory(e.target.value)}
       optionSelected={headerOption === 'FILTER'}
     >
       <option>{headerOption}</option>
