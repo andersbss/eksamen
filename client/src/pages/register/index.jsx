@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import Jumbotron from '../../components/common/Jumbotron';
 import RegisterForm from '../../components/forms/RegsiterForm';
 import RegisterLayout from '../../layouts/RegisterLayout';
 
 const Register = () => {
-  console.log();
+  const handleRegister = (e, formData) => {
+    e.preventDefault();
+    console.log(formData);
+  };
 
   return (
     <>
       <Jumbotron headerText="Registrer" top="70" bottom="0" />
       <RegisterLayout>
-        <RegisterForm />
+        <RegisterForm handleRegister={handleRegister} />
         <NavLink exact to="logginn">
           Har du allerede en konto? Logg inn her!
         </NavLink>
