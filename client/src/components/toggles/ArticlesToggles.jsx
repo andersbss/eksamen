@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import Button from '../buttons/Button';
+import SelectFilter from '../common/SelectFilter';
 
 const StyledSection = styled.section`
   display: flex;
@@ -13,7 +14,13 @@ const StyledSection = styled.section`
   }
 `;
 
-const ArticlesToggles = ({ loggedIn, isAdmin }) => {
+const ArticlesToggles = ({
+  loggedIn,
+  isAdmin,
+  categories,
+  setChosenCategory,
+  chosenCategory,
+}) => {
   const history = useHistory();
 
   return (
@@ -27,7 +34,11 @@ const ArticlesToggles = ({ loggedIn, isAdmin }) => {
         />
       )}
       <Button content="SØK" />
-      <Button content="FILTER" />
+      <SelectFilter
+        categories={categories}
+        setChosenCategory={setChosenCategory}
+        chosenCategory={chosenCategory}
+      />
     </StyledSection>
   );
 };
