@@ -95,7 +95,7 @@ const ArticleForm = ({ id, article }) => {
   const handleChange = (e) => {
     updateFormData({
       ...formData,
-      [e.target.name]: e.target.value.trim(),
+      [e.target.name]: e.target.value,
     });
 
     switch (e.target.name) {
