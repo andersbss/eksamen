@@ -11,6 +11,10 @@ const useForm = (callBack, validate) => {
     if (errors.length === 0) execute();
   }, [errors, callBack]);
 
+  useEffect(() => {
+    setErrors(validate(inputs));
+  }, [inputs, validate]);
+
   const handleChange = (e) => {
     e.persist();
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));

@@ -21,9 +21,8 @@ const RegisterForm = ({ handleRegister }) => {
   );
 
   useEffect(() => {
-    console.log(inputs);
     console.log(errors);
-  }, [inputs, errors]);
+  }, [errors]);
 
   return (
     <StyledForm onSubmit={handleSubmit}>
