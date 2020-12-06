@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Button from '../buttons/Button';
 import Input from '../common/Input';
@@ -26,15 +26,26 @@ const StyledSuccessMessage = styled.span`
   }
 `;
 
-const ContactForm = ({ handleSubmit, loading, submitSuccess, error }) => {
+const ContactForm = ({
+  handleSubmit,
+  loading,
+  submitSuccess,
+  error,
+  userEmail,
+}) => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    setEmail(userEmail);
+  }, [userEmail]);
 
   return (
     <StyledForm onSubmit={(e) => handleSubmit(e, email, message)}>
       <Input
         label="Epost (må tilhøre registrert bruker)"
         placeholder="Epost"
+        value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       <Textarea
