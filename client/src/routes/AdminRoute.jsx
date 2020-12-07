@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useUserContext } from '../context/UserContext';
-import Loader from '../components/animations/Loader';
 
 const AdminRoute = ({ children, ...rest }) => {
   const { loggedIn, userLoading, isAdmin } = useUserContext();
@@ -15,7 +14,7 @@ const AdminRoute = ({ children, ...rest }) => {
         ) : (
           <Redirect
             to={{
-              pathname: '/logginn',
+              pathname: '/notFound',
               state: { from: location },
             }}
           />
