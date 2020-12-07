@@ -3,6 +3,7 @@ import useDidMount from './didMount';
 
 const useForm = (callBack, validate, params) => {
   const [errors, setErrors] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState(true);
   const [inputs, setInputs] = useState({});
   const [readySubmit, setReadySubmit] = useState(false);
@@ -11,8 +12,10 @@ const useForm = (callBack, validate, params) => {
 
   useEffect(() => {
     const execute = async () => {
+      setLoading(true);
       const res = await callBack(...params, inputs);
       setResponse(res);
+      setLoading(false);
     };
     if (Object.keys(errors).length === 0 && readySubmit) {
       execute();
@@ -39,7 +42,15 @@ const useForm = (callBack, validate, params) => {
     setReadySubmit(true);
   };
 
-  return { inputs, errors, hasErrors, handleChange, handleSubmit, response };
+  return {
+    inputs,
+    errors,
+    hasErrors,
+    handleChange,
+    handleSubmit,
+    loading,
+    response,
+  };
 };
 
 export default useForm;

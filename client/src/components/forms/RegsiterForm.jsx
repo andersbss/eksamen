@@ -13,7 +13,27 @@ const StyledForm = styled.form`
   }
 `;
 
-const RegisterForm = ({ handleSubmit, handleChange, errors, hasErrors }) => (
+const StyledSuccessMessage = styled.span`
+  text-align: center;
+
+  & > p {
+    font-weight: 800;
+
+    &:nth-child(2) {
+      font-size: 1rem;
+    }
+  }
+`;
+
+const RegisterForm = ({
+  handleSubmit,
+  handleChange,
+  errors,
+  hasErrors,
+  loggedIn,
+  loading,
+  error,
+}) => (
   <StyledForm onSubmit={handleSubmit}>
     <Input
       name="firstName"
@@ -39,13 +59,21 @@ const RegisterForm = ({ handleSubmit, handleChange, errors, hasErrors }) => (
       errorLabel={errors?.password}
       onChange={handleChange}
     />
-    <Button
-      disabled={hasErrors}
-      content="Registrer"
-      type="submit"
-      backgroundColor="blue"
-      color="white"
-    />
+    {error && <p>Registrering feilet, prøv igjen</p>}
+    {!loggedIn ? (
+      <Button
+        type="submit"
+        content={loading ? 'REGISTRERER...' : 'REGISTRER'}
+        backgroundColor="blue"
+        color="white"
+        disabled={loading || hasErrors}
+      />
+    ) : (
+      <StyledSuccessMessage>
+        <p>Du er registrert!</p>
+        <p>Omdirigerer...</p>
+      </StyledSuccessMessage>
+    )}
   </StyledForm>
 );
 
