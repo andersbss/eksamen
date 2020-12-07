@@ -13,13 +13,13 @@ const Contact = () => {
   const { loggedIn, user } = useUserContext();
   const history = useHistory();
 
-  const handleSubmit = async (e, email, message) => {
+  const handleSubmit = async (e, email, name, message) => {
     e.preventDefault();
     try {
       setLoading(true);
       const {
         data: { success, data },
-      } = await request('POST', '/contacts', { email, message });
+      } = await request('POST', '/contacts', { email, name, message });
       console.log(user);
 
       if (success) {
@@ -48,6 +48,7 @@ const Contact = () => {
           error={error}
           submitSuccess={submitSuccess}
           userEmail={loggedIn ? user.email : ''}
+          userName={loggedIn ? `${user.firstName} ${user.lastName}` : ''}
         />
       </ContactLayout>
     </>
