@@ -34,7 +34,7 @@ const useForm = (callBack, validate, params) => {
   const handleChange = (e) => {
     e.persist();
     // setReadySubmit(false);
-    setHasErrors(true);
+    setHasErrors((prev) => !prev);
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
