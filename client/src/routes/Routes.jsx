@@ -13,10 +13,10 @@ import CreateArticle from '../pages/createArticle';
 import Articles from '../pages/articles';
 import Login from '../pages/login';
 import NotFound from '../pages/notFound';
-import AuthRoute from './AuthRoute';
 import ArticleDetail from '../pages/articleDetail';
 import Register from '../pages/register';
 import Contact from '../pages/contact';
+import AdminRoute from './AdminRoute';
 
 const Routes = () => (
   <Router>
@@ -46,12 +46,12 @@ const Routes = () => (
         <Route path="/kontakt">
           <Contact />
         </Route>
-        <AuthRoute path="/nyartikkel">
+        <AdminRoute path="/nyartikkel">
           <CreateArticle />
-        </AuthRoute>
-        <AuthRoute path="/redigerartikkel/:id">
+        </AdminRoute>
+        <AdminRoute path="/redigerartikkel/:id">
           <CreateArticle />
-        </AuthRoute>
+        </AdminRoute>
         <Redirect exact from="/" to="/hjem" />
         <Route path="*">
           <NotFound />

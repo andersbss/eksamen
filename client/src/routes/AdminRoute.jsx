@@ -1,31 +1,30 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 import { useUserContext } from '../context/UserContext';
+import Loader from '../components/animations/Loader';
 
-const NoAuthRoute = ({ children, ...rest }) => {
-  const { loggedIn, loading, user } = useUserContext();
-  return (
+const AdminRoute = ({ children, ...rest }) => {
+  const { loggedIn, userLoading, isAdmin } = useUserContext();
+
+  return !userLoading ? (
     <Route
       {...rest}
       render={({ location }) =>
-        !loggedIn && !loading ? (
+        loggedIn && isAdmin ? (
           <>{children}</>
         ) : (
           <Redirect
             to={{
-              pathname: '/todos',
+              pathname: '/logginn',
               state: { from: location },
             }}
           />
         )
       }
     />
+  ) : (
+    <></>
   );
 };
 
-NoAuthRoute.propTypes = {
-  children: PropTypes.node,
-};
-
-export default NoAuthRoute;
+export default AdminRoute;
