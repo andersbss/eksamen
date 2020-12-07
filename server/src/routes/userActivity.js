@@ -1,8 +1,8 @@
 import express from 'express';
-import { getCountByArticle } from '../controllers/index.js';
+import { userActivityController } from '../controllers/index.js';
 
 const router = express.Router();
 
-router.get('/visitsByArticle');
+router.get('/articlevisits', userActivityController.getCountByArticle);
 
 export default router;

@@ -64,7 +64,7 @@ app.use(`${process.env.BASEURL}/authors`, author);
 app.use(`${process.env.BASEURL}/`, user);
 app.use(`${process.env.BASEURL}/images`, image);
 app.use(`${process.env.BASEURL}/contacts`, contact);
-app.use(`${process.env.BASEURL}/userActivity`, userActivity);
+app.use(`${process.env.BASEURL}/useractivity`, userActivity);
 
 app.use(errorMiddleware);
 
