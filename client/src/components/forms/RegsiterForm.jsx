@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Button from '../buttons/Button';
 import Input from '../common/Input';
-import validate from '../../utils/registerFormValidation';
 
 const StyledForm = styled.form`
   display: grid;
@@ -59,7 +58,7 @@ const RegisterForm = ({
       errorLabel={errors?.password}
       onChange={handleChange}
     />
-    {error && <p>Registrering feilet, prøv igjen</p>}
+    {error && <p>{`Registrering feilet, prøv igjen.(${error[0]})`}</p>}
     {!loggedIn ? (
       <Button
         type="submit"
