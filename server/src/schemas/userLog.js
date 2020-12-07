@@ -1,7 +1,7 @@
 import Joi from 'joi';
 import { OBJECT_ID_REGEX } from '../constants/regexes';
 
-export const userActivitySchema = Joi.object()
+export const userLogSchema = Joi.object()
   .keys({
     user: Joi.string()
       .regex(OBJECT_ID_REGEX)
