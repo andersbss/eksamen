@@ -5,3 +5,4 @@ export * as categoryController from './category.js';
 export * as authorController from './author.js';
 export * as imageController from './image.js';
 export * as contactController from './contact.js';
+export * as userActivityController from './userActivity.js';
