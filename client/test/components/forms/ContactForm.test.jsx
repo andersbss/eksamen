@@ -5,7 +5,7 @@ import ContactForm, {
   StyledSuccessMessage,
   StyledErrorMessage,
 } from '../../../src/components/forms/ContactForm';
-import Button from '../../../src/components/buttons/Button';
+import Button, { StyledButton } from '../../../src/components/buttons/Button';
 import Input from '../../../src/components/common/Input';
 import { theme } from '../../../src/styles/Theme';
 
@@ -52,5 +52,13 @@ describe('<ContactForm />', () => {
 
     expect(wrapper.find(Input).at(0).prop('value')).toEqual('email@test.com');
     expect(wrapper.find(Input).at(1).prop('value')).toEqual('user name');
+  });
+
+  it('should call handleSubmit function when form is submitted', () => {
+    const mockSubmit = jest.fn();
+
+    const wrapper = shallow(<ContactForm handleSubmit={mockSubmit} />);
+    wrapper.simulate('submit');
+    expect(mockSubmit).toHaveBeenCalled();
   });
 });
