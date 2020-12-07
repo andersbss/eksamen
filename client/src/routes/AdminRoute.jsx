@@ -2,31 +2,28 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useUserContext } from '../context/UserContext';
 
-const AuthRoute = ({
-  redirectPath,
-  loginRequired,
-  adminRequired,
-  children,
-  ...rest
-}) => {
-  const { loggedIn, loading, isAdmin } = useUserContext();
-  return (
+const AdminRoute = ({ children, ...rest }) => {
+  const { loggedIn, userLoading, isAdmin } = useUserContext();
+
+  return !userLoading ? (
     <Route
       {...rest}
       render={({ location }) =>
-        loggedIn && !loading ? (
+        loggedIn && isAdmin ? (
           <>{children}</>
         ) : (
           <Redirect
             to={{
-              pathname: '/login',
+              pathname: '/notFound',
               state: { from: location },
             }}
           />
         )
       }
     />
+  ) : (
+    <></>
   );
 };
 
-export default AuthRoute;
+export default AdminRoute;
