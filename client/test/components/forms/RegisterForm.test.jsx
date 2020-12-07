@@ -30,4 +30,15 @@ describe('<RegisterForm />', () => {
     const wrapper = shallow(<RegisterForm error={errorMessage} />);
     expect(wrapper.find('p').at(0).text()).toContain(errorMessage);
   });
+
+  it('should disable Button if loading or hasErrors is true', () => {
+    const wrapper = shallow(<RegisterForm loading hasErrors />);
+    expect(wrapper.find(Button).prop('disabled')).toEqual(true);
+
+    wrapper.setProps({ loading: false });
+    expect(wrapper.find(Button).prop('disabled')).toEqual(true);
+
+    wrapper.setProps({ hasErrors: false });
+    expect(wrapper.find(Button).prop('disabled')).toEqual(false);
+  });
 });
