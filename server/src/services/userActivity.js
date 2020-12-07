@@ -1,6 +1,6 @@
 import UserActivity from '../models/userActivity.js';
 
-export const createAuthor = (data) => UserActivity.create(data);
+export const createUserActivity = (data) => UserActivity.create(data);
 
 export const getCountByArticle = async () => {
   const articles = await UserActivity.aggregate([
