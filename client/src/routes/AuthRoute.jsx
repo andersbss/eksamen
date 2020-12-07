@@ -1,15 +1,15 @@
-import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import { useUserContext } from '../context/UserContext';
 
-const AuthRoute = ({
-  redirectPath,
-  loginRequired,
-  adminRequired,
-  children,
-  ...rest
-}) => {
-  const { loggedIn, loading, isAdmin } = useUserContext();
+const AuthRoute = ({ children, ...rest }) => {
+  const { loggedIn, loading, user } = useUserContext();
   return (
     <Route
       {...rest}
@@ -27,6 +27,10 @@ const AuthRoute = ({
       }
     />
   );
+};
+
+AuthRoute.propTypes = {
+  children: PropTypes.node,
 };
 
 export default AuthRoute;
