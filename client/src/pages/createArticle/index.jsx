@@ -4,15 +4,12 @@ import Jumbotron from '../../components/common/Jumbotron';
 import ArticleForm from '../../components/forms/ArticleForm';
 import useFetch from '../../hooks/useFetch';
 import Loader from '../../components/animations/Loader';
+import Modal from '../../components/modals/Modal';
 
 const CreateArticle = () => {
   const { id } = useParams();
   const [article, setArticle] = useState(null);
-
-  const { error, loading, response, isSuccess, reqStatus } = useFetch(
-    'GET',
-    `articles/${id}`
-  );
+  const { loading, response, reqStatus } = useFetch('GET', `articles/${id}`);
 
   useEffect(() => {
     if (reqStatus === 200) {
@@ -22,6 +19,7 @@ const CreateArticle = () => {
 
   return (
     <>
+      <Modal />
       {!id && <Jumbotron headerText="Ny artikkel" />}
       {id && (
         <Jumbotron headerText={loading ? 'loading...' : response?.title} />
