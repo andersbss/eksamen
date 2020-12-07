@@ -6,7 +6,10 @@ import Input from '../common/Input';
 const StyledForm = styled.form`
   display: grid;
   grid-row-gap: 20px;
-  width: 200px;
+
+  & > button {
+    margin: auto;
+  }
 `;
 
 const StyledSuccessMessage = styled.span`

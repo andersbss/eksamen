@@ -9,13 +9,15 @@ import useForm from '../../hooks/useForm';
 import { request } from '../../services/httpService';
 import validate from '../../utils/categoryValidation';
 import CategoryForm from '../../components/forms/CategoryForm';
+import Error from '../../components/errors/Error';
 
 const CreateArticle = () => {
   const { id } = useParams();
   const [article, setArticle] = useState(null);
   const [error, setError] = useState(null);
-  const [categorySuccess, setCcategorySuccess] = useState(false);
+  const [categorySuccess, setCategorySuccess] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [refreshCategories, setRefreshCategories] = useState(false);
 
   const {
     loading: articlesLoading,
@@ -31,6 +33,18 @@ const CreateArticle = () => {
     loading,
     response,
   } = useForm(request, validate, ['POST', '/categories']);
+
+  useEffect(() => {
+    if (!response) return;
+    const {
+      data: { success, data },
+    } = response;
+
+    if (success) {
+      setModalIsOpen(false);
+      setRefreshCategories((prev) => !prev);
+    } else setError(data);
+  }, [response]);
 
   useEffect(() => {
     if (articlesStatus === 200) {
@@ -70,7 +84,9 @@ const CreateArticle = () => {
         loading={loading}
         error={error}
         handleModalToggle={() => setModalIsOpen(true)}
+        refreshCategories={refreshCategories}
       />
+      {error && <Error error={error} />}
     </>
   );
 };

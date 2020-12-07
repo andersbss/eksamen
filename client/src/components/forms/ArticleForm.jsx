@@ -57,7 +57,7 @@ const initialFormData = Object.freeze({
   public: 'false',
 });
 
-const ArticleForm = ({ id, article, handleModalToggle }) => {
+const ArticleForm = ({ id, article, handleModalToggle, refreshCategories }) => {
   const [formData, updateFormData] = useState(initialFormData);
   const [disabled, setDisabled] = useState(true);
   const [isCreated, setIsCreated] = useState(false);
@@ -102,7 +102,7 @@ const ArticleForm = ({ id, article, handleModalToggle }) => {
     loading: categoryLoading,
     response: categories,
     isSuccess: categoryIsSuccess,
-  } = useFetch('GET', '/categories');
+  } = useFetch('GET', '/categories', false, refreshCategories);
 
   const {
     error: authorFetchError,
@@ -150,7 +150,6 @@ const ArticleForm = ({ id, article, handleModalToggle }) => {
   };
 
   const imageFormOnChange = (e) => {
-    console.log(e);
     const imageFile = e.target.files[0];
     setFile(imageFile);
   };
@@ -158,7 +157,6 @@ const ArticleForm = ({ id, article, handleModalToggle }) => {
   const handleImageUpload = async (event) => {
     event.preventDefault();
     const { data } = await upload(file);
-    console.log(data);
 
     if (data.success) {
       setImageSuccess(true);
@@ -172,7 +170,6 @@ const ArticleForm = ({ id, article, handleModalToggle }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
 
     if (formData.author === '') {
       setAuthorError('Velg en forfatter');
