@@ -2,6 +2,12 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import morgan from 'morgan';
+import xssClean from 'xss-clean';
+import mongoSanitize from 'express-mongo-sanitize';
+import hpp from 'hpp';
+import rateLimit from 'express-rate-limit';
+import csrf from 'csurf';
+import helmet from 'helmet';
 
 import 'dotenv/config.js';
 import errorMiddleware from './middleware/errors.js';
@@ -15,6 +21,18 @@ import image from './routes/image.js';
 import contact from './routes/contact.js';
 
 const app = express();
+
+app.use(xssClean());
+app.use(mongoSanitize());
+app.use(hpp());
+app.use(helmet());
+
+const limiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // Accepts 60 requests per minute (1 request per second).
+  max: 400, // Accepts max 400 requests from the same IP, regardless of time interval.
+});
+
+app.use(limiter);
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
@@ -32,6 +50,11 @@ app.use(
 );
 
 app.use(cookieParser());
+app.use(csrf({ cookie: true }));
+
+app.get(`${process.env.BASEURL}/csrf-token`, (req, res) => {
+  res.status(200).json({ data: req.csrfToken() });
+});
 
 app.use(`${process.env.BASEURL}/`, auth);
 app.use(`${process.env.BASEURL}/articles`, article);
