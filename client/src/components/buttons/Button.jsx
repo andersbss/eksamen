@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledButton = styled.button`
+export const StyledButton = styled.button`
   font-size: ${(props) => props.theme.fonts.sizes.button};
   font-weight: ${(props) => props.theme.fonts.weights.button};
 
