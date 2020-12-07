@@ -1,7 +1,7 @@
-import UserActvity from '../models/userActivity.js';
+import UserActivity from '../models/userActivity.js';
 
 export const getCountByArticle = async () => {
-  const articles = await UserActvity.aggregate([
+  const articles = await UserActivity.aggregate([
     {
       $group: { _id: '$article', count: { $sum: 1 } },
     },
