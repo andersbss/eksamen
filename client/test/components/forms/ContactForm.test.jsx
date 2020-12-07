@@ -3,6 +3,7 @@ import { shallow, mount } from 'enzyme';
 import { ThemeProvider } from 'styled-components';
 import ContactForm, {
   StyledSuccessMessage,
+  StyledErrorMessage,
 } from '../../../src/components/forms/ContactForm';
 import Button from '../../../src/components/buttons/Button';
 import Input from '../../../src/components/common/Input';
@@ -15,6 +16,14 @@ describe('<ContactForm />', () => {
 
     wrapper.setProps({ submitSuccess: false });
     expect(wrapper.find(StyledSuccessMessage).exists()).toBe(false);
+  });
+
+  it('should render StyledErrorMessage if error is true', () => {
+    const wrapper = shallow(<ContactForm error />);
+    expect(wrapper.find(StyledErrorMessage).exists()).toBe(true);
+
+    wrapper.setProps({ error: false });
+    expect(wrapper.find(StyledErrorMessage).exists()).toBe(false);
   });
 
   it('should disable button if loading is true', () => {
