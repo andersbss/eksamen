@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import formatDate from '../../utils/dateFormatter';
+import Image from '../images/Image';
 
 const StyledInfoContainer = styled.span`
   display: flex;
@@ -37,6 +38,7 @@ const ArticleDetailArticle = ({ article, loggedIn }) => (
     <p>{article.ingress}</p>
     <p>{article.content}</p>
     <p>{article.category.title}</p>
+    {article.image && <Image imageId={article.image} height="400px" />}
   </StyledArticle>
 );
 

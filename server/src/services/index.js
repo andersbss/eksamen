@@ -3,3 +3,4 @@ export * as categoryService from './category.js';
 export * as authorService from './author.js';
 export * as articleService from './article.js';
 export * as imageService from './image.js';
+export * as contactService from './contact.js';

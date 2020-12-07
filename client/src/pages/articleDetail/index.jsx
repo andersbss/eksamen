@@ -34,6 +34,7 @@ const ArticleDetail = () => {
         history.push('/fagartikler');
       } else {
         setDeleteSuccess(false);
+        setDeleteError(data);
       }
     } catch (error) {
       deleteError({ success: false, data: 'Unexpected error occurred' });
@@ -73,7 +74,9 @@ const ArticleDetail = () => {
                 handleEdit={handleEdit}
               />
             )}
-            {!deleteSuccess && <p>Det oppstod en feil, prøv igjen</p>}
+            {!deleteSuccess && (
+              <p>Det oppstod en feil, prøv igjen. ({deleteError})</p>
+            )}
             {!isSuccess && !loading && <Error error={error} />}
           </ArticleDetailLayout>
         </>

@@ -10,12 +10,12 @@ const ImageForm = ({ handleSubmit, onChange, error, success, imageId }) => (
         type="file"
         id="image"
         name="image"
-        accept="image/*"
+        accept="image/png, image/jpeg"
         onChange={onChange}
       />
       <button type="submit">Last opp bilde</button>
     </form>
-    {imageId && <Image imageId={imageId} height="200px" />}
+    {imageId && <Image imageId={imageId} height="200px" width="200px" />}
   </>
 );
 

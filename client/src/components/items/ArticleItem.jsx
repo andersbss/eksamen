@@ -61,7 +61,11 @@ const ArticleItem = ({ title, ingress, categoryTitle, id, image }) => {
 
   return (
     <StyledLi onClick={handleArticleClick}>
-      {image ? <Image imageId={image} height="200px" /> : <FallbackImage />}
+      {image ? (
+        <Image imageId={image} height="200px" width="200px" />
+      ) : (
+        <FallbackImage />
+      )}
       <span>
         <h1>{title}</h1>
         <h4>{categoryTitle}</h4>
