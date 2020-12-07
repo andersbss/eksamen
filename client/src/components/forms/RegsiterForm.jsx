@@ -58,7 +58,11 @@ const RegisterForm = ({
       errorLabel={errors?.password}
       onChange={handleChange}
     />
-    {error && <p>{`Registrering feilet, prøv igjen.(${error[0]})`}</p>}
+    {error && (
+      <p>{`Registrering feilet, prøv igjen.(${
+        Array.isArray(error) ? error[0] : error
+      })`}</p>
+    )}
     {!loggedIn ? (
       <Button
         type="submit"
