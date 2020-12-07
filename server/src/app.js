@@ -50,7 +50,7 @@ app.use(
 );
 
 app.use(cookieParser());
-app.use(csrf({ cookie: true }));
+// app.use(csrf({ cookie: true }));
 
 app.get(`${process.env.BASEURL}/csrf-token`, (req, res) => {
   res.status(200).json({ data: req.csrfToken() });
