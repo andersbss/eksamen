@@ -5,6 +5,7 @@ const StyledContainer = styled.span`
   display: grid;
   grid-template-rows: auto 1fr;
   row-gap: 3px;
+
   & > label {
     color: black;
     font-size: 1.8em;
@@ -25,8 +26,25 @@ const StyledContainer = styled.span`
     }
   }
 `;
-// MÅ POSISJONERE TIL HØYRE OSV (for de som ikke hater css)
-const StyledErrorLabel = styled.label``;
+
+const StyledLabelContainer = styled.span`
+  display: flex;
+  justify-content: space-between;
+  height: 15px;
+  line-height: 0px;
+
+  & > label {
+    color: black;
+    font-size: 1.8em;
+    font-weight: 600;
+    vertical-align: middle;
+
+    &:nth-child(2) {
+      font-size: 1.2rem;
+      color: ${(props) => props.theme.colors.red};
+    }
+  }
+`;
 
 const Textarea = ({
   label,
@@ -41,8 +59,11 @@ const Textarea = ({
   onChange = () => {},
 }) => (
   <StyledContainer>
-    <label>{label}</label>
-    {errorLabel && <StyledErrorLabel>{errorLabel}</StyledErrorLabel>}
+    <StyledLabelContainer>
+      <label>{label}</label>
+      {errorLabel && <label>{errorLabel}</label>}
+    </StyledLabelContainer>
+
     <textarea
       placeholder={placeholder}
       maxLength={maxLength}

@@ -23,7 +23,7 @@ const StyledContainer = styled.span`
 const StyledLabelContainer = styled.span`
   display: flex;
   justify-content: space-between;
-  height: 10px;
+  height: 15px;
   line-height: 0px;
 
   & > label {

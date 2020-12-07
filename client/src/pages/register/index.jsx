@@ -13,15 +13,16 @@ const Register = () => {
   const [error, setError] = useState(null);
   const history = useHistory();
   const { setUser } = useUserContext();
+  const form = useForm(request, validate, ['POST', '/register']);
+
   const {
-    inputs,
     handleChange,
     handleSubmit,
     errors,
     hasErrors,
     loading,
     response,
-  } = useForm(request, validate, ['POST', '/register']);
+  } = form;
 
   useEffect(() => {
     if (!response) return;
