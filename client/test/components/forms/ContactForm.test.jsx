@@ -24,4 +24,18 @@ describe('<ContactForm />', () => {
     wrapper.setProps({ loading: false });
     expect(wrapper.find(Button).prop('disabled')).toEqual(false);
   });
+
+  it('should be auto filled values for { userEmail, userName }', () => {
+    const email = 'email@test.com';
+    const userName = 'user name';
+
+    const wrapper = mount(
+      <ThemeProvider theme={theme}>
+        <ContactForm userEmail={email} userName={userName} />
+      </ThemeProvider>
+    );
+
+    expect(wrapper.find(Input).at(0).prop('value')).toEqual('email@test.com');
+    expect(wrapper.find(Input).at(1).prop('value')).toEqual('user name');
+  });
 });
