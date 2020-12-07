@@ -11,6 +11,9 @@ export const userActivitySchema = Joi.object()
       }),
     article: Joi.string()
       .regex(OBJECT_ID_REGEX)
-      .meta({ _mongoose: { type: 'ObjectId', ref: 'Article' } }),
+      .meta({ _mongoose: { type: 'ObjectId', ref: 'Article' } })
+      .messages({
+        'string.pattern.base': 'Article id is not valid',
+      }),
   })
   .options({ abortEarly: false });
