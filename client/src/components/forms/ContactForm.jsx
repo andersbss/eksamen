@@ -32,21 +32,30 @@ const ContactForm = ({
   submitSuccess,
   error,
   userEmail,
+  userName,
 }) => {
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [message, setMessage] = useState('');
 
   useEffect(() => {
     setEmail(userEmail);
-  }, [userEmail]);
+    setName(userName);
+  }, [userEmail, userName]);
 
   return (
-    <StyledForm onSubmit={(e) => handleSubmit(e, email, message)}>
+    <StyledForm onSubmit={(e) => handleSubmit(e, email, name, message)}>
       <Input
-        label="Epost (må tilhøre registrert bruker)"
+        label="Epost"
         placeholder="Epost"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+      />
+      <Input
+        label="Navn"
+        placeholder="Navn"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
       />
       <Textarea
         label="Melding"
