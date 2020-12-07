@@ -8,8 +8,8 @@ describe('<Button />', () => {
   });
 
   it('should render correctly', () => {
-    const tree = shallow(<Button content="test" />);
-    expect(tree).toMatchSnapshot();
+    const wrapper = shallow(<Button content="test" />);
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('should contain "Content', () => {
@@ -24,5 +24,11 @@ describe('<Button />', () => {
     wrapper.find(StyledButton).simulate('click');
 
     expect(mockFunction).toHaveBeenCalled();
+  });
+
+  it('should be disabled', () => {
+    const isValid = true;
+    const wrapper = shallow(<Button disabled={isValid} />);
+    expect(wrapper.find(StyledButton).prop('disabled')).toEqual(true);
   });
 });
