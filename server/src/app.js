@@ -19,7 +19,7 @@ import author from './routes/author.js';
 import user from './routes/user.js';
 import image from './routes/image.js';
 import contact from './routes/contact.js';
-import userActivity from './routes/userActivity.js';
+import userLog from './routes/userLog.js';
 
 const app = express();
 
@@ -64,7 +64,7 @@ app.use(`${process.env.BASEURL}/authors`, author);
 app.use(`${process.env.BASEURL}/`, user);
 app.use(`${process.env.BASEURL}/images`, image);
 app.use(`${process.env.BASEURL}/contacts`, contact);
-app.use(`${process.env.BASEURL}/useractivity`, userActivity);
+app.use(`${process.env.BASEURL}/userlog`, userLog);
 
 app.use(errorMiddleware);
 

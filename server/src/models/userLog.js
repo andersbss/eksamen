@@ -5,8 +5,8 @@ const Joigoose = require('joigoose')(mongoose);
 
 const options = { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } };
 
-const UserActivitySchema = new Schema(Joigoose.convert(userActivitySchema), options);
+const UserLogSchema = new Schema(Joigoose.convert(userActivitySchema), options);
 
-const UserActivity = mongoose.model('UserActivity', UserActivitySchema);
+const UserLog = mongoose.model('UserActivity', UserLogSchema);
 
-export default UserActivity;
+export default UserLog;
