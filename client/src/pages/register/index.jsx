@@ -14,6 +14,7 @@ const Register = () => {
   const history = useHistory();
   const { setUser } = useUserContext();
   const {
+    inputs,
     handleChange,
     handleSubmit,
     errors,
@@ -50,7 +51,7 @@ const Register = () => {
           hasErrors={hasErrors}
           loggedIn={loginSuccess}
           loading={loading}
-          error={response}
+          error={error}
         />
         <NavLink exact to="logginn">
           Har du allerede en konto? Logg inn her!
