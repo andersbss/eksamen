@@ -24,6 +24,7 @@ const useForm = (callBack, validate, params) => {
   }, [callBack, errors, inputs, params, readySubmit]);
 
   useEffect(() => {
+    console.log(inputs);
     setErrors(validate(inputs));
   }, [inputs, validate]);
 

@@ -7,28 +7,69 @@ import Loader from '../../components/animations/Loader';
 import Modal from '../../components/modals/Modal';
 import useForm from '../../hooks/useForm';
 import { request } from '../../services/httpService';
+import validate from '../../utils/categoryValidation';
+import CategoryForm from '../../components/forms/CategoryForm';
 
 const CreateArticle = () => {
   const { id } = useParams();
   const [article, setArticle] = useState(null);
-  const { loading, response, reqStatus } = useFetch('GET', `articles/${id}`);
-  // const blah = useForm(request, val);
+  const [error, setError] = useState(null);
+  const [categorySuccess, setCcategorySuccess] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const {
+    loading: articlesLoading,
+    response: articlesResponse,
+    reqStatus: articlesStatus,
+  } = useFetch('GET', `articles/${id}`);
+
+  const {
+    handleChange,
+    handleSubmit,
+    errors,
+    hasErrors,
+    loading,
+    response,
+  } = useForm(request, validate, ['POST', '/categories']);
 
   useEffect(() => {
-    if (reqStatus === 200) {
-      setArticle(response);
+    if (articlesStatus === 200) {
+      setArticle(articlesResponse);
     }
-  }, [reqStatus, response]);
+  }, [articlesStatus, articlesResponse]);
 
   return (
     <>
-      <Modal />
+      {!modalIsOpen && (
+        <Modal>
+          <CategoryForm
+            handleSubmit={handleSubmit}
+            handleChange={handleChange}
+            errors={errors}
+            hasErrors={hasErrors}
+            success={categorySuccess}
+            loading={loading}
+            error={error}
+          />
+        </Modal>
+      )}
       {!id && <Jumbotron headerText="Ny artikkel" />}
       {id && (
-        <Jumbotron headerText={loading ? 'loading...' : response?.title} />
+        <Jumbotron
+          headerText={articlesLoading ? 'loading...' : articlesResponse?.title}
+        />
       )}
-      {loading && <Loader />}
-      <ArticleForm id={id} article={article} />
+      {articlesLoading && <Loader />}
+      <ArticleForm
+        id={id}
+        article={article}
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+        errors={errors}
+        hasErrors={hasErrors}
+        loading={loading}
+        error={error}
+      />
     </>
   );
 };
