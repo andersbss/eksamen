@@ -69,6 +69,7 @@ const CreateArticle = () => {
         hasErrors={hasErrors}
         loading={loading}
         error={error}
+        handleModalToggle={() => setModalIsOpen(true)}
       />
     </>
   );

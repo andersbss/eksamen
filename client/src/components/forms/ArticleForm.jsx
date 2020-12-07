@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../buttons/Button';
 import Select from '../common/Select';
@@ -30,6 +30,24 @@ const StyledForm = styled.form`
   }
 `;
 
+const StyledSelectButtonContainer = styled.span`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  & > button {
+    float: right;
+    height: 50px;
+    width: 100px;
+    margin-top: 25px;
+  }
+
+  & > span {
+    margin-right: 10px;
+    width: 100%;
+  }
+`;
+
 const initialFormData = Object.freeze({
   title: '',
   ingress: '',
@@ -39,7 +57,7 @@ const initialFormData = Object.freeze({
   public: 'false',
 });
 
-const ArticleForm = ({ id, article }) => {
+const ArticleForm = ({ id, article, handleModalToggle }) => {
   const [formData, updateFormData] = useState(initialFormData);
   const [disabled, setDisabled] = useState(true);
   const [isCreated, setIsCreated] = useState(false);
@@ -248,26 +266,34 @@ const ArticleForm = ({ id, article }) => {
         />
         {categoryLoading && <Loader />}
         {categoryIsSuccess && (
-          <Select
-            name="category"
-            label="Kategori"
-            errorLabel={categoryError}
-            onChange={handleChange}
-          >
-            {!article && <option value={null}>Velg kategori</option>}
-            {article && (
-              <option value={article.category._id} selected="selected">
-                {article.category.title}
-              </option>
-            )}
-            {categories.length <= 0 ? (
-              <p>Ingen kategorier</p>
-            ) : (
-              categories.map((category) => (
-                <option value={category._id}>{category.title}</option>
-              ))
-            )}
-          </Select>
+          <StyledSelectButtonContainer>
+            <Select
+              name="category"
+              label="Kategori"
+              errorLabel={categoryError}
+              onChange={handleChange}
+            >
+              {!article && <option value={null}>Velg kategori</option>}
+              {article && (
+                <option value={article.category._id} selected="selected">
+                  {article.category.title}
+                </option>
+              )}
+              {categories.length <= 0 ? (
+                <p>Ingen kategorier</p>
+              ) : (
+                categories.map((category) => (
+                  <option value={category._id}>{category.title}</option>
+                ))
+              )}
+            </Select>
+            <Button
+              content="NY"
+              backgroundColor="blue"
+              color="white"
+              onClick={handleModalToggle}
+            />
+          </StyledSelectButtonContainer>
         )}
         {!categoryIsSuccess && !categoryLoading && (
           <Error error={categoryFetchError} />
