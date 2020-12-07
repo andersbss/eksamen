@@ -13,6 +13,7 @@ const Register = () => {
     handleChange,
     handleSubmit,
     errors,
+    hasErrors,
     response,
   } = useForm(request, validate, ['POST', '/register']);
 
@@ -24,6 +25,7 @@ const Register = () => {
           handleSubmit={handleSubmit}
           handleChange={handleChange}
           errors={errors}
+          hasErrors={hasErrors}
         />
         <NavLink exact to="logginn">
           Har du allerede en konto? Logg inn her!

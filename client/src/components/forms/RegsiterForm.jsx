@@ -13,39 +13,44 @@ const StyledForm = styled.form`
   }
 `;
 
-const RegisterForm = ({ handleSubmit, handleChange, errors }) => (
-  <StyledForm onSubmit={handleSubmit}>
-    <Input
-      name="firstName"
-      label="Fornavn"
-      errorLabel={errors?.firstName}
-      onChange={handleChange}
-    />
-    <Input
-      name="lastName"
-      label="Etternavn"
-      errorLabel={errors?.lastName}
-      onChange={handleChange}
-    />
-    <Input
-      name="email"
-      label="E-post"
-      errorLabel={errors?.email}
-      onChange={handleChange}
-    />
-    <Input
-      name="password"
-      label="Passord"
-      errorLabel={errors?.password}
-      onChange={handleChange}
-    />
-    <Button
-      content="Registrer"
-      type="submit"
-      backgroundColor="blue"
-      color="white"
-    />
-  </StyledForm>
-);
+const RegisterForm = ({ handleSubmit, handleChange, errors, hasErrors }) => {
+  console.log('render');
+
+  return (
+    <StyledForm onSubmit={handleSubmit}>
+      <Input
+        name="firstName"
+        label="Fornavn"
+        errorLabel={errors?.firstName}
+        onChange={handleChange}
+      />
+      <Input
+        name="lastName"
+        label="Etternavn"
+        errorLabel={errors?.lastName}
+        onChange={handleChange}
+      />
+      <Input
+        name="email"
+        label="E-post"
+        errorLabel={errors?.email}
+        onChange={handleChange}
+      />
+      <Input
+        name="password"
+        label="Passord"
+        errorLabel={errors?.password}
+        onChange={handleChange}
+      />
+      <Button
+        disabled={hasErrors}
+        content="Registrer"
+        type="submit"
+        backgroundColor="blue"
+        color="white"
+      />
+    </StyledForm>
+  );
+};
 
 export default RegisterForm;

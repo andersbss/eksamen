@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
+import useDidMount from './didMount';
 
 const useForm = (callBack, validate, params) => {
   const [errors, setErrors] = useState([]);
+  const [hasErrors, setHasErrors] = useState(true);
   const [inputs, setInputs] = useState({});
   const [readySubmit, setReadySubmit] = useState(false);
   const [response, setResponse] = useState(null);
+  const didMount = useDidMount();
 
   useEffect(() => {
     const execute = async () => {
@@ -21,6 +24,10 @@ const useForm = (callBack, validate, params) => {
     setErrors(validate(inputs));
   }, [inputs, validate]);
 
+  useEffect(() => {
+    if (Object.keys(errors).length === 0 && !didMount) setHasErrors(false);
+  }, [errors, didMount]);
+
   const handleChange = (e) => {
     e.persist();
     setReadySubmit(false);
@@ -32,7 +39,7 @@ const useForm = (callBack, validate, params) => {
     setReadySubmit(true);
   };
 
-  return { inputs, errors, handleChange, handleSubmit, response };
+  return { inputs, errors, hasErrors, handleChange, handleSubmit, response };
 };
 
 export default useForm;
