@@ -15,15 +15,30 @@ const StyledForm = styled.form`
 
 const RegisterForm = ({ handleSubmit, handleChange, errors }) => (
   <StyledForm onSubmit={handleSubmit}>
-    <Input name="firstName" label="Fornavn" onChange={handleChange} />
+    <Input
+      name="firstName"
+      label="Fornavn"
+      errorLabel={errors?.firstName}
+      onChange={handleChange}
+    />
     <Input
       name="lastName"
       label="Etternavn"
       errorLabel={errors?.lastName}
       onChange={handleChange}
     />
-    <Input name="email" label="E-post" onChange={handleChange} />
-    <Input name="password" label="Passord" onChange={handleChange} />
+    <Input
+      name="email"
+      label="E-post"
+      errorLabel={errors?.email}
+      onChange={handleChange}
+    />
+    <Input
+      name="password"
+      label="Passord"
+      errorLabel={errors?.password}
+      onChange={handleChange}
+    />
     <Button
       content="Registrer"
       type="submit"
