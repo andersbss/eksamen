@@ -41,4 +41,14 @@ describe('<RegisterForm />', () => {
     wrapper.setProps({ hasErrors: false });
     expect(wrapper.find(Button).prop('disabled')).toEqual(false);
   });
+
+  it('should call handleChange for each input field, when changed', () => {
+    const mockHandle = jest.fn();
+    const wrapper = shallow(<RegisterForm handleChange={mockHandle} />);
+    wrapper.find(Input).at(0).simulate('change');
+    wrapper.find(Input).at(1).simulate('change');
+    wrapper.find(Input).at(2).simulate('change');
+    wrapper.find(Input).at(3).simulate('change');
+    expect(mockHandle).toHaveBeenCalledTimes(4);
+  });
 });
