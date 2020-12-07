@@ -1,13 +1,20 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { NavLink, useHistory } from 'react-router-dom';
 import Jumbotron from '../../components/common/Jumbotron';
 import RegisterForm from '../../components/forms/RegsiterForm';
 import useForm from '../../hooks/useForm';
 import validate from '../../utils/registerFormValidation';
 import RegisterLayout from '../../layouts/RegisterLayout';
+import { useUserContext } from '../../context/UserContext';
 import { request } from '../../services/httpService';
 
 const Register = () => {
+  const [loginSuccess, setLoginSuccess] = useState(false);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
+  const { setUser } = useUserContext();
+
   const {
     inputs,
     handleChange,
@@ -16,6 +23,25 @@ const Register = () => {
     hasErrors,
     response,
   } = useForm(request, validate, ['POST', '/register']);
+
+  useEffect(() => {
+    if (!response) return;
+    const {
+      data: { success, data },
+    } = response;
+
+    if (success) {
+      const { user, token } = data;
+      const expire = JSON.parse(window.atob(token.split('.')[1])).exp;
+      setUser({ ...user, expire });
+      setLoginSuccess(success);
+      setLoading(false);
+      setTimeout(() => history.push('/hjem'), 1500);
+    } else {
+      setLoading(false);
+      setError(data);
+    }
+  }, [history, response, setUser]);
 
   return (
     <>

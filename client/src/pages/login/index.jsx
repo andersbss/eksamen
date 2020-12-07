@@ -29,9 +29,8 @@ const Login = () => {
         setUser({ ...user, expire });
         setLoginSuccess(success);
         setLoading(false);
-        setTimeout(() => history.push('/hjem'), 2000);
+        setTimeout(() => history.push('/hjem'), 1500);
       } else {
-        console.log(data);
         setLoading(false);
         setError(data);
       }
