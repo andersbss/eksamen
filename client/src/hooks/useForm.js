@@ -10,9 +10,11 @@ const useForm = (callBack, validate, params) => {
     const execute = async () => {
       const res = await callBack(...params, inputs);
       setResponse(res);
-      setReadySubmit(false);
     };
-    if (Object.keys(errors).length === 0 && readySubmit) execute();
+    if (Object.keys(errors).length === 0 && readySubmit) {
+      execute();
+      setReadySubmit(false);
+    }
   }, [callBack, errors, inputs, params, readySubmit]);
 
   useEffect(() => {

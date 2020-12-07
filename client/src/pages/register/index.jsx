@@ -8,17 +8,23 @@ import RegisterLayout from '../../layouts/RegisterLayout';
 import { request } from '../../services/httpService';
 
 const Register = () => {
-  const { inputs, handleChange, handleSubmit, response } = useForm(
-    request,
-    validate,
-    ['POST', '/register']
-  );
+  const {
+    inputs,
+    handleChange,
+    handleSubmit,
+    errors,
+    response,
+  } = useForm(request, validate, ['POST', '/register']);
 
   return (
     <>
       <Jumbotron headerText="Registrer" top="70" bottom="0" />
       <RegisterLayout>
-        <RegisterForm handleSubmit={handleSubmit} handleChange={handleChange} />
+        <RegisterForm
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+          errors={errors}
+        />
         <NavLink exact to="logginn">
           Har du allerede en konto? Logg inn her!
         </NavLink>
