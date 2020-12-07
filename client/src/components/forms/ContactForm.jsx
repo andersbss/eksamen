@@ -15,6 +15,18 @@ const StyledForm = styled.form`
 
 export const StyledSuccessMessage = styled.span`
   text-align: center;
+  color: green;
+  & > p {
+    font-weight: 800;
+    &:nth-child(2) {
+      font-size: 1rem;
+    }
+  }
+`;
+
+export const StyledErrorMessage = styled.span`
+  text-align: center;
+  color: red;
   & > p {
     font-weight: 800;
     &:nth-child(2) {
@@ -59,7 +71,7 @@ const ContactForm = ({
         placeholder="Melding"
         onChange={(e) => setMessage(e.target.value)}
       />
-      {error && <p>{error}</p>}
+      {error && <StyledErrorMessage>{error}</StyledErrorMessage>}
       {!submitSuccess ? (
         <Button
           type="submit"
