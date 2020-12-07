@@ -40,8 +40,8 @@ const CreateArticle = () => {
 
   return (
     <>
-      {!modalIsOpen && (
-        <Modal>
+      {modalIsOpen && (
+        <Modal handleToggle={() => setModalIsOpen(false)}>
           <CategoryForm
             handleSubmit={handleSubmit}
             handleChange={handleChange}

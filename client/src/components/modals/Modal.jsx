@@ -21,9 +21,9 @@ const StyledModal = styled.section`
   z-index: 3;
 `;
 
-const Modal = ({ children }) => (
+const Modal = ({ children, handleToggle }) => (
   <>
-    <StyledModalBackground />
+    <StyledModalBackground onClick={handleToggle} />
     <StyledModal>{children}</StyledModal>
   </>
 );
