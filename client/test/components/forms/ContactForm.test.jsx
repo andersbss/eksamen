@@ -26,6 +26,12 @@ describe('<ContactForm />', () => {
     expect(wrapper.find(StyledErrorMessage).exists()).toBe(false);
   });
 
+  it('should show correct error message if error is true', () => {
+    const errorMessage = 'Something unexpected happened!';
+    const wrapper = shallow(<ContactForm error={errorMessage} />);
+    expect(wrapper.find(StyledErrorMessage).text()).toEqual(errorMessage);
+  });
+
   it('should disable button if loading is true', () => {
     const wrapper = shallow(<ContactForm loading />);
     expect(wrapper.find(Button).prop('disabled')).toEqual(true);
