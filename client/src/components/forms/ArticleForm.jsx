@@ -310,6 +310,7 @@ const ArticleForm = ({ id, article }) => {
           color="white"
         />
       </StyledForm>
+      {createError && <p>Det oppstod en feil, prøv igjen. ({createError})</p>}
       <h4>Last opp bilde til artikkelen (valgfritt): </h4>
       <ImageForm
         handleSubmit={handleImageUpload}
