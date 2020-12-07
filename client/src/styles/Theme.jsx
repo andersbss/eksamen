@@ -2,7 +2,7 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from './Global';
 
-const theme = {
+export const theme = {
   breakpoints: {
     sm: '(max-width: 500px)',
     md: '(max-width: 800px)',
