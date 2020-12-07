@@ -6,7 +6,6 @@ import Error from '../../components/errors/Error';
 import ArticleList from '../../components/lists/ArticleList';
 import ArticlesToggles from '../../components/toggles/ArticlesToggles';
 import useFetch from '../../hooks/useFetch';
-import useFetchArr from '../../hooks/useFetchArr';
 import { useUserContext } from '../../context/UserContext';
 import PaginationToggle from '../../components/toggles/PaginationToggle';
 
@@ -16,12 +15,13 @@ const Articles = () => {
   const [searchInput, setSearchInput] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const { loggedIn, isAdmin, userLoading } = useUserContext();
-  const [
-    categoryError,
-    categoryLoading,
-    categoryResponse,
-    categoryIsSuccess,
-  ] = useFetchArr('GET', '/categories');
+
+  const {
+    loading: categoryLoading,
+    response: categoryResponse,
+    isSuccess: categoryIsSuccess,
+  } = useFetch('GET', '/categories');
+
   const { error, loading, response, isSuccess } = useFetch(
     'GET',
     `/articles?limit=5&page=${page}${

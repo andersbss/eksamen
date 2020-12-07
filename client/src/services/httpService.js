@@ -17,6 +17,6 @@ export const request = async (method, endpoint, payload = null) => {
     return await http({ method, url: endpoint, data: payload });
   } catch (error) {
     if (error.response) return error.response;
-    return { data: { success: false, data: 'Connection error' } };
+    return { data: { success: false, data: 'Connection error', status: 503 } };
   }
 };

@@ -15,6 +15,7 @@ import Login from '../pages/login';
 import NotFound from '../pages/notFound';
 import AuthRoute from './AuthRoute';
 import ArticleDetail from '../pages/articleDetail';
+import Register from '../pages/register';
 import Contact from '../pages/contact';
 
 const Routes = () => (
@@ -23,6 +24,9 @@ const Routes = () => (
       <Switch>
         <Route path="/logginn">
           <Login />
+        </Route>
+        <Route path="/registrere">
+          <Register />
         </Route>
         <Route path="/hjem">
           <Home />

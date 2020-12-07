@@ -9,6 +9,6 @@ const StyledMain = styled.main`
   row-gap: 30px;
 `;
 
-const LoginLayout = ({ children }) => <StyledMain>{children}</StyledMain>;
+const RegisterLayout = ({ children }) => <StyledMain>{children}</StyledMain>;
 
-export default LoginLayout;
+export default RegisterLayout;

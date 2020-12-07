@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import Jumbotron from '../../components/common/Jumbotron';
 import Error from '../../components/errors/Error';
 import LoginForm from '../../components/forms/LoginForm';
@@ -29,9 +29,8 @@ const Login = () => {
         setUser({ ...user, expire });
         setLoginSuccess(success);
         setLoading(false);
-        setTimeout(() => history.push('/hjem'), 2000);
+        setTimeout(() => history.push('/hjem'), 1500);
       } else {
-        console.log(data);
         setLoading(false);
         setError(data);
       }
@@ -51,7 +50,9 @@ const Login = () => {
           error={!!error}
           loggedIn={loginSuccess}
         />
-
+        <NavLink exact to="/registrere">
+          Ikke registrert? Registrer deg her!
+        </NavLink>
         {error && <Error error={error} />}
       </LoginLayout>
     </>

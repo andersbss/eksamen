@@ -24,8 +24,6 @@ const StyledSuccessMessage = styled.span`
   }
 `;
 
-const StyledErrorMessage = styled.p``;
-
 const LoginForm = ({ handleLogin, loading, loggedIn, error }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -43,9 +41,7 @@ const LoginForm = ({ handleLogin, loading, loggedIn, error }) => {
         placeholder="Passord"
         onChange={(e) => setPassword(e.target.value)}
       />
-      {error && (
-        <StyledErrorMessage>Innlogging feilet, prøv igjen</StyledErrorMessage>
-      )}
+      {error && <p>Innlogging feilet, prøv igjen</p>}
       {!loggedIn ? (
         <Button
           type="submit"
