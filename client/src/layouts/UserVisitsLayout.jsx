@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 const StyledMain = styled.main`
   margin: auto;
-  margin-top: 80px;
+  margin-top: 40px;
   margin-bottom: 80px;
-  width: 1200px;
+  width: 400px;
 
   display: grid;
   grid-row-gap: 20px;

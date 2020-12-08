@@ -6,9 +6,8 @@ import StyledNavLink from '../common/LinkButton';
 
 const StyledLi = styled.li`
   margin: 0;
-  padding: 0;
-  margin-bottom: 20px;
   padding: 10px;
+  margin-bottom: 20px;
 
   display: grid;
   grid-template-columns: repeat(5, 1fr);
