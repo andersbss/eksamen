@@ -1,8 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Input, {
-  StyledLabelContainer,
-} from '../../../src/components/common/Input';
+import Input from '../../../src/components/common/Input';
 
 describe('<Input />', () => {
   it('should contain correct label based on label prop', () => {
