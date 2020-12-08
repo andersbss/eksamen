@@ -10,11 +10,5 @@ export const userLogSchema = Joi.object()
       .messages({
         'string.pattern.base': 'Article id is not valid',
       }),
-    user: Joi.string()
-      .regex(OBJECT_ID_REGEX)
-      .meta({ _mongoose: { type: 'ObjectId', ref: 'User' } })
-      .messages({
-        'string.pattern.base': 'User id is not valid',
-      }),
   })
   .options({ abortEarly: false });

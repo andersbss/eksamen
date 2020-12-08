@@ -8,6 +8,8 @@ export const create = catchAsyncErrors(async (req, res, next) => {
 
   if (!(await articleService.getArticleById(article))) return next(new ErrorHandler('Article not found', 404));
 
+  if (req.body.user) return next(new ErrorHandler('Invalid user', 400));
+
   if (!req.loggedIn) {
     const userActivity = await userLogService.createUserLog(req.body);
     response(res, 201, true, userActivity);

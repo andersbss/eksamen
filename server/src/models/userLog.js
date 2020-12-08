@@ -5,7 +5,16 @@ const Joigoose = require('joigoose')(mongoose);
 
 const options = { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } };
 
-const UserLogSchema = new Schema(Joigoose.convert(userLogSchema), options);
+const UserLogSchema = new Schema(
+  {
+    ...Joigoose.convert(userLogSchema),
+    user: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+    },
+  },
+  options
+);
 
 UserLogSchema.virtual('articles', {
   ref: 'UserLog',
