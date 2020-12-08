@@ -63,10 +63,10 @@ const Routes = () => (
         <SuperAdminRoute path="/topartikler">
           <TopArticles />
         </SuperAdminRoute>
-        <SuperAdminRoute path="statisikk/artikkelvisninger">
+        <SuperAdminRoute path="/artikkelvisninger">
           <ArticleVisits />
         </SuperAdminRoute>
-        <SuperAdminRoute path="statistikk/brukervisninger">
+        <SuperAdminRoute path="/brukervisninger">
           <UserVisits />
         </SuperAdminRoute>
         <Redirect exact from="/" to="/hjem" />

@@ -43,7 +43,7 @@ const MainLayout = ({ children }) => {
       </StyledHeader>
       {isSuperAdmin && !userLoading && (
         <Button
-          content="STATISTICS"
+          content="STATISTIKK"
           onClick={() => history.push('/statistikk')}
         />
       )}
