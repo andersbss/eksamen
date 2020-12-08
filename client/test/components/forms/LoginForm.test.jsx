@@ -55,4 +55,11 @@ describe('<LoginForm />', () => {
       wrapper.find('p').at(0).text().includes('Innlogging feilet, prøv igjen')
     ).toBe(false);
   });
+
+  it('should call handleLogin when form is submitted', () => {
+    const mockSubmit = jest.fn();
+    const wrapper = shallow(<LoginForm handleLogin={mockSubmit} />);
+    wrapper.simulate('submit');
+    expect(mockSubmit).toHaveBeenCalled();
+  });
 });
