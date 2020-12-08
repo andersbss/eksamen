@@ -23,4 +23,9 @@ describe('<ImageForm />', () => {
     const wrapper = shallow(<ImageForm error={errorMessage} />);
     expect(wrapper.find('p').text()).toContain(errorMessage);
   });
+
+  it('should display success message if success is true', () => {
+    const wrapper = shallow(<ImageForm success />);
+    expect(wrapper.find('p').text()).toContain('Bilde ble lastet opp!');
+  });
 });
