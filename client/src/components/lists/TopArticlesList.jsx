@@ -7,11 +7,12 @@ const StyledUl = styled.ul`
   padding: 0;
   list-style: none;
 
-  border: solid;
+  display: flex;
+  flex-direction: column;
 `;
 
 const TopArticlesList = ({ articles }) => {
-  console.log();
+  console.log(articles);
   return (
     <StyledUl>
       {!articles || articles.length === 0 ? (
