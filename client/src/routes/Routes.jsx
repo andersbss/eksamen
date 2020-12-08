@@ -19,6 +19,9 @@ import Contact from '../pages/contact';
 import AdminRoute from './AdminRoute';
 import SuperAdminRoute from './SuperAdminRoute';
 import Statistics from '../pages/statistics';
+import TopArticles from '../pages/topArticles';
+import ArticleVisits from '../pages/articlevisits';
+import UserVisits from '../pages/uservisits';
 
 const Routes = () => (
   <Router>
@@ -56,6 +59,15 @@ const Routes = () => (
         </AdminRoute>
         <SuperAdminRoute path="/statistikk">
           <Statistics />
+        </SuperAdminRoute>
+        <SuperAdminRoute path="statistikk/topartikler">
+          <TopArticles />
+        </SuperAdminRoute>
+        <SuperAdminRoute path="statisikk/artikkelvisninger">
+          <ArticleVisits />
+        </SuperAdminRoute>
+        <SuperAdminRoute path="statistikk/brukervisninger">
+          <UserVisits />
         </SuperAdminRoute>
         <Redirect exact from="/" to="/hjem" />
         <Route path="*">
