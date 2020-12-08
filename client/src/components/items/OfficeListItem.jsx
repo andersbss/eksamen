@@ -24,11 +24,10 @@ const OfficeListItem = ({ id, office, address, phone, email }) => {
   };
 
   return (
-    <StyledListItem>
+    <StyledListItem onClick={handleDetailClick}>
       <p>
         {office}&emsp;{address}
         &emsp;{phone}&emsp;{email}
-        <button onClick={handleDetailClick}>Mer info</button>
       </p>
     </StyledListItem>
   );

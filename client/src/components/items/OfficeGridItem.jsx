@@ -3,15 +3,24 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
 const StyledGridItem = styled.div`
-  border: 5px solid black;
-  height: 220px;
-  width: 275px;
-  margin: 0px 25px 25px 25px;
+  border: 2px solid gray;
+  height: 170px;
+  width: 340px;
+  margin: 20px 60px 20px 10px;
+  padding: 15px 20px 10px 20px;
+  line-height: 8px;
 
   & > button {
     margin: auto;
     display: block;
   }
+
+  & > p {
+    font-weight: 420;
+    font-size: 1.7rem;
+  }
+
+  cursor: pointer;
 `;
 
 const OfficeGridItem = ({ id, office, address, phone, email }) => {
@@ -23,12 +32,11 @@ const OfficeGridItem = ({ id, office, address, phone, email }) => {
     }
   };
   return (
-    <StyledGridItem>
+    <StyledGridItem onClick={handleDetailClick}>
       <h3>{office}</h3>
       <p>{address}</p>
       <p>{phone}</p>
       <p>{email}</p>
-      <button onClick={handleDetailClick}>Mer info</button>
     </StyledGridItem>
   );
 };
