@@ -11,6 +11,14 @@ describe('<ImageForm />', () => {
     expect(mockSubmit).toHaveBeenCalled();
   });
 
+  it('should display Image only if imageId is true', () => {
+    const wrapper = shallow(<ImageForm imageId="123" />);
+    expect(wrapper.find(Image).exists()).toBe(true);
+
+    wrapper.setProps({ imageId: false });
+    expect(wrapper.find(Image).exists()).toBe(false);
+  });
+
   it('should call handleChange when input field is changed', () => {
     const mockOnChange = jest.fn();
     const wrapper = shallow(<ImageForm onChange={mockOnChange} />);
