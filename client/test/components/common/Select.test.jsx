@@ -19,4 +19,11 @@ describe('<Select />', () => {
     const wrapper = shallow(<Select name="Select name" />);
     expect(wrapper.find('select').prop('name')).toEqual('Select name');
   });
+
+  it('should call onChange passed as prop, when select is changed', () => {
+    const mockOnChange = jest.fn();
+    const wrapper = shallow(<Select onChange={mockOnChange} />);
+    wrapper.find('select').simulate('change');
+    expect(mockOnChange).toHaveBeenCalled();
+  });
 });
