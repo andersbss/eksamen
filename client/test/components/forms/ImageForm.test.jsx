@@ -17,4 +17,10 @@ describe('<ImageForm />', () => {
     wrapper.find('input').simulate('change');
     expect(mockOnChange).toHaveBeenCalled();
   });
+
+  it('should display correct error message if error is true', () => {
+    const errorMessage = 'Something went wrong';
+    const wrapper = shallow(<ImageForm error={errorMessage} />);
+    expect(wrapper.find('p').text()).toContain(errorMessage);
+  });
 });
