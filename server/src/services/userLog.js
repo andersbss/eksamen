@@ -44,6 +44,27 @@ export const getCountByArticle = async () => {
 };
 
 export const getCountByUser = async () => {
-  const users = await UserLog.aggregate([]);
+  const users = await UserLog.aggregate([
+    {
+      $group: { _id: '$user', count: { $sum: 1 } },
+    },
+    {
+      $lookup: {
+        from: 'users',
+        localField: '_id',
+        foreignField: '_id',
+        as: 'user',
+      },
+    },
+    { $unwind: '$user' },
+    {
+      $project: {
+        count: '$count',
+        email: '$user.email',
+        firstName: '$user.firstName',
+        lastName: '$user.lastName',
+      },
+    },
+  ]);
   return users;
 };
