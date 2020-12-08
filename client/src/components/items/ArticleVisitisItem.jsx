@@ -36,7 +36,7 @@ const StyledLi = styled.li`
   }
 `;
 
-const TopArticleItem = ({ article }) => {
+const ArticleVisitsItem = ({ article }) => {
   console.log();
 
   return (
@@ -54,4 +54,4 @@ const TopArticleItem = ({ article }) => {
   );
 };
 
-export default TopArticleItem;
+export default ArticleVisitsItem;

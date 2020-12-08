@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import TopArticleItem from '../items/TopArticleItem';
+import ArticleVisitsItem from '../items/ArticleVisitisItem';
 
 const StyledUl = styled.ul`
   margin: 0;
@@ -21,7 +21,7 @@ const ArticlesVisitsList = ({ articles }) => {
         </li>
       ) : (
         articles.map((article) => (
-          <TopArticleItem key={article._id} article={article} />
+          <ArticleVisitsItem key={article._id} article={article} />
         ))
       )}
     </StyledUl>
