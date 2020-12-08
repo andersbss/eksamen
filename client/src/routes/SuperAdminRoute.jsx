@@ -1,21 +1,20 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import Loader from '../components/animations/Loader';
 import { useUserContext } from '../context/UserContext';
 
-const TestRoute = ({ children, ...rest }) => {
-  const { loggedIn, loading, isAdmin } = useUserContext();
+const SuperAdminRoute = ({ children, ...rest }) => {
+  const { loggedIn, userLoading, isSuperAdmin } = useUserContext();
 
-  return !loading ? (
+  return !userLoading ? (
     <Route
       {...rest}
       render={({ location }) =>
-        loggedIn && isAdmin && !loading ? (
+        loggedIn && isSuperAdmin ? (
           <>{children}</>
         ) : (
           <Redirect
             to={{
-              pathname: '/logginn',
+              pathname: '/notFound',
               state: { from: location },
             }}
           />
@@ -23,8 +22,8 @@ const TestRoute = ({ children, ...rest }) => {
       }
     />
   ) : (
-    <Loader />
+    <></>
   );
 };
 
-export default TestRoute;
+export default SuperAdminRoute;

@@ -17,6 +17,8 @@ import ArticleDetail from '../pages/articleDetail';
 import Register from '../pages/register';
 import Contact from '../pages/contact';
 import AdminRoute from './AdminRoute';
+import SuperAdminRoute from './SuperAdminRoute';
+import Statistics from '../pages/statistics';
 
 const Routes = () => (
   <Router>
@@ -52,6 +54,9 @@ const Routes = () => (
         <AdminRoute path="/redigerartikkel/:id">
           <CreateArticle />
         </AdminRoute>
+        <SuperAdminRoute path="/statistikk">
+          <Statistics />
+        </SuperAdminRoute>
         <Redirect exact from="/" to="/hjem" />
         <Route path="*">
           <NotFound />

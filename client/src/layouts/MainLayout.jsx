@@ -42,7 +42,10 @@ const MainLayout = ({ children }) => {
         <Nav />
       </StyledHeader>
       {isSuperAdmin && !userLoading && (
-        <Button content="STATISTICS" onClick={() => {}} />
+        <Button
+          content="STATISTICS"
+          onClick={() => history.push('/statistikk')}
+        />
       )}
       <StyledContainer>{children}</StyledContainer>
       <Footer />
