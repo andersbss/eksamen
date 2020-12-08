@@ -1,3 +1,4 @@
+import fs from 'fs';
 import UserLog from '../models/userLog.js';
 
 const ARTICLE_LOOKUP = [
@@ -49,7 +50,14 @@ const ARTICLE_LOOKUP = [
 
 export const createUserLog = (data) => UserLog.create(data);
 
-export const getAllUserLogs = () => UserLog.find();
+export const getAllUserLogsCsv = () => {
+  const userLogs = UserLog.find();
+
+  const parser = new Json2csvParser({ header: true });
+  const csvData = parser.parse(userLogs);
+
+  return csvData;
+};
 
 export const getCountByArticle = async () => {
   const articles = await UserLog.aggregate([
