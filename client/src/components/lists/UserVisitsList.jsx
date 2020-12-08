@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import UserVisitItem from '../items/UserVisitItem';
 
 const StyledUl = styled.ul`
   margin: 0;
@@ -15,7 +16,7 @@ const UserVisitsList = ({ users }) => (
     {!users || users.length === 0 ? (
       <li>Finner ingen brukere for øyeblikket, prøv igjen senere</li>
     ) : (
-      users.map((user) => <li>{user.email}</li>)
+      users.map((user, index) => <UserVisitItem key={index} user={user} />)
     )}
   </StyledUl>
 );
