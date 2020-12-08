@@ -5,7 +5,7 @@ import ContactForm, {
   StyledSuccessMessage,
   StyledErrorMessage,
 } from '../../../src/components/forms/ContactForm';
-import Button, { StyledButton } from '../../../src/components/buttons/Button';
+import Button from '../../../src/components/buttons/Button';
 import Input from '../../../src/components/common/Input';
 import { theme } from '../../../src/styles/Theme';
 
@@ -16,6 +16,14 @@ describe('<ContactForm />', () => {
 
     wrapper.setProps({ submitSuccess: false });
     expect(wrapper.find(StyledSuccessMessage).exists()).toBe(false);
+  });
+
+  it('should render Button if submitSuccess is false', () => {
+    const wrapper = shallow(<ContactForm submitSuccess={false} />);
+    expect(wrapper.find(Button).exists()).toBe(true);
+
+    wrapper.setProps({ submitSuccess: true });
+    expect(wrapper.find(Button).exists()).toBe(false);
   });
 
   it('should render StyledErrorMessage if error is true', () => {
