@@ -25,6 +25,7 @@ const UserContext = ({ children }) => {
   const contextValues = {
     userLoading,
     isAdmin: user?.role === 'admin',
+    isSuperAdmin: user?.role === 'superadmin',
     loggedIn: !!user,
     user,
     setUser,
