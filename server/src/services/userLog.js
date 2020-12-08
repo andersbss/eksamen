@@ -42,3 +42,8 @@ export const getCountByArticle = async () => {
   ]);
   return articles;
 };
+
+export const getCountByUser = async () => {
+  const users = await UserLog.aggregate([]);
+  return users;
+};
