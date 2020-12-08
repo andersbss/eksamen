@@ -7,10 +7,10 @@ import { categorySchema } from '../schemas/category.js';
 
 const router = express.Router();
 
-router.get('/', [authenticate, authorize([ROLE.ADMIN, ROLE.SUPER_ADMIN])], categoryController.getAll);
+router.get('/', categoryController.getAll);
 router.post(
   '/',
-  [authenticate, authorize([ROLE.ADMIN, ROLE.SUPER_ADMIN]), validate(categorySchema)],
+  [authenticate, authorize(ROLE.ADMIN, ROLE.SUPER_ADMIN), validate(categorySchema)],
   categoryController.create
 );
 

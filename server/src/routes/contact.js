@@ -7,8 +7,8 @@ import { contactSchema } from '../schemas/contact.js';
 
 const router = express.Router();
 
-router.get('/', authenticate, authorize([ROLE.ADMIN, ROLE.SUPER_ADMIN]), contactController.getAll);
-router.get('/:id', authenticate, authorize([ROLE.ADMIN, ROLE.SUPER_ADMIN]), contactController.getById);
+router.get('/', authenticate, authorize(ROLE.ADMIN, ROLE.SUPER_ADMIN), contactController.getAll);
+router.get('/:id', authenticate, authorize(ROLE.ADMIN, ROLE.SUPER_ADMIN), contactController.getById);
 router.post('/', [validate(contactSchema)], contactController.create);
 
 export default router;
