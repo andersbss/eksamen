@@ -26,4 +26,15 @@ describe('<Select />', () => {
     wrapper.find('select').simulate('change');
     expect(mockOnChange).toHaveBeenCalled();
   });
+
+  it('should place children inside select element, as defined by props', () => {
+    const wrapper = shallow(
+      <Select>
+        <option>1</option>
+        <option>2</option>
+      </Select>
+    );
+    const { children } = wrapper.find('select').props();
+    expect(children.length).toEqual(2);
+  });
 });
