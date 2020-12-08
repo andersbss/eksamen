@@ -27,6 +27,8 @@ const Offices = () => {
         <OfficeViewToggle
           handleGridToggle={handleGridToggle}
           handleListToggle={handleListToggle}
+          gridColor={toggleView ? 'blue' : ''}
+          listColor={toggleView ? '' : 'blue'}
         />
         {toggleView && <OfficeGrid officeList={officeList} />}
         {!toggleView && <OfficeList officeList={officeList} />}
