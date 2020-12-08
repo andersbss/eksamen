@@ -1,5 +1,6 @@
-import Json2csvParser from 'json2csv';
 import UserLog from '../models/userLog.js';
+
+const { parseAsync } = require('json2csv');
 
 const ARTICLE_LOOKUP = [
   {
@@ -50,13 +51,15 @@ const ARTICLE_LOOKUP = [
 
 export const createUserLog = (data) => UserLog.create(data);
 
-export const getAllUserLogsCsv = () => {
-  const userLogs = UserLog.find();
+export const getAllUserLogsCsv = async () => {
+  const logs = await UserLog.find().populate(['article', 'user']);
 
-  const parser = new Json2csvParser({ header: true });
-  const csvData = parser.parse(userLogs);
+  const fields = ['_id', 'article.title', 'article._id', 'user.email', 'user.firstName', 'user.lastName', 'createdAt'];
+  const opts = { fields };
 
-  return csvData;
+  const csv = await parseAsync(logs, opts);
+
+  return csv;
 };
 
 export const getCountByArticle = async () => {

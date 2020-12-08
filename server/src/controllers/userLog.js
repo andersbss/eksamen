@@ -37,7 +37,7 @@ export const getTopArticles = catchAsyncErrors(async (req, res, next) => {
 export const getAllCsv = catchAsyncErrors(async (req, res, next) => {
   const csvLog = await userLogService.getAllUserLogsCsv();
 
-  if (!csvLog) return next(new ErrorHandler('Userlogs not found', 404));
+  if (!csvLog) return next(new ErrorHandler('User Logs not found', 404));
 
   res.set('Content-Type', 'application/octet-stream');
   res.send(Buffer.from(csvLog));
