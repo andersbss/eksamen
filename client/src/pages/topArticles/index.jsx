@@ -1,6 +1,6 @@
 import React from 'react';
 import Jumbotron from '../../components/common/Jumbotron';
-import TopArticlesList from '../../components/lists/TopArticlesList';
+import ArticlesVisitsList from '../../components/lists/ArticlesVisitsList';
 import useFetch from '../../hooks/useFetch';
 import TopArticlesLayout from '../../layouts/TopArticlesLayout';
 
@@ -18,7 +18,7 @@ const TopArticles = () => {
 
       <TopArticlesLayout>
         {!topArticlesLoading && (
-          <TopArticlesList articles={topArticlesResponse} />
+          <ArticlesVisitsList articles={topArticlesResponse} />
         )}
       </TopArticlesLayout>
     </>

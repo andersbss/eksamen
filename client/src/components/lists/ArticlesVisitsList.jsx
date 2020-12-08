@@ -11,7 +11,7 @@ const StyledUl = styled.ul`
   flex-direction: column;
 `;
 
-const TopArticlesList = ({ articles }) => {
+const ArticlesVisitsList = ({ articles }) => {
   console.log(articles);
   return (
     <StyledUl>
@@ -28,4 +28,4 @@ const TopArticlesList = ({ articles }) => {
   );
 };
 
-export default TopArticlesList;
+export default ArticlesVisitsList;
