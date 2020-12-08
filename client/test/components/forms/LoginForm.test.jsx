@@ -33,4 +33,12 @@ describe('<LoginForm />', () => {
     wrapper.setProps({ loading: true });
     expect(wrapper.find(Button).prop('content')).toContain('LOGGER INN...');
   });
+
+  it('should only render StyledSuccessMessage if loggedIn is true', () => {
+    const wrapper = shallow(<LoginForm loggedIn />);
+    expect(wrapper.find(StyledSuccessMessage).exists()).toBe(true);
+
+    wrapper.setProps({ loggedIn: false });
+    expect(wrapper.find(StyledSuccessMessage).exists()).toBe(false);
+  });
 });
