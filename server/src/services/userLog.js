@@ -1,4 +1,4 @@
-import fs from 'fs';
+import Json2csvParser from 'json2csv';
 import UserLog from '../models/userLog.js';
 
 const ARTICLE_LOOKUP = [
