@@ -6,6 +6,8 @@ export const StyledTitle = styled.h2`
   text-align: center;
 `;
 
-const MediumTitle = ({ content }) => <StyledTitle>{content}</StyledTitle>;
+const MediumTitle = ({ content, style }) => (
+  <StyledTitle style={style}>{content}</StyledTitle>
+);
 
 export default MediumTitle;
