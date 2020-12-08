@@ -5,13 +5,8 @@ import { useHistory } from 'react-router-dom';
 const StyledListItem = styled.li`
   margin-bottom: 30px;
   counter-increment: item;
-
-  & > p > button {
-    margin-left: 20px;
-    width: 70px;
-    height: 20px;
-    font-size: 1.2rem;
-  }
+  line-height: 30px;
+  font-size: 1.8rem;
 `;
 
 const OfficeListItem = ({ id, office, address, phone, email }) => {
@@ -26,7 +21,14 @@ const OfficeListItem = ({ id, office, address, phone, email }) => {
   return (
     <StyledListItem onClick={handleDetailClick}>
       <p>
-        {office}&emsp;{address}
+        <span
+          style={{
+            fontWeight: 'bold',
+          }}
+        >
+          {office}
+        </span>
+        &emsp;{address}
         &emsp;{phone}&emsp;{email}
       </p>
     </StyledListItem>
