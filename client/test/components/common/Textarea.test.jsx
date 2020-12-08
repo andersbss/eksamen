@@ -12,7 +12,7 @@ describe('<Textarea />', () => {
 
   it('should contain correct errorLabel text', () => {
     const wrapper = shallow(<Textarea errorLabel="Name is required" />);
-    expect(wrapper.find(StyledErrorLabel).text()).toContain('Name is required');
+    expect(wrapper.find('label').at(1).text()).toContain('Name is required');
   });
 
   it('should have correct name, maxLength, placeholder, value, rows and cols', () => {
