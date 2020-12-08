@@ -39,4 +39,11 @@ describe('<Textarea />', () => {
     expect(wrapper.find('textarea').prop('rows')).toEqual(rows);
     expect(wrapper.find('textarea').prop('cols')).toEqual(cols);
   });
+
+  it('should run onChange when textarea is changed', () => {
+    const mockOnChange = jest.fn();
+    const wrapper = shallow(<Textarea onChange={mockOnChange} />);
+    wrapper.find('textarea').simulate('change');
+    expect(mockOnChange).toHaveBeenCalled();
+  });
 });
