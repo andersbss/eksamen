@@ -48,7 +48,7 @@ const StyledLi = styled.li`
   }
 `;
 
-const FallbackImage = styled.div`
+export const FallbackImage = styled.div`
   background-color: ${(props) => props.theme.colors.lightGrey};
 `;
 
@@ -70,9 +70,11 @@ const ArticleItem = ({ title, ingress, categoryTitle, id, image }) => {
         <h1>{title}</h1>
         <h4>{categoryTitle}</h4>
       </span>
-      <p>
-        {ingress.length > 200 ? `${ingress.substring(0, 200)}...` : ingress}
-      </p>
+      {ingress && (
+        <p>
+          {ingress.length > 200 ? `${ingress.substring(0, 200)}...` : ingress}
+        </p>
+      )}
     </StyledLi>
   );
 };

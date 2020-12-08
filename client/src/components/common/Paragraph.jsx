@@ -7,7 +7,7 @@ const StyledContainer = styled.section`
   width: 70%;
 `;
 
-const StyledTitle = styled.h2`
+export const StyledTitle = styled.h2`
   color: black;
 `;
 

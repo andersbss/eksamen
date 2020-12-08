@@ -12,7 +12,7 @@ const StyledForm = styled.form`
   }
 `;
 
-const StyledSuccessMessage = styled.span`
+export const StyledSuccessMessage = styled.span`
   text-align: center;
 
   & > p {

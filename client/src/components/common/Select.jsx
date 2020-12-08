@@ -22,7 +22,8 @@ const StyledContainer = styled.span`
     }
   }
 `;
-const StyledErrorLabel = styled.label``;
+
+export const StyledErrorLabel = styled.label``;
 
 const Select = ({ name, onChange, label, errorLabel, children }) => (
   <StyledContainer>

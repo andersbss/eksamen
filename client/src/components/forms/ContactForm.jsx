@@ -7,19 +7,28 @@ import Textarea from '../common/Textarea';
 const StyledForm = styled.form`
   display: grid;
   grid-row-gap: 20px;
-
   & > button {
     margin: auto;
     margin-bottom: 20px;
   }
 `;
 
-const StyledSuccessMessage = styled.span`
+export const StyledSuccessMessage = styled.span`
   text-align: center;
-
+  color: green;
   & > p {
     font-weight: 800;
+    &:nth-child(2) {
+      font-size: 1rem;
+    }
+  }
+`;
 
+export const StyledErrorMessage = styled.span`
+  text-align: center;
+  color: red;
+  & > p {
+    font-weight: 800;
     &:nth-child(2) {
       font-size: 1rem;
     }
@@ -62,7 +71,7 @@ const ContactForm = ({
         placeholder="Melding"
         onChange={(e) => setMessage(e.target.value)}
       />
-      {error && <p>{error}</p>}
+      {error && <StyledErrorMessage>{error}</StyledErrorMessage>}
       {!submitSuccess ? (
         <Button
           type="submit"
