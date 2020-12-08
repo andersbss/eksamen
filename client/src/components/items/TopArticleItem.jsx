@@ -46,7 +46,7 @@ const TopArticleItem = ({ article }) => {
         Av: {article.authorFirstName} {article.authorLastName}
       </p>
       <p>Publisert: {formatDate(article.createdAt)}</p>
-      <Button content="Les artikkel" backgroundColor="blue" />
+      <Button content="Til artikkel" backgroundColor="blue" />
     </StyledLi>
   );
 };

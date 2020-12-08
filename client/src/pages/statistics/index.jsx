@@ -32,6 +32,7 @@ const Statistics = () => {
     <>
       <Jumbotron headerText="Statistikk" top="70" bottom="0" />
       <StatisticsLayout>
+        <h2>Mest viste artikler</h2>
         {!topArticlesLoading && (
           <TopArticlesList articles={topArticlesResponse} />
         )}
