@@ -11,21 +11,16 @@ const StyledUl = styled.ul`
   flex-direction: column;
 `;
 
-const ArticlesVisitsList = ({ articles }) => {
-  console.log(articles);
-  return (
-    <StyledUl>
-      {!articles || articles.length === 0 ? (
-        <li>
-          Finner ingen artikler for øyeblikket. Vennligst prøv igjen senere
-        </li>
-      ) : (
-        articles.map((article) => (
-          <ArticleVisitsItem key={article._id} article={article} />
-        ))
-      )}
-    </StyledUl>
-  );
-};
+const ArticlesVisitsList = ({ articles }) => (
+  <StyledUl>
+    {!articles || articles.length === 0 ? (
+      <li>Finner ingen artikler for øyeblikket, prøv igjen senere</li>
+    ) : (
+      articles.map((article) => (
+        <ArticleVisitsItem key={article._id} article={article} />
+      ))
+    )}
+  </StyledUl>
+);
 
 export default ArticlesVisitsList;
