@@ -9,6 +9,13 @@ const ArticleSchema = new Schema(Joigoose.convert(articleSchema), options);
 
 ArticleSchema.index({ title: 'text' });
 
+ArticleSchema.virtual('userlogs', {
+  ref: 'Article',
+  localField: '_id',
+  foreignField: 'article',
+  justOne: false,
+});
+
 const Article = mongoose.model('Article', ArticleSchema);
 
 export default Article;
