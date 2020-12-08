@@ -25,4 +25,12 @@ describe('<LoginForm />', () => {
     wrapper.setProps({ loading: false });
     expect(wrapper.find(Button).prop('disabled')).toEqual(false);
   });
+
+  it('should have correct Button content depending on loading true/false', () => {
+    const wrapper = shallow(<LoginForm loading={false} />);
+    expect(wrapper.find(Button).prop('content')).toContain('LOGG INN');
+
+    wrapper.setProps({ loading: true });
+    expect(wrapper.find(Button).prop('content')).toContain('LOGGER INN...');
+  });
 });
