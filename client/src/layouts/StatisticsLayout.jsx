@@ -6,6 +6,12 @@ const StyledMain = styled.main`
   margin: auto;
   margin-top: 25px;
   width: 500px;
+
+  row-gap: 25px;
+
+  & > button {
+    margin: auto;
+  }
 `;
 
 const StatisticsLayout = ({ children }) => <StyledMain>{children}</StyledMain>;
