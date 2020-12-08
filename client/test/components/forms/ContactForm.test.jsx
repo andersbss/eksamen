@@ -10,7 +10,7 @@ import Input from '../../../src/components/common/Input';
 import { theme } from '../../../src/styles/Theme';
 
 describe('<ContactForm />', () => {
-  it('should render StyledSuccessMessage if submitSuccess is true', () => {
+  it('should only render StyledSuccessMessage if submitSuccess is true', () => {
     const wrapper = shallow(<ContactForm submitSuccess />);
     expect(wrapper.find(StyledSuccessMessage).exists()).toBe(true);
 
@@ -18,7 +18,7 @@ describe('<ContactForm />', () => {
     expect(wrapper.find(StyledSuccessMessage).exists()).toBe(false);
   });
 
-  it('should render Button if submitSuccess is false', () => {
+  it('should only render Button if submitSuccess is false', () => {
     const wrapper = shallow(<ContactForm submitSuccess={false} />);
     expect(wrapper.find(Button).exists()).toBe(true);
 
@@ -26,7 +26,7 @@ describe('<ContactForm />', () => {
     expect(wrapper.find(Button).exists()).toBe(false);
   });
 
-  it('should render StyledErrorMessage if error is true', () => {
+  it('should only render StyledErrorMessage if error is true', () => {
     const wrapper = shallow(<ContactForm error />);
     expect(wrapper.find(StyledErrorMessage).exists()).toBe(true);
 
@@ -48,7 +48,7 @@ describe('<ContactForm />', () => {
     expect(wrapper.find(Button).prop('disabled')).toEqual(false);
   });
 
-  it('should be auto filled values for { userEmail, userName }', () => {
+  it('should be auto filled values for userEmail and userName, if passed as props', () => {
     const email = 'email@test.com';
     const userName = 'user name';
 
@@ -62,7 +62,7 @@ describe('<ContactForm />', () => {
     expect(wrapper.find(Input).at(1).prop('value')).toEqual('user name');
   });
 
-  it('should call handleSubmit function when form is submitted', () => {
+  it('should call handleSubmit when form is submitted', () => {
     const mockSubmit = jest.fn();
 
     const wrapper = shallow(<ContactForm handleSubmit={mockSubmit} />);
