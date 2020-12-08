@@ -14,5 +14,5 @@ export const create = catchAsyncErrors(async (req, res, next) => {
 
 export const getAll = catchAsyncErrors(async (req, res, next) => {
   const categories = await categoryService.getAllCategories();
-  response(res, 201, true, categories);
+  response(res, 200, true, categories);
 });
