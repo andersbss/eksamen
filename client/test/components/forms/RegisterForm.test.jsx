@@ -1,12 +1,10 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
-import { ThemeProvider } from 'styled-components';
+import { shallow } from 'enzyme';
 import RegisterForm, {
   StyledSuccessMessage,
 } from '../../../src/components/forms/RegsiterForm';
-import Button, { StyledButton } from '../../../src/components/buttons/Button';
+import Button from '../../../src/components/buttons/Button';
 import Input from '../../../src/components/common/Input';
-import { theme } from '../../../src/styles/Theme';
 
 describe('<RegisterForm />', () => {
   it('should call handleSubmit function when form is submitted', () => {
@@ -17,7 +15,7 @@ describe('<RegisterForm />', () => {
     expect(mockSubmit).toHaveBeenCalled();
   });
 
-  it('should render StyledSuccessMessage if loggedIn is true', () => {
+  it('should only render StyledSuccessMessage if loggedIn is true', () => {
     const wrapper = shallow(<RegisterForm loggedIn />);
     expect(wrapper.find(StyledSuccessMessage).exists()).toBe(true);
 
