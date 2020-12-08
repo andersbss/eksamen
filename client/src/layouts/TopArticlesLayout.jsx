@@ -9,10 +9,6 @@ const StyledMain = styled.main`
 
   display: grid;
   grid-row-gap: 20px;
-
-  & > h2 {
-    margin: 0;
-  }
 `;
 
 const TopArticlesLayout = ({ children }) => <StyledMain>{children}</StyledMain>;

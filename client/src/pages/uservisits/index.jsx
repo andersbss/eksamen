@@ -13,7 +13,11 @@ const UserVisits = () => {
 
   return (
     <>
-      <Jumbotron headerText="Statistikk" top="70" bottom="0" />
+      <Jumbotron
+        headerText="Artikkelvisninger per bruker"
+        top="70"
+        bottom="0"
+      />
       <UserVisitsLayout>
         {loading && <Loader />}
         {!loading && !error && <UserVisitsList users={response} />}
