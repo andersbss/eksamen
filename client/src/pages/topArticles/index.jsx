@@ -2,6 +2,7 @@ import React from 'react';
 import Jumbotron from '../../components/common/Jumbotron';
 import TopArticlesList from '../../components/lists/TopArticlesList';
 import useFetch from '../../hooks/useFetch';
+import TopArticlesLayout from '../../layouts/TopArticlesLayout';
 
 const TopArticles = () => {
   const {
@@ -13,10 +14,9 @@ const TopArticles = () => {
 
   return (
     <>
-      <Jumbotron headerText="Statistikk" top="70" bottom="0" />
+      <Jumbotron headerText="Top 10 mest leste artikler" top="70" bottom="0" />
 
       <TopArticlesLayout>
-        <h2>Mest leste artikler</h2>
         {!topArticlesLoading && (
           <TopArticlesList articles={topArticlesResponse} />
         )}

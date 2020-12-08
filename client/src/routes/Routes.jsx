@@ -60,7 +60,7 @@ const Routes = () => (
         <SuperAdminRoute path="/statistikk">
           <Statistics />
         </SuperAdminRoute>
-        <SuperAdminRoute path="statistikk/topartikler">
+        <SuperAdminRoute path="/topartikler">
           <TopArticles />
         </SuperAdminRoute>
         <SuperAdminRoute path="statisikk/artikkelvisninger">
