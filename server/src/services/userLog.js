@@ -49,6 +49,8 @@ const ARTICLE_LOOKUP = [
 
 export const createUserLog = (data) => UserLog.create(data);
 
+export const getAllUserLogs = () => UserLog.find();
+
 export const getCountByArticle = async () => {
   const articles = await UserLog.aggregate([
     {
