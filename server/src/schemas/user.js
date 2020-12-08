@@ -33,7 +33,7 @@ export const userSchema = Joi.object()
       .messages({
         'string.min': 'Password has to be at least 8 characters',
       }),
-    role: Joi.string().valid('user', 'admin', 'superAdmin').default('user').messages({
+    role: Joi.string().valid('user', 'admin', 'superadmin').default('user').messages({
       // Remove andmin and superAdmin before handing in the exam
       'any.only': 'Invalid role',
     }),
