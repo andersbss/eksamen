@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import formatDate from '../../utils/dateFormatter';
 import Button from '../buttons/Button';
+import StyledNavLink from '../common/LinkButton';
 
 const StyledLi = styled.li`
   margin: 0;
@@ -10,7 +11,7 @@ const StyledLi = styled.li`
   padding: 10px;
 
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(5, 1fr);
   box-shadow: 0px 5px 13px -11px #000000;
 
   & > h3 {
@@ -46,7 +47,9 @@ const TopArticleItem = ({ article }) => {
         Av: {article.authorFirstName} {article.authorLastName}
       </p>
       <p>Publisert: {formatDate(article.createdAt)}</p>
-      <Button content="Til artikkel" backgroundColor="blue" />
+      <StyledNavLink primary exact to={`fagartikkel/${article._id}`}>
+        TIL ARTIKKEL
+      </StyledNavLink>
     </StyledLi>
   );
 };
