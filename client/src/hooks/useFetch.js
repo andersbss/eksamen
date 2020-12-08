@@ -26,7 +26,8 @@ const useFetch = (method, endpoint, wait = false, run, payload = null) => {
       }
     };
     if (!wait) loadData();
-  }, [method, endpoint, payload, wait, run]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [method, endpoint, wait, run]);
   return { error, loading, response, isSuccess, reqStatus };
 };
 
