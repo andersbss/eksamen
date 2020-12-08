@@ -45,6 +45,7 @@ export const authorizeAccess = catchAsyncErrors(async (req, res, next) => {
     return next();
   }
 
+  req.user = user;
   req.loggedIn = true;
   next();
 });
