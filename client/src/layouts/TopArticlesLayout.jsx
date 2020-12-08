@@ -15,6 +15,6 @@ const StyledMain = styled.main`
   }
 `;
 
-const StatisticsLayout = ({ children }) => <StyledMain>{children}</StyledMain>;
+const TopArticlesLayout = ({ children }) => <StyledMain>{children}</StyledMain>;
 
-export default StatisticsLayout;
+export default TopArticlesLayout;

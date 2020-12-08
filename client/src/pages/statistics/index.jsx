@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Jumbotron from '../../components/common/Jumbotron';
 import TopArticlesList from '../../components/lists/TopArticlesList';
 import useFetch from '../../hooks/useFetch';
-import StatisticsLayout from '../../layouts/StatisticsLayout';
+import StatisticsLayout from '../../layouts/TopArticlesLayout';
 
 const Statistics = () => {
   const {
