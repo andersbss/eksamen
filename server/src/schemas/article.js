@@ -34,14 +34,6 @@ export const articleSchema = Joi.object()
         'any.required': 'Category is required',
         'string.pattern.base': 'Category id is not valid',
       }),
-    publisher: Joi.string()
-      .required()
-      .regex(OBJECT_ID_REGEX)
-      .meta({ _mongoose: { type: 'ObjectId', ref: 'Publisher' } })
-      .messages({
-        'any.required': 'Publisher is required',
-        'string.pattern.base': 'Publisher id is not valid',
-      }),
     public: Joi.boolean().default(false).messages({
       'boolean.base': 'Public have to be true or false',
     }),

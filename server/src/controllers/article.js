@@ -36,7 +36,7 @@ export const create = catchAsyncErrors(async (req, res, next) => {
   if (!(await authorService.getAuthorById(author))) return next(new ErrorHandler('Author not found', 404));
   if (!(await categoryService.getCategoryById(category))) return next(new ErrorHandler('Category not found', 404));
 
-  const article = await articleService.createArticle(req.body);
+  const article = await articleService.createArticle({ ...req.body, publisher: req.user.id });
 
   response(res, 201, true, article);
 });

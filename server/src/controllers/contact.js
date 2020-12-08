@@ -1,28 +1,27 @@
 import catchAsyncErrors from '../middleware/catchAsync.js';
 import response from '../utils/response.js';
 import ErrorHandler from '../utils/errorHandler.js';
-import { contactService, userService } from '../services/index.js';
+import { contactService } from '../services/index.js';
 import { sendMail } from '../utils/sendEmail.js';
 
 export const create = catchAsyncErrors(async (req, res, next) => {
-  const { email, message } = req.body;
+  const { email, message, name } = req.body;
 
-  const user = await userService.getUserByEmail(email);
-  if (!user) {
-    return next(new ErrorHandler('User (by email) not found', 404));
-  }
   if (!email) {
     return next(new ErrorHandler('Fill out email', 400));
   }
   if (!message) {
     return next(new ErrorHandler('Fill out message', 400));
   }
+  if (!name) {
+    return next(new ErrorHandler('Fill out name', 400));
+  }
 
   // Copy of mail to administrator
   try {
     await sendMail({
       email: 'admin@admin.com',
-      subject: `Denne meldingen ble sendt av ${user.firstName} ${user.lastName} via deres kontaktside.`,
+      subject: `Denne meldingen ble sendt av ${name} via deres kontaktside.`,
       message: `${message}`,
     });
   } catch (error) {
@@ -32,8 +31,8 @@ export const create = catchAsyncErrors(async (req, res, next) => {
   // Verification email to user
   try {
     await sendMail({
-      email: user.email,
-      subject: `Hei ${user.firstName} ${user.lastName} - dette er en bekreftelse på at din melding ble sendt til FG Rørleggerfirma`,
+      email,
+      subject: `Hei ${name} - dette er en bekreftelse på at din melding ble sendt til FG Rørleggerfirma`,
       message: `Melding: ${message}`,
     });
   } catch (error) {

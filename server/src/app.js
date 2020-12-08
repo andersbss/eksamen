@@ -19,6 +19,7 @@ import author from './routes/author.js';
 import user from './routes/user.js';
 import image from './routes/image.js';
 import contact from './routes/contact.js';
+import userLog from './routes/userLog.js';
 
 const app = express();
 
@@ -50,11 +51,11 @@ app.use(
 );
 
 app.use(cookieParser());
-app.use(csrf({ cookie: true }));
+// app.use(csrf({ cookie: true }));
 
-app.get(`${process.env.BASEURL}/csrf-token`, (req, res) => {
-  res.status(200).json({ data: req.csrfToken() });
-});
+// app.get(`${process.env.BASEURL}/csrf-token`, (req, res) => {
+//  res.status(200).json({ data: req.csrfToken() });
+// });
 
 app.use(`${process.env.BASEURL}/`, auth);
 app.use(`${process.env.BASEURL}/articles`, article);
@@ -63,6 +64,7 @@ app.use(`${process.env.BASEURL}/authors`, author);
 app.use(`${process.env.BASEURL}/`, user);
 app.use(`${process.env.BASEURL}/images`, image);
 app.use(`${process.env.BASEURL}/contacts`, contact);
+app.use(`${process.env.BASEURL}/userlog`, userLog);
 
 app.use(errorMiddleware);
 

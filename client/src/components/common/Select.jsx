@@ -22,7 +22,7 @@ const StyledContainer = styled.span`
     }
   }
 `;
-// MÅ POSISJONERE TIL HØYRE OSV (for de som ikke hater css)
+
 export const StyledErrorLabel = styled.label``;
 
 const Select = ({ name, onChange, label, errorLabel, children }) => (

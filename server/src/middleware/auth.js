@@ -22,7 +22,7 @@ export const authenticate = catchAsyncErrors(async (req, res, next) => {
   next();
 });
 
-export const authorizeAccess = catchAsyncErrors(async (req, res, next) => {
+export const checkLogin = catchAsyncErrors(async (req, res, next) => {
   let token;
   if (req.cookies?.token) token = req.cookies.token;
 
@@ -45,6 +45,7 @@ export const authorizeAccess = catchAsyncErrors(async (req, res, next) => {
     return next();
   }
 
+  req.user = user;
   req.loggedIn = true;
   next();
 });
