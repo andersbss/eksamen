@@ -33,7 +33,7 @@ const limiter = rateLimit({
   max: 400, // Accepts max 400 requests from the same IP, regardless of time interval.
 });
 
-app.use(limiter);
+// app.use(limiter);
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));

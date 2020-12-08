@@ -17,7 +17,7 @@ const ArticleDetail = () => {
   const [deleteError, setDeleteError] = useState(false);
   const { id } = useParams();
   const history = useHistory();
-  const { loggedIn, isAdmin, userLoading } = useUserContext();
+  const { loggedIn, isAdmin, isSuperAdmin, userLoading } = useUserContext();
   const { error, loading, response, isSuccess, reqStatus } = useFetch(
     'GET',
     `articles/${id}`
@@ -71,7 +71,7 @@ const ArticleDetail = () => {
             {isSuccess && !loading && (
               <ArticleDetailArticle article={response} />
             )}
-            {loggedIn && isAdmin && (
+            {loggedIn && (isAdmin || isSuperAdmin) && (
               <DetailArticleToggles
                 deleteLoading={deleteLoading}
                 handleDelete={handleDelete}

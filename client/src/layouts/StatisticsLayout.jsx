@@ -8,7 +8,11 @@ const StyledMain = styled.main`
   width: 1200px;
 
   display: grid;
-  grid-row-gap: 80px;
+  grid-row-gap: 20px;
+
+  & > h2 {
+    margin: 0;
+  }
 `;
 
 const StatisticsLayout = ({ children }) => <StyledMain>{children}</StyledMain>;
