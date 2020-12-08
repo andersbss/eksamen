@@ -14,4 +14,29 @@ describe('<Textarea />', () => {
     const wrapper = shallow(<Textarea errorLabel="Name is required" />);
     expect(wrapper.find(StyledErrorLabel).text()).toContain('Name is required');
   });
+
+  it('should have correct name, maxLength, placeholder, value, rows and cols', () => {
+    const name = 'This is a name';
+    const maxLength = 5;
+    const placeholder = 'This is a placeholder';
+    const value = 1337;
+    const rows = 4;
+    const cols = 10;
+    const wrapper = shallow(
+      <Textarea
+        name={name}
+        maxLength={maxLength}
+        placeholder={placeholder}
+        value={value}
+        rows={rows}
+        cols={cols}
+      />
+    );
+    expect(wrapper.find('textarea').prop('name')).toEqual(name);
+    expect(wrapper.find('textarea').prop('maxLength')).toEqual(maxLength);
+    expect(wrapper.find('textarea').prop('placeholder')).toEqual(placeholder);
+    expect(wrapper.find('textarea').prop('value')).toEqual(value);
+    expect(wrapper.find('textarea').prop('rows')).toEqual(rows);
+    expect(wrapper.find('textarea').prop('cols')).toEqual(cols);
+  });
 });
