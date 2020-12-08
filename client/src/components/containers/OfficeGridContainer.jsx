@@ -9,10 +9,23 @@ const StyledGridContainer = styled.section`
   flex-wrap: wrap;
 `;
 
+const StyledMain = styled.main`
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 50px;
+
+  & > h2 {
+    font-size: 4rem;
+    font-weight: 1000;
+    line-height: 0px;
+  }
+`;
+
 const OfficeGridContainer = ({ offices }) => (
-  <>
+  <StyledMain>
     <MediumTitle
       content={`${offices.location} (${offices.offices.length} kontorer)`}
+      style={{ textAlign: 'left' }}
     />
     <StyledGridContainer>
       {offices.offices.length <= 0 ? (
@@ -29,7 +42,7 @@ const OfficeGridContainer = ({ offices }) => (
         ))
       )}
     </StyledGridContainer>
-  </>
+  </StyledMain>
 );
 
 export default OfficeGridContainer;
