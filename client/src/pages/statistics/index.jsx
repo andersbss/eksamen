@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
+import Jumbotron from '../../components/common/Jumbotron';
 import useFetch from '../../hooks/useFetch';
+import StatisticsLayout from '../../layouts/StatisticsLayout';
 
 const Statistics = () => {
   const {
@@ -28,7 +30,14 @@ const Statistics = () => {
     console.log(articleVisitsResponse);
   }, [userVisitsResponse, articleVisitsResponse]);
 
-  return <h1>Stats</h1>;
+  return (
+    <>
+      <Jumbotron headerText="Statistikk" top="70" bottom="0" />
+      <StatisticsLayout>
+        <h2>Test</h2>
+      </StatisticsLayout>
+    </>
+  );
 };
 
 export default Statistics;
