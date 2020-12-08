@@ -46,4 +46,11 @@ describe('<Textarea />', () => {
     wrapper.find('textarea').simulate('change');
     expect(mockOnChange).toHaveBeenCalled();
   });
+
+  it('should be required if required prop is true', () => {
+    const wrapper = shallow(<Textarea required />);
+    expect(wrapper.find('textarea').prop('required')).toEqual(true);
+    wrapper.setProps({ required: false });
+    expect(wrapper.find('textarea').prop('required')).toEqual(false);
+  });
 });
