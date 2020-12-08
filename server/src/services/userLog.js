@@ -68,3 +68,21 @@ export const getCountByUser = async () => {
   ]);
   return users;
 };
+
+export const getTopArticles = async () => {
+  const articles = await UserLog.aggregate([
+    {
+      $group: { _id: '$article', count: { $sum: 1 } },
+    },
+    {
+      $lookup: {
+        from: 'articles',
+        localField: '_id',
+        foreignField: '_id',
+        as: 'article',
+      },
+    },
+    { $unwind: '$article' },
+  ]);
+  return articles;
+};

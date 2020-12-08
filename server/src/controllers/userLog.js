@@ -24,3 +24,8 @@ export const getCountByUser = catchAsyncErrors(async (req, res, next) => {
   const users = await userLogService.getCountByUser();
   response(res, 200, true, users);
 });
+
+export const getTopArticles = catchAsyncErrors(async (req, res, next) => {
+  const articles = await userLogService.getTopArticles();
+  response(res, 200, true, articles);
+});
