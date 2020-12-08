@@ -47,7 +47,7 @@ const ArticleVisitsItem = ({ article }) => {
         Av: {article.authorFirstName} {article.authorLastName}
       </p>
       <p>Publisert: {formatDate(article.createdAt)}</p>
-      <StyledNavLink primary exact to={`fagartikkel/${article._id}`}>
+      <StyledNavLink primary="true" exact to={`fagartikkel/${article._id}`}>
         TIL ARTIKKEL
       </StyledNavLink>
     </StyledLi>
