@@ -24,7 +24,10 @@ const StyledGridPart = styled.div`
   width: 15px;
   height: 15px;
   margin: 2px;
-  background-color: black;
+  background-color: ${(props) =>
+    props.gridColor === 'blue'
+      ? props.theme.colors.blue
+      : props.theme.colors.black};
 `;
 
 const StyledListPart = styled.div`
@@ -32,20 +35,29 @@ const StyledListPart = styled.div`
   height: 5px;
   background-color: black;
   margin: 6px 0;
+  background-color: ${(props) =>
+    props.listColor === 'blue'
+      ? props.theme.colors.blue
+      : props.theme.colors.black};
 `;
 
-const OfficeViewToggle = ({ handleGridToggle, handleListToggle }) => (
+const OfficeViewToggle = ({
+  handleGridToggle,
+  handleListToggle,
+  gridColor,
+  listColor,
+}) => (
   <StyledButtonContainer>
     <StyledListIcon onClick={handleListToggle}>
-      <StyledListPart />
-      <StyledListPart />
-      <StyledListPart />
+      <StyledListPart listColor={listColor} />
+      <StyledListPart listColor={listColor} />
+      <StyledListPart listColor={listColor} />
     </StyledListIcon>
     <StyledGridIcon onClick={handleGridToggle}>
-      <StyledGridPart />
-      <StyledGridPart />
-      <StyledGridPart />
-      <StyledGridPart />
+      <StyledGridPart gridColor={gridColor} />
+      <StyledGridPart gridColor={gridColor} />
+      <StyledGridPart gridColor={gridColor} />
+      <StyledGridPart gridColor={gridColor} />
     </StyledGridIcon>
   </StyledButtonContainer>
 );
