@@ -34,7 +34,7 @@ const ArticlesToggles = ({
   return (
     <StyledSection isAdmin={isAdmin}>
       {loggedIn && isAdmin && (
-        <StyledNavLink primary exact to="/nyartikkel">
+        <StyledNavLink primary="true" exact to="/nyartikkel">
           NY ARTIKKEL
         </StyledNavLink>
       )}

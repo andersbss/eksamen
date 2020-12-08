@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
+import FileDownload from 'js-file-download';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../../components/buttons/Button';
@@ -14,8 +15,25 @@ const StyledLink = styled(NavLink)`
 `;
 
 const Statistics = () => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+
   const handleDownload = async () => {
-    const res = await download();
+    setLoading(true);
+    const response = await download();
+    setLoading(false);
+
+    if (response?.status === 200 && response) {
+      const date = new Date();
+      FileDownload(
+        response.data,
+        `userlog-${
+          date.getDay() + 1
+        }-${date.getMonth()}-${date.getFullYear()}.csv`
+      );
+    } else {
+      setError(true);
+    }
   };
 
   return (
@@ -32,10 +50,12 @@ const Statistics = () => {
           Artikkelvisninger per bruker
         </StyledLink>
         <Button
+          disabled={loading}
           onClick={handleDownload}
-          content="Last ned brukeraktivitet"
+          content={loading ? 'Henter data...' : 'Last ned brukeraktivitet'}
           backgroundColor="blue"
         />
+        {error && <p>Kunne ikke hente data, prøv igjen senere</p>}
       </StatisticsLayout>
     </>
   );

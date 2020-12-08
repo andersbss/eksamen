@@ -9,7 +9,7 @@ export const upload = async (image) => {
     await getCsrfToken();
     const data = new FormData();
     data.append('image', image);
-    return await http.post(`${API_UPLOAD_URL}`, data, {
+    return await http.post(API_UPLOAD_URL, data, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
