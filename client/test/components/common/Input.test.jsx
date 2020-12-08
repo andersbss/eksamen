@@ -38,7 +38,7 @@ describe('<Input />', () => {
     expect(wrapper.find('input').prop('type')).toEqual(type);
   });
 
-  it('should have be required if required prop is true', () => {
+  it('should be required if required prop is true', () => {
     const wrapper = shallow(<Input required />);
     expect(wrapper.find('input').prop('required')).toEqual(true);
     wrapper.setProps({ required: false });
