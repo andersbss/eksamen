@@ -13,7 +13,7 @@ const StyledUl = styled.ul`
 
 const ArticleList = ({ articles }) => (
   <StyledUl>
-    {!articles && articles.length <= 0 ? (
+    {!articles || articles.length <= 0 ? (
       <p>Finner ingen artikler for øyeblikket. Vennligst prøv igjen senere</p>
     ) : (
       articles.map((article) => (

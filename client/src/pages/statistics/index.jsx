@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Jumbotron from '../../components/common/Jumbotron';
+import TopArticlesList from '../../components/lists/TopArticlesList';
 import useFetch from '../../hooks/useFetch';
 import StatisticsLayout from '../../layouts/StatisticsLayout';
 
@@ -25,16 +26,15 @@ const Statistics = () => {
     isSuccess: isTopArticlesSuccess,
   } = useFetch('GET', 'userlog/toparticles');
 
-  useEffect(() => {
-    console.log(userVisitsResponse);
-    console.log(articleVisitsResponse);
-  }, [userVisitsResponse, articleVisitsResponse]);
+  useEffect(() => {}, [userVisitsResponse, articleVisitsResponse]);
 
   return (
     <>
       <Jumbotron headerText="Statistikk" top="70" bottom="0" />
       <StatisticsLayout>
-        <h2>Test</h2>
+        {!topArticlesLoading && (
+          <TopArticlesList articles={topArticlesResponse} />
+        )}
       </StatisticsLayout>
     </>
   );
