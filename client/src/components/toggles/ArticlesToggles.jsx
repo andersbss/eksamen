@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import Button from '../buttons/Button';
 import SelectFilter from '../common/SelectFilter';
 import Input from '../common/Input';
+import StyledNavLink from '../common/LinkButton';
 
 const StyledSection = styled.section`
   display: flex;
@@ -33,12 +34,9 @@ const ArticlesToggles = ({
   return (
     <StyledSection isAdmin={isAdmin}>
       {loggedIn && isAdmin && (
-        <Button
-          onClick={() => history.push('/nyartikkel')}
-          content="NY ARTIKKEL"
-          backgroundColor="blue"
-          color="white"
-        />
+        <StyledNavLink primary exact to="/nyartikkel">
+          NY ARTIKKEL
+        </StyledNavLink>
       )}
 
       <Input
