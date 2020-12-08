@@ -41,4 +41,18 @@ describe('<LoginForm />', () => {
     wrapper.setProps({ loggedIn: false });
     expect(wrapper.find(StyledSuccessMessage).exists()).toBe(false);
   });
+
+  it('should only show error message if error is true', () => {
+    const wrapper = shallow(<LoginForm error />);
+    expect(wrapper.find('p').at(0).text()).toContain(
+      'Innlogging feilet, prøv igjen'
+    );
+    wrapper.setProps({ error: false, loggedIn: false });
+    expect(wrapper.find('p').exists()).toBe(false);
+
+    wrapper.setProps({ loggedIn: true });
+    expect(
+      wrapper.find('p').at(0).text().includes('Innlogging feilet, prøv igjen')
+    ).toBe(false);
+  });
 });
