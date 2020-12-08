@@ -14,4 +14,9 @@ describe('<Select />', () => {
     const wrapper = shallow(<Select errorLabel="Name is required" />);
     expect(wrapper.find(StyledErrorLabel).text()).toContain('Name is required');
   });
+
+  it('should have correct name based on name prop', () => {
+    const wrapper = shallow(<Select name="Select name" />);
+    expect(wrapper.find('select').prop('name')).toEqual('Select name');
+  });
 });
