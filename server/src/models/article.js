@@ -10,6 +10,11 @@ const options = { timestamps: true, toJSON: { virtuals: true }, toObject: { virt
 const ArticleSchema = new Schema(
   {
     ...Joigoose.convert(articleSchema),
+    publisher: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+      required: true,
+    },
     readTime: {
       type: Number,
     },
