@@ -59,15 +59,6 @@ const StyledSuccessMessage = styled.span`
   }
 `;
 
-const initialFormData = Object.freeze({
-  title: '',
-  ingress: '',
-  content: '',
-  category: '',
-  author: '',
-  public: 'false',
-});
-
 const ArticleForm = ({
   id,
   article,
