@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Input from '../common/Input';
 import { StyledSuccessMessage } from '../styledComponents/StyledMessages';
 import StyledForm from '../styledComponents/StyledForm';
