@@ -23,6 +23,7 @@ const OfficeGridContainer = ({ offices }) => (
       ) : (
         offices.offices.map((office) => (
           <OfficeGridItem
+            key={office.id}
             id={office.id}
             office={office.office}
             address={office.address}

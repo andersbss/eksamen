@@ -6,7 +6,9 @@ const OfficeGrid = ({ officeList }) => (
     {officeList.length <= 0 ? (
       <p>Ingen kontorer funnet. Vennligst prøv igjen senere.</p>
     ) : (
-      officeList.map((offices) => <OfficeGridContainer offices={offices} />)
+      officeList.map((offices, index) => (
+        <OfficeGridContainer key={index} offices={offices} />
+      ))
     )}
   </>
 );

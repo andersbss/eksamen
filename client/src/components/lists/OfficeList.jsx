@@ -6,7 +6,9 @@ const OfficeList = ({ officeList }) => (
     {officeList.length <= 0 ? (
       <p>Ingen kontorer funnet. Vennligst prøv igjen senere.</p>
     ) : (
-      officeList.map((offices) => <OfficeListContainer offices={offices} />)
+      officeList.map((offices, index) => (
+        <OfficeListContainer key={index} offices={offices} />
+      ))
     )}
   </>
 );

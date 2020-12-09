@@ -42,6 +42,7 @@ const OfficeListContainer = ({ offices }) => (
       ) : (
         offices.offices.map((office) => (
           <OfficeListItem
+            key={office.id}
             id={office.id}
             office={office.office}
             address={office.address}
