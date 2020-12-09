@@ -104,6 +104,7 @@ const CreateArticle = () => {
 
     if (success) {
       setModalIsOpen(false);
+      setCategorySuccess(true);
       setRefreshCategories((prev) => !prev);
     } else setCategoryError(data);
   }, [categoryResponse]);
