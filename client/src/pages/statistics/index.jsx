@@ -6,6 +6,7 @@ import Button from '../../components/buttons/Button';
 import Jumbotron from '../../components/common/Jumbotron';
 import StatisticsLayout from '../../layouts/StatisticsLayout';
 import { download } from '../../services/fileService';
+import StyledButton from '../../components/styledComponents/StyledButton';
 
 const StyledLink = styled(NavLink)`
   color: ${(props) => props.theme.colors.black};
@@ -49,12 +50,13 @@ const Statistics = () => {
         <StyledLink exact to="/brukervisninger">
           Artikkelvisninger per bruker
         </StyledLink>
-        <Button
+        <StyledButton
           disabled={loading}
+          primary="true"
           onClick={handleDownload}
-          content={loading ? 'Henter data...' : 'Last ned brukeraktivitet'}
-          backgroundColor="blue"
-        />
+        >
+          {loading ? 'Henter data...' : 'Last ned brukeraktivitet'}
+        </StyledButton>
         {error && <p>Kunne ikke hente data, prøv igjen senere</p>}
       </StatisticsLayout>
     </>
