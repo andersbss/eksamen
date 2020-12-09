@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import Button from '../buttons/Button';
-import SelectFilter from '../common/SelectFilter';
+import SelectFilter from '../common/CategorySelectFilter';
 import Input from '../common/Input';
 import StyledNavLink from '../common/LinkButton';
 
