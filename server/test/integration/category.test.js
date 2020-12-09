@@ -80,7 +80,7 @@ describe('Create', () => {
   });
 
   // eslint-disable-next-line jest/expect-expect
-  it('should return error if unauthorized', async () => {
+  it('should return error when unauthorized', async () => {
     await request(app)
       .post(`${BASE_URL}/categories`)
       .send({ title: 'Category' })

@@ -133,6 +133,21 @@ describe('Create', () => {
       .send(articlePayload)
       .expect(404, { success: false, data: 'Author not found', status: 404 });
   });
+
+  // eslint-disable-next-line jest/expect-expect
+  it('should return error when unauthorized', async () => {
+    userPayload.role = 'user';
+    userPayload.email = 'user@user.com';
+    const userRes = await request(app).post(`${BASE_URL}/register`).send(userPayload);
+
+    const userToken = userRes.body.data.token;
+
+    await request(app)
+      .post(`${BASE_URL}/articles`)
+      .set('Cookie', `token=${userToken}`)
+      .send(articlePayload)
+      .expect(403, { success: false, data: 'Unauthorized', status: 403 });
+  });
 });
 
 describe('Get', () => {
