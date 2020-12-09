@@ -67,4 +67,21 @@ describe('Create', () => {
     expect(data.category).toEqual(articlePayload.category);
     expect(data._id).toMatch(OBJECT_ID_REGEX);
   });
+
+  // eslint-disable-next-line jest/expect-expect
+  it('should return error when title is invalid', async () => {
+    articlePayload.title = '';
+    await request(app)
+      .post(`${BASE_URL}/articles`)
+      .set('Cookie', `token=${token}`)
+      .send(articlePayload)
+      .expect(400, { success: false, data: ['Title is required'], status: 400 });
+
+    articlePayload.title = 'x'.repeat(10 * 10 * 10);
+    await request(app)
+      .post(`${BASE_URL}/articles`)
+      .set('Cookie', `token=${token}`)
+      .send(articlePayload)
+      .expect(400, { success: false, data: ['Title cannot be longer than 50 characters'], status: 400 });
+  });
 });

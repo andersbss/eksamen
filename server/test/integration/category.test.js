@@ -74,8 +74,7 @@ describe('Create', () => {
       .post(`${BASE_URL}/categories`)
       .set('Cookie', `token=${token}`)
       .send({
-        title:
-          'Tooooooooooooooooooooooooooooooooooooooooooooooo loooooooooooooooooooooooooooooooooooooooooooooooooooong',
+        title: 'x'.repeat(10 * 10 * 10),
       })
       .expect(400, { success: false, data: ['Title cannot be longer than 50 characters'], status: 400 });
   });
