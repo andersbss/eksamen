@@ -15,7 +15,6 @@ const Image = ({ imageId, width, height }) => {
   useEffect(() => {
     const downloadImage = async () => {
       const { data } = await download(imageId);
-      console.log(data);
       if (data.type === 'image/jpeg' || data.type === 'image/png') {
         const img = await data.arrayBuffer().then((buffer) => {
           const base64Flag = 'data:image/jpeg;base64,';
