@@ -197,6 +197,21 @@ describe('Get', () => {
   });
 
   // eslint-disable-next-line jest/expect-expect
+  it('should return error when not logged in user access private article', async () => {
+    const articleRes = await request(app)
+      .post(`${BASE_URL}/articles`)
+      .set('Cookie', `token=${token}`)
+      .send(articlePayload);
+
+    const { data } = articleRes.body;
+
+    await request(app)
+      .get(`${BASE_URL}/articles/${data._id}`)
+      .set('Cookie', `token=${token}`)
+      .expect(404, { success: false, data: 'Article not found', status: 404 });
+  });
+
+  // eslint-disable-next-line jest/expect-expect
   it('should return success with all private articles', async () => {
     await request(app).post(`${BASE_URL}/articles`).set('Cookie', `token=${token}`).send(articlePayload);
     const privateArticlesRes = await request(app).get(`${BASE_URL}/articles`).set('Cookie', `token=${token}`);
