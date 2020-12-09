@@ -80,6 +80,7 @@ const ArticleForm = ({
   errors,
   handleModalToggle,
   refreshCategories,
+  articleLoading,
 }) => {
   // Image
   const [file, setFile] = useState();
@@ -128,123 +129,135 @@ const ArticleForm = ({
 
   return (
     <StyledFormContainer>
-      <StyledForm onSubmit={handleSubmit}>
-        <Input
-          label="Tittel"
-          errorLabel={errors?.title}
-          type="text"
-          maxLength="50"
-          placeholder="Tittel"
-          required="true"
-          name="title"
-          onChange={handleChange}
-        />
-        <Input
-          label="Ingress"
-          errorLabel={errors?.ingress}
-          type="text"
-          maxLength="1000"
-          placeholder="Ingress"
-          required="true"
-          name="ingress"
-          onChange={handleChange}
-        />
-        <Textarea
-          label="Innhold"
-          errorLabel={errors?.content}
-          maxLength="3000"
-          placeholder="Innhold"
-          required="true"
-          name="content"
-          rows="4"
-          cols="50"
-          onChange={handleChange}
-        />
-        {categoryLoading && <Loader />}
-        {categoryIsSuccess && (
-          <StyledSelectButtonContainer>
+      {articleLoading ? (
+        <Loader />
+      ) : (
+        <StyledForm onSubmit={handleSubmit}>
+          <Input
+            label="Tittel"
+            errorLabel={errors?.title}
+            type="text"
+            maxLength="50"
+            placeholder="Tittel"
+            required="true"
+            name="title"
+            defaultValue={article.title}
+            onChange={handleChange}
+          />
+          <Input
+            label="Ingress"
+            errorLabel={errors?.ingress}
+            type="text"
+            maxLength="1000"
+            placeholder="Ingress"
+            required="true"
+            name="ingress"
+            defaultValue={article.ingress}
+            onChange={handleChange}
+          />
+          <Textarea
+            label="Innhold"
+            errorLabel={errors?.content}
+            maxLength="3000"
+            placeholder="Innhold"
+            required="true"
+            name="content"
+            defaultValue={article.content}
+            rows="4"
+            cols="50"
+            onChange={handleChange}
+          />
+          {categoryLoading && <Loader />}
+          {categoryIsSuccess && (
+            <StyledSelectButtonContainer>
+              <Select
+                name="category"
+                label="Kategori"
+                errorLabel={errors?.category}
+                onChange={handleChange}
+              >
+                {!article && <option value={null}>Velg kategori</option>}
+                {article && (
+                  <option value={article.category._id} selected="selected">
+                    {article.category.title}
+                  </option>
+                )}
+                {categories.length <= 0 ? (
+                  <p>Ingen kategorier</p>
+                ) : (
+                  categories.map((category) => {
+                    if (category._id === article.category._id) return null;
+                    return (
+                      <option value={category._id}>{category.title}</option>
+                    );
+                  })
+                )}
+              </Select>
+              <Button
+                content="NY"
+                backgroundColor="blue"
+                color="white"
+                onClick={handleModalToggle}
+              />
+            </StyledSelectButtonContainer>
+          )}
+          {!categoryIsSuccess && !categoryLoading && (
+            <Error error={categoryFetchError} />
+          )}
+          {authorLoading && <Loader />}
+          {authorIsSuccess && (
             <Select
-              name="category"
-              label="Kategori"
-              errorLabel={errors?.category}
+              name="author"
+              label="Forfatter"
+              errorLabel={errors?.author}
               onChange={handleChange}
             >
-              {!article && <option value={null}>Velg kategori</option>}
+              {!article && <option value={null}>Velg forfatter</option>}
               {article && (
-                <option value={article.category._id} selected="selected">
-                  {article.category.title}
+                <option value={article.author._id} selected="selected">
+                  {authorName}
                 </option>
               )}
-              {categories.length <= 0 ? (
-                <p>Ingen kategorier</p>
+              {authors.length <= 0 ? (
+                <p>Ingen forfattere</p>
               ) : (
-                categories.map((category) => (
-                  <option value={category._id}>{category.title}</option>
-                ))
+                authors.map((author) => {
+                  if (author._id === article.author._id) return null;
+                  const name = `${author.firstName} ${author.lastName}`;
+                  return <option value={author._id}>{name}</option>;
+                })
               )}
             </Select>
+          )}
+          {!authorIsSuccess && !authorLoading && (
+            <Error error={authorFetchError} />
+          )}
+          <Select name="public" label="Tilgang" onChange={handleChange}>
+            <option value="false">Private</option>
+            <option value="true">Public</option>
+          </Select>
+          {error && (
+            <p>{`Registrering feilet, prøv igjen.(${
+              Array.isArray(error) ? error[0] : error
+            })`}</p>
+          )}
+          {!submitSuccess ? (
             <Button
-              content="NY"
+              type="submit"
+              content={id ? 'Edit' : 'Create'}
+              disabled={loading || hasErrors}
               backgroundColor="blue"
               color="white"
-              onClick={handleModalToggle}
             />
-          </StyledSelectButtonContainer>
-        )}
-        {!categoryIsSuccess && !categoryLoading && (
-          <Error error={categoryFetchError} />
-        )}
-        {authorLoading && <Loader />}
-        {authorIsSuccess && (
-          <Select
-            name="author"
-            label="Forfatter"
-            errorLabel={errors?.author}
-            onChange={handleChange}
-          >
-            {!article && <option value={null}>Velg forfatter</option>}
-            {article && (
-              <option value={article.author._id} selected="selected">
-                {authorName}
-              </option>
-            )}
-            {authors.length <= 0 ? (
-              <p>Ingen forfattere</p>
-            ) : (
-              authors.map((author) => {
-                const name = `${author.firstName} ${author.lastName}`;
-                return <option value={author._id}>{name}</option>;
-              })
-            )}
-          </Select>
-        )}
-        {!authorIsSuccess && !authorLoading && (
-          <Error error={authorFetchError} />
-        )}
-        <Select name="public" label="Tilgang" onChange={handleChange}>
-          <option value="false">Private</option>
-          <option value="true">Public</option>
-        </Select>
-        {error && (
-          <p>{`Registrering feilet, prøv igjen.(${
-            Array.isArray(error) ? error[0] : error
-          })`}</p>
-        )}
-        {!submitSuccess ? (
-          <Button
-            type="submit"
-            content={id ? 'Edit' : 'Create'}
-            disabled={loading || hasErrors}
-            backgroundColor="blue"
-            color="white"
-          />
-        ) : (
-          <StyledSuccessMessage>
-            <p>Meldingen er sendt!</p>
-            <p>Omdirigerer...</p>
-          </StyledSuccessMessage>
-        )}
-      </StyledForm>
+          ) : (
+            <StyledSuccessMessage>
+              <p>Meldingen er sendt!</p>
+              <p>Omdirigerer...</p>
+            </StyledSuccessMessage>
+          )}
+        </StyledForm>
+      )}
+
       <h4>Last opp bilde til artikkelen (valgfritt): </h4>
       <ImageForm
         handleSubmit={handleImageUpload}
