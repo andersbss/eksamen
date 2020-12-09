@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
+import Error from '../errors/Error';
 import { useUserContext } from '../../context/UserContext';
 import { request } from '../../services/httpService';
 
@@ -205,6 +206,7 @@ const Nav = () => {
           )}
         </StyledLi>
       </StyledUl>
+      <Error error={error} />
     </StyledNav>
   );
 };
