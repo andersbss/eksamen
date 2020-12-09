@@ -235,6 +235,21 @@ describe('Update', () => {
         status: 400,
       });
   });
+
+  // eslint-disable-next-line jest/expect-expect
+  it('should return error when article is not found', async () => {
+    await request(app)
+      .put(`${BASE_URL}/articles/badId`)
+      .set('Cookie', `token=${token}`)
+      .send(articlePayload)
+      .expect(404, { success: false, data: 'Resource not found. Invalid _id', status: 404 });
+
+    await request(app)
+      .put(`${BASE_URL}/articles/ffffffffffffffffffffffff`)
+      .set('Cookie', `token=${token}`)
+      .send(articlePayload)
+      .expect(404, { success: false, data: 'Article not found', status: 404 });
+  });
 });
 
 describe('Delete', () => {
