@@ -52,6 +52,31 @@ describe('Register', () => {
   });
 
   // eslint-disable-next-line jest/expect-expect
+  it('should return error when name is invalid', async () => {
+    userPayload.email = 'test1@test.com';
+    userPayload.lastName = '';
+    userPayload.firstName = '';
+    await request(app)
+      .post(`${BASE_URL}/register`)
+      .send(userPayload)
+      .expect(400, { success: false, data: ['First name is required', 'Last name is required'], status: 400 });
+
+    userPayload.email = 'test2@test.com';
+    userPayload.lastName =
+      'ThisNameIsWaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaayToLong';
+    userPayload.firstName =
+      'ThisNameIsWaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaayToLong';
+    await request(app)
+      .post(`${BASE_URL}/register`)
+      .send(userPayload)
+      .expect(400, {
+        success: false,
+        data: ['First name cannot be longer than 100 characters', 'Last name cannot be longer than 100 characters'],
+        status: 400,
+      });
+  });
+
+  // eslint-disable-next-line jest/expect-expect
   it('should return error if email is invalid', async () => {
     await request(app)
       .post(`${BASE_URL}/register`)
