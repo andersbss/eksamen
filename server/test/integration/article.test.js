@@ -11,6 +11,8 @@ let token;
 
 let userPayload;
 let articlePayload;
+let author;
+let category;
 
 beforeAll(async () => {
   await connectDatabase();
@@ -28,8 +30,8 @@ beforeEach(async () => {
   const user = await createUser(app, userPayload);
   token = user.token;
 
-  const author = await createAuthor(app, 'Author', 'Author');
-  const category = await createCategory(app, token, 'Category');
+  author = await createAuthor(app, 'Author', 'Author');
+  category = await createCategory(app, token, 'Category');
 
   articlePayload = {
     title: 'Title',
@@ -69,19 +71,45 @@ describe('Create', () => {
   });
 
   // eslint-disable-next-line jest/expect-expect
-  it('should return error when title is invalid', async () => {
+  it('should return error when long or short', async () => {
     articlePayload.title = '';
+    articlePayload.ingress = '';
+    articlePayload.content = '';
+    articlePayload.author = '';
+    articlePayload.category = '';
     await request(app)
       .post(`${BASE_URL}/articles`)
       .set('Cookie', `token=${token}`)
       .send(articlePayload)
-      .expect(400, { success: false, data: ['Title is required'], status: 400 });
+      .expect(400, {
+        success: false,
+        data: [
+          'Title is required',
+          'Ingress is required',
+          'Content is required',
+          'Author is required',
+          'Category is required',
+        ],
+        status: 400,
+      });
 
     articlePayload.title = 'x'.repeat(10 * 10 * 10);
+    articlePayload.ingress = 'x'.repeat(20 * 20 * 20);
+    articlePayload.content = 'x'.repeat(20 * 20 * 20);
+    articlePayload.author = author._id;
+    articlePayload.category = category._id;
     await request(app)
       .post(`${BASE_URL}/articles`)
       .set('Cookie', `token=${token}`)
       .send(articlePayload)
-      .expect(400, { success: false, data: ['Title cannot be longer than 50 characters'], status: 400 });
+      .expect(400, {
+        success: false,
+        data: [
+          'Title cannot be longer than 50 characters',
+          'Ingress cannot be longer than 1000 characters',
+          'Content cannot be longer than 3000 characters',
+        ],
+        status: 400,
+      });
   });
 });

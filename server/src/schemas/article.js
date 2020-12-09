@@ -12,10 +12,14 @@ export const articleSchema = Joi.object()
         'string.empty': 'Title is required',
         'string.max': 'Title cannot be longer than 50 characters',
       }),
-    ingress: Joi.string().max(1000).messages({
+    ingress: Joi.string().required().max(1000).messages({
+      'any.required': 'Ingress is required',
+      'string.empty': 'Ingress is required',
       'string.max': 'Ingress cannot be longer than 1000 characters',
     }),
-    content: Joi.string().max(3000).messages({
+    content: Joi.string().required().max(3000).messages({
+      'any.required': 'Content is required',
+      'string.empty': 'Content is required',
       'string.max': 'Content cannot be longer than 3000 characters',
     }),
     author: Joi.string()
@@ -24,6 +28,7 @@ export const articleSchema = Joi.object()
       .meta({ _mongoose: { type: 'ObjectId', ref: 'Author', trim: true } })
       .messages({
         'any.required': 'Author is required',
+        'string.empty': 'Author is required',
         'string.pattern.base': 'Author id is not valid',
       }),
     category: Joi.string()
@@ -32,6 +37,7 @@ export const articleSchema = Joi.object()
       .meta({ _mongoose: { type: 'ObjectId', ref: 'Category' } })
       .messages({
         'any.required': 'Category is required',
+        'string.empty': 'Category is required',
         'string.pattern.base': 'Category id is not valid',
       }),
     public: Joi.boolean().default(false).messages({
