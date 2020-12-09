@@ -1,4 +1,5 @@
 import request from 'supertest';
+import validator from 'validator';
 import { app } from '../../src/app.js';
 import { EMAIL_REGEX, OBJECT_ID_REGEX } from '../../src/constants/regexes.js';
 import { connectDatabase, closeDatabase, clearDatabase } from '../config/db.js';
@@ -35,12 +36,9 @@ afterEach(async () => {
 });
 
 describe('Auth', () => {
-  // eslint-disable-next-line jest/expect-expect
   it('should return success and a new user including valid jwt', async () => {
     const { success, data } = userRes.body;
     const { email, firstName, lastName, role } = data.user;
-
-    console.log(userRes.body);
 
     expect(userRes.status).toBe(201);
     expect(success).toBe(true);
@@ -48,7 +46,22 @@ describe('Auth', () => {
     expect(email).toEqual(userPayload.email);
     expect(firstName).toEqual(userPayload.firstName);
     expect(lastName).toEqual(userPayload.lastName);
+    expect(role).toEqual('user');
     expect(data.user.password).toEqual(undefined);
-    expect(data.token).toMatch(OBJECT_ID_REGEX);
+    expect(validator.isJWT(data.token)).toEqual(true);
+  });
+
+  it('should return success with user credentials and a jwt', async () => {
+    const response = await request(app)
+      .post(`${BASE_URL}/login`)
+      .send({ email: userPayload.email, password: userPayload.password });
+
+    const { success, data } = response.body;
+
+    expect(success).toBe(true);
+    expect(response.status).toBe(201);
+    expect(data.user.email).toEqual(userPayload.email);
+    expect(validator.isJWT(data.token)).toBe(true);
+    expect(data.user.password).toEqual(undefined);
   });
 });
