@@ -1,8 +1,8 @@
 import React from 'react';
-import Button from '../buttons/Button';
 import Input from '../common/Input';
 import { StyledSuccessMessage } from '../styledComponents/StyledMessages';
 import StyledForm from '../styledComponents/StyledForm';
+import Button from '../styledComponents/StyledButton';
 
 const RegisterForm = ({
   handleSubmit,
@@ -44,13 +44,9 @@ const RegisterForm = ({
       })`}</p>
     )}
     {!loggedIn ? (
-      <Button
-        type="submit"
-        content={loading ? 'REGISTRERER...' : 'REGISTRER'}
-        backgroundColor="blue"
-        color="white"
-        disabled={loading || hasErrors}
-      />
+      <Button primary type="submit" disabled={loading || hasErrors}>
+        {loading ? 'REGISTRERER...' : 'REGISTRER'}
+      </Button>
     ) : (
       <StyledSuccessMessage>
         <p>Du er registrert!</p>
