@@ -11,6 +11,10 @@ let token;
 let userPayload;
 let articlePayload;
 
+const createAuthor = async (firstName, lastName) => {
+  await request(app).post(`${BASE_URL}/authors`).send({ firstName, lastName });
+};
+
 beforeAll(async () => {
   await connectDatabase();
 });
