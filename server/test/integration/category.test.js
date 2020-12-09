@@ -8,12 +8,14 @@ const BASE_URL = process.env.BASEURL;
 let adminRes;
 let token;
 
+let userPayload;
+
 beforeAll(async () => {
   await connectDatabase();
 });
 
 beforeEach(async () => {
-  const payload = {
+  userPayload = {
     firstName: 'test',
     lastName: 'test',
     email: 'admin@admin.com',
@@ -21,7 +23,7 @@ beforeEach(async () => {
     role: 'admin',
   };
 
-  adminRes = await request(app).post(`${BASE_URL}/register`).send(payload);
+  adminRes = await request(app).post(`${BASE_URL}/register`).send(userPayload);
 
   token = adminRes.body.data.token;
 });
@@ -76,5 +78,25 @@ describe('Create', () => {
           'Tooooooooooooooooooooooooooooooooooooooooooooooo loooooooooooooooooooooooooooooooooooooooooooooooooooong',
       })
       .expect(400, { success: false, data: ['Title cannot be longer than 50 characters'], status: 400 });
+  });
+
+  // eslint-disable-next-line jest/expect-expect
+  it('should return error if unauthorized', async () => {
+    await request(app)
+      .post(`${BASE_URL}/categories`)
+      .send({ title: 'Category' })
+      .expect(401, { success: false, data: 'No token', status: 401 });
+
+    userPayload.role = 'user';
+    userPayload.email = 'user@user.com';
+    const userRes = await request(app).post(`${BASE_URL}/register`).send(userPayload);
+
+    const userToken = userRes.body.data.token;
+
+    await request(app)
+      .post(`${BASE_URL}/categories`)
+      .set('Cookie', `token=${userToken}`)
+      .send({ title: 'Category' })
+      .expect(403, { success: false, data: 'Unauthorized', status: 403 });
   });
 });
