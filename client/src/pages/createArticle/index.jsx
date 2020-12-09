@@ -22,6 +22,13 @@ const CreateArticle = () => {
   const [refreshCategories, setRefreshCategories] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const history = useHistory();
+  let putOrPost;
+
+  if (id) {
+    putOrPost = ['PUT', `/articles/${id}`];
+  } else {
+    putOrPost = ['POST', '/articles'];
+  }
 
   const {
     loading: articlesLoading,
@@ -45,7 +52,7 @@ const CreateArticle = () => {
     hasErrors: hasArticleErrors,
     loading: articleLoading,
     response: articleResponse,
-  } = useForm(request, articleValidate, ['POST', '/articles']);
+  } = useForm(request, articleValidate, putOrPost);
 
   useEffect(() => {
     if (!categoryResponse) return;
@@ -67,7 +74,7 @@ const CreateArticle = () => {
 
     if (success) {
       setSubmitSuccess(success);
-      setTimeout(() => history.push('/fagartikler'), 1500);
+      history.push('/fagartikler');
     } else setArticleError(data);
   }, [articleResponse, history]);
 
@@ -89,6 +96,7 @@ const CreateArticle = () => {
             success={categorySuccess}
             loading={categoryLoading}
             error={categoryError}
+            submitSuccess={submitSuccess}
           />
         </Modal>
       )}
