@@ -97,6 +97,7 @@ const StyledLi = styled.li`
     font-size: 2rem;
     font-weight: 600;
     cursor: pointer;
+    border: solid;
 
     &.active {
       color: ${(props) => props.theme.colors.blue};
@@ -206,7 +207,7 @@ const Nav = () => {
           )}
         </StyledLi>
       </StyledUl>
-      <Error error={error} />
+      {error && <Error error={error} />}
     </StyledNav>
   );
 };
