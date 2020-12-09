@@ -1,4 +1,5 @@
 export const OBJECT_ID_REGEX = /^[0-9a-fA-F]{24}$/;
+export const EMAIL_REGEX = /\S+@\S+\.\S+/;
 export const ONE_DIGIT_REGEX = /(?=.*[0-9])/;
 export const ONE_LOWERCASE_REGEX = /(?=.*[a-z])/;
 export const ONE_UPPERCASE_REGEX = /(?=.*[A-Z])/;
