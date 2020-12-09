@@ -14,7 +14,7 @@ const Articles = () => {
   const [chosenCategory, setChosenCategory] = useState(null);
   const [searchInput, setSearchInput] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
-  const { loggedIn, isAdmin, userLoading } = useUserContext();
+  const { loggedIn, isAdmin, isSuperAdmin, userLoading } = useUserContext();
 
   const {
     loading: categoryLoading,
@@ -47,7 +47,7 @@ const Articles = () => {
         {categoryIsSuccess && !categoryLoading && (
           <ArticlesToggles
             loggedIn={loggedIn}
-            isAdmin={isAdmin}
+            isAdmin={isAdmin || isSuperAdmin}
             categories={categoryResponse}
             setChosenCategory={setChosenCategory}
             chosenCategory={chosenCategory}

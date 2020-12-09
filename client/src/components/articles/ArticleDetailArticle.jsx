@@ -18,8 +18,9 @@ const StyledArticle = styled.article`
     font-size: 2rem;
     font-weight: 400;
 
-    &:nth-child(1) {
-      margin-bottom: 100px;
+    &:nth-child(2) {
+      font-size: 1.2rem;
+      font-weight: 700;
     }
 
     &:last-child {
@@ -35,6 +36,10 @@ const ArticleDetailArticle = ({ article, loggedIn }) => (
       <h3>{`Av ${article.author.firstName} ${article.author.lastName}`}</h3>
       <h3>{formatDate(article.createdAt)}</h3>
     </StyledInfoContainer>
+    <p>
+      Lesetid: {article?.readTime}
+      {` ${article.readTime < 1 ? 'minutt' : 'minutter'}`}
+    </p>
     <p>{article.ingress}</p>
     <p>{article.content}</p>
     <p>{article.category.title}</p>

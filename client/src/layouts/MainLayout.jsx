@@ -1,10 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 import Nav from '../components/nav/Nav';
 import Footer from '../components/footers/Footer';
+import Button from '../components/buttons/Button';
+import { useUserContext } from '../context/UserContext';
 
 const StyledMainLayout = styled.div`
   min-height: 100%;
+
+  & > button {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
 `;
 
 const StyledHeader = styled.header`
@@ -21,14 +32,25 @@ const StyledContainer = styled.div`
   min-height: calc(100vh - 100px);
 `;
 
-const MainLayout = ({ children }) => (
-  <StyledMainLayout>
-    <StyledHeader>
-      <Nav />
-    </StyledHeader>
-    <StyledContainer>{children}</StyledContainer>
-    <Footer />
-  </StyledMainLayout>
-);
+const MainLayout = ({ children }) => {
+  const { userLoading, isSuperAdmin } = useUserContext();
+  const history = useHistory();
+
+  return (
+    <StyledMainLayout>
+      <StyledHeader>
+        <Nav />
+      </StyledHeader>
+      {isSuperAdmin && !userLoading && (
+        <Button
+          content="STATISTIKK"
+          onClick={() => history.push('/statistikk')}
+        />
+      )}
+      <StyledContainer>{children}</StyledContainer>
+      <Footer />
+    </StyledMainLayout>
+  );
+};
 
 export default MainLayout;

@@ -1,5 +1,7 @@
 import UserLog from '../models/userLog.js';
 
+const { parseAsync } = require('json2csv');
+
 const ARTICLE_LOOKUP = [
   {
     $lookup: {
@@ -48,6 +50,17 @@ const ARTICLE_LOOKUP = [
 ];
 
 export const createUserLog = (data) => UserLog.create(data);
+
+export const getAllUserLogsCsv = async () => {
+  const logs = await UserLog.find().populate(['article', 'user']);
+
+  const fields = ['_id', 'article.title', 'article._id', 'user.email', 'user.firstName', 'user.lastName', 'createdAt'];
+  const opts = { fields };
+
+  const csv = await parseAsync(logs, opts);
+
+  return csv;
+};
 
 export const getCountByArticle = async () => {
   const articles = await UserLog.aggregate([

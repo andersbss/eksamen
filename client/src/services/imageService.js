@@ -9,14 +9,15 @@ export const upload = async (image) => {
     await getCsrfToken();
     const data = new FormData();
     data.append('image', image);
-    return await http.post(`${API_UPLOAD_URL}`, data, {
+    return await http.post(API_UPLOAD_URL, data, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
-  } catch (err) {
+  } catch (error) {
     console.log(err);
-    return err.response;
+    if (error.response) return error.response;
+    return { data: { success: false, data: 'Connection error', status: 503 } };
   }
 };
 
@@ -25,7 +26,8 @@ export const download = async (id) => {
     return await http.get(`${API_DOWNLOAD_URL}/${id}`, {
       responseType: 'blob',
     });
-  } catch (err) {
-    return err.response;
+  } catch (error) {
+    if (error.response) return error.response;
+    return { data: { success: false, data: 'Connection error', status: 503 } };
   }
 };
