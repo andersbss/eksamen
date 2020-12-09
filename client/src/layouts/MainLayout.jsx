@@ -1,21 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
 import Nav from '../components/nav/Nav';
 import Footer from '../components/footers/Footer';
-import Button from '../components/buttons/Button';
+import StyledLinkButton from '../components/styledComponents/StyledLinkButton';
 import { useUserContext } from '../context/UserContext';
 
 const StyledMainLayout = styled.div`
   min-height: 100%;
+`;
 
-  & > button {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    margin-right: 10px;
-    margin-bottom: 10px;
-  }
+const StyledNavLink = styled(StyledLinkButton)`
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin-right: 10px;
+  margin-bottom: 10px;
 `;
 
 const StyledHeader = styled.header`
@@ -34,7 +33,6 @@ const StyledContainer = styled.div`
 
 const MainLayout = ({ children }) => {
   const { userLoading, isSuperAdmin } = useUserContext();
-  const history = useHistory();
 
   return (
     <StyledMainLayout>
@@ -42,10 +40,9 @@ const MainLayout = ({ children }) => {
         <Nav />
       </StyledHeader>
       {isSuperAdmin && !userLoading && (
-        <Button
-          content="STATISTIKK"
-          onClick={() => history.push('/statistikk')}
-        />
+        <StyledNavLink exact to="/statistikk">
+          STATISTIKK
+        </StyledNavLink>
       )}
       <StyledContainer>{children}</StyledContainer>
       <Footer />
