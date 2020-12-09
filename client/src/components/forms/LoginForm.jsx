@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Button from '../buttons/Button';
 import Input from '../common/Input';
 import { StyledSuccessMessage } from '../styledComponents/StyledMessages';
-import { StyledForm } from '../styledComponents/StyledForm';
+import StyledForm from '../styledComponents/StyledForm';
 
 const LoginForm = ({ handleLogin, loading, loggedIn, error }) => {
   const [email, setEmail] = useState('');

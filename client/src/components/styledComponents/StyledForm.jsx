@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledForm = styled.form`
+const StyledForm = styled.form`
   display: grid;
   grid-row-gap: 20px;
 
@@ -8,3 +8,5 @@ export const StyledForm = styled.form`
     margin: auto;
   }
 `;
+
+export default StyledForm;

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import formatDate from '../../utils/dateFormatter';
 import Button from '../buttons/Button';
-import StyledNavLink from '../common/LinkButton';
+import StyledNavLink from '../styledComponents/StyledLinkButton';
 
 const StyledLi = styled.li`
   margin: 0;

@@ -7,7 +7,7 @@ import Input from '../common/Input';
 import Loader from '../animations/Loader';
 import Textarea from '../common/Textarea';
 import ImageForm from './ImageForm';
-import { StyledForm } from '../styledComponents/StyledForm';
+import StyledForm from '../styledComponents/StyledForm';
 
 const StyledFormContainer = styled.main`
   padding: 20px;
