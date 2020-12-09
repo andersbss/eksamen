@@ -1,10 +1,11 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { ThemeProvider } from 'styled-components';
-import ContactForm, {
+import ContactForm from '../../../src/components/forms/ContactForm';
+import {
   StyledSuccessMessage,
   StyledErrorMessage,
-} from '../../../src/components/forms/ContactForm';
+} from '../../../src/components/styledComponents/StyledMessages';
 import Button from '../../../src/components/buttons/Button';
 import Input from '../../../src/components/common/Input';
 import { theme } from '../../../src/styles/Theme';
@@ -26,40 +27,33 @@ describe('<ContactForm />', () => {
     expect(wrapper.find(Button).exists()).toBe(false);
   });
 
-  it('should only render StyledErrorMessage if error is true', () => {
-    const wrapper = shallow(<ContactForm error />);
-    expect(wrapper.find(StyledErrorMessage).exists()).toBe(true);
-
-    wrapper.setProps({ error: false });
-    expect(wrapper.find(StyledErrorMessage).exists()).toBe(false);
-  });
-
   it('should show correct error message if error is true', () => {
     const errorMessage = 'Something unexpected happened!';
     const wrapper = shallow(<ContactForm error={errorMessage} />);
-    expect(wrapper.find(StyledErrorMessage).text()).toEqual(errorMessage);
+    expect(wrapper.find('p').text()).toContain(errorMessage);
   });
 
-  it('should disable button if loading is true', () => {
-    const wrapper = shallow(<ContactForm loading />);
+  it('should disable button if loading or hasErrors is true', () => {
+    const wrapper = shallow(<ContactForm loading={false} hasErrors={false} />);
+    expect(wrapper.find(Button).prop('disabled')).toEqual(false);
+
+    wrapper.setProps({ loading: true });
     expect(wrapper.find(Button).prop('disabled')).toEqual(true);
 
-    wrapper.setProps({ loading: false });
-    expect(wrapper.find(Button).prop('disabled')).toEqual(false);
+    wrapper.setProps({ loading: false, hasErrors: true });
+    expect(wrapper.find(Button).prop('disabled')).toEqual(true);
   });
 
   it('should be auto filled values for userEmail and userName, if passed as props', () => {
     const email = 'email@test.com';
     const userName = 'user name';
 
-    const wrapper = mount(
-      <ThemeProvider theme={theme}>
-        <ContactForm userEmail={email} userName={userName} />
-      </ThemeProvider>
+    const wrapper = shallow(
+      <ContactForm userEmail={email} userName={userName} />
     );
 
-    expect(wrapper.find(Input).at(0).prop('value')).toEqual('email@test.com');
-    expect(wrapper.find(Input).at(1).prop('value')).toEqual('user name');
+    expect(wrapper.find(Input).at(0).prop('defaultValue')).toEqual(email);
+    expect(wrapper.find(Input).at(1).prop('defaultValue')).toEqual(userName);
   });
 
   it('should call handleSubmit when form is submitted', () => {
