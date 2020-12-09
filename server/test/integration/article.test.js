@@ -236,3 +236,29 @@ describe('Update', () => {
       });
   });
 });
+
+describe('Delete', () => {
+  it('should return no articles and deleted article', async () => {
+    const newArticleRes = await request(app)
+      .post(`${BASE_URL}/articles`)
+      .set('Cookie', `token=${token}`)
+      .send(articlePayload);
+
+    const deletedArticleRes = await request(app)
+      .delete(`${BASE_URL}/articles/${newArticleRes.body.data._id}`)
+      .set('Cookie', `token=${token}`);
+    const { success: deletedSuccess, data: deletedData } = deletedArticleRes.body;
+
+    const privateArticlesRes = await request(app).get(`${BASE_URL}/articles`).set('Cookie', `token=${token}`);
+    const { data: allData } = privateArticlesRes.body;
+
+    expect(deletedArticleRes.status).toEqual(200);
+    expect(deletedSuccess).toBe(true);
+    expect(deletedData.title).toEqual(articlePayload.title);
+    expect(deletedData.ingress).toEqual(articlePayload.ingress);
+    expect(deletedData.content).toEqual(articlePayload.content);
+    expect(deletedData.category).toEqual(articlePayload.category);
+    expect(deletedData.author).toEqual(articlePayload.author);
+    expect(allData.data).toHaveLength(0);
+  });
+});
