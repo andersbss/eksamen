@@ -168,7 +168,25 @@ describe('Get', () => {
   });
 
   // eslint-disable-next-line jest/expect-expect
-  it('should return success wit all private articles', async () => {
+  it('should return success with a single article', async () => {
+    articlePayload.public = true;
+    const articleRes = await request(app)
+      .post(`${BASE_URL}/articles`)
+      .set('Cookie', `token=${token}`)
+      .send(articlePayload);
+
+    const { data: newArticle } = articleRes.body;
+    const publicArticleRes = await request(app).get(`${BASE_URL}/articles/${newArticle._id}`);
+
+    const { success, data } = publicArticleRes.body;
+
+    expect(success).toBe(true);
+    expect(publicArticleRes.status).toEqual(200);
+    expect(data._id).toEqual(newArticle._id);
+  });
+
+  // eslint-disable-next-line jest/expect-expect
+  it('should return success with all private articles', async () => {
     await request(app).post(`${BASE_URL}/articles`).set('Cookie', `token=${token}`).send(articlePayload);
     const privateArticlesRes = await request(app).get(`${BASE_URL}/articles`).set('Cookie', `token=${token}`);
 
