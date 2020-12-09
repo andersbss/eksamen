@@ -48,4 +48,15 @@ describe('Create', () => {
     expect(data.title).toEqual('Category');
     expect(data._id).toMatch(OBJECT_ID_REGEX);
   });
+
+  // eslint-disable-next-line jest/expect-expect
+  it('should return error when category already exist', async () => {
+    await request(app).post(`${BASE_URL}/categories`).set('Cookie', `token=${token}`).send({ title: 'Category' });
+
+    await request(app)
+      .post(`${BASE_URL}/categories`)
+      .set('Cookie', `token=${token}`)
+      .send({ title: 'Category' })
+      .expect(400, { success: false, data: 'Category already exist', status: 400 });
+  });
 });
