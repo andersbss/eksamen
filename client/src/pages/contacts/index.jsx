@@ -12,7 +12,7 @@ const Contacts = () => {
 
   return (
     <>
-      <Jumbotron headerText="Contacts" />
+      <Jumbotron headerText="Meldinger" top="70" bottom="0" />
       <ContactsLayout>
         <h2>CONTACTS</h2>
       </ContactsLayout>
