@@ -265,6 +265,21 @@ describe('Update', () => {
       .send(articlePayload)
       .expect(404, { success: false, data: 'Article not found', status: 404 });
   });
+
+  // eslint-disable-next-line jest/expect-expect
+  it('should return error when unauthorized', async () => {
+    userPayload.role = 'user';
+    userPayload.email = 'user@user.com';
+    const userRes = await request(app).post(`${BASE_URL}/register`).send(userPayload);
+
+    const userToken = userRes.body.data.token;
+
+    await request(app)
+      .put(`${BASE_URL}/articles/notimportantforthistest`)
+      .set('Cookie', `token=${userToken}`)
+      .send(articlePayload)
+      .expect(403, { success: false, data: 'Unauthorized', status: 403 });
+  });
 });
 
 describe('Delete', () => {
@@ -303,5 +318,19 @@ describe('Delete', () => {
       .delete(`${BASE_URL}/articles/ffffffffffffffffffffffff`)
       .set('Cookie', `token=${token}`)
       .expect(404, { success: false, data: 'Article not found', status: 404 });
+  });
+
+  // eslint-disable-next-line jest/expect-expect
+  it('should return error when unauthorized', async () => {
+    userPayload.role = 'user';
+    userPayload.email = 'user@user.com';
+    const userRes = await request(app).post(`${BASE_URL}/register`).send(userPayload);
+
+    const userToken = userRes.body.data.token;
+
+    await request(app)
+      .delete(`${BASE_URL}/articles/notimportantforthistest`)
+      .set('Cookie', `token=${userToken}`)
+      .expect(403, { success: false, data: 'Unauthorized', status: 403 });
   });
 });
