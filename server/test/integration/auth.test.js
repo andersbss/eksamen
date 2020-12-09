@@ -161,3 +161,10 @@ describe('Login', () => {
       .expect(404, { success: false, data: 'Failed to login, user not found', status: 404 });
   });
 });
+
+describe('Logout', () => {
+  // eslint-disable-next-line jest/expect-expect
+  it('should return success when logging out', async () => {
+    await request(app).post(`${BASE_URL}/logout`).expect(200, { success: true, data: 'Logged out', status: 200 });
+  });
+});
