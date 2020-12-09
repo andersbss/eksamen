@@ -112,4 +112,25 @@ describe('Create', () => {
         status: 400,
       });
   });
+
+  // eslint-disable-next-line jest/expect-expect
+  it('should return error if invalid object ids', async () => {
+    articlePayload.author = 'Not a valid id';
+    articlePayload.category = 'Not a valid id';
+
+    await request(app)
+      .post(`${BASE_URL}/articles`)
+      .set('Cookie', `token=${token}`)
+      .send(articlePayload)
+      .expect(400, { success: false, data: ['Author id is not valid', 'Category id is not valid'], status: 400 });
+
+    articlePayload.author = 'ffffffffffffffffffffffff';
+    articlePayload.category = 'ffffffffffffffffffffffff';
+
+    await request(app)
+      .post(`${BASE_URL}/articles`)
+      .set('Cookie', `token=${token}`)
+      .send(articlePayload)
+      .expect(404, { success: false, data: 'Author not found', status: 404 });
+  });
 });
