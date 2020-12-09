@@ -186,6 +186,17 @@ describe('Get', () => {
   });
 
   // eslint-disable-next-line jest/expect-expect
+  it('should return error when article not found', async () => {
+    await request(app)
+      .get(`${BASE_URL}/articles/ffffffffffffffffffffffff`)
+      .expect(404, { success: false, data: 'Article not found', status: 404 });
+
+    await request(app)
+      .get(`${BASE_URL}/articles/badId`)
+      .expect(404, { success: false, data: 'Resource not found. Invalid _id', status: 404 });
+  });
+
+  // eslint-disable-next-line jest/expect-expect
   it('should return success with all private articles', async () => {
     await request(app).post(`${BASE_URL}/articles`).set('Cookie', `token=${token}`).send(articlePayload);
     const privateArticlesRes = await request(app).get(`${BASE_URL}/articles`).set('Cookie', `token=${token}`);
