@@ -15,8 +15,9 @@ import { upload } from '../../services/imageService';
 
 const StyledFormContainer = styled.main`
   padding: 20px;
-  width: 80%;
+  width: 60%;
   margin: auto;
+  padding-top: 100px;
 
   & > form > img {
     padding-top: 10px;
@@ -37,8 +38,8 @@ const StyledSelectButtonContainer = styled.span`
   & > button {
     float: right;
     height: 50px;
-    width: 100px;
-    margin-top: 50px;
+    width: 80px;
+    margin-top: 18px;
   }
 
   & > span {
@@ -131,7 +132,7 @@ const ArticleForm = ({
             placeholder="Tittel"
             required="true"
             name="title"
-            defaultValue={article.title}
+            defaultValue={article ? article.title : ''}
             onChange={handleChange}
           />
           <Input
@@ -142,7 +143,7 @@ const ArticleForm = ({
             placeholder="Ingress"
             required="true"
             name="ingress"
-            defaultValue={article.ingress}
+            defaultValue={article ? article.ingress : ''}
             onChange={handleChange}
           />
           <Textarea
@@ -152,7 +153,7 @@ const ArticleForm = ({
             placeholder="Innhold"
             required="true"
             name="content"
-            defaultValue={article.content}
+            defaultValue={article ? article.content : ''}
             rows="4"
             cols="50"
             onChange={handleChange}
@@ -176,7 +177,8 @@ const ArticleForm = ({
                   <p>Ingen kategorier</p>
                 ) : (
                   categories.map((category) => {
-                    if (category._id === article.category._id) return null;
+                    if (article)
+                      if (category._id === article.category._id) return null;
                     return (
                       <option value={category._id}>{category.title}</option>
                     );
@@ -212,7 +214,8 @@ const ArticleForm = ({
                 <p>Ingen forfattere</p>
               ) : (
                 authors.map((author) => {
-                  if (author._id === article.author._id) return null;
+                  if (article)
+                    if (author._id === article.author._id) return null;
                   const name = `${author.firstName} ${author.lastName}`;
                   return <option value={author._id}>{name}</option>;
                 })
