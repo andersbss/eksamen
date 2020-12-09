@@ -1,8 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Textarea, {
-  StyledErrorLabel,
-} from '../../../src/components/common/Textarea';
+import Textarea from '../../../src/components/common/Textarea';
 
 describe('<Textarea />', () => {
   it('should contain correct label text', () => {
