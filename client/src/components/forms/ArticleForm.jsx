@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../buttons/Button';
 import Select from '../common/Select';
 import Error from '../errors/Error';
-import useFetch from '../../hooks/useFetch';
-import inputValidation from '../../utils/formValidation';
 import Input from '../common/Input';
 import Loader from '../animations/Loader';
 import Textarea from '../common/Textarea';
-import { request } from '../../services/httpService';
 import ImageForm from './ImageForm';
-import { upload } from '../../services/imageService';
 
 const StyledFormContainer = styled.main`
   padding: 20px;
@@ -61,29 +56,29 @@ const StyledSuccessMessage = styled.span`
 
 const ArticleForm = ({
   id,
+  imageId,
   article,
+  authors,
+  categories,
   handleSubmit,
   handleChange,
+  imageFormOnChange,
+  handleModalToggle,
   loading,
+  articleLoading,
+  categoryFetchLoading,
+  authorLoading,
+  handleImageUpload,
   submitSuccess,
+  authorIsSuccess,
+  categoryIsSuccess,
+  imageSuccess,
   hasErrors,
   error,
   errors,
-  handleModalToggle,
-  articleLoading,
-  authorFetchError,
-  authorLoading,
-  authors,
-  authorIsSuccess,
-  categoryFetchError,
-  categoryFetchLoading,
-  categories,
-  categoryIsSuccess,
-  imageFormOnChange,
-  handleImageUpload,
   imageError,
-  imageSuccess,
-  imageId,
+  authorFetchError,
+  categoryFetchError,
 }) => {
   const [authorName, setAuthorName] = useState('');
 
