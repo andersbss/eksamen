@@ -1,42 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Jumbotron from '../../components/common/Jumbotron';
 import ContactForm from '../../components/forms/ContactForm';
 import ContactLayout from '../../layouts/ContactLayout';
+import validate from '../../utils/contactFormValidation';
 import { request } from '../../services/httpService';
 import { useUserContext } from '../../context/UserContext';
+import useForm from '../../hooks/useForm';
 
 const Contact = () => {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const form = useForm(request, validate, ['POST', '/contacts']);
   const { loggedIn, user } = useUserContext();
   const history = useHistory();
 
-  const handleSubmit = async (e, email, name, message) => {
-    e.preventDefault();
-    try {
-      setLoading(true);
-      const {
-        data: { success, data },
-      } = await request('POST', '/contacts', { email, name, message });
-      console.log(user);
+  const {
+    handleChange,
+    handleSubmit,
+    errors,
+    hasErrors,
+    loading,
+    response,
+  } = form;
 
-      if (success) {
-        setSubmitSuccess(success);
-        setLoading(false);
-        console.log(data);
-        setTimeout(() => history.push('/hjem'), 2000);
-      } else {
-        console.log(data);
-        setLoading(false);
-        setError(data);
-      }
-    } catch (error) {
-      setLoading(false);
-      setError({ success: false, data: 'Unexpected error occurred' });
+  useEffect(() => {
+    if (!response) return;
+    const {
+      data: { success, data },
+    } = response;
+
+    if (success) {
+      setSubmitSuccess(success);
+      setTimeout(() => history.push('/hjem'), 1500);
+    } else {
+      setError(data);
     }
-  };
+  }, [history, response]);
 
   return (
     <>
@@ -44,6 +44,9 @@ const Contact = () => {
       <ContactLayout>
         <ContactForm
           handleSubmit={handleSubmit}
+          handleChange={handleChange}
+          errors={errors}
+          hasErrors={hasErrors}
           loading={loading}
           error={error}
           submitSuccess={submitSuccess}

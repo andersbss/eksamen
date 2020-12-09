@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import Jumbotron from '../../components/common/Jumbotron';
 import ArticleForm from '../../components/forms/ArticleForm';
 import useFetch from '../../hooks/useFetch';
@@ -7,17 +7,56 @@ import Loader from '../../components/animations/Loader';
 import Modal from '../../components/modals/Modal';
 import useForm from '../../hooks/useForm';
 import { request } from '../../services/httpService';
-import validate from '../../utils/categoryValidation';
+import categoryValidate from '../../utils/categoryValidation';
+import articleValidate from '../../utils/articleFormValidation';
 import CategoryForm from '../../components/forms/CategoryForm';
 import Error from '../../components/errors/Error';
+import { upload } from '../../services/imageService';
 
 const CreateArticle = () => {
   const { id } = useParams();
   const [article, setArticle] = useState(null);
-  const [error, setError] = useState(null);
+  const [categoryError, setCategoryError] = useState(null);
+  const [articleError, setArticleError] = useState(null);
   const [categorySuccess, setCategorySuccess] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [refreshCategories, setRefreshCategories] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  const history = useHistory();
+
+  // Image
+  const [file, setFile] = useState();
+  const [imageError, setImageError] = useState(null);
+  const [imageSuccess, setImageSuccess] = useState(false);
+  const [imageId, setImageId] = useState('');
+
+  const imageFormOnChange = (e) => {
+    const imageFile = e.target.files[0];
+    setFile(imageFile);
+  };
+
+  const handleImageUpload = async (event) => {
+    event.preventDefault();
+    const { data } = await upload(file);
+
+    if (data.success) {
+      setImageSuccess(true);
+      setImageError(null);
+      setImageId(data?.data?._id);
+    } else {
+      setImageError(data.data);
+      setImageSuccess(false);
+    }
+  };
+
+  let putOrPost;
+
+  if (id) {
+    putOrPost = ['PUT', `/articles/${id}`];
+  } else {
+    putOrPost = ['POST', '/articles'];
+  }
 
   const {
     loading: articlesLoading,
@@ -26,25 +65,61 @@ const CreateArticle = () => {
   } = useFetch('GET', `articles/${id}`);
 
   const {
-    handleChange,
-    handleSubmit,
-    errors,
-    hasErrors,
-    loading,
-    response,
-  } = useForm(request, validate, ['POST', '/categories']);
+    error: categoryFetchError,
+    loading: categoryFetchLoading,
+    response: categories,
+    isSuccess: categoryIsSuccess,
+  } = useFetch('GET', '/categories', false, refreshCategories);
+
+  const {
+    error: authorFetchError,
+    loading: authorLoading,
+    response: authors,
+    isSuccess: authorIsSuccess,
+  } = useFetch('GET', '/authors');
+
+  const {
+    handleChange: handleCategoryChange,
+    handleSubmit: handleCategorySubmit,
+    errors: categoryErrors,
+    hasErrors: hasCategoryErrors,
+    loading: categoryLoading,
+    response: categoryResponse,
+  } = useForm(request, categoryValidate, ['POST', '/categories']);
+
+  const {
+    handleChange: handleArticleChange,
+    handleSubmit: handleArticleSubmit,
+    errors: articleErrors,
+    hasErrors: hasArticleErrors,
+    loading: articleLoading,
+    response: articleResponse,
+  } = useForm(request, articleValidate, putOrPost);
 
   useEffect(() => {
-    if (!response) return;
+    if (!categoryResponse) return;
     const {
       data: { success, data },
-    } = response;
+    } = categoryResponse;
 
     if (success) {
       setModalIsOpen(false);
+      setCategorySuccess(true);
       setRefreshCategories((prev) => !prev);
-    } else setError(data);
-  }, [response]);
+    } else setCategoryError(data);
+  }, [categoryResponse]);
+
+  useEffect(() => {
+    if (!articleResponse) return;
+    const {
+      data: { success, data },
+    } = articleResponse;
+
+    if (success) {
+      setSubmitSuccess(success);
+      history.push('/fagartikler');
+    } else setArticleError(data);
+  }, [articleResponse, history]);
 
   useEffect(() => {
     if (articlesStatus === 200) {
@@ -57,13 +132,14 @@ const CreateArticle = () => {
       {modalIsOpen && (
         <Modal handleToggle={() => setModalIsOpen(false)}>
           <CategoryForm
-            handleSubmit={handleSubmit}
-            handleChange={handleChange}
-            errors={errors}
-            hasErrors={hasErrors}
+            handleSubmit={handleCategorySubmit}
+            handleChange={handleCategoryChange}
+            errors={categoryErrors}
+            hasErrors={hasCategoryErrors}
             success={categorySuccess}
-            loading={loading}
-            error={error}
+            loading={categoryLoading}
+            error={categoryError}
+            submitSuccess={submitSuccess}
           />
         </Modal>
       )}
@@ -77,16 +153,31 @@ const CreateArticle = () => {
       <ArticleForm
         id={id}
         article={article}
-        handleSubmit={handleSubmit}
-        handleChange={handleChange}
-        errors={errors}
-        hasErrors={hasErrors}
-        loading={loading}
-        error={error}
+        handleSubmit={handleArticleSubmit}
+        handleChange={handleArticleChange}
+        errors={articleErrors}
+        hasErrors={hasArticleErrors}
+        loading={articleLoading}
+        error={articleError}
         handleModalToggle={() => setModalIsOpen(true)}
         refreshCategories={refreshCategories}
+        articleLoading={articlesLoading}
+        authorFetchError={authorFetchError}
+        authorLoading={authorLoading}
+        authors={authors}
+        authorIsSuccess={authorIsSuccess}
+        categoryFetchError={categoryFetchError}
+        categoryFetchLoading={categoryFetchLoading}
+        categories={categories}
+        categoryIsSuccess={categoryIsSuccess}
+        imageFormOnChange={imageFormOnChange}
+        handleImageUpload={handleImageUpload}
+        imageError={imageError}
+        imageSuccess={imageSuccess}
+        imageId={imageId}
       />
-      {error && <Error error={error} />}
+      {articleError && <Error error={articleError} />}
+      {categoryError && <Error error={categoryError} />}
     </>
   );
 };

@@ -37,57 +37,59 @@ export const StyledErrorMessage = styled.span`
 
 const ContactForm = ({
   handleSubmit,
+  handleChange,
   loading,
   submitSuccess,
+  hasErrors,
   error,
+  errors,
   userEmail,
   userName,
-}) => {
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    setEmail(userEmail);
-    setName(userName);
-  }, [userEmail, userName]);
-
-  return (
-    <StyledForm onSubmit={(e) => handleSubmit(e, email, name, message)}>
-      <Input
-        label="Epost"
-        placeholder="Epost"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+}) => (
+  <StyledForm onSubmit={handleSubmit}>
+    <Input
+      name="email"
+      label="Epost"
+      errorLabel={errors?.email}
+      placeholder="Epost"
+      defaultValue={userEmail}
+      onChange={handleChange}
+    />
+    <Input
+      name="name"
+      label="Navn"
+      errorLabel={errors?.name}
+      placeholder="Navn"
+      defaultValue={userName}
+      onChange={handleChange}
+    />
+    <Textarea
+      name="message"
+      label="Melding"
+      errorLabel={errors?.message}
+      placeholder="Melding"
+      onChange={handleChange}
+    />
+    {error && (
+      <p>{`Registrering feilet, prøv igjen.(${
+        Array.isArray(error) ? error[0] : error
+      })`}</p>
+    )}
+    {!submitSuccess ? (
+      <Button
+        type="submit"
+        content={loading ? 'Sender melding...' : 'Send'}
+        backgroundColor="blue"
+        color="white"
+        disabled={loading || hasErrors}
       />
-      <Input
-        label="Navn"
-        placeholder="Navn"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <Textarea
-        label="Melding"
-        placeholder="Melding"
-        onChange={(e) => setMessage(e.target.value)}
-      />
-      {error && <StyledErrorMessage>{error}</StyledErrorMessage>}
-      {!submitSuccess ? (
-        <Button
-          type="submit"
-          content={loading ? 'Sender melding...' : 'Send'}
-          backgroundColor="blue"
-          color="white"
-          disabled={loading}
-        />
-      ) : (
-        <StyledSuccessMessage>
-          <p>Meldingen er sendt!</p>
-          <p>Omdirigerer...</p>
-        </StyledSuccessMessage>
-      )}
-    </StyledForm>
-  );
-};
+    ) : (
+      <StyledSuccessMessage>
+        <p>Meldingen er sendt!</p>
+        <p>Omdirigerer...</p>
+      </StyledSuccessMessage>
+    )}
+  </StyledForm>
+);
 
 export default ContactForm;
