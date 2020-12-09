@@ -70,53 +70,27 @@ const ArticleForm = ({
   error,
   errors,
   handleModalToggle,
-  refreshCategories,
   articleLoading,
+  authorFetchError,
+  authorLoading,
+  authors,
+  authorIsSuccess,
+  categoryFetchError,
+  categoryFetchLoading,
+  categories,
+  categoryIsSuccess,
+  imageFormOnChange,
+  handleImageUpload,
+  imageError,
+  imageSuccess,
+  imageId,
 }) => {
-  // Image
-  const [file, setFile] = useState();
-  const [imageError, setImageError] = useState(null);
-  const [imageSuccess, setImageSuccess] = useState(false);
-  const [imageId, setImageId] = useState('');
   const [authorName, setAuthorName] = useState('');
-
-  const {
-    error: categoryFetchError,
-    loading: categoryLoading,
-    response: categories,
-    isSuccess: categoryIsSuccess,
-  } = useFetch('GET', '/categories', false, refreshCategories);
-
-  const {
-    error: authorFetchError,
-    loading: authorLoading,
-    response: authors,
-    isSuccess: authorIsSuccess,
-  } = useFetch('GET', '/authors');
 
   useEffect(() => {
     if (article)
       setAuthorName(`${article.author.firstName} ${article.author.lastName}`);
   }, [article]);
-
-  const imageFormOnChange = (e) => {
-    const imageFile = e.target.files[0];
-    setFile(imageFile);
-  };
-
-  const handleImageUpload = async (event) => {
-    event.preventDefault();
-    const { data } = await upload(file);
-
-    if (data.success) {
-      setImageSuccess(true);
-      setImageError(null);
-      setImageId(data?.data?._id);
-    } else {
-      setImageError(data.data);
-      setImageSuccess(false);
-    }
-  };
 
   return (
     <StyledFormContainer>
@@ -158,7 +132,7 @@ const ArticleForm = ({
             cols="50"
             onChange={handleChange}
           />
-          {categoryLoading && <Loader />}
+          {categoryFetchLoading && <Loader />}
           {categoryIsSuccess && (
             <StyledSelectButtonContainer>
               <Select
@@ -193,7 +167,7 @@ const ArticleForm = ({
               />
             </StyledSelectButtonContainer>
           )}
-          {!categoryIsSuccess && !categoryLoading && (
+          {!categoryIsSuccess && !categoryFetchLoading && (
             <Error error={categoryFetchError} />
           )}
           {authorLoading && <Loader />}

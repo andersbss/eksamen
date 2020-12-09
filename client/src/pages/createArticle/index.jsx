@@ -11,6 +11,7 @@ import categoryValidate from '../../utils/categoryValidation';
 import articleValidate from '../../utils/articleFormValidation';
 import CategoryForm from '../../components/forms/CategoryForm';
 import Error from '../../components/errors/Error';
+import { upload } from '../../services/imageService';
 
 const CreateArticle = () => {
   const { id } = useParams();
@@ -21,7 +22,34 @@ const CreateArticle = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [refreshCategories, setRefreshCategories] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+
   const history = useHistory();
+
+  // Image
+  const [file, setFile] = useState();
+  const [imageError, setImageError] = useState(null);
+  const [imageSuccess, setImageSuccess] = useState(false);
+  const [imageId, setImageId] = useState('');
+
+  const imageFormOnChange = (e) => {
+    const imageFile = e.target.files[0];
+    setFile(imageFile);
+  };
+
+  const handleImageUpload = async (event) => {
+    event.preventDefault();
+    const { data } = await upload(file);
+
+    if (data.success) {
+      setImageSuccess(true);
+      setImageError(null);
+      setImageId(data?.data?._id);
+    } else {
+      setImageError(data.data);
+      setImageSuccess(false);
+    }
+  };
+
   let putOrPost;
 
   if (id) {
@@ -35,6 +63,20 @@ const CreateArticle = () => {
     response: articlesResponse,
     reqStatus: articlesStatus,
   } = useFetch('GET', `articles/${id}`);
+
+  const {
+    error: categoryFetchError,
+    loading: categoryFetchLoading,
+    response: categories,
+    isSuccess: categoryIsSuccess,
+  } = useFetch('GET', '/categories', false, refreshCategories);
+
+  const {
+    error: authorFetchError,
+    loading: authorLoading,
+    response: authors,
+    isSuccess: authorIsSuccess,
+  } = useFetch('GET', '/authors');
 
   const {
     handleChange: handleCategoryChange,
@@ -119,6 +161,19 @@ const CreateArticle = () => {
         handleModalToggle={() => setModalIsOpen(true)}
         refreshCategories={refreshCategories}
         articleLoading={articlesLoading}
+        authorFetchError={authorFetchError}
+        authorLoading={authorLoading}
+        authors={authors}
+        authorIsSuccess={authorIsSuccess}
+        categoryFetchError={categoryFetchError}
+        categoryFetchLoading={categoryFetchLoading}
+        categories={categories}
+        categoryIsSuccess={categoryIsSuccess}
+        imageFormOnChange={imageFormOnChange}
+        handleImageUpload={handleImageUpload}
+        imageError={imageError}
+        imageSuccess={imageSuccess}
+        imageId={imageId}
       />
       {articleError && <Error error={articleError} />}
       {categoryError && <Error error={categoryError} />}
