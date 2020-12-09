@@ -7,7 +7,7 @@ const StyledEmployeeContainer = styled.section`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin: 20px;
+  margin: 30px;
 `;
 
 const Employees = ({ officeId }) => {

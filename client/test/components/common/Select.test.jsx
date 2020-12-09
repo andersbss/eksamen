@@ -1,8 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Select, {
-  StyledErrorLabel,
-} from '../../../src/components/common/Select';
+import Select from '../../../src/components/common/Select';
 
 describe('<Select />', () => {
   it('should contain correct label text', () => {
@@ -12,7 +10,7 @@ describe('<Select />', () => {
 
   it('should contain correct errorLabel text', () => {
     const wrapper = shallow(<Select errorLabel="Name is required" />);
-    expect(wrapper.find(StyledErrorLabel).text()).toContain('Name is required');
+    expect(wrapper.find('label').at(1).text()).toContain('Name is required');
   });
 
   it('should have correct name based on name prop', () => {

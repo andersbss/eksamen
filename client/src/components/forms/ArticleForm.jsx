@@ -7,6 +7,7 @@ import Input from '../common/Input';
 import Loader from '../animations/Loader';
 import Textarea from '../common/Textarea';
 import ImageForm from './ImageForm';
+import StyledForm from '../styledComponents/StyledForm';
 
 const StyledFormContainer = styled.main`
   padding: 20px;
@@ -14,15 +15,14 @@ const StyledFormContainer = styled.main`
   margin: auto;
   padding-top: 100px;
 
+  & > form > button {
+    margin: 0;
+  }
+
   & > form > img {
     padding-top: 10px;
     padding-bottom: 10px;
   }
-`;
-
-const StyledForm = styled.form`
-  display: grid;
-  row-gap: 30px;
 `;
 
 const StyledSelectButtonContainer = styled.span`

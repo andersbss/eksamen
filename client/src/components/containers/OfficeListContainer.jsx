@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import MediumTitle from '../titles/MediumTitle';
 import OfficeListItem from '../items/OfficeListItem';
+import StyledOfficeMain from '../styledComponents/StyledOfficeMain';
 
 const StyledUl = styled.ol`
   list-style: none;
@@ -29,20 +30,8 @@ const StyledUl = styled.ol`
   }
 `;
 
-const StyledMain = styled.main`
-  padding-left: 50px;
-  padding-right: 50px;
-  padding-bottom: 50px;
-
-  & > h2 {
-    font-size: 4rem;
-    font-weight: 1000;
-    line-height: 0px;
-  }
-`;
-
 const OfficeListContainer = ({ offices }) => (
-  <StyledMain>
+  <StyledOfficeMain>
     <MediumTitle
       content={`${offices.location} (${offices.offices.length} kontorer)`}
       style={{ textAlign: 'left' }}
@@ -62,7 +51,7 @@ const OfficeListContainer = ({ offices }) => (
         ))
       )}
     </StyledUl>
-  </StyledMain>
+  </StyledOfficeMain>
 );
 
 export default OfficeListContainer;

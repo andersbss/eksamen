@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import MediumTitle from '../titles/MediumTitle';
 import OfficeGridItem from '../items/OfficeGridItem';
+import StyledOfficeMain from '../styledComponents/StyledOfficeMain';
 
 const StyledGridContainer = styled.section`
   display: flex;
@@ -9,20 +10,8 @@ const StyledGridContainer = styled.section`
   flex-wrap: wrap;
 `;
 
-const StyledMain = styled.main`
-  padding-left: 50px;
-  padding-right: 50px;
-  padding-bottom: 50px;
-
-  & > h2 {
-    font-size: 4rem;
-    font-weight: 1000;
-    line-height: 0px;
-  }
-`;
-
 const OfficeGridContainer = ({ offices }) => (
-  <StyledMain>
+  <StyledOfficeMain>
     <MediumTitle
       content={`${offices.location} (${offices.offices.length} kontorer)`}
       style={{ textAlign: 'left' }}
@@ -42,7 +31,7 @@ const OfficeGridContainer = ({ offices }) => (
         ))
       )}
     </StyledGridContainer>
-  </StyledMain>
+  </StyledOfficeMain>
 );
 
 export default OfficeGridContainer;

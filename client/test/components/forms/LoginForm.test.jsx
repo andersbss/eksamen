@@ -1,8 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import LoginForm, {
-  StyledSuccessMessage,
-} from '../../../src/components/forms/LoginForm';
+import LoginForm from '../../../src/components/forms/LoginForm';
+import { StyledSuccessMessage } from '../../../src/components/styledComponents/StyledMessages';
 import Button from '../../../src/components/buttons/Button';
 
 describe('<LoginForm />', () => {

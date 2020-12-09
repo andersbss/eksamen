@@ -1,39 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import React from 'react';
 import Button from '../buttons/Button';
 import Input from '../common/Input';
 import Textarea from '../common/Textarea';
-
-const StyledForm = styled.form`
-  display: grid;
-  grid-row-gap: 20px;
-  & > button {
-    margin: auto;
-    margin-bottom: 20px;
-  }
-`;
-
-export const StyledSuccessMessage = styled.span`
-  text-align: center;
-  color: green;
-  & > p {
-    font-weight: 800;
-    &:nth-child(2) {
-      font-size: 1rem;
-    }
-  }
-`;
-
-export const StyledErrorMessage = styled.span`
-  text-align: center;
-  color: red;
-  & > p {
-    font-weight: 800;
-    &:nth-child(2) {
-      font-size: 1rem;
-    }
-  }
-`;
+import { StyledSuccessMessage } from '../styledComponents/StyledMessages';
+import StyledForm from '../styledComponents/StyledForm';
 
 const ContactForm = ({
   handleSubmit,

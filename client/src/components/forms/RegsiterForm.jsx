@@ -1,28 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
 import Button from '../buttons/Button';
 import Input from '../common/Input';
-
-const StyledForm = styled.form`
-  display: grid;
-  grid-row-gap: 20px;
-
-  & > button {
-    margin: auto;
-  }
-`;
-
-export const StyledSuccessMessage = styled.span`
-  text-align: center;
-
-  & > p {
-    font-weight: 800;
-
-    &:nth-child(2) {
-      font-size: 1rem;
-    }
-  }
-`;
+import { StyledSuccessMessage } from '../styledComponents/StyledMessages';
+import StyledForm from '../styledComponents/StyledForm';
 
 const RegisterForm = ({
   handleSubmit,

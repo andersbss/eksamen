@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import Button from '../buttons/Button';
 import SelectFilter from '../common/SelectFilter';
 import Input from '../common/Input';
-import StyledNavLink from '../common/LinkButton';
+import StyledNavLink from '../styledComponents/StyledLinkButton';
 
 const StyledSection = styled.section`
   display: flex;
