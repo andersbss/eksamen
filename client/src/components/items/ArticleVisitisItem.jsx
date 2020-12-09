@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import formatDate from '../../utils/dateFormatter';
-import Button from '../buttons/Button';
 import StyledNavLink from '../styledComponents/StyledLinkButton';
 
 const StyledLi = styled.li`
@@ -35,22 +34,18 @@ const StyledLi = styled.li`
   }
 `;
 
-const ArticleVisitsItem = ({ article }) => {
-  console.log();
-
-  return (
-    <StyledLi>
-      <h3>{article.title}</h3>
-      <p>Visninger: {article.count}</p>
-      <p>
-        Av: {article.authorFirstName} {article.authorLastName}
-      </p>
-      <p>Publisert: {formatDate(article.createdAt)}</p>
-      <StyledNavLink primary="true" exact to={`fagartikkel/${article._id}`}>
-        TIL ARTIKKEL
-      </StyledNavLink>
-    </StyledLi>
-  );
-};
+const ArticleVisitsItem = ({ article }) => (
+  <StyledLi>
+    <h3>{article.title}</h3>
+    <p>Visninger: {article.count}</p>
+    <p>
+      Av: {article.authorFirstName} {article.authorLastName}
+    </p>
+    <p>Publisert: {formatDate(article.createdAt)}</p>
+    <StyledNavLink primary="true" exact to={`fagartikkel/${article._id}`}>
+      TIL ARTIKKEL
+    </StyledNavLink>
+  </StyledLi>
+);
 
 export default ArticleVisitsItem;
