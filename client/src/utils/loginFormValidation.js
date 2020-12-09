@@ -1,5 +1,15 @@
-const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const validate = (inputs) => {
+  const { email, password } = inputs;
+  const errors = {};
 
-const loginIsValid = (email) => EMAIL_REGEX.test(email.toLowerCase());
+  if (!email) errors.email = 'Fyll inn epost';
+  else if (!email.match(/\S+@\S+\.\S+/)) {
+    errors.email = 'Ugyldig e-postadresse';
+  }
 
-export default loginIsValid;
+  if (!password?.replace(/\s/g, '')) errors.password = 'Fyll inn passord';
+
+  return errors;
+};
+
+export default validate;

@@ -4,36 +4,47 @@ import { StyledSuccessMessage } from '../styledComponents/StyledMessages';
 import StyledForm from '../styledComponents/StyledForm';
 import Button from '../styledComponents/StyledButton';
 
-const LoginForm = ({ handleLogin, loading, loggedIn, error }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  return (
-    <StyledForm onSubmit={(e) => handleLogin(e, email, password)}>
-      <Input
-        label="Epost"
-        placeholder="Epost"
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <Input
-        label="Passord"
-        type="Password"
-        placeholder="Passord"
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      {error && <p>Innlogging feilet, prøv igjen</p>}
-      {!loggedIn ? (
-        <Button primary type="submit" disabled={loading}>
-          {loading ? 'LOGGER INN...' : 'LOGG INN'}
-        </Button>
-      ) : (
-        <StyledSuccessMessage>
-          <p>Du er logget inn!</p>
-          <p>Omdirigerer...</p>
-        </StyledSuccessMessage>
-      )}
-    </StyledForm>
-  );
-};
+const LoginForm = ({
+  handleSubmit,
+  handleChange,
+  errors,
+  hasErrors,
+  loggedIn,
+  loading,
+  error,
+}) => (
+  <StyledForm onSubmit={handleSubmit}>
+    <Input
+      name="email"
+      label="Epost"
+      placeholder="Epost"
+      errorLabel={errors?.email}
+      onChange={handleChange}
+    />
+    <Input
+      name="password"
+      type="password"
+      label="Passord"
+      placeholder="Passord"
+      errorLabel={errors?.password}
+      onChange={handleChange}
+    />
+    {error && (
+      <p>{`Innlogging feilet, prøv igjen.(${
+        Array.isArray(error) ? error[0] : error
+      })`}</p>
+    )}
+    {!loggedIn ? (
+      <Button primary type="submit" disabled={loading || hasErrors}>
+        {loading ? 'LOGGER INN...' : 'LOGG INN'}
+      </Button>
+    ) : (
+      <StyledSuccessMessage>
+        <p>Du er logget inn!</p>
+        <p>Omdirigerer...</p>
+      </StyledSuccessMessage>
+    )}
+  </StyledForm>
+);
 
 export default LoginForm;
