@@ -1,27 +1,27 @@
 import React, { useState, useEffect, useRef } from 'react';
 import StyledSelect from '../styledComponents/StyledSelect';
 
-const SelectFilter = ({ locations, setChosenLocation, chosenLocation }) => {
+const SelectFilter = ({ categories, setChosenCategory, chosenCategory }) => {
   const [headerOption, setHeaderOption] = useState('FILTER');
-  const selectedLocation = useRef(null);
+  const selectedCat = useRef(null);
 
   useEffect(() => {
-    if (chosenLocation) {
+    if (chosenCategory) {
       setHeaderOption('INGEN');
-      if (chosenLocation === 'INGEN') setHeaderOption('FILTER');
+      if (chosenCategory === 'INGEN') setHeaderOption('FILTER');
     }
-  }, [chosenLocation]);
+  }, [chosenCategory]);
 
   return (
     <StyledSelect
-      onChange={(e) => setChosenLocation(e.target.value)}
+      onChange={(e) => setChosenCategory(e.target.value)}
       optionSelected={headerOption === 'FILTER'}
-      ref={selectedLocation}
+      ref={selectedCat}
     >
       <option>{headerOption}</option>
-      {locations?.map((location) => (
-        <option value={location} key={location}>
-          {location}
+      {categories?.map((category) => (
+        <option value={category._id} key={category._id}>
+          {category.title}
         </option>
       ))}
     </StyledSelect>
