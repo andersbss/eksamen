@@ -86,6 +86,7 @@ const ArticleForm = ({
   const [imageError, setImageError] = useState(null);
   const [imageSuccess, setImageSuccess] = useState(false);
   const [imageId, setImageId] = useState('');
+  const [authorName, setAuthorName] = useState('');
 
   const {
     error: categoryFetchError,
@@ -100,6 +101,11 @@ const ArticleForm = ({
     response: authors,
     isSuccess: authorIsSuccess,
   } = useFetch('GET', '/authors');
+
+  useEffect(() => {
+    if (article)
+      setAuthorName(`${article.author.firstName} ${article.author.lastName}`);
+  }, [article]);
 
   const imageFormOnChange = (e) => {
     const imageFile = e.target.files[0];
@@ -199,7 +205,7 @@ const ArticleForm = ({
             {!article && <option value={null}>Velg forfatter</option>}
             {article && (
               <option value={article.author._id} selected="selected">
-                {article.author.firstName}
+                {authorName}
               </option>
             )}
             {authors.length <= 0 ? (
