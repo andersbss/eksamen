@@ -2,6 +2,7 @@ import expectCt from 'helmet/dist/middlewares/expect-ct';
 import request from 'supertest';
 import { app } from '../../src/app.js';
 import { OBJECT_ID_REGEX } from '../../src/constants/regexes.js';
+import { imageController } from '../../src/controllers/index.js';
 import { connectDatabase, closeDatabase, clearDatabase } from '../config/db.js';
 
 const BASE_URL = process.env.BASEURL;
@@ -36,8 +37,7 @@ afterEach(async () => {
 });
 
 describe('Get', () => {
-  // eslint-disable-next-line jest/expect-expect
-  it('should return user without id when given token', async () => {
+  it('should return user without id and password when given token', async () => {
     const response = await request(app).get(`${BASE_URL}/me`).set('Cookie', `token=${token}`);
 
     const { success, data } = response.body;
@@ -52,5 +52,10 @@ describe('Get', () => {
     expect(data._id).toEqual(undefined);
     expect(data.password).toEqual(undefined);
     expect(data.id).toEqual(null);
+  });
+
+  // eslint-disable-next-line jest/expect-expect
+  it('should return error when not given token', async () => {
+    await request(app).get(`${BASE_URL}/me`).expect(401, { success: false, data: 'No token', status: 401 });
   });
 });
