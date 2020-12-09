@@ -147,4 +147,17 @@ describe('Login', () => {
     expect(validator.isJWT(data.token)).toBe(true);
     expect(data.user.password).toEqual(undefined);
   });
+
+  // eslint-disable-next-line jest/expect-expect
+  it('should return error when not matching email and password or user not found', async () => {
+    await request(app)
+      .post(`${BASE_URL}/login`)
+      .send({ email: 'not@existing'.com, password: userPayload.password })
+      .expect(404, { success: false, data: 'Failed to login, user not found', status: 404 });
+
+    await request(app)
+      .post(`${BASE_URL}/login`)
+      .send({ email: userPayload.email, password: 'NotMatching123' })
+      .expect(404, { success: false, data: 'Failed to login, user not found', status: 404 });
+  });
 });
