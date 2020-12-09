@@ -1,29 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from '../buttons/Button';
+import StyledButton from '../styledComponents/StyledButton';
+import StyledLinkButton from '../styledComponents/StyledLinkButton';
 
 const StyledSection = styled.section`
   display: flex;
-
-  & > button {
-    margin-right: 20px;
-    background-color: ${(props) => props.theme.colors.red};
-
-    &:nth-child(2) {
-      background-color: ${(props) => props.theme.colors.green};
-    }
-  }
 `;
 
-const DetailArticleToggles = ({ handleDelete, handleEdit, deleteLoading }) => (
+const Button = styled(StyledButton)`
+  margin-right: 20px;
+  background-color: ${(props) => props.theme.colors.red};
+`;
+
+const NavLink = styled(StyledLinkButton)`
+  background-color: ${(props) => props.theme.colors.green};
+`;
+
+const DetailArticleToggles = ({ handleDelete, deleteLoading, id }) => (
   <StyledSection>
     <Button
-      content={deleteLoading ? 'SLETTER...' : 'SLETT '}
+      primary="true"
       disabled={deleteLoading}
-      color="white"
       onClick={() => handleDelete()}
-    />
-    <Button content="REDIGER" color="white" onClick={() => handleEdit()} />
+    >
+      {deleteLoading ? 'SLETTER...' : 'SLETT'}
+    </Button>
+    <NavLink primary="true" exact to={`/redigerartikkel/${id}`}>
+      REDIGER
+    </NavLink>
   </StyledSection>
 );
 

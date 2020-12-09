@@ -35,20 +35,17 @@ const ArticleDetail = () => {
       } = await request('DELETE', `articles/${id}`);
 
       if (success) {
+        setDeleteLoading(false);
         history.push('/fagartikler');
       } else {
         setDeleteSuccess(false);
+        setDeleteLoading(false);
         setDeleteError(data);
       }
     } catch (error) {
-      deleteError({ success: false, data: 'Unexpected error occurred' });
-    } finally {
       setDeleteLoading(false);
+      deleteError({ success: false, data: 'Unexpected error occurred' });
     }
-  };
-
-  const handleEdit = () => {
-    history.push(`/redigerartikkel/${id}`);
   };
 
   useEffect(() => {
@@ -75,7 +72,7 @@ const ArticleDetail = () => {
               <DetailArticleToggles
                 deleteLoading={deleteLoading}
                 handleDelete={handleDelete}
-                handleEdit={handleEdit}
+                id={id}
               />
             )}
             {!deleteSuccess && (
