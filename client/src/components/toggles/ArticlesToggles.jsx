@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-import Button from '../buttons/Button';
 import SelectFilter from '../common/CategorySelectFilter';
 import Input from '../common/Input';
 import StyledNavLink from '../styledComponents/StyledLinkButton';
+import Button from '../styledComponents/StyledButton';
 
 const StyledSection = styled.section`
   display: flex;
@@ -44,7 +44,7 @@ const ArticlesToggles = ({
         onChange={(e) => setSearchTerm(e.target.value)}
       />
 
-      <Button content="SØK" onClick={handleSearch} />
+      <Button onClick={handleSearch}>SØK</Button>
 
       <SelectFilter
         categories={categories}
