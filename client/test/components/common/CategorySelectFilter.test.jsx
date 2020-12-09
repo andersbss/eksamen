@@ -27,4 +27,21 @@ describe('<CategorySelectFilter />', () => {
     expect(wrapper.find('option').length).toEqual(4);
     expect(wrapper.text()).toContain('category1' && 'category2' && 'category3');
   });
+
+  it('should call setChosenCategory when selected is changed', () => {
+    const mockOnChange = jest.fn();
+    const categories = ['category1', 'category2', 'category3'];
+
+    const wrapper = mount(
+      <ThemeProvider theme={theme}>
+        <CategorySelectFilter
+          setChosenCategory={mockOnChange}
+          categories={categories}
+        />
+      </ThemeProvider>
+    );
+
+    wrapper.find(StyledSelect).simulate('change');
+    expect(mockOnChange).toHaveBeenCalled();
+  });
 });
