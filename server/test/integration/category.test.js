@@ -59,4 +59,22 @@ describe('Create', () => {
       .send({ title: 'Category' })
       .expect(400, { success: false, data: 'Category already exist', status: 400 });
   });
+
+  // eslint-disable-next-line jest/expect-expect
+  it('should return error when title is invalid', async () => {
+    await request(app)
+      .post(`${BASE_URL}/categories`)
+      .set('Cookie', `token=${token}`)
+      .send()
+      .expect(400, { success: false, data: ['Title is required'], status: 400 });
+
+    await request(app)
+      .post(`${BASE_URL}/categories`)
+      .set('Cookie', `token=${token}`)
+      .send({
+        title:
+          'Tooooooooooooooooooooooooooooooooooooooooooooooo loooooooooooooooooooooooooooooooooooooooooooooooooooong',
+      })
+      .expect(400, { success: false, data: ['Title cannot be longer than 50 characters'], status: 400 });
+  });
 });
