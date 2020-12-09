@@ -166,4 +166,17 @@ describe('Get', () => {
     expect(data.currentPage).toEqual(1);
     expect(data.data[0].public).toBe(false);
   });
+
+  it('should return no private articles when user is not logged in', async () => {
+    await request(app).post(`${BASE_URL}/articles`).set('Cookie', `token=${token}`).send(articlePayload);
+    const privateArticlesRes = await request(app).get(`${BASE_URL}/articles`);
+
+    const { success, data } = privateArticlesRes.body;
+
+    expect(privateArticlesRes.status).toEqual(200);
+    expect(success).toBe(true);
+    expect(data.data).toHaveLength(0);
+    expect(data.totalPages).toEqual(1);
+    expect(data.currentPage).toEqual(1);
+  });
 });
