@@ -43,6 +43,8 @@ const ContactForm = ({
   hasErrors,
   error,
   errors,
+  userEmail,
+  userName,
 }) => (
   <StyledForm onSubmit={handleSubmit}>
     <Input
@@ -50,6 +52,7 @@ const ContactForm = ({
       label="Epost"
       errorLabel={errors?.email}
       placeholder="Epost"
+      defaultValue={userEmail}
       onChange={handleChange}
     />
     <Input
@@ -57,6 +60,7 @@ const ContactForm = ({
       label="Navn"
       errorLabel={errors?.name}
       placeholder="Navn"
+      defaultValue={userName}
       onChange={handleChange}
     />
     <Textarea
