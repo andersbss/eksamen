@@ -37,9 +37,16 @@ export const userSchema = Joi.object()
       .messages({
         'string.min': 'Password has to be at least 3 characters',
       }),
-    role: Joi.string().valid('user', 'admin', 'superadmin').default('user').messages({
-      // Remove andmin and superAdmin before handing in the exam
-      'any.only': 'Invalid role',
-    }),
+    role: Joi.string()
+      .valid(
+        'user',
+        `${process.env.NODE_ENV === 'test' && 'admin'}`,
+        `${process.env.NODE_ENV === 'test' && 'superadmin'}`
+      )
+      .default('user')
+      .messages({
+        // Remove andmin and superAdmin before handing in the exam
+        'any.only': 'Invalid role',
+      }),
   })
   .options({ abortEarly: false });

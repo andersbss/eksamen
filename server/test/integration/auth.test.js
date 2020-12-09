@@ -27,8 +27,8 @@ beforeEach(async () => {
   userRes = await request(app).post(`${BASE_URL}/register`).send(userPayload);
 });
 
-afterAll(async (done) => {
-  await closeDatabase(done);
+afterAll(async () => {
+  await closeDatabase();
 });
 
 afterEach(async () => {
