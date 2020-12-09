@@ -23,9 +23,6 @@ export const StyledError = styled.div`
   }
 `;
 
-const Error = ({ error }) => {
-  console.log(error);
-  return <StyledError>{error}</StyledError>;
-};
+const Error = ({ error }) => <StyledError>{error}</StyledError>;
 
 export default Error;
