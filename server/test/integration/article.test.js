@@ -212,4 +212,27 @@ describe('Update', () => {
     expect(data.author).toEqual(newAuthor._id);
     expect(data.category).toEqual(newCategory._id);
   });
+
+  // eslint-disable-next-line jest/expect-expect
+  it('should return error when missing inputs', async () => {
+    const initialArticleRes = await request(app)
+      .post(`${BASE_URL}/articles`)
+      .set('Cookie', `token=${token}`)
+      .send(articlePayload);
+
+    await request(app)
+      .put(`${BASE_URL}/articles/${initialArticleRes.body.data._id}`)
+      .set('Cookie', `token=${token}`)
+      .expect(400, {
+        success: false,
+        data: [
+          'Title is required',
+          'Ingress is required',
+          'Content is required',
+          'Author is required',
+          'Category is required',
+        ],
+        status: 400,
+      });
+  });
 });
