@@ -5,7 +5,8 @@ import { connectDatabase, closeDatabase, clearDatabase } from '../config/db.js';
 
 const BASE_URL = process.env.BASEURL;
 
-let admin;
+let adminRes;
+let token;
 
 beforeAll(async () => {
   await connectDatabase();
@@ -17,9 +18,12 @@ beforeEach(async () => {
     lastName: 'test',
     email: 'admin@admin.com',
     password: 'SecretPassword879',
+    role: 'admin',
   };
 
-  admin = await request(app).post(`${BASE_URL}/register`).send(payload);
+  adminRes = await request(app).post(`${BASE_URL}/register`).send(payload);
+
+  token = adminRes.body.data.token;
 });
 
 afterAll(async () => {
@@ -31,9 +35,17 @@ afterEach(async () => {
 });
 
 describe('Create', () => {
-  it('should return a new category', async () => {
-    const num = 1;
+  it('should return success with a new category', async () => {
+    const response = await request(app)
+      .post(`${BASE_URL}/categories`)
+      .set('Cookie', `token=${token}`)
+      .send({ title: 'Category' });
 
-    expect(num).toEqual(1);
+    const { data, success } = response.body;
+
+    expect(success).toBe(true);
+    expect(response.status).toBe(201);
+    expect(data.title).toEqual('Category');
+    expect(data._id).toMatch(OBJECT_ID_REGEX);
   });
 });

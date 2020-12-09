@@ -6,6 +6,7 @@ import { userService } from '../services/index.js';
 
 export const authenticate = catchAsyncErrors(async (req, res, next) => {
   let token;
+
   if (req.cookies?.token) token = req.cookies.token;
 
   if (!token) return next(new ErrorHandler('No token', 401));
