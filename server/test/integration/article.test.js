@@ -134,3 +134,21 @@ describe('Create', () => {
       .expect(404, { success: false, data: 'Author not found', status: 404 });
   });
 });
+
+describe('Get', () => {
+  // eslint-disable-next-line jest/expect-expect
+  it('should return success with all public articles', async () => {
+    articlePayload.public = true;
+    await request(app).post(`${BASE_URL}/articles`).set('Cookie', `token=${token}`).send(articlePayload);
+    const publicArticlesRes = await request(app).get(`${BASE_URL}/articles`);
+
+    const { success, data } = publicArticlesRes.body;
+
+    expect(publicArticlesRes.status).toEqual(200);
+    expect(success).toBe(true);
+    expect(data.data).toHaveLength(1);
+    expect(data.totalPages).toEqual(1);
+    expect(data.currentPage).toEqual(1);
+    expect(data.data[0].public).toBe(true);
+  });
+});
