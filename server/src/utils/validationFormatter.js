@@ -5,7 +5,7 @@ const validateInput = async (schema, input) => {
   try {
     return await schema.validateAsync({ ...input });
   } catch (error) {
-    console.log(error.details.map((detail) => detail));
+    if (process.env.NODE_ENV !== 'test') console.log(error.details.map((detail) => detail));
     return error;
   }
 };

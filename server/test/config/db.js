@@ -21,8 +21,8 @@ export const connectDatabase = async () => {
   });
 };
 
-export const closeDatabase = async (done) => {
-  mongoose.disconnect(done);
+export const closeDatabase = async () => {
+  await mongoose.disconnect();
   await mockServer.stop();
 };
 

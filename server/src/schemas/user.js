@@ -21,21 +21,32 @@ export const userSchema = Joi.object()
         'string.empty': 'Last name is required',
         'string.max': 'Last name cannot be longer than 100 characters',
       }),
-    email: Joi.string().required().email().messages({
-      'any.required': 'Email is required',
-      'string.email': 'Invalid email',
-    }),
+    email: Joi.string()
+      .required()
+      .email()
+      .meta({ _mongoose: { unique: true } })
+      .messages({
+        'any.required': 'Email is required',
+        'string.email': 'Invalid email',
+      }),
     password: Joi.string()
       .required()
       .min(3)
       .regex(ONE_DIGIT_REGEX, { name: 'digit' })
       .meta({ _mongoose: { select: false } })
       .messages({
-        'string.min': 'Password has to be at least 8 characters',
+        'string.min': 'Password has to be at least 3 characters',
       }),
-    role: Joi.string().valid('user', 'admin', 'superadmin').default('user').messages({
-      // Remove andmin and superAdmin before handing in the exam
-      'any.only': 'Invalid role',
-    }),
+    role: Joi.string()
+      .valid(
+        'user',
+        `${process.env.NODE_ENV === 'test' && 'admin'}`,
+        `${process.env.NODE_ENV === 'test' && 'superadmin'}`
+      )
+      .default('user')
+      .messages({
+        // Remove andmin and superAdmin before handing in the exam
+        'any.only': 'Invalid role',
+      }),
   })
   .options({ abortEarly: false });

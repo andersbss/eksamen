@@ -14,9 +14,9 @@ export const login = catchAsyncErrors(async (req, res, next) => {
 
   const user = await userService.getUserByEmail(email, true);
 
-  if (!user) return next(new ErrorHandler('User not found', 404));
+  if (!user) return next(new ErrorHandler('Failed to login, user not found', 404));
 
-  if (!(await user.matchPassword(password))) return next(new ErrorHandler('User not found', 404));
+  if (!(await user.matchPassword(password))) return next(new ErrorHandler('Failed to login, user not found', 404));
 
   sendToken(user, res);
 });
