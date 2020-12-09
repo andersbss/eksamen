@@ -178,7 +178,7 @@ const ArticleForm = ({
               >
                 {!article && <option value={null}>Velg kategori</option>}
                 {article && (
-                  <option value={article.category._id} selected="selected">
+                  <option value={article.category._id} defaultValue>
                     {article.category.title}
                   </option>
                 )}
@@ -214,7 +214,7 @@ const ArticleForm = ({
             >
               {!article && <option value={null}>Velg forfatter</option>}
               {article && (
-                <option value={article.author._id} selected="selected">
+                <option value={article.author._id} defaultValue>
                   {authorName}
                 </option>
               )}
