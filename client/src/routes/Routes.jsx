@@ -22,6 +22,7 @@ import Statistics from '../pages/statistics';
 import TopArticles from '../pages/topArticles';
 import ArticleVisits from '../pages/articlevisits';
 import UserVisits from '../pages/uservisits';
+import Contacts from '../pages/contacts';
 
 const Routes = () => (
   <Router>
@@ -56,6 +57,9 @@ const Routes = () => (
         </AdminRoute>
         <AdminRoute path="/redigerartikkel/:id">
           <CreateArticle />
+        </AdminRoute>
+        <AdminRoute path="/meldinger">
+          <Contacts />
         </AdminRoute>
         <SuperAdminRoute path="/statistikk">
           <Statistics />

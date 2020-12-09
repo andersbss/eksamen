@@ -149,7 +149,13 @@ const Nav = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
-  const { setUser, loggedIn } = useUserContext();
+  const {
+    setUser,
+    loggedIn,
+    userLoading,
+    isAdmin,
+    isSuperAdmin,
+  } = useUserContext();
 
   const handleLogout = async () => {
     try {
@@ -191,11 +197,19 @@ const Nav = () => {
             Fagartikler
           </NavLink>
         </StyledLi>
-        <StyledLi>
-          <NavLink exact to="/kontakt" activeClassName="active">
-            Kontakt
-          </NavLink>
-        </StyledLi>
+        {!userLoading && (isAdmin || isSuperAdmin) ? (
+          <StyledLi>
+            <NavLink exact to="/meldinger" activeClassName="active">
+              Meldinger
+            </NavLink>
+          </StyledLi>
+        ) : (
+          <StyledLi>
+            <NavLink exact to="/kontakt" activeClassName="active">
+              Kontakt
+            </NavLink>
+          </StyledLi>
+        )}
         <StyledLi>
           {loggedIn ? (
             <a onClick={handleLogout}>LOGG UT</a>
