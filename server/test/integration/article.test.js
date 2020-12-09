@@ -207,7 +207,6 @@ describe('Get', () => {
 
     await request(app)
       .get(`${BASE_URL}/articles/${data._id}`)
-      .set('Cookie', `token=${token}`)
       .expect(404, { success: false, data: 'Article not found', status: 404 });
   });
 
