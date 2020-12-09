@@ -11,7 +11,6 @@ import useForm from '../../hooks/useForm';
 const Contact = () => {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [error, setError] = useState(null);
-  // const [loading, setLoading] = useState(false);
   const form = useForm(request, validate, ['POST', '/contacts']);
   const { loggedIn, user } = useUserContext();
   const history = useHistory();
