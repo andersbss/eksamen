@@ -22,7 +22,7 @@ export default (err, req, res, next) => {
     let error = { ...err };
     error.message = err.message;
 
-    console.log(error.message);
+    if (process.env.NODE_ENV !== 'test') console.log(error.message);
 
     if (err.name === 'CastError') {
       const message = `Resource not found. Invalid ${err.path}`;
@@ -36,7 +36,10 @@ export default (err, req, res, next) => {
       );
     }
 
-    if (err.code === 11000) error = new ErrorHandler(`${Object.keys(err.keyValue)} already exist`, 400);
+    if (err.code === 11000) {
+      if (process.env.NODE_ENV === 'test') error = new ErrorHandler(`Duplicate value`, 400);
+      else error = new ErrorHandler(`${Object.keys(err.keyValue)} already exist`, 400);
+    }
 
     response(res, error.status, false, error.message || 'Internal Server Error');
   }

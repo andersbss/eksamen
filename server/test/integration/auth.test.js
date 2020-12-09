@@ -35,7 +35,7 @@ afterEach(async () => {
   await clearDatabase();
 });
 
-describe('Auth', () => {
+describe('Register', () => {
   it('should return success and a new user including valid jwt', async () => {
     const { success, data } = userRes.body;
     const { email, firstName, lastName, role } = data.user;
@@ -51,6 +51,40 @@ describe('Auth', () => {
     expect(validator.isJWT(data.token)).toEqual(true);
   });
 
+  // eslint-disable-next-line jest/expect-expect
+  it('should return error if email is invalid', async () => {
+    await request(app)
+      .post(`${BASE_URL}/register`)
+      .send(userPayload)
+      .expect(400, { success: false, data: 'Duplicate value', status: 400 });
+
+    delete userPayload.email;
+    await request(app)
+      .post(`${BASE_URL}/register`)
+      .send(userPayload)
+      .expect(400, { success: false, data: ['Email is required'], status: 400 });
+
+    userPayload.email = 'invalidEmail';
+    await request(app)
+      .post(`${BASE_URL}/register`)
+      .send(userPayload)
+      .expect(400, { success: false, data: ['Invalid email'], status: 400 });
+
+    userPayload.email = 'invalidEmail';
+    await request(app)
+      .post(`${BASE_URL}/register`)
+      .send(userPayload)
+      .expect(400, { success: false, data: ['Invalid email'], status: 400 });
+
+    userPayload.email = 'x'.repeat(10 * 10 * 10);
+    await request(app)
+      .post(`${BASE_URL}/register`)
+      .send(userPayload)
+      .expect(400, { success: false, data: ['Invalid email'], status: 400 });
+  });
+});
+
+describe('Login', () => {
   it('should return success with user credentials and a jwt', async () => {
     const response = await request(app)
       .post(`${BASE_URL}/login`)
