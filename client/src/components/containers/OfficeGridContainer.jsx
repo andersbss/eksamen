@@ -7,6 +7,7 @@ const StyledGridContainer = styled.section`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin-top: 100px;
 `;
 
 const StyledMain = styled.main`
