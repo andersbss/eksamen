@@ -31,8 +31,12 @@ const Employees = ({ officeId }) => {
       {employees.length <= 0 ? (
         <p>Ingen ansatte</p>
       ) : (
-        employees.map((employee) => (
-          <EmployeeItem navn={employee.navn} stilling={employee.stilling} />
+        employees.map((employee, index) => (
+          <EmployeeItem
+            key={index}
+            navn={employee.navn}
+            stilling={employee.stilling}
+          />
         ))
       )}
     </StyledEmployeeContainer>
