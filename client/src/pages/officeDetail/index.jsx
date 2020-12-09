@@ -5,19 +5,16 @@ import { officeList } from '../../mockUpData';
 import Paragraph from '../../components/common/Paragraph';
 import Employees from '../../components/Employees';
 import MediumTitle from '../../components/titles/MediumTitle';
-import ContactUs from '../../components/ContactUs';
 
 const OfficeDetail = () => {
   const { id } = useParams();
   const [specificOffice, setSpecificOffice] = useState({});
-  const [location, setLocation] = useState('');
 
   useEffect(() => {
     if (id) {
       officeList.forEach((element) => {
         element.offices.forEach((el) => {
           if (el.id === parseInt(id)) {
-            setLocation(element.location);
             setSpecificOffice(el);
           }
         });
@@ -37,7 +34,10 @@ const OfficeDetail = () => {
       />
       <MediumTitle content="Våre ansatte" />
       <Employees officeId={id} />
-      <Jumbotron content={`Kontakt oss på ${specificOffice.phone}`} />
+      <Jumbotron
+        headerText={`Kontakt oss på ${specificOffice.phone}`}
+        marginLeftAndRight="30"
+      />
     </>
   );
 };
