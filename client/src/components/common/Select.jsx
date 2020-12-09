@@ -23,12 +23,34 @@ const StyledContainer = styled.span`
   }
 `;
 
+const StyledLabelContainer = styled.span`
+  display: flex;
+  justify-content: space-between;
+  height: 15px;
+  line-height: 0px;
+
+  & > label {
+    color: black;
+    font-size: 1.8em;
+    font-weight: 600;
+    vertical-align: middle;
+
+    &:nth-child(2) {
+      font-size: 1.2rem;
+      color: ${(props) => props.theme.colors.red};
+    }
+  }
+`;
+
 export const StyledErrorLabel = styled.label``;
 
 const Select = ({ name, onChange, label, errorLabel, children }) => (
   <StyledContainer>
-    <label>{label}</label>
-    {errorLabel && <StyledErrorLabel>{errorLabel}</StyledErrorLabel>}
+    <StyledLabelContainer>
+      <label>{label}</label>
+      {errorLabel && <label>{errorLabel}</label>}
+    </StyledLabelContainer>
+
     <select name={name} required onChange={onChange}>
       {children}
     </select>
