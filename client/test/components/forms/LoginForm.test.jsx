@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import LoginForm from '../../../src/components/forms/LoginForm';
 import { StyledSuccessMessage } from '../../../src/components/styledComponents/StyledMessages';
-import Button from '../../../src/components/buttons/Button';
+import Button from '../../../src/components/styledComponents/StyledButton';
 
 describe('<LoginForm />', () => {
   it('should only render login Button if loggedIn is false', () => {
@@ -23,10 +23,10 @@ describe('<LoginForm />', () => {
 
   it('should have correct Button content depending on loading true/false', () => {
     const wrapper = shallow(<LoginForm loading={false} />);
-    expect(wrapper.find(Button).prop('content')).toContain('LOGG INN');
+    expect(wrapper.find(Button).contains('LOGG INN'));
 
     wrapper.setProps({ loading: true });
-    expect(wrapper.find(Button).prop('content')).toContain('LOGGER INN...');
+    expect(wrapper.find(Button).contains('LOGGER INN...'));
   });
 
   it('should only render StyledSuccessMessage if loggedIn is true', () => {
