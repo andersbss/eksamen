@@ -100,3 +100,16 @@ describe('Create', () => {
       .expect(403, { success: false, data: 'Unauthorized', status: 403 });
   });
 });
+
+describe('Get', () => {
+  it('should return a list with categories', async () => {
+    await request(app).post(`${BASE_URL}/categories`).set('Cookie', `token=${token}`).send({ title: 'Category' });
+
+    const categoriesRes = await request(app).get(`${BASE_URL}/categories`);
+    const { success, data } = categoriesRes.body;
+
+    expect(success).toBe(true);
+    expect(data).toHaveLength(1);
+    expect(data[0].title).toEqual('Category');
+  });
+});
