@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import PaginationButton from '../buttons/PaginationButton';
+import PaginationButton from '../common/PaginationButton';
 
 const StyledButtonContainer = styled.section`
   display: flex;
