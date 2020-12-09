@@ -48,6 +48,17 @@ const StyledSelectButtonContainer = styled.span`
   }
 `;
 
+const StyledSuccessMessage = styled.span`
+  text-align: center;
+  color: green;
+  & > p {
+    font-weight: 800;
+    &:nth-child(2) {
+      font-size: 1rem;
+    }
+  }
+`;
+
 const initialFormData = Object.freeze({
   title: '',
   ingress: '',
@@ -57,45 +68,24 @@ const initialFormData = Object.freeze({
   public: 'false',
 });
 
-const ArticleForm = ({ id, article, handleModalToggle, refreshCategories }) => {
-  const [formData, updateFormData] = useState(initialFormData);
-  const [disabled, setDisabled] = useState(true);
-  const [isCreated, setIsCreated] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [createError, setCreateError] = useState();
-
+const ArticleForm = ({
+  id,
+  article,
+  handleSubmit,
+  handleChange,
+  loading,
+  submitSuccess,
+  hasErrors,
+  error,
+  errors,
+  handleModalToggle,
+  refreshCategories,
+}) => {
   // Image
   const [file, setFile] = useState();
-  const [error, setError] = useState(null);
+  const [imageError, setImageError] = useState(null);
   const [imageSuccess, setImageSuccess] = useState(false);
   const [imageId, setImageId] = useState('');
-
-  // Input errors
-  const [titleError, setTitleError] = useState('Fyll ut tittel');
-  const [ingressError, setIngressError] = useState('Fyll ut ingress');
-  const [contentError, setContentError] = useState('Fyll ut innhold');
-  const [categoryError, setCategoryError] = useState('');
-  const [authorError, setAuthorError] = useState('');
-
-  const history = useHistory();
-
-  useEffect(() => {
-    if (article !== null) {
-      const autoFillData = {
-        title: article.title,
-        ingress: article.ingress,
-        content: article.content,
-        category: article.category._id,
-        author: article.author._id,
-      };
-      updateFormData(autoFillData);
-      setDisabled(false);
-      setTitleError(false);
-      setIngressError(false);
-      setContentError(false);
-      console.log(article);
-    }
-  }, [article]);
 
   const {
     error: categoryFetchError,
@@ -111,44 +101,6 @@ const ArticleForm = ({ id, article, handleModalToggle, refreshCategories }) => {
     isSuccess: authorIsSuccess,
   } = useFetch('GET', '/authors');
 
-  const handleChange = (e) => {
-    updateFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-
-    switch (e.target.name) {
-      case 'title':
-        setTitleError(
-          inputValidation(e.target.name, e.target.value, e.target.maxLength)
-        );
-        break;
-      case 'ingress':
-        setIngressError(
-          inputValidation(e.target.name, e.target.value, e.target.maxLength)
-        );
-        break;
-      case 'content':
-        setContentError(
-          inputValidation(e.target.name, e.target.value, e.target.maxLength)
-        );
-        break;
-      default:
-    }
-    if (e.target.name === 'category' && e.target.value !== '') {
-      setCategoryError('');
-    }
-    if (e.target.name === 'author' && e.target.value !== '') {
-      setAuthorError('');
-    }
-
-    if (titleError || ingressError || contentError) {
-      setDisabled(true);
-    } else {
-      setDisabled(false);
-    }
-  };
-
   const imageFormOnChange = (e) => {
     const imageFile = e.target.files[0];
     setFile(imageFile);
@@ -160,105 +112,46 @@ const ArticleForm = ({ id, article, handleModalToggle, refreshCategories }) => {
 
     if (data.success) {
       setImageSuccess(true);
-      setError(null);
+      setImageError(null);
       setImageId(data?.data?._id);
     } else {
-      setError(data.data);
+      setImageError(data.data);
       setImageSuccess(false);
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (formData.author === '') {
-      setAuthorError('Velg en forfatter');
-    }
-    if (formData.category === '') {
-      setCategoryError('Velg en kategori');
-    }
-    if (formData.author !== '' && formData.category !== '') {
-      try {
-        if (imageId !== '') {
-          formData.image = imageId;
-        }
-        setLoading(true);
-        if (!article) {
-          const {
-            data: { success, data },
-          } = await request('POST', '/articles', formData);
-
-          if (success) {
-            setIsCreated(true);
-            setLoading(false);
-            setDisabled(true);
-            setTimeout(() => history.push('/fagartikler'), 2000);
-          } else {
-            setCreateError(data);
-            setLoading(false);
-          }
-        } else {
-          console.log(formData);
-          const {
-            data: { success, data },
-          } = await request('PUT', `/articles/${article.id}`, formData);
-
-          if (success) {
-            setIsCreated(true);
-            setLoading(false);
-            setDisabled(true);
-            setTimeout(() => history.push('/fagartikler'), 2000);
-          } else {
-            setCreateError(data);
-            setLoading(false);
-          }
-        }
-      } catch (error) {
-        setLoading(false);
-        setCreateError({ success: false, data: 'Unexpected error occurred' });
-      }
     }
   };
 
   return (
     <StyledFormContainer>
-      {isCreated && (
-        <p>Artikkel publisert - Omdirigerer til fagartikkel-siden...</p>
-      )}
-      {createError && <p>Publisering av artikkel feilet</p>}
-      <StyledForm onSubmit={(e) => handleSubmit(e)}>
+      <StyledForm onSubmit={handleSubmit}>
         <Input
           label="Tittel"
-          errorLabel={titleError}
+          errorLabel={errors?.title}
           type="text"
           maxLength="50"
           placeholder="Tittel"
           required="true"
           name="title"
-          value={formData.title}
           onChange={handleChange}
         />
         <Input
           label="Ingress"
-          errorLabel={ingressError}
+          errorLabel={errors?.ingress}
           type="text"
           maxLength="1000"
           placeholder="Ingress"
           required="true"
           name="ingress"
-          value={formData.ingress}
           onChange={handleChange}
         />
         <Textarea
           label="Innhold"
-          errorLabel={contentError}
+          errorLabel={errors?.content}
           maxLength="3000"
           placeholder="Innhold"
           required="true"
           name="content"
           rows="4"
           cols="50"
-          value={formData.content}
           onChange={handleChange}
         />
         {categoryLoading && <Loader />}
@@ -267,7 +160,7 @@ const ArticleForm = ({ id, article, handleModalToggle, refreshCategories }) => {
             <Select
               name="category"
               label="Kategori"
-              errorLabel={categoryError}
+              errorLabel={errors?.category}
               onChange={handleChange}
             >
               {!article && <option value={null}>Velg kategori</option>}
@@ -300,7 +193,7 @@ const ArticleForm = ({ id, article, handleModalToggle, refreshCategories }) => {
           <Select
             name="author"
             label="Forfatter"
-            errorLabel={authorError}
+            errorLabel={errors?.author}
             onChange={handleChange}
           >
             {!article && <option value={null}>Velg forfatter</option>}
@@ -326,19 +219,31 @@ const ArticleForm = ({ id, article, handleModalToggle, refreshCategories }) => {
           <option value="false">Private</option>
           <option value="true">Public</option>
         </Select>
-        <Button
-          content={id ? 'Edit' : 'Create'}
-          disabled={disabled}
-          backgroundColor="blue"
-          color="white"
-        />
+        {error && (
+          <p>{`Registrering feilet, prøv igjen.(${
+            Array.isArray(error) ? error[0] : error
+          })`}</p>
+        )}
+        {!submitSuccess ? (
+          <Button
+            type="submit"
+            content={id ? 'Edit' : 'Create'}
+            disabled={loading || hasErrors}
+            backgroundColor="blue"
+            color="white"
+          />
+        ) : (
+          <StyledSuccessMessage>
+            <p>Meldingen er sendt!</p>
+            <p>Omdirigerer...</p>
+          </StyledSuccessMessage>
+        )}
       </StyledForm>
-      {createError && <p>Det oppstod en feil, prøv igjen. ({createError})</p>}
       <h4>Last opp bilde til artikkelen (valgfritt): </h4>
       <ImageForm
         handleSubmit={handleImageUpload}
         onChange={imageFormOnChange}
-        error={error}
+        error={imageError}
         success={imageSuccess}
         imageId={imageId}
       />
