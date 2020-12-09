@@ -17,6 +17,7 @@ const StyledFormContainer = styled.main`
   padding: 20px;
   width: 80%;
   margin: auto;
+
   & > form > img {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -25,9 +26,7 @@ const StyledFormContainer = styled.main`
 
 const StyledForm = styled.form`
   display: grid;
-  grid-template-rows: 1fr 1fr 2fr 1fr 1fr 1fr 1fr auto auto;
-  & > * {
-  }
+  row-gap: 30px;
 `;
 
 const StyledSelectButtonContainer = styled.span`
@@ -39,7 +38,7 @@ const StyledSelectButtonContainer = styled.span`
     float: right;
     height: 50px;
     width: 100px;
-    margin-top: 25px;
+    margin-top: 50px;
   }
 
   & > span {
