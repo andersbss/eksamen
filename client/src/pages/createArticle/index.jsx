@@ -118,6 +118,7 @@ const CreateArticle = () => {
         error={articleError}
         handleModalToggle={() => setModalIsOpen(true)}
         refreshCategories={refreshCategories}
+        articleLoading={articlesLoading}
       />
       {articleError && <Error error={articleError} />}
       {categoryError && <Error error={categoryError} />}
