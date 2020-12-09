@@ -1,6 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
+import { ThemeProvider } from 'styled-components';
 import OfficeSelectFilter from '../../../src/components/common/OfficeSelectFilter';
+import StyledSelect from '../../../src/components/styledComponents/StyledSelect';
+import { theme } from '../../../src/styles/Theme';
 
 describe('<OfficeSelectFilter />', () => {
   it('should contain correct options, based on location prop', () => {
@@ -10,5 +13,22 @@ describe('<OfficeSelectFilter />', () => {
 
     expect(wrapper.find('option').length).toEqual(4);
     expect(wrapper.text()).toContain('Norway' && 'Sweden' && 'Denmark');
+  });
+
+  it('should call setChosenLocation when selected is changed', () => {
+    const mockOnChange = jest.fn();
+    const locations = ['Norway', 'Sweden', 'Denmark'];
+
+    const wrapper = mount(
+      <ThemeProvider theme={theme}>
+        <OfficeSelectFilter
+          setChosenLocation={mockOnChange}
+          locations={locations}
+        />
+      </ThemeProvider>
+    );
+
+    wrapper.find(StyledSelect).simulate('change');
+    expect(mockOnChange).toHaveBeenCalled();
   });
 });
