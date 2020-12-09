@@ -180,3 +180,36 @@ describe('Get', () => {
     expect(data.currentPage).toEqual(1);
   });
 });
+
+describe('Update', () => {
+  // eslint-disable-next-line jest/expect-expect
+  it('should return success with an updated article', async () => {
+    const initialArticleRes = await request(app)
+      .post(`${BASE_URL}/articles`)
+      .set('Cookie', `token=${token}`)
+      .send(articlePayload);
+
+    const newAuthor = await createAuthor(app, 'Author2', 'Author2');
+    const newCategory = await createCategory(app, token, 'Category2');
+
+    articlePayload.title = 'Updated';
+    articlePayload.ingress = 'Updated';
+    articlePayload.content = 'Updated';
+    articlePayload.author = newAuthor._id;
+    articlePayload.category = newCategory._id;
+    const updatedArticleRes = await request(app)
+      .put(`${BASE_URL}/articles/${initialArticleRes.body.data._id}`)
+      .set('Cookie', `token=${token}`)
+      .send(articlePayload);
+
+    const { success, data } = updatedArticleRes.body;
+
+    expect(updatedArticleRes.status).toEqual(200);
+    expect(success).toBe(true);
+    expect(data.title).toEqual('Updated');
+    expect(data.ingress).toEqual('Updated');
+    expect(data.ingress).toEqual('Updated');
+    expect(data.author).toEqual(newAuthor._id);
+    expect(data.category).toEqual(newCategory._id);
+  });
+});
