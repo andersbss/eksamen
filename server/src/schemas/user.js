@@ -35,7 +35,7 @@ export const userSchema = Joi.object()
       .regex(ONE_DIGIT_REGEX, { name: 'digit' })
       .meta({ _mongoose: { select: false } })
       .messages({
-        'string.min': 'Password has to be at least 8 characters',
+        'string.min': 'Password has to be at least 3 characters',
       }),
     role: Joi.string().valid('user', 'admin', 'superadmin').default('user').messages({
       // Remove andmin and superAdmin before handing in the exam

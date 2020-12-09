@@ -107,6 +107,30 @@ describe('Register', () => {
       .send(userPayload)
       .expect(400, { success: false, data: ['Invalid email'], status: 400 });
   });
+
+  // eslint-disable-next-line jest/expect-expect
+  it('should return error when password is invalid', async () => {
+    userPayload.password = '';
+    userPayload.email = 'test1@test.com';
+    await request(app)
+      .post(`${BASE_URL}/register`)
+      .send(userPayload)
+      .expect(400, { success: false, data: ['"password" is not allowed to be empty'], status: 400 });
+
+    userPayload.password = 'x1';
+    userPayload.email = 'test2@test.com';
+    await request(app)
+      .post(`${BASE_URL}/register`)
+      .send(userPayload)
+      .expect(400, { success: false, data: ['Password has to be at least 3 characters'], status: 400 });
+
+    userPayload.password = 'NoDigit';
+    userPayload.email = 'test3@test.com';
+    await request(app)
+      .post(`${BASE_URL}/register`)
+      .send(userPayload)
+      .expect(400, { success: false, data: ['Password has to include at least 1 digit'], status: 400 });
+  });
 });
 
 describe('Login', () => {
