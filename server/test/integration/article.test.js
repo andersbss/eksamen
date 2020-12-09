@@ -261,4 +261,17 @@ describe('Delete', () => {
     expect(deletedData.author).toEqual(articlePayload.author);
     expect(allData.data).toHaveLength(0);
   });
+
+  // eslint-disable-next-line jest/expect-expect
+  it('should return error when article is not found', async () => {
+    await request(app)
+      .delete(`${BASE_URL}/articles/badId`)
+      .set('Cookie', `token=${token}`)
+      .expect(404, { success: false, data: 'Resource not found. Invalid _id', status: 404 });
+
+    await request(app)
+      .delete(`${BASE_URL}/articles/ffffffffffffffffffffffff`)
+      .set('Cookie', `token=${token}`)
+      .expect(404, { success: false, data: 'Article not found', status: 404 });
+  });
 });
