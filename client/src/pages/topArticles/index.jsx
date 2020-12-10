@@ -1,6 +1,7 @@
 import React from 'react';
 import Loader from '../../components/animations/Loader';
 import Jumbotron from '../../components/common/Jumbotron';
+import Error from '../../components/errors/Error';
 import ArticlesVisitsList from '../../components/lists/ArticlesVisitsList';
 import useFetch from '../../hooks/useFetch';
 import TopArticlesLayout from '../../layouts/TopArticlesLayout';
@@ -14,6 +15,7 @@ const TopArticles = () => {
       <TopArticlesLayout>
         {loading && <Loader />}
         {!loading && !error && <ArticlesVisitsList articles={response} />}
+        {!loading && error && <Error error={error} />}
       </TopArticlesLayout>
     </>
   );
