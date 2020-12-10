@@ -92,7 +92,7 @@ const CreateArticle = () => {
     loading: articleLoading,
     response: articleResponse,
     setInputs: articleSetInputs,
-  } = useForm(request, articleValidate, putOrPost);
+  } = useForm(request, articleValidate, putOrPost, modalIsOpen);
 
   useEffect(() => {
     if (!categoryResponse) return;

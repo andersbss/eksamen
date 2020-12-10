@@ -11,7 +11,7 @@ const TopArticles = () => {
 
   return (
     <>
-      <Jumbotron headerText="Top 10 mest leste artikler" top="70" bottom="0" />
+      <Jumbotron headerText="Top 10 besøkte artikler" top="70" bottom="0" />
       <TopArticlesLayout>
         {loading && <Loader />}
         {!loading && !error && <ArticlesVisitsList articles={response} />}

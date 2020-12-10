@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import useDidMount from './useDidMount';
 
-const useForm = (callBack, validate, params) => {
+const useForm = (callBack, validate, params, wait = false) => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState(true);
@@ -12,16 +12,18 @@ const useForm = (callBack, validate, params) => {
 
   useEffect(() => {
     const execute = async () => {
-      setLoading(true);
-      const res = await callBack(...params, inputs);
-      setResponse(res);
-      setLoading(false);
+      if (!wait) {
+        setLoading(true);
+        const res = await callBack(...params, inputs);
+        setResponse(res);
+        setLoading(false);
+      }
     };
     if (Object.keys(errors).length === 0 && readySubmit) {
       execute();
       setReadySubmit(false);
     }
-  }, [callBack, errors, inputs, params, readySubmit]);
+  }, [callBack, errors, inputs, params, readySubmit, wait]);
 
   useEffect(() => {
     setErrors(validate(inputs));
