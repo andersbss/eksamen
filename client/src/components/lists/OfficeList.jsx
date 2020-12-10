@@ -1,4 +1,5 @@
 import React from 'react';
+import { array } from 'prop-types';
 import OfficeListContainer from '../containers/OfficeListContainer';
 
 const OfficeList = ({ officeList }) => (
@@ -12,5 +13,9 @@ const OfficeList = ({ officeList }) => (
     )}
   </>
 );
+
+OfficeList.propTypes = {
+  officeList: array.isRequired,
+};
 
 export default OfficeList;
