@@ -1,4 +1,5 @@
 import React from 'react';
+import { array, shape, string } from 'prop-types';
 import styled from 'styled-components';
 import MediumTitle from '../titles/MediumTitle';
 import OfficeListItem from '../items/OfficeListItem';
@@ -54,5 +55,15 @@ const OfficeListContainer = ({ offices }) => (
     </StyledUl>
   </StyledOfficeMain>
 );
+
+OfficeListContainer.propTypes = {
+  offices: shape({
+    location: string,
+    offices: array,
+    address: string.isRequired,
+    phone: string.isRequired,
+    email: string.isRequired,
+  }),
+};
 
 export default OfficeListContainer;
