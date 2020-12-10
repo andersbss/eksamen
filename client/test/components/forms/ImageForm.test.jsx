@@ -15,7 +15,7 @@ describe('<ImageForm />', () => {
     const wrapper = shallow(<ImageForm imageId="123" />);
     expect(wrapper.find(Image).exists()).toBe(true);
 
-    wrapper.setProps({ imageId: false });
+    wrapper.setProps({ imageId: null });
     expect(wrapper.find(Image).exists()).toBe(false);
   });
 
