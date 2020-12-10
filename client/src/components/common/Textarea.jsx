@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, number, shape, bool, func } from 'prop-types';
+import { string, bool, func } from 'prop-types';
 import styled from 'styled-components';
 
 const StyledContainer = styled.span`
