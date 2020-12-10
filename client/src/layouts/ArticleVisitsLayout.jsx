@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import BaseLayout from './BaseLayouts/BaseLayout';
 
-const StyledMain = styled.main``;
+const StyledMain = styled(BaseLayout)``;
 
 const ArticleVisitsLayout = ({ children }) => (
   <StyledMain>{children}</StyledMain>

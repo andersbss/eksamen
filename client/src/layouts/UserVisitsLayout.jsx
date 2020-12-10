@@ -1,14 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import BaseLayout from './BaseLayouts/BaseLayout';
 
-const StyledMain = styled.main`
-  margin: auto;
-  margin-top: 40px;
-  margin-bottom: 80px;
-  width: 400px;
-
+const StyledMain = styled(BaseLayout)`
   display: grid;
   grid-row-gap: 20px;
+  width: 400px;
 `;
 
 const UserVisitsLayout = ({ children }) => <StyledMain>{children}</StyledMain>;

@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import BaseLayout from './BaseLayouts/BaseLayout';
 
-const StyledMain = styled.main`
+const StyledMain = styled(BaseLayout)`
   display: grid;
-  margin: auto;
-  margin-top: 80px;
   width: 500px;
   row-gap: 30px;
 `;

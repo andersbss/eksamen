@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import BaseLayout from './BaseLayouts/BaseLayout';
 
-const StyledMain = styled.main`
-  margin: auto;
-  margin-top: 80px;
+const StyledMain = styled(BaseLayout)`
   width: 800px;
 `;
 
-const LoginLayout = ({ children }) => <StyledMain>{children}</StyledMain>;
+const ContactLayout = ({ children }) => <StyledMain>{children}</StyledMain>;
 
-export default LoginLayout;
+export default ContactLayout;

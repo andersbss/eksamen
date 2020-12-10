@@ -13,6 +13,8 @@ const StyledButton = styled.button`
   background-color: ${(props) =>
     props.primary ? props.theme.colors.blue : props.theme.colors.lightGrey};
 
+  margin: ${(props) => (props.center ? 'auto' : 'none')};
+
   &:disabled {
     background-color: ${(props) => props.theme.colors.lightGrey};
     color: ${(props) => props.theme.colors.black};

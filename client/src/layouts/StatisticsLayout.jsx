@@ -1,17 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import BaseLayout from './BaseLayouts/BaseLayout';
 
-const StyledMain = styled.main`
+const StyledMain = styled(BaseLayout)`
   display: grid;
-  margin: auto;
-  margin-top: 25px;
   width: 500px;
-
   row-gap: 25px;
-
-  & > button {
-    margin: auto;
-  }
 `;
 
 const StatisticsLayout = ({ children }) => <StyledMain>{children}</StyledMain>;

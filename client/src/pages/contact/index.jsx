@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Jumbotron from '../../components/common/Jumbotron';
 import ContactForm from '../../components/forms/ContactForm';
-import ContactLayout from '../../layouts/ContactLayout';
 import validate from '../../utils/contactFormValidation';
 import { request } from '../../services/httpService';
 import { useUserContext } from '../../context/UserContext';
 import useForm from '../../hooks/useForm';
+import ContactLayout from '../../layouts/ContactLayout';
 
 const Contact = () => {
   const [submitSuccess, setSubmitSuccess] = useState(false);

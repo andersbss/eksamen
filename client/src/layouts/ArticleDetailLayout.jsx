@@ -1,13 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import BaseLayout from './BaseLayouts/BaseLayout';
 
-const StyledMain = styled.main`
-  margin: auto;
-  margin-top: 50px;
-  margin-bottom: 50px;
+const StyledMain = styled(BaseLayout)`
   display: grid;
-  width: 1000px;
-  row-gap: 50px;
 `;
 
 const ArticleDetailLayout = ({ children }) => (

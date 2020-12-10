@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import FileDownload from 'js-file-download';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import Button from '../../components/buttons/Button';
 import Jumbotron from '../../components/common/Jumbotron';
 import StatisticsLayout from '../../layouts/StatisticsLayout';
 import { download } from '../../services/fileService';
@@ -53,6 +52,7 @@ const Statistics = () => {
         <StyledButton
           disabled={loading}
           primary="true"
+          center="true"
           onClick={handleDownload}
         >
           {loading ? 'Henter data...' : 'Last ned brukeraktivitet'}
