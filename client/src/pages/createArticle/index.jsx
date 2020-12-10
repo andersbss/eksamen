@@ -52,11 +52,8 @@ const CreateArticle = () => {
 
   let putOrPost;
 
-  if (id) {
-    putOrPost = ['PUT', `/articles/${id}`];
-  } else {
-    putOrPost = ['POST', '/articles'];
-  }
+  if (id) putOrPost = ['PUT', `/articles/${id}`];
+  else putOrPost = ['POST', '/articles'];
 
   const {
     loading: articlesLoading,
