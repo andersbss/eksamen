@@ -29,7 +29,7 @@ const CreateArticle = () => {
   const [file, setFile] = useState(null);
   const [imageError, setImageError] = useState(null);
   const [imageSuccess, setImageSuccess] = useState(false);
-  const [imageId, setImageId] = useState('');
+  const [imageId, setImageId] = useState(null);
   const [disabledImageUpload, setDisabledImageUpload] = useState(true);
 
   const imageFormOnChange = (e) => {
