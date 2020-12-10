@@ -9,6 +9,15 @@ import { theme } from '../../../src/styles/Theme';
 const locations = ['Norway', 'Sweden', 'Denmark'];
 
 describe('<OfficeSelectFilter />', () => {
+  it('should be defined', () => {
+    expect(OfficeSelectFilter).toBeDefined();
+  });
+
+  it('should render correctly', () => {
+    const wrapper = shallow(<OfficeSelectFilter locations={locations} />);
+    expect(wrapper.exists()).toBe(true);
+  });
+
   it('should contain correct options, based on location prop', () => {
     const wrapper = shallow(<OfficeSelectFilter locations={locations} />);
     const options = wrapper.find('option');

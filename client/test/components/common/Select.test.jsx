@@ -3,6 +3,15 @@ import { shallow } from 'enzyme';
 import Select from '../../../src/components/common/Select';
 
 describe('<Select />', () => {
+  it('should be defined', () => {
+    expect(Select).toBeDefined();
+  });
+
+  it('should render correctly', () => {
+    const wrapper = shallow(<Select label="testing content" />);
+    expect(wrapper.exists()).toBe(true);
+  });
+
   it('should contain correct label text', () => {
     const wrapper = shallow(<Select label="This is a label" />);
     expect(wrapper.find('label').at(0).text()).toContain('This is a label');

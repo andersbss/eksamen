@@ -3,6 +3,15 @@ import { shallow } from 'enzyme';
 import Textarea from '../../../src/components/common/Textarea';
 
 describe('<Textarea />', () => {
+  it('should be defined', () => {
+    expect(Textarea).toBeDefined();
+  });
+
+  it('should render correctly', () => {
+    const wrapper = shallow(<Textarea label="This is a label" />);
+    expect(wrapper.exists()).toBe(true);
+  });
+
   it('should contain correct label text', () => {
     const wrapper = shallow(<Textarea label="This is a label" />);
     expect(wrapper.find('label').at(0).text()).toContain('This is a label');

@@ -3,6 +3,15 @@ import { shallow } from 'enzyme';
 import Toast from '../../../src/components/common/Toast';
 
 describe('<Toast />', () => {
+  it('should be defined', () => {
+    expect(Toast).toBeDefined();
+  });
+
+  it('should render correctly', () => {
+    const wrapper = shallow(<Toast header="this is a header" />);
+    expect(wrapper.exists()).toBe(true);
+  });
+
   it('should contain correct header text', () => {
     const wrapper = shallow(<Toast header="this is a header" />);
     expect(wrapper.find('h3').text()).toContain('this is a header');

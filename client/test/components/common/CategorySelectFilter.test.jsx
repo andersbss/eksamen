@@ -22,6 +22,14 @@ const categories = [
 ];
 
 describe('<CategorySelectFilter />', () => {
+  it('should be defined', () => {
+    expect(CategorySelectFilter).toBeDefined();
+  });
+
+  it('should render correctly', () => {
+    const wrapper = shallow(<CategorySelectFilter categories={categories} />);
+    expect(wrapper.exists()).toBe(true);
+  });
   it('should contain correct options, based on category prop', () => {
     const wrapper = shallow(<CategorySelectFilter categories={categories} />);
     const options = wrapper.find('option');
