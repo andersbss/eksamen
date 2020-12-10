@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { string, number, shape, bool, array, func } from 'prop-types';
+import { string, bool, array, func } from 'prop-types';
 import SelectFilter from '../common/CategorySelectFilter';
 import Input from '../common/Input';
 import StyledNavLink from '../styledComponents/StyledLinkButton';
