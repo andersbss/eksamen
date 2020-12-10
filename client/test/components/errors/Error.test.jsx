@@ -14,8 +14,12 @@ describe('<Error />', () => {
 
   it('should contain correct error text', () => {
     const wrapper = shallow(<Error error="Something unexpected happened" />);
-    expect(wrapper.find(StyledError).text()).toContain(
+
+    console.log(wrapper.find(StyledError));
+    expect(wrapper.find(StyledError).find('p').text()).toContain(
       'Something unexpected happened'
     );
+
+    // wrapper.find('p').text()).toContain(errorMessage)
   });
 });

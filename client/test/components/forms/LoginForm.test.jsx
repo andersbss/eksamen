@@ -41,7 +41,7 @@ describe('<LoginForm />', () => {
   });
 
   it('should only show error message if error is true', () => {
-    const wrapper = shallow(<LoginForm error />);
+    const wrapper = shallow(<LoginForm error="error" />);
     expect(wrapper.find('p').at(0).text()).toContain(
       'Innlogging feilet, prøv igjen'
     );

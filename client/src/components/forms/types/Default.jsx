@@ -1,8 +1,8 @@
 import { func, bool, string, object, array, oneOfType } from 'prop-types';
 
 const FormTypes = {
-  handleSubmit: func.isRequired,
-  handleChange: func.isRequired,
+  handleSubmit: func,
+  handleChange: func,
   errors: object,
   hasErrors: bool,
   loading: bool,
