@@ -1,8 +1,11 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import LoginForm from '../../../src/components/forms/LoginForm';
 import { StyledSuccessMessage } from '../../../src/components/styledComponents/StyledMessages';
 import Button from '../../../src/components/styledComponents/StyledButton';
+import Theme from '../../../src/styles/Theme';
+
+const error = ['Invalid input'];
 
 describe('<LoginForm />', () => {
   it('should only render login Button if loggedIn is false', () => {
@@ -41,17 +44,13 @@ describe('<LoginForm />', () => {
   });
 
   it('should only show error message if error is true', () => {
-    const wrapper = shallow(<LoginForm error="error" />);
-    expect(wrapper.find('p').at(0).text()).toContain(
-      'Innlogging feilet, prøv igjen'
+    const wrapper = mount(
+      <Theme>
+        <LoginForm error={error} />
+      </Theme>
     );
-    wrapper.setProps({ error: false, loggedIn: false });
-    expect(wrapper.find('p').exists()).toBe(false);
 
-    wrapper.setProps({ loggedIn: true });
-    expect(
-      wrapper.find('p').at(0).text().includes('Innlogging feilet, prøv igjen')
-    ).toBe(false);
+    expect(wrapper.find('p').at(0).text()).toContain('Invalid input');
   });
 
   it('should call handleLogin when form is submitted', () => {

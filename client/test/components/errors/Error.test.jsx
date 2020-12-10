@@ -1,6 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import Error, { StyledError } from '../../../src/components/errors/Error';
+import Theme from '../../../src/styles/Theme';
+
+const error = ['Invalid input'];
 
 describe('<Error />', () => {
   it('should be defined', () => {
@@ -8,18 +11,16 @@ describe('<Error />', () => {
   });
 
   it('should render correctly', () => {
-    const wrapper = shallow(<Error error="Something unexpected happened" />);
+    const wrapper = shallow(<Error error={error} />);
     expect(wrapper.exists()).toBe(true);
   });
 
   it('should contain correct error text', () => {
-    const wrapper = shallow(<Error error="Something unexpected happened" />);
-
-    console.log(wrapper.find(StyledError));
-    expect(wrapper.find(StyledError).find('p').text()).toContain(
-      'Something unexpected happened'
+    const wrapper = mount(
+      <Theme>
+        <Error error={error} visible />
+      </Theme>
     );
-
-    // wrapper.find('p').text()).toContain(errorMessage)
+    expect(wrapper.find(StyledError).text()).toContain('Invalid input');
   });
 });
