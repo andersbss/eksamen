@@ -1,6 +1,13 @@
 import React from 'react';
 import { func, string, array, oneOfType, bool } from 'prop-types';
+import styled from 'styled-components';
 import Image from '../images/Image';
+import StyledButton from '../styledComponents/StyledButton';
+
+const StyledImageButton = styled(StyledButton)`
+  width: 120px;
+  height: 50px;
+`;
 
 const ImageForm = ({ handleSubmit, onChange, error, success, imageId }) => (
   <>
@@ -18,7 +25,7 @@ const ImageForm = ({ handleSubmit, onChange, error, success, imageId }) => (
         accept="image/png, image/jpeg"
         onChange={onChange}
       />
-      <button type="submit">Last opp bilde</button>
+      <StyledImageButton type="submit">Last opp bilde</StyledImageButton>
     </form>
     {imageId && <Image imageId={imageId} height="200px" width="200px" />}
   </>
