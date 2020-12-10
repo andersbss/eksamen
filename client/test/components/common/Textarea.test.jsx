@@ -24,11 +24,11 @@ describe('<Textarea />', () => {
 
   it('should have correct name, maxLength, placeholder, value, rows and cols', () => {
     const name = 'This is a name';
-    const maxLength = 5;
+    const maxLength = '5';
     const placeholder = 'This is a placeholder';
-    const value = 1337;
-    const rows = 4;
-    const cols = 10;
+    const value = '1337';
+    const rows = '4';
+    const cols = '10';
     const wrapper = shallow(
       <Textarea
         name={name}

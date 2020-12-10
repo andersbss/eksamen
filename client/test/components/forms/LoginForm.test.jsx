@@ -13,11 +13,14 @@ describe('<LoginForm />', () => {
     expect(wrapper.find(Button).exists()).toBe(false);
   });
 
-  it('should disable button if loading is true', () => {
-    const wrapper = shallow(<LoginForm loading />);
+  it('should disable button if loading or hasErrors is true', () => {
+    const wrapper = shallow(<LoginForm loggedIn={false} loading hasErrors />);
     expect(wrapper.find(Button).prop('disabled')).toEqual(true);
 
     wrapper.setProps({ loading: false });
+    expect(wrapper.find(Button).prop('disabled')).toEqual(true);
+
+    wrapper.setProps({ hasErrors: false });
     expect(wrapper.find(Button).prop('disabled')).toEqual(false);
   });
 
@@ -53,7 +56,7 @@ describe('<LoginForm />', () => {
 
   it('should call handleLogin when form is submitted', () => {
     const mockSubmit = jest.fn();
-    const wrapper = shallow(<LoginForm handleLogin={mockSubmit} />);
+    const wrapper = shallow(<LoginForm handleSubmit={mockSubmit} />);
     wrapper.simulate('submit');
     expect(mockSubmit).toHaveBeenCalled();
   });

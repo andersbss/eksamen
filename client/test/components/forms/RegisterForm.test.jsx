@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import RegisterForm from '../../../src/components/forms/RegsiterForm';
 import { StyledSuccessMessage } from '../../../src/components/styledComponents/StyledMessages';
-import Button from '../../../src/components/buttons/Button';
+import Button from '../../../src/components/styledComponents/StyledButton';
 import Input from '../../../src/components/common/Input';
 
 describe('<RegisterForm />', () => {

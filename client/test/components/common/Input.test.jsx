@@ -12,15 +12,15 @@ describe('<Input />', () => {
     const errorMessage = 'This is an error';
     const wrapper = shallow(<Input errorLabel={errorMessage} />);
     expect(wrapper.find('label').at(1).text()).toContain(errorMessage);
-    wrapper.setProps({ errorLabel: false });
+    wrapper.setProps({ errorLabel: null });
     expect(wrapper.find('label').at(1).exists()).toBe(false);
   });
 
   it('should have correct name, maxLength, placeholder, value and type', () => {
     const name = 'This is a name';
-    const maxLength = 5;
+    const maxLength = '5';
     const placeholder = 'This is a placeholder';
-    const value = 1337;
+    const value = '1337';
     const type = 'button';
     const wrapper = shallow(
       <Input
