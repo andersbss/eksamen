@@ -1,4 +1,5 @@
 import React from 'react';
+import { array } from 'prop-types';
 import styled from 'styled-components';
 import ContactItem from '../items/ContactItem';
 
@@ -22,5 +23,9 @@ const ContactList = ({ contacts }) => (
     )}
   </StyledUl>
 );
+
+ContactList.propTypes = {
+  contacts: array.isRequired,
+};
 
 export default ContactList;
