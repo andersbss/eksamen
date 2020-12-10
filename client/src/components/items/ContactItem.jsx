@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, number, shape } from 'prop-types';
+import { string, shape } from 'prop-types';
 import styled from 'styled-components';
 import formatDate from '../../utils/dateFormatter';
 

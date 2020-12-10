@@ -1,4 +1,5 @@
 import React from 'react';
+import { string, number, shape } from 'prop-types';
 import styled from 'styled-components';
 
 const StyledEmployeeContainer = styled.section`
@@ -22,4 +23,10 @@ const EmployeeItem = ({ navn, stilling }) => (
     </p>
   </StyledEmployeeContainer>
 );
+
+EmployeeItem.propTypes = {
+  navn: string,
+  stilling: string,
+};
+
 export default EmployeeItem;
