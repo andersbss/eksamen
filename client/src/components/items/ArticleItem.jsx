@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, number, shape } from 'prop-types';
+import { string } from 'prop-types';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import Image from '../images/Image';
