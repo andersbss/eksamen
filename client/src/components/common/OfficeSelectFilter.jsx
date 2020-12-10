@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { string, number, shape, array, func } from 'prop-types';
 import StyledSelect from '../styledComponents/StyledSelect';
 
 const SelectFilter = ({ locations, setChosenLocation, chosenLocation }) => {
@@ -26,6 +27,12 @@ const SelectFilter = ({ locations, setChosenLocation, chosenLocation }) => {
       ))}
     </StyledSelect>
   );
+};
+
+SelectFilter.propTypes = {
+  locations: array,
+  setChosenLocation: func,
+  chosenLocation: string,
 };
 
 export default SelectFilter;
