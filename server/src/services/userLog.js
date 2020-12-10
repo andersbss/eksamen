@@ -51,6 +51,8 @@ const ARTICLE_LOOKUP = [
 
 export const createUserLog = (data) => UserLog.create(data);
 
+export const deleteUserLogByArticleId = (articleId) => UserLog.deleteMany({ article: articleId });
+
 export const getAllUserLogsCsv = async () => {
   const logs = await UserLog.find().populate(['article', 'user']);
 

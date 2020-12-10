@@ -1,6 +1,6 @@
 import ErrorHandler from '../utils/errorHandler.js';
 import catchAsyncErrors from '../middleware/catchAsync.js';
-import { articleService, authorService, categoryService } from '../services/index.js';
+import { articleService, authorService, categoryService, userLogService } from '../services/index.js';
 import response from '../utils/response.js';
 
 export const getAll = catchAsyncErrors(async (req, res, next) => {
@@ -53,6 +53,8 @@ export const remove = catchAsyncErrors(async (req, res, next) => {
 
   const article = await articleService.getArticleById(id);
   if (!article) return next(new ErrorHandler('Article not found', 404));
+
+  await userLogService.deleteUserLogByArticleId(id);
 
   article.remove();
 

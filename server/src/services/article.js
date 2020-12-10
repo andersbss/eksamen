@@ -1,5 +1,6 @@
 import Article from '../models/article.js';
 import { ApiFilter } from '../utils/apiFilter.js';
+import ErrorHandler from '../utils/errorHandler.js';
 
 export const getArticleById = (id, withPopulation) => {
   if (withPopulation) return Article.findById(id).populate(['category', 'author']);
