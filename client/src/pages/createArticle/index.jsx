@@ -114,7 +114,7 @@ const CreateArticle = () => {
 
     if (success) {
       setSubmitSuccess(success);
-      history.push('/fagartikler');
+      setTimeout(() => history.push('/fagartikler'), 1500);
     } else setArticleError(data);
   }, [articleResponse, history]);
 

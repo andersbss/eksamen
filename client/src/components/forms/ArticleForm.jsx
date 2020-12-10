@@ -220,7 +220,7 @@ const ArticleForm = ({
             </StyledButton>
           ) : (
             <StyledSuccessMessage>
-              <p>Meldingen er sendt!</p>
+              <p>{id ? 'Endringene er lagret' : 'Artikkel opprettet'}</p>
               <p>Omdirigerer...</p>
             </StyledSuccessMessage>
           )}
