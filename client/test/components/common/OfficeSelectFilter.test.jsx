@@ -5,22 +5,23 @@ import OfficeSelectFilter from '../../../src/components/common/OfficeSelectFilte
 import StyledSelect from '../../../src/components/styledComponents/StyledSelect';
 import { theme } from '../../../src/styles/Theme';
 
+// 3 locations, + 1 header(default) <option> = 4 option elements
+const locations = ['Norway', 'Sweden', 'Denmark'];
+
 describe('<OfficeSelectFilter />', () => {
   it('should contain correct options, based on location prop', () => {
-    // 3 locations, + 1 header(default) <option> = 4
-    const locations = ['Norway', 'Sweden', 'Denmark'];
     const wrapper = shallow(<OfficeSelectFilter locations={locations} />);
+    const options = wrapper.find('option');
 
-    expect(wrapper.find('option').length).toEqual(4);
+    expect(options.length).toEqual(4);
     expect(wrapper.text()).toContain('Norway' && 'Sweden' && 'Denmark');
-    expect(wrapper.find('option').at(1).prop('value')).toEqual('Norway');
-    expect(wrapper.find('option').at(2).prop('value')).toEqual('Sweden');
-    expect(wrapper.find('option').at(3).prop('value')).toEqual('Denmark');
+    expect(options.at(1).prop('value')).toEqual('Norway');
+    expect(options.at(2).prop('value')).toEqual('Sweden');
+    expect(options.at(3).prop('value')).toEqual('Denmark');
   });
 
   it('should call setChosenLocation when selected is changed', () => {
     const mockOnChange = jest.fn();
-    const locations = ['Norway', 'Sweden', 'Denmark'];
 
     const wrapper = mount(
       <ThemeProvider theme={theme}>
@@ -36,7 +37,6 @@ describe('<OfficeSelectFilter />', () => {
   });
 
   it('should only have "FILTER" option when no filter is chosen', () => {
-    const locations = ['Norway', 'Sweden', 'Denmark'];
     const wrapper = mount(
       <ThemeProvider theme={theme}>
         <OfficeSelectFilter locations={locations} chosenLocation="INGEN" />
@@ -47,7 +47,6 @@ describe('<OfficeSelectFilter />', () => {
   });
 
   it('should only have "INGEN" option when no filter is chosen', () => {
-    const locations = ['Norway', 'Sweden', 'Denmark'];
     const wrapper = mount(
       <ThemeProvider theme={theme}>
         <OfficeSelectFilter locations={locations} chosenLocation="FILTER" />
