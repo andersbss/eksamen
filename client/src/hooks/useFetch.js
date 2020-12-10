@@ -26,6 +26,7 @@ const useFetch = (method, endpoint, wait = false, run, payload = null) => {
       }
     };
     if (!wait) loadData();
+    // Ikke 100% optimalt, men er for å unngår evig loop
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [method, endpoint, wait, run]);
   return { error, loading, response, isSuccess, reqStatus };
