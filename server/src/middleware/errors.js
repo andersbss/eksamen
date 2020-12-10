@@ -14,6 +14,8 @@ export default (err, req, res, next) => {
   //  });
   // }
 
+  // Feilhåndteringen blir utført som om det skulle vært produksjon da det gir mest
+  // mening med tanke på brukeropplevelsen selv om appen kjører i dev.
   if (
     process.env.NODE_ENV === 'production' ||
     process.env.NODE_ENV === 'test' ||
@@ -40,6 +42,10 @@ export default (err, req, res, next) => {
       if (process.env.NODE_ENV === 'test') error = new ErrorHandler(`Duplicate value`, 400);
       else error = new ErrorHandler(`${Object.keys(err.keyValue)} already exist`, 400);
     }
+
+    if (err.name === 'JsonWebTokenError') error = new ErrorHandler('Invalid jwt', 500);
+
+    if (err.name === 'TokenExpiredError') error = new ErrorHandler('Expired jwt', 500);
 
     response(res, error.status, false, error.message || 'Internal Server Error');
   }
