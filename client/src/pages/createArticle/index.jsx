@@ -39,13 +39,13 @@ const CreateArticle = () => {
 
   const handleImageUpload = async (event) => {
     event.preventDefault();
-    console.log(imageId);
     const { data } = await upload(file);
 
     if (data.success) {
       setImageSuccess(true);
       setImageError(null);
       setImageId(data?.data?._id);
+      setDisabledImageUpload(true);
     } else {
       setImageError(data.data);
       setImageSuccess(false);
