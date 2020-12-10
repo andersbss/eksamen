@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, bool, array, func } from 'prop-types';
+import { string, func } from 'prop-types';
 import styled from 'styled-components';
 
 const StyledButtonContainer = styled.aside`
