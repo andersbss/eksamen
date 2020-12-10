@@ -8,6 +8,13 @@ const StyledListItem = styled.li`
   counter-increment: item;
   line-height: 30px;
   font-size: 1.8rem;
+  cursor: pointer;
+
+  & > p {
+    & > span {
+      font-weight: bold;
+    }
+  }
 `;
 
 const OfficeListItem = ({ id, office, address, phone, email }) => {
@@ -22,13 +29,7 @@ const OfficeListItem = ({ id, office, address, phone, email }) => {
   return (
     <StyledListItem onClick={handleDetailClick}>
       <p>
-        <span
-          style={{
-            fontWeight: 'bold',
-          }}
-        >
-          {office}
-        </span>
+        <span>{office}</span>
         &emsp;{address}
         &emsp;{phone}&emsp;{email}
       </p>
