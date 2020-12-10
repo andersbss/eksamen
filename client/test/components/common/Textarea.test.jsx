@@ -39,12 +39,13 @@ describe('<Textarea />', () => {
         cols={cols}
       />
     );
-    expect(wrapper.find('textarea').prop('name')).toEqual(name);
-    expect(wrapper.find('textarea').prop('maxLength')).toEqual(maxLength);
-    expect(wrapper.find('textarea').prop('placeholder')).toEqual(placeholder);
-    expect(wrapper.find('textarea').prop('value')).toEqual(value);
-    expect(wrapper.find('textarea').prop('rows')).toEqual(rows);
-    expect(wrapper.find('textarea').prop('cols')).toEqual(cols);
+    const textarea = wrapper.find('textarea');
+    expect(textarea.prop('name')).toEqual(name);
+    expect(textarea.prop('maxLength')).toEqual(maxLength);
+    expect(textarea.prop('placeholder')).toEqual(placeholder);
+    expect(textarea.prop('value')).toEqual(value);
+    expect(textarea.prop('rows')).toEqual(rows);
+    expect(textarea.prop('cols')).toEqual(cols);
   });
 
   it('should run onChange when textarea is changed', () => {
