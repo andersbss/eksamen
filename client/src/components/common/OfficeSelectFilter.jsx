@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { string, number, shape, array, func } from 'prop-types';
+import { string, array, func } from 'prop-types';
 import StyledSelect from '../styledComponents/StyledSelect';
 
 const SelectFilter = ({ locations, setChosenLocation, chosenLocation }) => {

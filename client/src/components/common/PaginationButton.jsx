@@ -1,4 +1,5 @@
 import React from 'react';
+import { number, func } from 'prop-types';
 import styled from 'styled-components';
 
 export const StyledButton = styled.button`
@@ -25,5 +26,11 @@ const PaginationButton = ({ number, currentPage, setPage }) => (
     {number}
   </StyledButton>
 );
+
+PaginationButton.propTypes = {
+  number,
+  currentPage: number,
+  setPage: func,
+};
 
 export default PaginationButton;
