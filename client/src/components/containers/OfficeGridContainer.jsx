@@ -1,4 +1,5 @@
 import React from 'react';
+import { array, shape, string } from 'prop-types';
 import styled from 'styled-components';
 import MediumTitle from '../titles/MediumTitle';
 import OfficeGridItem from '../items/OfficeGridItem';
@@ -35,5 +36,12 @@ const OfficeGridContainer = ({ offices }) => (
     </StyledGridContainer>
   </StyledOfficeMain>
 );
+
+OfficeGridContainer.propTypes = {
+  offices: shape({
+    location: string.isRequired,
+    offices: array,
+  }),
+};
 
 export default OfficeGridContainer;
