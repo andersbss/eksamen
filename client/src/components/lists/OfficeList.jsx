@@ -1,21 +1,26 @@
 import React from 'react';
-import { array } from 'prop-types';
-import OfficeListContainer from '../containers/OfficeListContainer';
+import styled from 'styled-components';
+import OfficeItem from '../items/OfficeItem';
 
-const OfficeList = ({ officeList }) => (
-  <>
-    {officeList.length <= 0 ? (
-      <p>Ingen kontorer funnet. Vennligst prøv igjen senere.</p>
-    ) : (
-      officeList.map((offices, index) => (
-        <OfficeListContainer key={index} offices={offices} />
-      ))
-    )}
-  </>
+const StyledUl = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  display: ${(props) => (props.toggled ? 'grid' : 'flex')};
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  column-gap: 120px;
+  row-gap: ${(props) => (props.toggled ? '60px' : '20px')};
+
+  flex-direction: column;
+`;
+
+const OfficeList = ({ location, toggled }) => (
+  <StyledUl toggled={toggled}>
+    {location.offices.map((office, index) => (
+      <OfficeItem toggled={toggled} key={index} office={office} />
+    ))}
+  </StyledUl>
 );
-
-OfficeList.propTypes = {
-  officeList: array.isRequired,
-};
 
 export default OfficeList;

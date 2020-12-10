@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import OfficeList from '../lists/OfficeListV2';
+import OfficeList from '../lists/OfficeList';
 
 const StyledLi = styled.li`
   & > h2 {

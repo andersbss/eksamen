@@ -1,20 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import React, { useEffect, useState } from 'react';
 import Jumbotron from '../../components/common/Jumbotron';
-import OfficeGrid from '../../components/grids/OfficeGrid';
-import OfficeList from '../../components/lists/OfficeList';
-import OfficeViewToggle from '../../components/toggles/OfficeViewToggle';
-import OfficeSelectFilter from '../../components/common/OfficeSelectFilter';
+import LocationList from '../../components/lists/LocationList';
+import OfficeToggleView from '../../components/toggles/OfficeViewToggle';
+import OfficesLayout from '../../layouts/OfficesLayout';
 import { officeList } from '../../mockUpData';
 
-const StyledContainer = styled.main`
-  margin-top: 140px;
-`;
-
 const Offices = () => {
-  const [toggleView, setToggleView] = useState(true);
   const [chosenLocation, setChosenLocation] = useState('INGEN');
-  const [offices, setOffices] = useState(officeList);
+  const [currentOffices, setCurrentOffices] = useState(officeList);
+  const [toggleView, setToggleView] = useState(true);
+
   const locations = officeList.map((office) => office.location);
 
   const filterOffices = (offices, location) => {
@@ -28,34 +23,33 @@ const Offices = () => {
   };
 
   useEffect(() => {
-    setOffices(filterOffices(officeList, chosenLocation));
+    setCurrentOffices(filterOffices(officeList, chosenLocation));
   }, [chosenLocation]);
 
   const handleListToggle = () => {
+    console.log('list');
     setToggleView(false);
   };
+
   const handleGridToggle = () => {
+    console.log('grid');
     setToggleView(true);
   };
 
   return (
     <>
       <Jumbotron headerText="Våre kontorer" />
-      <StyledContainer>
-        <OfficeViewToggle
-          handleGridToggle={handleGridToggle}
+      <OfficesLayout>
+        <OfficeToggleView
           handleListToggle={handleListToggle}
-          gridColor={toggleView ? 'blue' : ''}
-          listColor={toggleView ? '' : 'blue'}
-        />
-        <OfficeSelectFilter
+          handleGridToggle={handleGridToggle}
+          toggleView={toggleView}
           locations={locations}
           chosenLocation={chosenLocation}
           setChosenLocation={setChosenLocation}
         />
-        {toggleView && <OfficeGrid officeList={offices} />}
-        {!toggleView && <OfficeList officeList={offices} />}
-      </StyledContainer>
+        <LocationList locations={currentOffices} toggled={toggleView} />
+      </OfficesLayout>
     </>
   );
 };

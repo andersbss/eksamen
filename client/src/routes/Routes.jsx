@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import Home from '../pages/home';
-import Offices from '../pages/officesvs';
+import Offices from '../pages/offices';
 import OfficeDetail from '../pages/officeDetail/index';
 import CreateArticle from '../pages/createArticle';
 import Articles from '../pages/articles';
