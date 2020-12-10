@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import Jumbotron from '../../components/common/Jumbotron';
 import { officeList } from '../../mockUpData';
 import Paragraph from '../../components/common/Paragraph';
-import Employees from '../../components/containers/Employees';
+import Employees from '../../components/containers/EmployeesContainer';
 import MediumTitle from '../../components/titles/MediumTitle';
 
 const OfficeDetail = () => {
