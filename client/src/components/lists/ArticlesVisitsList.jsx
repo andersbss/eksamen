@@ -1,4 +1,5 @@
 import React from 'react';
+import { array } from 'prop-types';
 import styled from 'styled-components';
 import ArticleVisitsItem from '../items/ArticleVisitisItem';
 
@@ -22,5 +23,9 @@ const ArticlesVisitsList = ({ articles }) => (
     )}
   </StyledUl>
 );
+
+ArticlesVisitsList.propTypes = {
+  articles: array.isRequired,
+};
 
 export default ArticlesVisitsList;
