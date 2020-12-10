@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { array, shape, string } from 'prop-types';
 import styled from 'styled-components';
 import Button from '../buttons/Button';
+import StyledButton from '../styledComponents/StyledButton';
 import Select from '../common/Select';
 import Error from '../errors/Error';
 import Input from '../common/Input';
@@ -206,18 +206,18 @@ const ArticleForm = ({
             <option value="true">Public</option>
           </Select>
           {error && (
-            <p>{`Registrering feilet, prøv igjen.(${
+            <p>{`Opplasting feilet, prøv igjen.(${
               Array.isArray(error) ? error[0] : error
             })`}</p>
           )}
           {!submitSuccess ? (
-            <Button
+            <StyledButton
+              primary="true"
               type="submit"
-              content={id ? 'Edit' : 'Create'}
               disabled={loading || hasErrors}
-              backgroundColor="blue"
-              color="white"
-            />
+            >
+              {id ? 'LAGRE ENDRINGER' : 'OPPRETT'}
+            </StyledButton>
           ) : (
             <StyledSuccessMessage>
               <p>Meldingen er sendt!</p>
