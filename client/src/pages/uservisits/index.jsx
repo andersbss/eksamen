@@ -1,4 +1,5 @@
 import React from 'react';
+import Error from '../../components/errors/Error';
 import useFetch from '../../hooks/useFetch';
 import Jumbotron from '../../components/common/Jumbotron';
 import UserVisitsLayout from '../../layouts/UserVisitsLayout';
@@ -21,6 +22,7 @@ const UserVisits = () => {
       <UserVisitsLayout>
         {loading && <Loader />}
         {!loading && !error && <UserVisitsList users={response} />}
+        {!loading && error && <Error error={error} />}
       </UserVisitsLayout>
     </>
   );

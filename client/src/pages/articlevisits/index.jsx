@@ -1,5 +1,5 @@
 import React from 'react';
-import ArticleVisitsLayout from '../../layouts/ArticleVisitsLayout';
+import Error from '../../components/errors/Error';
 import Jumbotron from '../../components/common/Jumbotron';
 import useFetch from '../../hooks/useFetch';
 import ArticlesVisitsList from '../../components/lists/ArticlesVisitsList';
@@ -15,6 +15,7 @@ const ArticleVisits = () => {
       <ArticlesVisitsLayout>
         {loading && <Loader />}
         {!loading && !error && <ArticlesVisitsList articles={response} />}
+        {!loading && error && <Error error={error} />}
       </ArticlesVisitsLayout>
     </>
   );

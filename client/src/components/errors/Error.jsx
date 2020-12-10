@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 export const StyledError = styled.div`
@@ -9,20 +9,36 @@ export const StyledError = styled.div`
   z-index: 1;
 
   width: 220px;
-  height: 80px;
+  height: 100px;
   text-align: center;
-  border-radius: 10px;
 
-  background-color: ${(props) => props.theme.colors.darkGreen};
+  background-color: ${(props) => props.theme.colors.blue};
 
   & > p {
     color: white;
-    &:nth-child(2) {
-      font-size: 1.5em;
-    }
+    font-size: 1.3rem;
   }
 `;
 
-const Error = ({ error }) => <StyledError>{error}</StyledError>;
+const Error = ({ error }) => {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    setVisible(true);
+    setTimeout(() => setVisible(false), 3000);
+  }, []);
+
+  return (
+    <>
+      {visible && (
+        <StyledError>
+          <p>{`En feil oppstod (${
+            Array.isArray(error) ? error[0] : error
+          })`}</p>
+        </StyledError>
+      )}
+    </>
+  );
+};
 
 export default Error;

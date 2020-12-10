@@ -22,6 +22,8 @@ const Articles = () => {
     isSuccess: categoryIsSuccess,
   } = useFetch('GET', '/categories');
 
+  // Dette kunne blitt håndtert bedre med axios sin egen queryparam opsjon.
+  // Tenkte ikke over dette førs like før innelevering.
   const { error, loading, response, isSuccess } = useFetch(
     'GET',
     `/articles?limit=5&page=${page}${
@@ -57,16 +59,20 @@ const Articles = () => {
           />
         )}
 
-        {loading && <Loader />}
+        {loading ? (
+          <Loader />
+        ) : (
+          <>
+            {isSuccess && <ArticleList articles={response?.data} />}
 
-        {isSuccess && !loading && <ArticleList articles={response?.data} />}
-
-        {isSuccess && !loading && (
-          <PaginationToggle
-            length={response.totalPages}
-            setPage={setPage}
-            currentPage={page}
-          />
+            {isSuccess && (
+              <PaginationToggle
+                length={response.totalPages}
+                setPage={setPage}
+                currentPage={page}
+              />
+            )}
+          </>
         )}
 
         {!isSuccess && !loading && <Error error={error} />}

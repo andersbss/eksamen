@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import Error from '../../components/errors/Error';
 import Jumbotron from '../../components/common/Jumbotron';
 import ContactsLayout from '../../layouts/ContactsLayout';
 import useFetch from '../../hooks/useFetch';
@@ -14,6 +15,7 @@ const Contacts = () => {
       <ContactsLayout>
         {loading && <Loader />}
         {!loading && !error && <ContactList contacts={response} />}
+        {!loading && error && <Error error={error} />}
       </ContactsLayout>
     </>
   );
