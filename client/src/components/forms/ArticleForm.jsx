@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Button from '../buttons/Button';
 import StyledButton from '../styledComponents/StyledButton';
@@ -80,8 +80,31 @@ const ArticleForm = ({
   imageError,
   authorFetchError,
   categoryFetchError,
+  setArticleInputs,
 }) => {
+  const titleRef = useRef();
+  const ingressRef = useRef();
+  const contentRef = useRef();
   const [authorName, setAuthorName] = useState('');
+
+  useEffect(() => {
+    if (!id) return;
+
+    if (!articleLoading && authorIsSuccess && categoryIsSuccess) {
+      setArticleInputs((prev) => ({
+        ...prev,
+        [titleRef.current.name]: titleRef.current.value,
+        [ingressRef.current.name]: ingressRef.current.value,
+        [contentRef.current.name]: contentRef.current.value,
+      }));
+    }
+  }, [
+    articleLoading,
+    authorIsSuccess,
+    categoryIsSuccess,
+    id,
+    setArticleInputs,
+  ]);
 
   useEffect(() => {
     if (article)
@@ -91,7 +114,7 @@ const ArticleForm = ({
   return (
     <StyledFormContainer>
       {articleLoading ? (
-        <Loader />
+        <p>Laster...</p>
       ) : (
         <StyledForm onSubmit={handleSubmit}>
           <Input
@@ -102,6 +125,7 @@ const ArticleForm = ({
             placeholder="Tittel"
             required
             name="title"
+            reference={titleRef}
             defaultValue={article ? article.title : ''}
             onChange={handleChange}
           />
@@ -113,6 +137,7 @@ const ArticleForm = ({
             placeholder="Ingress"
             required
             name="ingress"
+            reference={ingressRef}
             defaultValue={article ? article.ingress : ''}
             onChange={handleChange}
           />
@@ -123,12 +148,12 @@ const ArticleForm = ({
             placeholder="Innhold"
             required
             name="content"
+            reference={contentRef}
             defaultValue={article ? article.content : ''}
             rows="4"
             cols="50"
             onChange={handleChange}
           />
-          {categoryFetchLoading && <Loader />}
           {categoryIsSuccess && (
             <StyledSelectButtonContainer>
               <Select
@@ -168,7 +193,6 @@ const ArticleForm = ({
           {!categoryIsSuccess && !categoryFetchLoading && (
             <Error error={categoryFetchError} />
           )}
-          {authorLoading && <Loader />}
           {authorIsSuccess && (
             <Select
               name="author"

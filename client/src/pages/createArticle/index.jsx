@@ -91,6 +91,7 @@ const CreateArticle = () => {
     hasErrors: hasArticleErrors,
     loading: articleLoading,
     response: articleResponse,
+    setInputs: articleSetInputs,
   } = useForm(request, articleValidate, putOrPost);
 
   useEffect(() => {
@@ -143,16 +144,17 @@ const CreateArticle = () => {
       {!id && <Jumbotron headerText="Ny artikkel" />}
       {id && (
         <Jumbotron
-          headerText={articlesLoading ? 'loading...' : articlesResponse?.title}
+          headerText={articlesLoading ? '...' : articlesResponse?.title}
         />
       )}
-      {articlesLoading && <Loader />}
+      {(articlesLoading || categoryLoading || authorLoading) && <Loader />}
       <ArticleForm
         id={id}
         article={article}
         handleSubmit={handleArticleSubmit}
         handleChange={handleArticleChange}
         errors={articleErrors}
+        setArticleInputs={articleSetInputs}
         hasErrors={hasArticleErrors}
         loading={articleLoading}
         error={articleError}

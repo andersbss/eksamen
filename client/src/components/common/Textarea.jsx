@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, bool, func } from 'prop-types';
+import { string, bool, func, object } from 'prop-types';
 import styled from 'styled-components';
 
 const StyledContainer = styled.span`
@@ -51,6 +51,7 @@ const Textarea = ({
   label,
   errorLabel,
   name,
+  reference,
   maxLength = '',
   placeholder = '',
   rows,
@@ -72,6 +73,7 @@ const Textarea = ({
       required={required}
       onChange={onChange}
       name={name}
+      ref={reference}
       rows={rows}
       cols={cols}
       value={value}
@@ -89,6 +91,7 @@ Textarea.propTypes = {
   rows: string,
   cols: string,
   required: bool,
+  reference: object,
   value: string,
   defaultValue: string,
   onChange: func,
