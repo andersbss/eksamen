@@ -6,7 +6,7 @@ const FormTypes = {
   errors: object,
   hasErrors: bool,
   loading: bool,
-  error: string,
+  error: oneOfType([string, array]),
 };
 
 export default FormTypes;
