@@ -1,4 +1,5 @@
 import React from 'react';
+import { string, number, shape } from 'prop-types';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import Image from '../images/Image';
@@ -77,6 +78,14 @@ const ArticleItem = ({ title, ingress, categoryTitle, id, image }) => {
       )}
     </StyledLi>
   );
+};
+
+ArticleItem.propTypes = {
+  title: string.isRequired,
+  ingress: string,
+  categoryTitle: string,
+  id: string.isRequired,
+  image: string,
 };
 
 export default ArticleItem;
