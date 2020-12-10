@@ -1,4 +1,5 @@
 import React from 'react';
+import { string, number, shape } from 'prop-types';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
@@ -39,6 +40,14 @@ const OfficeGridItem = ({ id, office, address, phone, email }) => {
       <p>{email}</p>
     </StyledGridItem>
   );
+};
+
+OfficeGridItem.propTypes = {
+  id: number.isRequired,
+  office: string.isRequired,
+  address: string,
+  phone: string,
+  email: string,
 };
 
 export default OfficeGridItem;
