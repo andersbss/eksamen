@@ -1,4 +1,6 @@
 import React from 'react';
+import { bool } from 'prop-types';
+import DefaultFormTypes from './types/Default';
 import Input from '../common/Input';
 import { StyledSuccessMessage } from '../styledComponents/StyledMessages';
 import StyledForm from '../styledComponents/StyledForm';
@@ -9,9 +11,9 @@ const LoginForm = ({
   handleChange,
   errors,
   hasErrors,
-  loggedIn,
   loading,
   error,
+  loggedIn,
 }) => (
   <StyledForm onSubmit={handleSubmit}>
     <Input
@@ -46,5 +48,10 @@ const LoginForm = ({
     )}
   </StyledForm>
 );
+
+LoginForm.propTypes = {
+  ...DefaultFormTypes,
+  loggedIn: bool,
+};
 
 export default LoginForm;

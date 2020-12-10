@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import useDidMount from './didMount';
+import useDidMount from './useDidMount';
 
 const useForm = (callBack, validate, params) => {
   const [errors, setErrors] = useState({});
@@ -28,7 +28,6 @@ const useForm = (callBack, validate, params) => {
   }, [inputs, validate]);
 
   useEffect(() => {
-    console.log(errors);
     if (Object.keys(errors).length === 0 && !didMount) setHasErrors(false);
   }, [errors, didMount]);
 
