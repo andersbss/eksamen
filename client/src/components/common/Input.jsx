@@ -1,4 +1,5 @@
 import React from 'react';
+import { string, bool, func } from 'prop-types';
 import styled from 'styled-components';
 
 const StyledContainer = styled.span`
@@ -68,4 +69,18 @@ const Input = ({
     />
   </StyledContainer>
 );
+
+Input.propTypes = {
+  label: string,
+  errorLabel: string,
+  type: string,
+  name: string,
+  maxLength: string,
+  placeholder: string,
+  required: bool,
+  value: string,
+  defaultValue: string,
+  onChange: func,
+};
+
 export default Input;
