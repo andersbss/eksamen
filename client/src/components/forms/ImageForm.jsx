@@ -9,14 +9,7 @@ const StyledImageButton = styled(StyledButton)`
   height: 50px;
 `;
 
-const ImageForm = ({
-  handleSubmit,
-  onChange,
-  error,
-  success,
-  imageId,
-  disabledUpload,
-}) => (
+const ImageForm = ({ handleSubmit, onChange, error, success, imageId }) => (
   <>
     {success && <p>Bilde ble lastet opp!</p>}
     {error && (
@@ -32,9 +25,7 @@ const ImageForm = ({
         accept="image/png, image/jpeg"
         onChange={onChange}
       />
-      <StyledImageButton type="submit" disabled={disabledUpload}>
-        Last opp bilde
-      </StyledImageButton>
+      <StyledImageButton type="submit">Last opp bilde</StyledImageButton>
     </form>
     {imageId && <Image imageId={imageId} height="200px" width="200px" />}
   </>
