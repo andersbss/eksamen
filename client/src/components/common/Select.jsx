@@ -43,14 +43,14 @@ const StyledLabelContainer = styled.span`
   }
 `;
 
-const Select = ({ name, onChange, label, errorLabel, children }) => (
+const Select = ({ name, onChange, reference, label, errorLabel, children }) => (
   <StyledContainer>
     <StyledLabelContainer>
       <label>{label}</label>
       {errorLabel && <label>{errorLabel}</label>}
     </StyledLabelContainer>
 
-    <select name={name} required onChange={onChange}>
+    <select name={name} required onChange={onChange} ref={reference}>
       {children}
     </select>
   </StyledContainer>
