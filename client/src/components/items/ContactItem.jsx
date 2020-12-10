@@ -1,4 +1,5 @@
 import React from 'react';
+import { string, number, shape } from 'prop-types';
 import styled from 'styled-components';
 import formatDate from '../../utils/dateFormatter';
 
@@ -26,5 +27,14 @@ const ContactItem = ({ contact }) => (
     <p>{contact.message}</p>
   </StyledLi>
 );
+
+ContactItem.propTypes = {
+  contact: shape({
+    name: string.isRequired,
+    email: string.isRequired,
+    createdAt: string.isRequired,
+    message: string,
+  }),
+};
 
 export default ContactItem;
