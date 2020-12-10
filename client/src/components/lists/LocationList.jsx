@@ -1,4 +1,5 @@
 import React from 'react';
+import { array, bool } from 'prop-types';
 import styled from 'styled-components';
 import LocationItem from '../items/LocationItem';
 
@@ -20,5 +21,10 @@ const LocationList = ({ locations, toggled }) => (
     ))}
   </StyledUl>
 );
+
+LocationList.propTypes = {
+  locations: array.isRequired,
+  toggled: bool,
+};
 
 export default LocationList;

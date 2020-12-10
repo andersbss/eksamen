@@ -1,4 +1,5 @@
 import React from 'react';
+import { bool, number, shape, string } from 'prop-types';
 import styled from 'styled-components';
 import OfficeList from '../lists/OfficeList';
 
@@ -18,5 +19,13 @@ const OfficeItem = ({ location, count, toggled }) => (
     <OfficeList toggled={toggled} location={location} />
   </StyledLi>
 );
+
+OfficeItem.propTypes = {
+  location: shape({
+    location: string,
+  }).isRequired,
+  count: number.isRequired,
+  toggled: bool,
+};
 
 export default OfficeItem;

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
+import { bool, shape, string } from 'prop-types';
 
 const StyledLi = styled.li`
   border: ${(props) =>
@@ -50,6 +51,16 @@ const OfficeItem = ({ office, toggled }) => {
       <p>{office.email}</p>
     </StyledLi>
   );
+};
+
+OfficeItem.propTypes = {
+  office: shape({
+    office: string,
+    address: string,
+    phone: string,
+    email: string,
+  }),
+  toggled: bool,
 };
 
 export default OfficeItem;

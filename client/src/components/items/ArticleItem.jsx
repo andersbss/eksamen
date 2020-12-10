@@ -1,5 +1,5 @@
 import React from 'react';
-import { bool, string } from 'prop-types';
+import { string } from 'prop-types';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import Image from '../images/Image';
@@ -85,7 +85,7 @@ ArticleItem.propTypes = {
   ingress: string,
   categoryTitle: string,
   id: string.isRequired,
-  image: bool,
+  image: string,
 };
 
 export default ArticleItem;
