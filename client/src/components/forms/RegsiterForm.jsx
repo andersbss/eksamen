@@ -37,6 +37,7 @@ const RegisterForm = ({
     <Input
       name="password"
       label="Passord"
+      type="password"
       errorLabel={errors?.password}
       onChange={handleChange}
     />
