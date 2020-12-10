@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import DefaultFormTypes from './types/Default';
 import Input from '../common/Input';
-import Button from '../buttons/Button';
+import Button from '../styledComponents/StyledButton';
 
 const StyledForm = styled.form`
   width: 600px;
@@ -22,7 +23,6 @@ const CategoryForm = ({
   handleChange,
   errors,
   hasErrors,
-  success,
   loading,
   error,
 }) => (
@@ -34,15 +34,19 @@ const CategoryForm = ({
       errorLabel={errors?.title}
       onChange={handleChange}
     />
-    <Button
-      type="submit"
-      content={loading ? 'Oppretter kategori...' : 'OPPRETT'}
-      backgroundColor="blue"
-      color="white"
-      disabled={loading || hasErrors}
-    />
-    {error && <p>Noe gikk galt, prøv igjen</p>}
+    <Button primary="true" type="submit" disabled={loading || hasErrors}>
+      {loading ? 'Oppretter kategori...' : 'OPPRETT'}
+    </Button>
+    {error && (
+      <p>{`Oppretting feilet, prøv igjen. (${
+        Array.isArray(error) ? error[0] : error
+      })`}</p>
+    )}
   </StyledForm>
 );
+
+CategoryForm.propTypes = {
+  ...DefaultFormTypes,
+};
 
 export default CategoryForm;

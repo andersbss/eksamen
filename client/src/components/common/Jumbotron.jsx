@@ -1,4 +1,5 @@
 import React from 'react';
+import { string } from 'prop-types';
 import styled from 'styled-components';
 
 const StyledHeader = styled.header`
@@ -28,4 +29,12 @@ const Jumbotron = ({ headerText, top, bottom, marginLeftAndRight }) => (
     <h1>{headerText}</h1>
   </StyledHeader>
 );
+
+Jumbotron.propTypes = {
+  headerText: string,
+  top: string,
+  bottom: string,
+  marginLeftAndRight: string,
+};
+
 export default Jumbotron;

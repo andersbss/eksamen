@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Button from '../buttons/Button';
+import StyledButton from '../styledComponents/StyledButton';
 import Select from '../common/Select';
 import Error from '../errors/Error';
 import Input from '../common/Input';
-import Loader from '../animations/Loader';
 import Textarea from '../common/Textarea';
 import ImageForm from './ImageForm';
 import StyledForm from '../styledComponents/StyledForm';
@@ -79,8 +79,31 @@ const ArticleForm = ({
   imageError,
   authorFetchError,
   categoryFetchError,
+  setArticleInputs,
 }) => {
+  const titleRef = useRef();
+  const ingressRef = useRef();
+  const contentRef = useRef();
   const [authorName, setAuthorName] = useState('');
+
+  useEffect(() => {
+    if (!id) return;
+
+    if (!articleLoading && authorIsSuccess && categoryIsSuccess) {
+      setArticleInputs((prev) => ({
+        ...prev,
+        [titleRef.current.name]: titleRef.current.value,
+        [ingressRef.current.name]: ingressRef.current.value,
+        [contentRef.current.name]: contentRef.current.value,
+      }));
+    }
+  }, [
+    articleLoading,
+    authorIsSuccess,
+    categoryIsSuccess,
+    id,
+    setArticleInputs,
+  ]);
 
   useEffect(() => {
     if (article)
@@ -90,7 +113,7 @@ const ArticleForm = ({
   return (
     <StyledFormContainer>
       {articleLoading ? (
-        <Loader />
+        <p>Laster...</p>
       ) : (
         <StyledForm onSubmit={handleSubmit}>
           <Input
@@ -99,8 +122,9 @@ const ArticleForm = ({
             type="text"
             maxLength="50"
             placeholder="Tittel"
-            required="true"
+            required
             name="title"
+            reference={titleRef}
             defaultValue={article ? article.title : ''}
             onChange={handleChange}
           />
@@ -110,8 +134,9 @@ const ArticleForm = ({
             type="text"
             maxLength="1000"
             placeholder="Ingress"
-            required="true"
+            required
             name="ingress"
+            reference={ingressRef}
             defaultValue={article ? article.ingress : ''}
             onChange={handleChange}
           />
@@ -120,14 +145,14 @@ const ArticleForm = ({
             errorLabel={errors?.content}
             maxLength="3000"
             placeholder="Innhold"
-            required="true"
+            required
             name="content"
+            reference={contentRef}
             defaultValue={article ? article.content : ''}
             rows="4"
             cols="50"
             onChange={handleChange}
           />
-          {categoryFetchLoading && <Loader />}
           {categoryIsSuccess && (
             <StyledSelectButtonContainer>
               <Select
@@ -149,23 +174,21 @@ const ArticleForm = ({
                     if (article)
                       if (category._id === article.category._id) return null;
                     return (
-                      <option value={category._id}>{category.title}</option>
+                      <option key={category._id} value={category._id}>
+                        {category.title}
+                      </option>
                     );
                   })
                 )}
               </Select>
-              <Button
-                content="NY"
-                backgroundColor="blue"
-                color="white"
-                onClick={handleModalToggle}
-              />
+              <StyledButton primary="true" onClick={handleModalToggle}>
+                NY
+              </StyledButton>
             </StyledSelectButtonContainer>
           )}
           {!categoryIsSuccess && !categoryFetchLoading && (
             <Error error={categoryFetchError} />
           )}
-          {authorLoading && <Loader />}
           {authorIsSuccess && (
             <Select
               name="author"
@@ -186,7 +209,11 @@ const ArticleForm = ({
                   if (article)
                     if (author._id === article.author._id) return null;
                   const name = `${author.firstName} ${author.lastName}`;
-                  return <option value={author._id}>{name}</option>;
+                  return (
+                    <option key={author._id} value={author._id}>
+                      {name}
+                    </option>
+                  );
                 })
               )}
             </Select>
@@ -199,21 +226,21 @@ const ArticleForm = ({
             <option value="true">Public</option>
           </Select>
           {error && (
-            <p>{`Registrering feilet, prøv igjen.(${
+            <p>{`Opplasting feilet, prøv igjen.(${
               Array.isArray(error) ? error[0] : error
             })`}</p>
           )}
           {!submitSuccess ? (
-            <Button
+            <StyledButton
+              primary="true"
               type="submit"
-              content={id ? 'Edit' : 'Create'}
               disabled={loading || hasErrors}
-              backgroundColor="blue"
-              color="white"
-            />
+            >
+              {id ? 'LAGRE ENDRINGER' : 'OPPRETT'}
+            </StyledButton>
           ) : (
             <StyledSuccessMessage>
-              <p>Meldingen er sendt!</p>
+              <p>{id ? 'Endringene er lagret' : 'Artikkel opprettet'}</p>
               <p>Omdirigerer...</p>
             </StyledSuccessMessage>
           )}

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import useDidMount from './didMount';
 
 const useForm = (callBack, validate, params) => {
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState(true);
   const [inputs, setInputs] = useState({});
@@ -28,6 +28,7 @@ const useForm = (callBack, validate, params) => {
   }, [inputs, validate]);
 
   useEffect(() => {
+    console.log(errors);
     if (Object.keys(errors).length === 0 && !didMount) setHasErrors(false);
   }, [errors, didMount]);
 
@@ -50,6 +51,7 @@ const useForm = (callBack, validate, params) => {
     handleSubmit,
     loading,
     response,
+    setInputs,
   };
 };
 

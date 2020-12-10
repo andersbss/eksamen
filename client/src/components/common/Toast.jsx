@@ -1,4 +1,5 @@
 import React from 'react';
+import { string } from 'prop-types';
 import styled from 'styled-components';
 
 const StyledToastContainer = styled.div`
@@ -17,5 +18,11 @@ const Toast = ({ header, content, duration }) => (
     <p>{content}</p>
   </StyledToastContainer>
 );
+
+Toast.propTypes = {
+  header: string,
+  content: string,
+  duration: string,
+};
 
 export default Toast;

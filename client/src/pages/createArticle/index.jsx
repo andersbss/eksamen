@@ -52,11 +52,8 @@ const CreateArticle = () => {
 
   let putOrPost;
 
-  if (id) {
-    putOrPost = ['PUT', `/articles/${id}`];
-  } else {
-    putOrPost = ['POST', '/articles'];
-  }
+  if (id) putOrPost = ['PUT', `/articles/${id}`];
+  else putOrPost = ['POST', '/articles'];
 
   const {
     loading: articlesLoading,
@@ -94,6 +91,7 @@ const CreateArticle = () => {
     hasErrors: hasArticleErrors,
     loading: articleLoading,
     response: articleResponse,
+    setInputs: articleSetInputs,
   } = useForm(request, articleValidate, putOrPost);
 
   useEffect(() => {
@@ -117,7 +115,7 @@ const CreateArticle = () => {
 
     if (success) {
       setSubmitSuccess(success);
-      history.push('/fagartikler');
+      setTimeout(() => history.push('/fagartikler'), 1500);
     } else setArticleError(data);
   }, [articleResponse, history]);
 
@@ -146,16 +144,17 @@ const CreateArticle = () => {
       {!id && <Jumbotron headerText="Ny artikkel" />}
       {id && (
         <Jumbotron
-          headerText={articlesLoading ? 'loading...' : articlesResponse?.title}
+          headerText={articlesLoading ? '...' : articlesResponse?.title}
         />
       )}
-      {articlesLoading && <Loader />}
+      {(articlesLoading || categoryLoading || authorLoading) && <Loader />}
       <ArticleForm
         id={id}
         article={article}
         handleSubmit={handleArticleSubmit}
         handleChange={handleArticleChange}
         errors={articleErrors}
+        setArticleInputs={articleSetInputs}
         hasErrors={hasArticleErrors}
         loading={articleLoading}
         error={articleError}

@@ -1,4 +1,6 @@
 import React from 'react';
+import { string } from 'prop-types';
+
 import styled from 'styled-components';
 
 const StyledContainer = styled.section`
@@ -17,5 +19,10 @@ const Paragraph = ({ header, content }) => (
     <p>{content}</p>
   </StyledContainer>
 );
+
+Paragraph.propTypes = {
+  header: string,
+  content: string,
+};
 
 export default Paragraph;
