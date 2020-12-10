@@ -73,7 +73,8 @@ const ArticleForm = ({
   const titleRef = useRef();
   const ingressRef = useRef();
   const contentRef = useRef();
-  const [authorName, setAuthorName] = useState('');
+  const categoryRef = useRef();
+  const authorRef = useRef();
 
   useEffect(() => {
     if (!id) return;
@@ -84,6 +85,8 @@ const ArticleForm = ({
         [titleRef.current.name]: titleRef.current.value,
         [ingressRef.current.name]: ingressRef.current.value,
         [contentRef.current.name]: contentRef.current.value,
+        [categoryRef.current.name]: categoryRef.current.value,
+        [authorRef.current.name]: authorRef.current.value,
       }));
     }
   }, [
@@ -93,11 +96,6 @@ const ArticleForm = ({
     id,
     setArticleInputs,
   ]);
-
-  useEffect(() => {
-    if (article)
-      setAuthorName(`${article.author.firstName} ${article.author.lastName}`);
-  }, [article]);
 
   return (
     <StyledFormContainer>
@@ -149,25 +147,18 @@ const ArticleForm = ({
                 label="Kategori"
                 errorLabel={errors?.category}
                 onChange={handleChange}
+                defaultValue={article ? article.category._id : ''}
+                reference={categoryRef}
               >
-                {!article && <option value={null}>Velg kategori</option>}
-                {article && (
-                  <option value={article.category._id} defaultValue>
-                    {article.category.title}
-                  </option>
-                )}
+                {!id && <option value={null}>Velg kategori</option>}
                 {categories.length <= 0 ? (
                   <p>Ingen kategorier</p>
                 ) : (
-                  categories.map((category) => {
-                    if (article)
-                      if (category._id === article.category._id) return null;
-                    return (
-                      <option key={category._id} value={category._id}>
-                        {category.title}
-                      </option>
-                    );
-                  })
+                  categories.map((category) => (
+                    <option key={category._id} value={category._id}>
+                      {category.title}
+                    </option>
+                  ))
                 )}
               </Select>
               <StyledButton primary="true" onClick={handleModalToggle}>
@@ -184,19 +175,14 @@ const ArticleForm = ({
               label="Forfatter"
               errorLabel={errors?.author}
               onChange={handleChange}
+              defaultValue={article ? article.author._id : null}
+              reference={authorRef}
             >
-              {!article && <option value={null}>Velg forfatter</option>}
-              {article && (
-                <option value={article.author._id} defaultValue>
-                  {authorName}
-                </option>
-              )}
+              {!id && <option value={null}>Velg forfatter</option>}
               {authors.length <= 0 ? (
                 <p>Ingen forfattere</p>
               ) : (
                 authors.map((author) => {
-                  if (article)
-                    if (author._id === article.author._id) return null;
                   const name = `${author.firstName} ${author.lastName}`;
                   return (
                     <option key={author._id} value={author._id}>
