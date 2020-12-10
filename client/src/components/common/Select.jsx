@@ -1,4 +1,5 @@
 import React from 'react';
+import { string, func, node } from 'prop-types';
 import styled from 'styled-components';
 
 const StyledContainer = styled.span`
@@ -54,5 +55,13 @@ const Select = ({ name, onChange, label, errorLabel, children }) => (
     </select>
   </StyledContainer>
 );
+
+Select.propTypes = {
+  name: string,
+  onChange: func,
+  label: string,
+  errorLabel: string,
+  children: node,
+};
 
 export default Select;
