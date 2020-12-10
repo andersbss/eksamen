@@ -26,11 +26,10 @@ const CreateArticle = () => {
   const history = useHistory();
 
   // Image
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState();
   const [imageError, setImageError] = useState(null);
   const [imageSuccess, setImageSuccess] = useState(false);
   const [imageId, setImageId] = useState('');
-  const [disableImageUpload, setDisableImageUpload] = useState(true);
 
   const imageFormOnChange = (e) => {
     const imageFile = e.target.files[0];
@@ -126,11 +125,6 @@ const CreateArticle = () => {
     }
   }, [articlesStatus, articlesResponse]);
 
-  useEffect(() => {
-    if (file === null) setDisableImageUpload(true);
-    else setDisableImageUpload(false);
-  }, [file]);
-
   return (
     <>
       {modalIsOpen && (
@@ -181,7 +175,6 @@ const CreateArticle = () => {
         imageSuccess={imageSuccess}
         submitSuccess={submitSuccess}
         imageId={imageId}
-        disableImageUpload={disableImageUpload}
       />
       {articleError && <Error error={articleError} />}
       {categoryError && <Error error={categoryError} />}
