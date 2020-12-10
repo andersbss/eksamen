@@ -4,11 +4,11 @@ Vi bruker en skybasert mongodb server.
 Connectionstring: mongodb+srv://admin:admin@cluster0.jx0ym.mongodb.net/eksamen?retryWrites=true&w=majority
 
 Kjøre appen fra terminal:
-cd server
-npm install
-npm run dev
-cd client
-npm install
+cd server\
+npm install\
+npm run dev\
+cd client\
+npm install\
 npm run dev
 
 .env filer er ikke lagt i .gitIgnore. Dette er for å gjøre det enkelt for sensor og emneansvarlig.
