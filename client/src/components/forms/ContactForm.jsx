@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../buttons/Button';
+import Button from '../styledComponents/StyledButton';
 import Input from '../common/Input';
 import Textarea from '../common/Textarea';
 import { StyledSuccessMessage } from '../styledComponents/StyledMessages';
@@ -41,18 +41,14 @@ const ContactForm = ({
       onChange={handleChange}
     />
     {error && (
-      <p>{`Registrering feilet, prøv igjen.(${
+      <p>{`Innsending feilet, prøv igjen.(${
         Array.isArray(error) ? error[0] : error
       })`}</p>
     )}
     {!submitSuccess ? (
-      <Button
-        type="submit"
-        content={loading ? 'Sender melding...' : 'Send'}
-        backgroundColor="blue"
-        color="white"
-        disabled={loading || hasErrors}
-      />
+      <Button primary="true" type="submit" disabled={loading || hasErrors}>
+        {loading ? 'Seneder melding...' : 'SEND'}
+      </Button>
     ) : (
       <StyledSuccessMessage>
         <p>Meldingen er sendt!</p>
