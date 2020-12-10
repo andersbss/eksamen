@@ -8,11 +8,11 @@ import StyledForm from '../styledComponents/StyledForm';
 const ContactForm = ({
   handleSubmit,
   handleChange,
-  loading,
-  submitSuccess,
-  hasErrors,
-  error,
   errors,
+  hasErrors,
+  loading,
+  error,
+  submitSuccess,
   userEmail,
   userName,
 }) => (
