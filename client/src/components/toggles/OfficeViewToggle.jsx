@@ -1,4 +1,5 @@
 import React from 'react';
+import { string, bool, array, func } from 'prop-types';
 import styled from 'styled-components';
 
 const StyledButtonContainer = styled.aside`
@@ -61,5 +62,12 @@ const OfficeViewToggle = ({
     </StyledGridIcon>
   </StyledButtonContainer>
 );
+
+OfficeViewToggle.propTypes = {
+  handleGridToggle: func.isRequired,
+  handleListToggle: func.isRequired,
+  gridColor: string,
+  listColor: string,
+};
 
 export default OfficeViewToggle;
