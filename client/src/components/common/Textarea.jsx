@@ -1,4 +1,5 @@
 import React from 'react';
+import { string, number, shape, bool, func } from 'prop-types';
 import styled from 'styled-components';
 
 const StyledContainer = styled.span`
@@ -78,4 +79,19 @@ const Textarea = ({
     />
   </StyledContainer>
 );
+
+Textarea.propTypes = {
+  label: string,
+  errorLabel: string,
+  name: string,
+  maxLength: string,
+  placeholder: string,
+  rows: string,
+  cols: string,
+  required: bool,
+  value: string,
+  defaultValue: string,
+  onChange: func,
+};
+
 export default Textarea;
