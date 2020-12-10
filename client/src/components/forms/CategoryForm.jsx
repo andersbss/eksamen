@@ -1,6 +1,7 @@
 import React from 'react';
 import { string, func, node } from 'prop-types';
 import styled from 'styled-components';
+import DefaultFormTypes from './types/Default';
 import Input from '../common/Input';
 import Button from '../styledComponents/StyledButton';
 
@@ -40,5 +41,9 @@ const CategoryForm = ({
     {error && <p>Noe gikk galt, prøv igjen</p>}
   </StyledForm>
 );
+
+CategoryForm.propTypes = {
+  ...DefaultFormTypes,
+};
 
 export default CategoryForm;

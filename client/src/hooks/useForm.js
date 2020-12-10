@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import useDidMount from './didMount';
 
 const useForm = (callBack, validate, params) => {
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState(true);
   const [inputs, setInputs] = useState({});
