@@ -1,10 +1,16 @@
 import mongoose, { Schema } from 'mongoose';
-import { IMAGE_FILE_PATH, IMAGE_FILE_MIMETYPE } from '../constants/dataRules';
 
 const ImageSchema = new Schema(
   {
-    file_path: IMAGE_FILE_PATH,
-    file_mimetype: IMAGE_FILE_MIMETYPE,
+    file_path: {
+      type: String,
+      required: true,
+    },
+    file_mimetype: {
+      type: String,
+      required: true,
+      // min: [1, 'Mime type has to be at least 1 digit long'],
+    },
   },
   { timestamps: true }
 );
