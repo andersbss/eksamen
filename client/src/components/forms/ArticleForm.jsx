@@ -103,7 +103,6 @@ const ArticleForm = ({
   ]);
 
   useEffect(() => {
-    console.log(imageId);
     if (imageId) {
       setArticleInputs((prev) => ({
         ...prev,
