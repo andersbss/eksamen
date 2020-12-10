@@ -5,7 +5,6 @@ import StyledButton from '../styledComponents/StyledButton';
 import Select from '../common/Select';
 import Error from '../errors/Error';
 import Input from '../common/Input';
-import Loader from '../animations/Loader';
 import Textarea from '../common/Textarea';
 import ImageForm from './ImageForm';
 import StyledForm from '../styledComponents/StyledForm';
@@ -182,12 +181,9 @@ const ArticleForm = ({
                   })
                 )}
               </Select>
-              <Button
-                content="NY"
-                backgroundColor="blue"
-                color="white"
-                onClick={handleModalToggle}
-              />
+              <StyledButton primary="true" onClick={handleModalToggle}>
+                NY
+              </StyledButton>
             </StyledSelectButtonContainer>
           )}
           {!categoryIsSuccess && !categoryFetchLoading && (
