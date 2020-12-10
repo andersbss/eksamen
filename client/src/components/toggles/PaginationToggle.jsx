@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, func, number } from 'prop-types';
+import { func, number } from 'prop-types';
 import styled from 'styled-components';
 import PaginationButton from '../common/PaginationButton';
 

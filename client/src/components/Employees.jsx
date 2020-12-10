@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { string } from 'prop-types';
 import styled from 'styled-components';
 import EmployeeItem from './items/EmployeeItem';
 import { employeesList } from '../mockUpData';
@@ -42,4 +43,9 @@ const Employees = ({ officeId }) => {
     </StyledEmployeeContainer>
   );
 };
+
+Employees.propTypes = {
+  officeId: string.isRequired,
+};
+
 export default Employees;
