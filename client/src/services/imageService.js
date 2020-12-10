@@ -15,7 +15,7 @@ export const upload = async (image) => {
       },
     });
   } catch (error) {
-    console.log(err);
+    console.log(error);
     if (error.response) return error.response;
     return { data: { success: false, data: 'Connection error', status: 503 } };
   }

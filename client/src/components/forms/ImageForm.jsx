@@ -1,13 +1,12 @@
 import React from 'react';
 import { func, string, array, oneOfType, bool } from 'prop-types';
-
 import Image from '../images/Image';
 
 const ImageForm = ({ handleSubmit, onChange, error, success, imageId }) => (
   <>
     {success && <p>Bilde ble lastet opp!</p>}
     {error && (
-      <p>{`Opplast feilet, prøv igjen. (${
+      <p>{`Opplasting feilet, prøv igjen. (${
         Array.isArray(error) ? error[0] : error
       })`}</p>
     )}
