@@ -13,6 +13,9 @@ describe('<OfficeSelectFilter />', () => {
 
     expect(wrapper.find('option').length).toEqual(4);
     expect(wrapper.text()).toContain('Norway' && 'Sweden' && 'Denmark');
+    expect(wrapper.find('option').at(1).prop('value')).toEqual('Norway');
+    expect(wrapper.find('option').at(2).prop('value')).toEqual('Sweden');
+    expect(wrapper.find('option').at(3).prop('value')).toEqual('Denmark');
   });
 
   it('should call setChosenLocation when selected is changed', () => {
