@@ -30,10 +30,10 @@ app.use(helmet());
 
 const limiter = rateLimit({
   windowMs: 60 * 60 * 1000, // Accepts 60 requests per minute (1 request per second).
-  max: 400, // Accepts max 400 requests from the same IP, regardless of time interval.
+  max: 1000, // Accepts max 1000 requests from the same IP, regardless of time interval.
 });
 
-// app.use(limiter);
+app.use(limiter);
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
@@ -51,11 +51,11 @@ app.use(
 );
 
 app.use(cookieParser());
-// app.use(csrf({ cookie: true }));
+app.use(csrf({ cookie: true }));
 
-// app.get(`${process.env.BASEURL}/csrf-token`, (req, res) => {
-//  res.status(200).json({ data: req.csrfToken() });
-// });
+app.get(`${process.env.BASEURL}/csrf-token`, (req, res) => {
+  res.status(200).json({ data: req.csrfToken() });
+});
 
 app.use(`${process.env.BASEURL}/`, auth);
 app.use(`${process.env.BASEURL}/articles`, article);

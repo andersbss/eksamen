@@ -31,7 +31,7 @@ export const StyledButton = styled.button`
 `;
 
 // This is not being used. Every button is replaced with 'styledComponents/StyledButton'.
-// We just dont want to break anything before handing in the exam.
+// We just dont want to break anything before handing in the exam. Just in case :)
 const Button = ({ content, onClick, disabled, backgroundColor, color }) => (
   <StyledButton
     backgroundColor={backgroundColor}

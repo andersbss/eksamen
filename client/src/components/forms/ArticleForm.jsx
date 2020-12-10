@@ -43,6 +43,10 @@ const StyledSelectButtonContainer = styled.span`
   }
 `;
 
+// Vi skulle strukturere dette anderledes. Dette er helt klart for mange props.
+// Vi kunne satt article form rett i form komponenteten, eller latt være å decontructrukte her ute.
+// Siden hadde en annan struktur tidligere, og de da har denne utingen hengt igjen.
+// Vi er klar over at det er ikke er optimalt.
 const ArticleForm = ({
   id,
   imageId,
