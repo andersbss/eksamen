@@ -73,6 +73,7 @@ const ArticleForm = ({
   authorFetchError,
   categoryFetchError,
   setArticleInputs,
+  disableImageUpload,
 }) => {
   const titleRef = useRef();
   const ingressRef = useRef();
@@ -231,6 +232,7 @@ const ArticleForm = ({
         handleSubmit={handleImageUpload}
         onChange={imageFormOnChange}
         error={imageError}
+        disabledUpload={disableImageUpload}
         success={imageSuccess}
         imageId={imageId}
       />
