@@ -3,8 +3,16 @@ Eksamen i webapplikasjoner av Anders Bjørnstad Strandseter og Sigmund Baklia.
 Vi bruker en skybasert mongodb server.
 Connectionstring: mongodb+srv://admin:admin@cluster0.jx0ym.mongodb.net/eksamen?retryWrites=true&w=majority
 
-.env filer er ikke lagt i .gitIgnore. Dette er for å gjør det enkelt for sensor og emneansvarlig.
-I produksjon skal selvsagt slik filer ikke bli lastet opp til repo.
+Kjøre appen fra terminal:
+cd server
+npm install
+npm run dev
+cd client
+npm install
+npm run dev
+
+.env filer er ikke lagt i .gitIgnore. Dette er for å gjøre det enkelt for sensor og emneansvarlig.
+I produksjon skal selvsagt slike filer ikke bli lastet opp til repo.
 
 Det er tre eksisterende brukere i systemet med forskjellige roller:
 
