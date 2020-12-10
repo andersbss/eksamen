@@ -50,6 +50,7 @@ const useForm = (callBack, validate, params) => {
     handleSubmit,
     loading,
     response,
+    setInputs,
   };
 };
 

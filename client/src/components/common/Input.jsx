@@ -45,6 +45,7 @@ const Input = ({
   errorLabel = '',
   type = '',
   name,
+  reference,
   maxLength = '',
   placeholder = '',
   required = false,
@@ -58,6 +59,7 @@ const Input = ({
       {errorLabel && <label>{errorLabel}</label>}
     </StyledLabelContainer>
     <input
+      ref={reference}
       type={type}
       placeholder={placeholder}
       maxLength={maxLength}

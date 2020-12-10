@@ -16,6 +16,7 @@ const Contact = () => {
   const history = useHistory();
 
   const {
+    setInputs,
     handleChange,
     handleSubmit,
     errors,
@@ -49,6 +50,7 @@ const Contact = () => {
           hasErrors={hasErrors}
           loading={loading}
           error={error}
+          setInputs={setInputs}
           submitSuccess={submitSuccess}
           userEmail={loggedIn ? user.email : ''}
           userName={loggedIn ? `${user.firstName} ${user.lastName}` : ''}
