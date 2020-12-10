@@ -31,16 +31,18 @@ describe('<Input />', () => {
         type={type}
       />
     );
-    expect(wrapper.find('input').prop('name')).toEqual(name);
-    expect(wrapper.find('input').prop('maxLength')).toEqual(maxLength);
-    expect(wrapper.find('input').prop('placeholder')).toEqual(placeholder);
-    expect(wrapper.find('input').prop('value')).toEqual(value);
-    expect(wrapper.find('input').prop('type')).toEqual(type);
+    const input = wrapper.find('input');
+    expect(input.prop('name')).toEqual(name);
+    expect(input.prop('maxLength')).toEqual(maxLength);
+    expect(input.prop('placeholder')).toEqual(placeholder);
+    expect(input.prop('value')).toEqual(value);
+    expect(input.prop('type')).toEqual(type);
   });
 
   it('should be required if required prop is true', () => {
     const wrapper = shallow(<Input required />);
     expect(wrapper.find('input').prop('required')).toEqual(true);
+
     wrapper.setProps({ required: false });
     expect(wrapper.find('input').prop('required')).toEqual(false);
   });

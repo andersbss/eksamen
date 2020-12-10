@@ -6,6 +6,15 @@ import ArticleItem, {
 import Image from '../../../src/components/images/Image';
 
 describe('<ArticleItem />', () => {
+  it('should be defined', () => {
+    expect(ArticleItem).toBeDefined();
+  });
+
+  it('should render correctly', () => {
+    const wrapper = shallow(<ArticleItem image />);
+    expect(wrapper.exists()).toBe(true);
+  });
+
   it('should contain Image if image is true', () => {
     const wrapper = shallow(<ArticleItem image />);
     expect(wrapper.find(Image).exists()).toBe(true);
