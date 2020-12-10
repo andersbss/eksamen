@@ -34,4 +34,26 @@ describe('<OfficeSelectFilter />', () => {
     wrapper.find(StyledSelect).simulate('change');
     expect(mockOnChange).toHaveBeenCalled();
   });
+
+  it('should only have "FILTER" option when no filter is chosen', () => {
+    const locations = ['Norway', 'Sweden', 'Denmark'];
+    const wrapper = mount(
+      <ThemeProvider theme={theme}>
+        <OfficeSelectFilter locations={locations} chosenLocation="INGEN" />
+      </ThemeProvider>
+    );
+
+    expect(wrapper.find('option').at(0).text()).toContain('FILTER');
+  });
+
+  it('should only have "INGEN" option when no filter is chosen', () => {
+    const locations = ['Norway', 'Sweden', 'Denmark'];
+    const wrapper = mount(
+      <ThemeProvider theme={theme}>
+        <OfficeSelectFilter locations={locations} chosenLocation="FILTER" />
+      </ThemeProvider>
+    );
+
+    expect(wrapper.find('option').at(0).text()).toContain('INGEN');
+  });
 });
