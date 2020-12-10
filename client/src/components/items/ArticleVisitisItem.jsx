@@ -1,4 +1,5 @@
 import React from 'react';
+import { string, number, shape } from 'prop-types';
 import styled from 'styled-components';
 import formatDate from '../../utils/dateFormatter';
 import StyledNavLink from '../styledComponents/StyledLinkButton';
@@ -47,5 +48,17 @@ const ArticleVisitsItem = ({ article }) => (
     </StyledNavLink>
   </StyledLi>
 );
+
+ArticleVisitsItem.propTypes = {
+  article: shape({
+    title: string.isRequired,
+    count: number.isRequired,
+    author: shape({
+      firstName: string.isRequired,
+      lastName: string.isRequired,
+    }),
+    createdAt: string.isRequired,
+  }),
+};
 
 export default ArticleVisitsItem;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { func, number } from 'prop-types';
 import styled from 'styled-components';
 import PaginationButton from '../common/PaginationButton';
 
@@ -19,5 +20,11 @@ const PaginationToggle = ({ currentPage, setPage, length }) => (
     ))}
   </StyledButtonContainer>
 );
+
+PaginationToggle.propTypes = {
+  currentPage: number.isRequired,
+  setPage: func.isRequired,
+  length: number.isRequired,
+};
 
 export default PaginationToggle;

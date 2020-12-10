@@ -60,9 +60,9 @@ OfficeListContainer.propTypes = {
   offices: shape({
     location: string,
     offices: array,
-    address: string.isRequired,
-    phone: string.isRequired,
-    email: string.isRequired,
+    address: string,
+    phone: string,
+    email: string,
   }),
 };
 

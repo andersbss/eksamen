@@ -1,4 +1,5 @@
 import React from 'react';
+import { array } from 'prop-types';
 import styled from 'styled-components';
 import UserVisitItem from '../items/UserVisitItem';
 
@@ -20,5 +21,9 @@ const UserVisitsList = ({ users }) => (
     )}
   </StyledUl>
 );
+
+UserVisitsList.propTypes = {
+  users: array.isRequired,
+};
 
 export default UserVisitsList;

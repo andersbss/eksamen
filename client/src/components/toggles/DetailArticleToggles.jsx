@@ -1,4 +1,5 @@
 import React from 'react';
+import { string, bool, array, func } from 'prop-types';
 import styled from 'styled-components';
 import StyledButton from '../styledComponents/StyledButton';
 import StyledLinkButton from '../styledComponents/StyledLinkButton';
@@ -30,5 +31,11 @@ const DetailArticleToggles = ({ handleDelete, deleteLoading, id }) => (
     </NavLink>
   </StyledSection>
 );
+
+DetailArticleToggles.propTypes = {
+  handleDelete: func.isRequired,
+  deleteLoading: bool,
+  id: string.isRequired,
+};
 
 export default DetailArticleToggles;

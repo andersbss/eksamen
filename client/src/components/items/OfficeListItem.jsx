@@ -1,4 +1,5 @@
 import React from 'react';
+import { string, number } from 'prop-types';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
@@ -33,6 +34,14 @@ const OfficeListItem = ({ id, office, address, phone, email }) => {
       </p>
     </StyledListItem>
   );
+};
+
+OfficeListItem.propTypes = {
+  id: number.isRequired,
+  office: string.isRequired,
+  address: string,
+  phone: string,
+  email: string,
 };
 
 export default OfficeListItem;

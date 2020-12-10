@@ -1,4 +1,5 @@
 import React from 'react';
+import { func, node } from 'prop-types';
 import styled from 'styled-components';
 
 const StyledModalBackground = styled.div`
@@ -27,5 +28,10 @@ const Modal = ({ children, handleToggle }) => (
     <StyledModal>{children}</StyledModal>
   </>
 );
+
+Modal.propTypes = {
+  children: node,
+  handleToggle: func,
+};
 
 export default Modal;

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
+import { string, bool, array, func } from 'prop-types';
 import SelectFilter from '../common/CategorySelectFilter';
 import Input from '../common/Input';
 import StyledNavLink from '../styledComponents/StyledLinkButton';
@@ -26,33 +26,38 @@ const ArticlesToggles = ({
   setChosenCategory,
   chosenCategory,
   setSearchTerm,
-  searchTerm,
   handleSearch,
-}) => {
-  const history = useHistory();
+}) => (
+  <StyledSection isAdmin={isAdmin}>
+    {loggedIn && isAdmin && (
+      <StyledNavLink primary="true" exact to="/nyartikkel">
+        NY ARTIKKEL
+      </StyledNavLink>
+    )}
 
-  return (
-    <StyledSection isAdmin={isAdmin}>
-      {loggedIn && isAdmin && (
-        <StyledNavLink primary="true" exact to="/nyartikkel">
-          NY ARTIKKEL
-        </StyledNavLink>
-      )}
+    <Input
+      label="Søk på artikkeltittel"
+      onChange={(e) => setSearchTerm(e.target.value)}
+    />
 
-      <Input
-        label="Søk på artikkeltittel"
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
+    <Button onClick={handleSearch}>SØK</Button>
 
-      <Button onClick={handleSearch}>SØK</Button>
+    <SelectFilter
+      categories={categories}
+      setChosenCategory={setChosenCategory}
+      chosenCategory={chosenCategory}
+    />
+  </StyledSection>
+);
 
-      <SelectFilter
-        categories={categories}
-        setChosenCategory={setChosenCategory}
-        chosenCategory={chosenCategory}
-      />
-    </StyledSection>
-  );
+ArticlesToggles.propTypes = {
+  loggedIn: bool,
+  isAdmin: bool,
+  categories: array.isRequired,
+  setChosenCategory: func.isRequired,
+  chosenCategory: string,
+  setSearchTerm: func.isRequired,
+  handleSearch: func.isRequired,
 };
 
 export default ArticlesToggles;

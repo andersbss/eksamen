@@ -1,4 +1,5 @@
 import React from 'react';
+import { node } from 'prop-types';
 import styled from 'styled-components';
 import Nav from '../components/nav/Nav';
 import Footer from '../components/footers/Footer';
@@ -48,6 +49,10 @@ const MainLayout = ({ children }) => {
       <Footer />
     </StyledMainLayout>
   );
+};
+
+MainLayout.propTypes = {
+  children: node,
 };
 
 export default MainLayout;
