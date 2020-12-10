@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { array, shape, string } from 'prop-types';
 import styled from 'styled-components';
 import Button from '../buttons/Button';
 import Select from '../common/Select';
@@ -99,7 +100,7 @@ const ArticleForm = ({
             type="text"
             maxLength="50"
             placeholder="Tittel"
-            required="true"
+            required
             name="title"
             defaultValue={article ? article.title : ''}
             onChange={handleChange}
@@ -110,7 +111,7 @@ const ArticleForm = ({
             type="text"
             maxLength="1000"
             placeholder="Ingress"
-            required="true"
+            required
             name="ingress"
             defaultValue={article ? article.ingress : ''}
             onChange={handleChange}
@@ -120,7 +121,7 @@ const ArticleForm = ({
             errorLabel={errors?.content}
             maxLength="3000"
             placeholder="Innhold"
-            required="true"
+            required
             name="content"
             defaultValue={article ? article.content : ''}
             rows="4"
@@ -149,7 +150,9 @@ const ArticleForm = ({
                     if (article)
                       if (category._id === article.category._id) return null;
                     return (
-                      <option value={category._id}>{category.title}</option>
+                      <option key={category._id} value={category._id}>
+                        {category.title}
+                      </option>
                     );
                   })
                 )}
@@ -186,7 +189,11 @@ const ArticleForm = ({
                   if (article)
                     if (author._id === article.author._id) return null;
                   const name = `${author.firstName} ${author.lastName}`;
-                  return <option value={author._id}>{name}</option>;
+                  return (
+                    <option key={author._id} value={author._id}>
+                      {name}
+                    </option>
+                  );
                 })
               )}
             </Select>
