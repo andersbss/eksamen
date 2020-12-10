@@ -73,6 +73,7 @@ const ArticleForm = ({
   authorFetchError,
   categoryFetchError,
   setArticleInputs,
+  disabledImageUpload,
 }) => {
   const titleRef = useRef();
   const ingressRef = useRef();
@@ -100,6 +101,16 @@ const ArticleForm = ({
     id,
     setArticleInputs,
   ]);
+
+  useEffect(() => {
+    console.log(imageId);
+    if (imageId) {
+      setArticleInputs((prev) => ({
+        ...prev,
+        image: imageId,
+      }));
+    }
+  }, [imageId, setArticleInputs]);
 
   return (
     <StyledFormContainer>
@@ -233,6 +244,7 @@ const ArticleForm = ({
         error={imageError}
         success={imageSuccess}
         imageId={imageId}
+        disabledImageUpload={disabledImageUpload}
       />
     </StyledFormContainer>
   );
