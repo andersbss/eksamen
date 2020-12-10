@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import Button from '../buttons/Button';
 import StyledButton from '../styledComponents/StyledButton';
+import { StyledSuccessMessage } from '../styledComponents/StyledMessages';
 import Select from '../common/Select';
 import Error from '../errors/Error';
 import Input from '../common/Input';
@@ -40,17 +40,6 @@ const StyledSelectButtonContainer = styled.span`
   & > span {
     margin-right: 10px;
     width: 100%;
-  }
-`;
-
-const StyledSuccessMessage = styled.span`
-  text-align: center;
-  color: green;
-  & > p {
-    font-weight: 800;
-    &:nth-child(2) {
-      font-size: 1rem;
-    }
   }
 `;
 

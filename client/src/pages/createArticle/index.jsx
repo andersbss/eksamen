@@ -173,6 +173,7 @@ const CreateArticle = () => {
         handleImageUpload={handleImageUpload}
         imageError={imageError}
         imageSuccess={imageSuccess}
+        submitSuccess={submitSuccess}
         imageId={imageId}
       />
       {articleError && <Error error={articleError} />}
