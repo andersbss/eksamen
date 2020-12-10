@@ -1,4 +1,4 @@
-import { func, bool, string, object } from 'prop-types';
+import { func, bool, string, object, array, oneOfType } from 'prop-types';
 
 const FormTypes = {
   handleSubmit: func.isRequired,

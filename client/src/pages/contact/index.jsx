@@ -40,7 +40,7 @@ const Contact = () => {
 
   return (
     <>
-      <Jumbotron headerText="Kontakt oss" />
+      <Jumbotron headerText="Kontakt oss" top="70" bottom="0" />
       <ContactLayout>
         <ContactForm
           handleSubmit={handleSubmit}

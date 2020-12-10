@@ -1,5 +1,4 @@
 import React from 'react';
-import { string, func, node } from 'prop-types';
 import styled from 'styled-components';
 import DefaultFormTypes from './types/Default';
 import Input from '../common/Input';
@@ -38,7 +37,11 @@ const CategoryForm = ({
     <Button primary="true" type="submit" disabled={loading || hasErrors}>
       {loading ? 'Oppretter kategori...' : 'OPPRETT'}
     </Button>
-    {error && <p>Noe gikk galt, prøv igjen</p>}
+    {error && (
+      <p>{`Oppretting feilet, prøv igjen. (${
+        Array.isArray(error) ? error[0] : error
+      })`}</p>
+    )}
   </StyledForm>
 );
 
