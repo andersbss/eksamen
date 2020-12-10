@@ -1,4 +1,5 @@
 import React from 'react';
+import { string, number, shape } from 'prop-types';
 import styled from 'styled-components';
 
 const StyledLi = styled.li`
@@ -24,18 +25,22 @@ const StyledLi = styled.li`
   }
 `;
 
-const UserVisitItem = ({ user }) => {
-  console.log();
+const UserVisitItem = ({ user }) => (
+  <StyledLi>
+    <h3>
+      {user.firstName} {user.lastName}
+    </h3>
+    <p>{user.email}</p>
+    <p>Leste artikler: {user.count}</p>
+  </StyledLi>
+);
 
-  return (
-    <StyledLi>
-      <h3>
-        {user.firstName} {user.lastName}
-      </h3>
-      <p>{user.email}</p>
-      <p>Leste artikler: {user.count}</p>
-    </StyledLi>
-  );
+UserVisitItem.propTypes = {
+  user: shape({
+    firstName: string.isRequired,
+    lastName: string.isRequired,
+    email: string.isRequired,
+  }),
 };
 
 export default UserVisitItem;
