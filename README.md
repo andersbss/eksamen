@@ -11,19 +11,19 @@ cd client\
 npm install\
 npm run dev
 
-Tester for client og server: \
+Tester for client og server: 
 npm run test
 
 .env filer er ikke lagt i .gitIgnore. Dette er for å gjøre det enkelt for sensor og emneansvarlig.
 I produksjon skal selvsagt slike filer ikke bli lastet opp til repo.
 
-Det er tre eksisterende brukere i systemet med forskjellige roller: \
+Det er tre eksisterende brukere i systemet med forskjellige roller: 
 
-User: bruker@bruker.com Passord123! \
+User: bruker@bruker.com Passord123! 
 
-Admin: admin@admin.com Passord123! \
+Admin: admin@admin.com Passord123! 
 
-Superadmin: superadmin@superadmin.com Passord123! \
+Superadmin: superadmin@superadmin.com Passord123! 
 
 
 For å teste apiet i Postman må csfr token kommenteres ut. Dette kan gjøres i server/src/app.js
